@@ -1,0 +1,54 @@
+{
+  "name": "andrewscaya/ascmvc",
+  "description": "A lightweight MVC framework for educational purposes.",
+  "type": "library",
+  "license": "GPL-2.0-only",
+  "keywords": [
+    "ascmvc",
+    "framework",
+    "mvc",
+    "education"
+  ],
+  "homepage": "https://github.com/andrewscaya/ascmvc",
+  "authors": [
+    {
+      "name": "Andrew Caya",
+      "email": "andrewscaya@yahoo.ca"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.zendframework.com"
+    }
+  ],
+  "require": {
+    "php": "^5.5 || ^7.0",
+    "smarty/smarty": "3.1.27",
+    "doctrine/dbal": "2.5.2",
+    "doctrine/orm": "2.5.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8",
+    "squizlabs/php_codesniffer": "^2.3.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ascmvc\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AscmvcTest\\": "test/"
+    }
+  },
+  "scripts": {
+    "check": [
+      "@cs",
+      "@test"
+    ],
+    "cs": "phpcs",
+    "cs-fix": "phpcbf",
+    "test": "phpunit"
+  }
+}
