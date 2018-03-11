@@ -1,8 +1,18 @@
 <?php
+/**
+ * ASC LightMVC
+ *
+ * @package    ASC LightMVC
+ * @author     Andrew Caya
+ * @link       https://github.com/andrewscaya
+ * @version    1.0.0
+ * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
+ */
 
 namespace Ascmvc\Mvc;
 
 // external namespaces to reference
+use Ascmvc\AbstractModelObject;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
@@ -10,52 +20,23 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
 
-/* Register Doctrine's autoloader. */
-require_once BASEDIR . DIRECTORY_SEPARATOR . 'libs' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+class Doctrine extends AbstractModelObject {
 
-
-class Doctrine {
-    
-    /**@var array|null  Array contains instances of Doctrine objects (DBAL or ORM).*/
-    protected static $doctrineInstance;
-    
-    /**
-     * Protected method : this class cannot be instantiated by the new keyword
-     * because it is a Singleton.
-     *
-     * @param void.
-     *
-     * @return void.
-     */
     protected function __construct()
     {
 
     }
-    
-    /**
-     * Protected method : this class cannot be copied because it is a Singleton.
-     *
-     * @param void.
-     *
-     * @return void.
-     */
+
     protected function __clone()
     {
 
     }
-    
-    /**
-     * Static method : returns the Singleton instance of this class.
-     *
-     * @param void.
-     *
-     * @return Object:Doctrine  Returns the specified Doctrine object (DBAL or ORM).
-     */
-    public static function getInstance($connType, $connName, $params)
+
+    public static function getInstance($connType, $connName, Array $params)
     {
         if (!isset($connType) || !isset($connName) || !isset($params)) {
             
-            return FALSE;
+            return false;
             
         }
         

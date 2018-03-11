@@ -9,24 +9,36 @@
  * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
  */
 
-namespace Ascmvc\Mvc;
+namespace Ascmvc;
 
 
 /**
  * The AbstractRequest class is the blueprint for the MVC's main Request object.
  *
- * *Description* The AbstractRequest class is the one that needs to be extended
+ * The AbstractRequest class is the one that needs to be extended
  * in order to create a LightMVC Request object.
  */
 abstract class AbstractRequest {
     
-    /**@var Object:App|null  Contains a reference to the Singleton instance of the App class.*/
+    /**
+     * Contains a reference to the Singleton instance of the App class.
+     *
+     * @var AbstractApp|null
+     */
     protected $app;
     
-    /**@var array|null  Array contains all of the app's basic configurations.*/
+    /**
+     * Array contains all of the app's basic configurations.
+     *
+     * @var Array|null
+     */
     protected $baseConfig;
     
-    /**@var array|null  Contains an associative array of all of the URI's elements.*/
+    /**
+     * Contains an associative array of all of the URI's elements.
+     *
+     * @var array|null
+     */
     protected $requestURI;
     
     
@@ -34,14 +46,14 @@ abstract class AbstractRequest {
      * Initializes this class by assigning the elements of the URI to the
      * array $requestURI.
      *
-     * @param Object:App &$app.
+     * @param AbstractApp &$app.
      *
      * @return void.
      */
-    public abstract function __construct(App &$app);
+    public abstract function __construct(AbstractApp &$app);
     
     /**
-     * @return array|null $requestURI
+     * @return array|null
      */
     public abstract function getRequestURI();
         

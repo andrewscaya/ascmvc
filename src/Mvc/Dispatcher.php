@@ -11,6 +11,9 @@
 
 namespace Ascmvc\Mvc;
 
+use Ascmvc\AbstractApp;
+use Ascmvc\AbstractDispatcher;
+
 
 class Dispatcher extends AbstractDispatcher {
 
@@ -18,11 +21,11 @@ class Dispatcher extends AbstractDispatcher {
      * Initializes this class by assigning the objects contained in the
      * referenced App object's router object to the corresponding properties.
      *
-     * @param Object:App &$app.
+     * @param AbstractApp &$app.
      *
      * @return void.
      */
-    public function __construct(App &$app)
+    public function __construct(AbstractApp &$app)
     {
         $this->app = $app;
 

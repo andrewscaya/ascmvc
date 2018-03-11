@@ -9,7 +9,7 @@
  * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
  */
 
-namespace Ascmvc\Mvc;
+namespace Ascmvc;
 
 
 /**
@@ -20,22 +20,46 @@ namespace Ascmvc\Mvc;
  */
 abstract class AbstractController implements ServiceManagerListenerInterface {
     
-    /**@var Object:App|null  Contains a reference to the Singleton instance of the App class.*/
+    /**
+     * Contains a reference to the Singleton instance of the App class.
+     *
+     * @var AbstractApp|null
+     */
     protected $app;
     
-    /**@var array|null  Contains a reference to the array containing all of the app's basic configurations.*/
+    /**
+     * Contains a reference to the array containing all of the app's basic configurations.
+     *
+     * @var Array|null
+     */
     protected $baseConfig;
     
-    /**@var Object:Smarty|null  Contains a reference to a Smarty instance.*/
+    /**
+     * Contains a reference to a Smarty instance.
+     *
+     * @var AbstractViewObject|null
+     */
     protected $viewObject;
     
-    /**@var array|null  Array contains all of the values that will be assigned to the controller's view manager.*/
+    /**
+     * Array contains all of the values that will be assigned to the controller's view manager.
+     *
+     * @var array|null
+     */
     protected $view;
     
-    /**@var Object:ServiceManager|null  Contains a reference to a ServiceManager instance.*/
+    /**
+     * Contains a reference to a ServiceManager instance.
+     *
+     * @var AbstractServiceManager|null
+     */
     protected $serviceManager;
     
-    /**@var array|null  Array contains the controller's helper objects.*/
+    /**
+     * Array contains the controller's helper objects.
+     *
+     * @var array|null
+     */
     protected $helpers;
     
     /**
@@ -43,13 +67,20 @@ abstract class AbstractController implements ServiceManagerListenerInterface {
      * contained in the referenced App object to the corresponding
      * properties.
      *
-     * @param Object:App &$app.
+     * @param AbstractApp &$app
      * 
      * @return void.
      */
-    public abstract function __construct(App &$app);
-    
-    public static function config(App &$app)
+    public abstract function __construct(AbstractApp &$app);
+
+    /**
+     * Configure the application.
+     *
+     * @param AbstractApp &$app
+     *
+     * @return mixed.
+     */
+    public static function config(AbstractApp &$app)
     {
     
     }
@@ -59,7 +90,7 @@ abstract class AbstractController implements ServiceManagerListenerInterface {
      *
      * @param void.
      *
-     * @return void.
+     * @return mixed.
      */
     public abstract function indexAction();
 

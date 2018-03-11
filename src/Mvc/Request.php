@@ -11,6 +11,9 @@
 
 namespace Ascmvc\Mvc;
 
+use Ascmvc\AbstractApp;
+use Ascmvc\AbstractRequest;
+
 
 class Request extends AbstractRequest {
     
@@ -22,7 +25,7 @@ class Request extends AbstractRequest {
      *
      * @return void.
      */
-    public function __construct(App &$app)
+    public function __construct(AbstractApp &$app)
     {
         $this->app = $app;
         

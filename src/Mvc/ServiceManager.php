@@ -11,10 +11,14 @@
 
 namespace Ascmvc\Mvc;
 
+use Ascmvc\AbstractApp;
+use Ascmvc\AbstractServiceManager;
+use Ascmvc\ServiceManagerListenerInterface;
+use Ascmvc\ServiceManagerServiceInterface;
+
 
 class ServiceManager extends AbstractServiceManager {
 
-    
     public function addRegisteredService($serviceName, &$service)
     {
         $this->registeredServices[$serviceName] = $service;
@@ -53,7 +57,7 @@ class ServiceManager extends AbstractServiceManager {
         return $this->registeredListeners[$listenerName];
     }
     
-    public function processEvents(App &$app)
+    public function processEvents(AbstractApp &$app)
     {
         if ($this->runLevel == 'preboot' || $this->runLevel == 'postboot') {
             
@@ -69,7 +73,7 @@ class ServiceManager extends AbstractServiceManager {
                     
                     $fileName = $fileInfo->getFilename();
                     
-                    $controllerName = substr($fileName, 0, strlen($fileName) - 4);
+                    $controllerName = 'Application\\Controllers\\' . substr($fileName, 0, strlen($fileName) - 4);
             
                     require_once $path . DIRECTORY_SEPARATOR . $fileName;
                     
@@ -91,7 +95,7 @@ class ServiceManager extends AbstractServiceManager {
         }
     }
     
-    public function updateRunLevel(App &$app, $runLevel)
+    public function updateRunLevel(AbstractApp &$app, $runLevel)
     {
         $this->runLevel = $runLevel;
         

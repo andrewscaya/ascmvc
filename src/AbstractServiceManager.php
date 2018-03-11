@@ -9,24 +9,36 @@
  * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
  */
 
-namespace Ascmvc\Mvc;
+namespace Ascmvc;
 
 
 /**
  * The abstract AbstractServiceManager class is the blueprint for the MVC's service manager.
  *
- * *Description* The AbstractServiceManager class is the one that needs to be extended
+ * The AbstractServiceManager class is the one that needs to be extended
  * in order to create a LightMVC service manager.
  */
 abstract class AbstractServiceManager {
 
-    /**@var array|null  Array contains the Service Manager's services objects.*/
+    /**
+     * Array contains the Service Manager's services objects.
+     *
+     * @var array|null
+     */
     protected $registeredServices;
     
-    /**@var array|null  Array contains the Service Manager's ServiceManagerListenerInterface objects.*/
+    /**
+     * Array contains the Service Manager's ServiceManagerListenerInterface objects.
+     *
+     * @var array|null
+     */
     protected $registeredListeners;
     
-    /**@var string|null  Contains a string that is name of the application.*/
+    /**
+     * Contains a string that corresponds to the application's runlevel.
+     *
+     * @var string|null
+     */
     protected $runLevel;
     
     /**
@@ -35,9 +47,9 @@ abstract class AbstractServiceManager {
      *
      * @param string $serviceName.
      * 
-     * @param Object &$service.
+     * @param mixed &$service
      *
-     * @return Object:AbstractServiceManager $this.
+     * @return AbstractServiceManager
      */
     public abstract function addRegisteredService($serviceName, &$service);
     
@@ -45,9 +57,9 @@ abstract class AbstractServiceManager {
      * Removes a reference to a service object in the $registeredServices
      * array.
      *
-     * @param string $serviceName.
+     * @param string $serviceName
      *
-     * @return Object:AbstractServiceManager $this.
+     * @return AbstractServiceManager
      */
     public abstract function removeRegisteredService($serviceName);
     
@@ -55,9 +67,9 @@ abstract class AbstractServiceManager {
      * Returns a service object that is registered in the $registeredServices
      * array.
      *
-     * @param string $serviceName.
+     * @param string $serviceName
      *
-     * @return Object $this->registeredServices[$serviceName].
+     * @return mixed
      */
     public abstract function getRegisteredService($serviceName);
     
@@ -65,11 +77,11 @@ abstract class AbstractServiceManager {
      * Registers a reference to a ServiceManagerListenerInterface object
      * in the $registeredListeners array.
      *
-     * @param string $listenerName.
+     * @param string $listenerName
      * 
-     * @param Object:ServiceManagerListenerInterface &$listener.
+     * @param ServiceManagerListenerInterface
      *
-     * @return Object:AbstractServiceManager $this.
+     * @return AbstractServiceManager
      */
     public abstract function addRegisteredListener($listenerName, ServiceManagerListenerInterface &$listener);
     
@@ -79,7 +91,7 @@ abstract class AbstractServiceManager {
      *
      * @param string $listenerName.
      *
-     * @return Object:AbstractServiceManager $this.
+     * @return AbstractServiceManager
      */
     public abstract function removeRegisteredListener($listenerName);
     
@@ -89,7 +101,7 @@ abstract class AbstractServiceManager {
      *
      * @param string $listenerName.
      *
-     * @return Object $this->registeredListeners[$listenerName].
+     * @return ServiceManagerListenerInterface
      */
     public abstract function getRegisteredListener($listenerName);
     
@@ -98,22 +110,22 @@ abstract class AbstractServiceManager {
      * ServiceManagerListenerInterface object that is registered
      * in the $registeredListeners array.
      *
-     * @param Object:App &$app.
+     * @param AbstractApp &$app.
      *
      * @return void.
      */
-    public abstract function processEvents(App &$app);
+    public abstract function processEvents(AbstractApp &$app);
     
     /**
      * Updates the $runLevel property with the new runlevel name
      * and calls $this->processEvents() method.
      *
-     * @param Object:App &$app.
+     * @param AbstractApp &$app.
      * 
-     * @param string $runLevel.
+     * @param int $runLevel.
      *
-     * @return Object:AbstractServiceManager $this.
+     * @return AbstractServiceManager
      */
-    public abstract function updateRunLevel(App &$app, $runLevel);
+    public abstract function updateRunLevel(AbstractApp &$app, $runLevel);
     
 }

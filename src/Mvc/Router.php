@@ -11,20 +11,13 @@
 
 namespace Ascmvc\Mvc;
 
+use Ascmvc\AbstractApp;
+use Ascmvc\AbstractRouter;
+
 
 class Router extends AbstractRouter {
-    
-    /**
-     * Initializes this class by assigning the objects contained in the
-     * referenced App object to the corresponding properties. Also, it
-     * tries to resolve the currentRoute URI to a handler (a controller
-     * and its method).
-     *
-     * @param Object:App &$app.
-     *
-     * @return void.
-     */
-    public function __construct(App &$app)
+
+    public function __construct(AbstractApp &$app)
     {
         $this->app = $app;
         

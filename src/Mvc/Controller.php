@@ -11,19 +11,13 @@
 
 namespace Ascmvc\Mvc;
 
+use Ascmvc\AbstractApp;
+use Ascmvc\AbstractController;
+
 
 class Controller extends AbstractController {
-    
-    /**
-     * Initializes this class by assigning the objects and arrays
-     * contained in the referenced App object to the corresponding
-     * properties.
-     *
-     * @param Object:App &$app.
-     *
-     * @return void.
-     */
-    public function __construct(App &$app)
+
+    public function __construct(AbstractApp &$app)
     {
         $this->app = $app;
         
@@ -40,17 +34,17 @@ class Controller extends AbstractController {
         $this->view = $this->baseConfig['view'];
     }
     
-    public static function config(App &$app)
+    public static function config(AbstractApp &$app)
     {
     
     }
     
-    public static function preboot(App &$app)
+    public static function preboot(AbstractApp &$app)
     {
         
     }
     
-    public static function postboot(App &$app)
+    public static function postboot(AbstractApp &$app)
     {
         
     }

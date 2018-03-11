@@ -16,12 +16,6 @@
       "email": "andrewscaya@yahoo.ca"
     }
   ],
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packages.zendframework.com"
-    }
-  ],
   "require": {
     "php": "^5.5 || ^7.0",
     "smarty/smarty": "3.1.27",

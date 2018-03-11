@@ -1,8 +1,8 @@
 <?php
 /**
- * PHP Code Viewer App
+ * ASC LightMVC
  *
- * @package    PHP Code Viewer App
+ * @package    ASC LightMVC
  * @author     Andrew Caya
  * @link       https://github.com/andrewscaya
  * @version    1.0.0
@@ -11,12 +11,15 @@
 
 namespace Ascmvc\Mvc;
 
+use Ascmvc\AbstractApp;
+use Ascmvc\AbstractController;
+use Ascmvc\AbstractDispatcher;
+use Ascmvc\AbstractRouter;
+use Ascmvc\AbstractServiceManager;
+use Ascmvc\AbstractViewObject;
+
 
 class App extends AbstractApp {
-    
-    /**@var Object:App|null  Contains the Singleton instance of this class.*/
-    protected static $appInstance;
-    
     
     protected function __construct()
     {
@@ -27,12 +30,7 @@ class App extends AbstractApp {
     {
         
     }
-    
-    /**
-     * @param void.
-     *
-     * @return Object:App  Returns the current App object.
-     */
+
     public static function getInstance()
     {
         if(!self::$appInstance) {
@@ -44,7 +42,7 @@ class App extends AbstractApp {
         return self::$appInstance;
     }
     
-    public function initialize(&$baseConfig, ServiceManager &$serviceManager = NULL, \Smarty &$viewObject = NULL)
+    public function initialize(Array &$baseConfig, AbstractServiceManager &$serviceManager = NULL, \Smarty &$viewObject = NULL)
     {
         if (!isset($this->request)) {
         
@@ -125,7 +123,7 @@ class App extends AbstractApp {
         return $this->serviceManager;
     }
 
-    public function setServiceManager(ServiceManager &$serviceManager)
+    public function setServiceManager(AbstractServiceManager &$serviceManager)
     {
         $this->serviceManager = $serviceManager;
 
@@ -137,7 +135,7 @@ class App extends AbstractApp {
         return $this->viewObject;
     }
 
-    public function setViewObject(\Smarty &$viewObject)
+    public function setViewObject(AbstractViewObject &$viewObject)
     {
         $this->viewObject = $viewObject;
 
@@ -149,7 +147,7 @@ class App extends AbstractApp {
         return $this->router;
     }
     
-    public function setRouter(Router &$router)
+    public function setRouter(AbstractRouter &$router)
     {
         $this->router = $router;
         
@@ -161,7 +159,7 @@ class App extends AbstractApp {
         return $this->dispatcher;
     }
     
-    public function setDispatcher(Dispatcher &$dispatcher)
+    public function setDispatcher(AbstractDispatcher &$dispatcher)
     {
         $this->dispatcher = $dispatcher;
         
@@ -173,7 +171,7 @@ class App extends AbstractApp {
         return $this->controller;
     }
     
-    public function setController(Controller &$controller)
+    public function setController(AbstractController &$controller)
     {
         $this->controller = $controller;
         
