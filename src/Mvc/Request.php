@@ -56,14 +56,15 @@ class Request extends AbstractRequest {
         $requestUriArrayCount = count($requestUriArrayTemp) - 1;
         
         
-        if (in_array($this->baseConfig['appFolder'], $requestUriArrayTemp)) {
+        if (isset($this->baseConfig['appFolder'])
+            && in_array($this->baseConfig['appFolder'], $requestUriArrayTemp)) {
         
             $requestUriArrayElements = $requestUriArrayCount -3;
         
             $arrayBaseIndex = 4;
         
         }
-        elseif (in_array('public', $requestUriArray)) {
+        elseif (in_array('public', $requestUriArrayTemp)) {
         
             $requestUriArrayElements = $requestUriArrayCount -2;
         
