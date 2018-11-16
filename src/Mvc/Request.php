@@ -30,8 +30,8 @@ class Request extends AbstractRequest {
         $this->app = $app;
         
         $this->baseConfig = $this->app->getBaseConfig();
-        
-        $this->requestURI['protocol'] = $_SERVER['proto'];
+
+        $this->requestURI['scheme'] = $_SERVER['REQUEST_SCHEME'];
         
         $this->requestURI['host'] = $_SERVER['HTTP_HOST'];
         
