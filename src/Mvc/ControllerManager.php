@@ -46,23 +46,30 @@ class ControllerManager extends AbstractControllerManager {
         }
         catch (\ReflectionException $e) {
         
-            $this->controllerReflection = NULL;
+            $this->controllerReflection = null;
             
-            $this->controllerName = NULL;
+            $this->controllerName = null;
             
-            $this->controllerMethodName = NULL;
+            $this->controllerMethodName = null;
         
-            $this->currentRequestURI = NULL;
+            $this->currentRequestURI = null;
         
         }
         
         $controllerName = $this->controllerName;
         
-        $this->controller = ($this->controllerName != NULL) ? new $controllerName($this->app) : NULL;
+        $sm = $this->app->getServiceManager();
         
-        $this->method = ($this->controllerMethodName != NULL) ? $this->controllerMethodName : NULL;
+        if($this->controllerReflection->hasMethod('factory')) {
+			$controllerName::factory($this->app);
+			$this->controller = isset($sm[$controllerName]) ? $sm[$controllerName] : null;
+		}
+        
+        $this->controller = ($this->controller == null && $controllerName != null) ? new $controllerName($this->app) : $this->controller;
+        
+        $this->method = ($this->controllerMethodName != null) ? $this->controllerMethodName : null;
 
-        if ($this->controller == NULL || $this->method == NULL) {
+        if ($this->controller == null || $this->method == null) {
 
             header("Location: ". URLBASEADDR ."c404");
 
@@ -73,7 +80,7 @@ class ControllerManager extends AbstractControllerManager {
 
     public function execute()
     {
-        $this->controller->{$this->method}();
+        $controllerOutput = $this->controller->{$this->method}();
     }
 
 }

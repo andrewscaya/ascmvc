@@ -11,6 +11,7 @@
 
 namespace Ascmvc;
 
+use Pimple\Container;
 
 /**
  * The abstract AbstractApp class is the blueprint for the MVC's main engine.
@@ -42,11 +43,18 @@ abstract class AbstractApp {
     protected $request;
     
     /**
-     * Contains a reference to a ServiceManager instance.
+     * Contains a reference to a Container instance.
      *
-     * @var AbstractServiceManager|null
+     * @var Container|null
      */
     protected $serviceManager;
+    
+    /**
+     * Contains a reference to the EventManager instance.
+     *
+     * @var AbstractEventManager|null
+     */
+    protected $eventManager;
     
     /**
      * Contains a reference to a Smarty instance.
@@ -127,7 +135,7 @@ abstract class AbstractApp {
      *
      * @return array.
      */
-    public abstract function initialize(Array &$baseConfig, AbstractServiceManager &$serviceManager = NULL, \Smarty &$viewObject = NULL);
+    public abstract function initialize(Array &$baseConfig, Container &$serviceManager = null, ViewObject &$viewObject = null);
     
     /**
      * Get the application's base configuration.
@@ -154,20 +162,36 @@ abstract class AbstractApp {
     public abstract function getRequest();
     
     /**
-     * Get the AbstractServiceManager object.
+     * Get the Container object.
      *
-     * @return AbstractServiceManager
+     * @return Container
      */
     public abstract function getServiceManager();
 
     /**
-     * Set the AbstractServiceManager object.
+     * Set the Container object.
      *
-     * @param AbstractServiceManager
+     * @param Container
      *
      * @return AbstractApp
      */
-    public abstract function setServiceManager(AbstractServiceManager &$serviceManager);
+    public abstract function setServiceManager(Container &$serviceManager);
+    
+    /**
+     * Get the AbstractEventManager object.
+     *
+     * @return AbstractEventManager
+     */
+    public abstract function getEventManager();
+
+    /**
+     * Set the AbstractEventManager object.
+     *
+     * @param AbstractEventManager
+     *
+     * @return AbstractApp
+     */
+    public abstract function setEventManager(AbstractEventManager &$eventManager);
 
     /**
      * Get the AbstractViewObject object.

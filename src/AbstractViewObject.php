@@ -44,11 +44,11 @@ abstract class AbstractViewObject
     /**
      * Static method : returns the Singleton instance of this class.
      *
-     * @param void.
+     * @param array $baseConfig.
      *
      * @return AbstractViewObject
      */
-    public static function getInstance()
+    public static function getInstance(array $baseConfig)
     {
 
     }

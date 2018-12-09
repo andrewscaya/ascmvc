@@ -15,8 +15,9 @@ use Ascmvc\AbstractApp;
 use Ascmvc\AbstractController;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\AbstractRouter;
-use Ascmvc\AbstractServiceManager;
+use Ascmvc\AbstractEventManager;
 use Ascmvc\AbstractViewObject;
+use Pimple\Container;
 
 
 class App extends AbstractApp {
@@ -42,7 +43,7 @@ class App extends AbstractApp {
         return self::$appInstance;
     }
     
-    public function initialize(Array &$baseConfig, AbstractServiceManager &$serviceManager = NULL, \Smarty &$viewObject = NULL)
+    public function initialize(Array &$baseConfig, Container &$serviceManager = null, ViewObject &$viewObject = null)
     {
         if (!isset($this->request)) {
         
@@ -53,7 +54,7 @@ class App extends AbstractApp {
         
         if (!isset($serviceManager)) {
             
-            $this->serviceManager = new ServiceManager();
+            $this->serviceManager = new Container();
             
         }
         else {
@@ -61,6 +62,8 @@ class App extends AbstractApp {
             $this->serviceManager = $serviceManager;
             
         }
+        
+        $this->eventManager = new EventManager();
         
         
         $this->baseConfig = $baseConfig;
@@ -74,7 +77,7 @@ class App extends AbstractApp {
                     
                     $dbManager = Doctrine::getInstance($connType, $connName, $params);
                     
-                    $this->serviceManager->addRegisteredService($connName, $dbManager);
+                    $this->serviceManager["$connName"] = $dbManager;
                     
                 }
                 
@@ -82,10 +85,9 @@ class App extends AbstractApp {
             
         }
         
-        
         if (!isset($viewObject)) {
-        
-            $this->viewObject = Smarty::getInstance();
+			
+            $this->viewObject = ViewObject::getInstance($this->baseConfig);
         
         }
         else {
@@ -93,12 +95,6 @@ class App extends AbstractApp {
             $this->viewObject = $viewObject;
         
         }
-        
-        $this->viewObject->setTemplateDir($this->baseConfig['BASEDIR'] . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR);
-        $this->viewObject->setCompileDir($this->baseConfig['BASEDIR'] . DIRECTORY_SEPARATOR . 'templates_c' . DIRECTORY_SEPARATOR);
-        $this->viewObject->setConfigDir($this->baseConfig['BASEDIR'] . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR);
-        $this->viewObject->setCacheDir($this->baseConfig['BASEDIR'] . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR);
-        $this->viewObject->caching = 0;
     }
     
     public function getBaseConfig()
@@ -123,9 +119,21 @@ class App extends AbstractApp {
         return $this->serviceManager;
     }
 
-    public function setServiceManager(AbstractServiceManager &$serviceManager)
+    public function setServiceManager(Container &$serviceManager)
     {
         $this->serviceManager = $serviceManager;
+
+        return $this;
+    }
+    
+    public function getEventManager()
+    {
+        return $this->eventManager;
+    }
+
+    public function setEventManager(AbstractEventManager &$eventManager)
+    {
+        $this->eventManager = $eventManager;
 
         return $this;
     }
@@ -185,7 +193,7 @@ class App extends AbstractApp {
 
     public function setCurrentRunLevel($currentRunLevel)
     {
-        $this->getServiceManager()->updateRunLevel($this, $currentRunLevel);
+        $this->getEventManager()->updateRunLevel($this, $currentRunLevel);
         
         $this->currentRunLevel = $currentRunLevel;
         
@@ -200,7 +208,7 @@ class App extends AbstractApp {
         
         $this->setCurrentRunLevel('postboot');
         
-        $this->serviceManager->addRegisteredListener('controller', $this->controller);
+        $this->eventManager->addRegisteredListener('controller', $this->controller);
                 
         $this->setCurrentRunLevel('predispatch');
         

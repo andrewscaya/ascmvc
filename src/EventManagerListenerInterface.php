@@ -13,15 +13,15 @@ namespace Ascmvc;
 
 
 /**
- * ServiceManagerListenerInterface allows the implementing class
- * to be consumed as a ServiceManager class listener.
+ * EventManagerListenerInterface allows the implementing class
+ * to be consumed as a EventManager class listener.
  * 
  * The interface's methods correspond exactly to the
  * App Class' runlevels as they are defined in its run() method
  * so that, in turn, these methods may be dynamically called by the
- * Service Manager's event-driven processEvents() method.
+ * Event Manager's event-driven processEvents() method.
  */
-interface ServiceManagerListenerInterface {
+interface EventManagerListenerInterface {
     
     /**
      * Allows an implementing object to interrupt the App's runtime before
@@ -36,7 +36,7 @@ interface ServiceManagerListenerInterface {
     /**
      * Allows an implementing object to interrupt the App's runtime immediately
      * after the instantiation of the Router, Dispatcher and Controller classes
-     * but before the Service Manager's registration of the Controller object.
+     * but before the Event Manager's registration of the Controller object.
      *
      * @param AbstractApp &$app
      *
@@ -46,7 +46,7 @@ interface ServiceManagerListenerInterface {
     
     /**
      * Allows an implementing object to interrupt the App's runtime after the
-     * the Service Manager's registration of the Controller object but before
+     * the Event Manager's registration of the Controller object but before
      * the Dispatcher's call to the Controller's action method.  This phase allows
      * for Controller configuration.  By default, predispatch() calls the Controller's
      * config() method.

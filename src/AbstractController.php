@@ -18,7 +18,7 @@ namespace Ascmvc;
  * *Description* The AbstractController class is the one that needs to be extended
  * in order to create a LightMVC controller.
  */
-abstract class AbstractController implements ServiceManagerListenerInterface {
+abstract class AbstractController implements EventManagerListenerInterface {
     
     /**
      * Contains a reference to the Singleton instance of the App class.
@@ -81,6 +81,18 @@ abstract class AbstractController implements ServiceManagerListenerInterface {
      * @return mixed.
      */
     public static function config(AbstractApp &$app)
+    {
+    
+    }
+    
+    /**
+     * Create the controller.
+     *
+     * @param AbstractApp &$app
+     *
+     * @return AbstractController.
+     */
+    public static function factory(AbstractApp &$app)
     {
     
     }
