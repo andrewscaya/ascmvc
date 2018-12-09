@@ -39,36 +39,14 @@ abstract class AbstractRouter {
      *
      * @var array|null
      */
-    protected $currentRequestURI;
+    protected $requestURI;
     
     /**
-     * Contains a string that is the name of the requested handler.
+     * Contains an instance of the MVC's ControllerManager.
      *
-     * @var string|null
+     * @var AbstractControllerManager
      */
-    protected $controllerName;
-    
-    /**
-     * Contains a string that is the name of the controller's requested method.
-     *
-     * @var string|null
-     */
-    protected $controllerMethodName;
-    
-    /**
-     * Contains a ReflectionClass instance.
-     *
-     * @var \ReflectionClass|null
-     */
-    protected $controllerReflection;
-    
-    /**
-     * Contains a string that is the URI of the controller's file that must be included.
-     *
-     * @var string|null
-     */
-    protected $controllerFile;
-    
+    protected $controllerManager;
     
     /**
      * Initializes this class by assigning the objects contained in the
@@ -85,28 +63,6 @@ abstract class AbstractRouter {
      *
      * @return array|null
      */
-    public abstract function getCurrentRequestURI();
-    
-    /**
-     * Get the controller's reflection class.
-     *
-     * @return \ReflectionClass|null
-     */
-    public abstract function getControllerReflection();
-    
-    /**
-     * @return string|null
-     */
-    public abstract function getControllerName();
-    
-    /**
-     * @return string|null
-     */
-    public abstract function getControllerMethodName();
-    
-    /**
-     * @return string|null
-     */
-    public abstract function getControllerFile();
+    public abstract function getRequestURI();
     
 }

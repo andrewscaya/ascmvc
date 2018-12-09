@@ -13,7 +13,7 @@ namespace Ascmvc\Mvc;
 
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractController;
-use Ascmvc\AbstractDispatcher;
+use Ascmvc\AbstractControllerManager;
 use Ascmvc\AbstractRouter;
 use Ascmvc\AbstractServiceManager;
 use Ascmvc\AbstractViewObject;
@@ -154,14 +154,14 @@ class App extends AbstractApp {
         return $this;
     }
     
-    public function getDispatcher()
+    public function getControllerManager()
     {
-        return $this->dispatcher;
+        return $this->controllerManager;
     }
     
-    public function setDispatcher(AbstractDispatcher &$dispatcher)
+    public function setControllerManager(AbstractControllerManager &$controllerManager)
     {
-        $this->dispatcher = $dispatcher;
+        $this->controllerManager = $controllerManager;
         
         return $this;
     }
@@ -196,9 +196,7 @@ class App extends AbstractApp {
     {
         $this->setCurrentRunLevel('preboot');
         
-        $this->router = new Router($this);
-        
-        $this->dispatcher = new Dispatcher($this);
+        $this->router = new FastRouter($this);
         
         $this->setCurrentRunLevel('postboot');
         
@@ -206,7 +204,7 @@ class App extends AbstractApp {
                 
         $this->setCurrentRunLevel('predispatch');
         
-        $this->dispatcher->dispatch();
+        $this->controllerManager->execute();
         
         $this->setCurrentRunLevel('postdispatch');
         

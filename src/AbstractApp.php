@@ -63,11 +63,11 @@ abstract class AbstractApp {
     protected $router;
     
     /**
-     * Contains a reference to a Dispatcher instance.
+     * Contains a reference to a ControllerManager instance.
      *
-     * @var AbstractDispatcher|null
+     * @var AbstractControllerManager|null
      */
-    protected $dispatcher;
+    protected $controllerManager;
     
     /**
      * Contains a reference to a polymorphic Controller instance.
@@ -206,7 +206,7 @@ abstract class AbstractApp {
      *
      * @return AbstractDispatcher
      */
-    public abstract function getDispatcher();
+    public abstract function getControllerManager();
 
     /**
      * Set the AbstractDispatcher object.
@@ -215,7 +215,7 @@ abstract class AbstractApp {
      *
      * @return AbstractApp
      */
-    public abstract function setDispatcher(AbstractDispatcher &$dispatcher);
+    public abstract function setControllerManager(AbstractControllerManager &$controllerManager);
 
     /**
      * Get the AbstractController object.

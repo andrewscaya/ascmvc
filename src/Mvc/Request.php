@@ -35,9 +35,12 @@ class Request extends AbstractRequest {
         
         $this->requestURI['host'] = $_SERVER['HTTP_HOST'];
         
-        $tempURI = ltrim($_SERVER['REQUEST_URI']);
+        // Fetch method and URI from somewhere
+		$this->requestURI['httpmethod'] = $_SERVER['REQUEST_METHOD'];
         
-        $tempURI = (string) urldecode($tempURI);
+        $this->requestURI['uri'] = ltrim($_SERVER['REQUEST_URI']);
+        
+        $tempURI = $this->requestURI['uri'];
         
         $tempURI = substr($tempURI, 0, 140);
         
@@ -51,6 +54,8 @@ class Request extends AbstractRequest {
         
         $this->requestURI['getparams'] = ($tempURI) ?: NULL;
         
+        $tempURI = (string) rawurldecode($tempURI);
+        
         $requestUriArrayTemp = ($tempURI) ? explode('/', $tempURI[0]) : explode('/', $requestUriArrayTemp);
         
         $requestUriArrayCount = count($requestUriArrayTemp) - 1;
@@ -63,23 +68,20 @@ class Request extends AbstractRequest {
         
             $arrayBaseIndex = 4;
         
-        }
-        elseif (in_array('public', $requestUriArrayTemp)) {
+        } elseif (in_array('public', $requestUriArrayTemp)) {
         
             $requestUriArrayElements = $requestUriArrayCount -2;
         
             $arrayBaseIndex = 3;
         
-        }
-        else {
+        } else {
         
             $requestUriArrayElements = $requestUriArrayCount - 1;
         
             $arrayBaseIndex = 2;
         
         }
-        
-        
+            
         if ($requestUriArrayElements >= 2
             && !empty($requestUriArrayTemp[$arrayBaseIndex])) {
                 
@@ -87,8 +89,7 @@ class Request extends AbstractRequest {
         
                 $this->requestURI['method'] = $requestUriArrayTemp[$arrayBaseIndex + 1];
         
-        }
-        elseif ($requestUriArrayElements == 1 && $requestUriArrayTemp[$arrayBaseIndex] != 'index') {
+        } elseif ($requestUriArrayElements == 1 && $requestUriArrayTemp[$arrayBaseIndex] != 'index') {
         
                 $this->requestURI['controller'] = ucfirst($requestUriArrayTemp[$arrayBaseIndex]);
         
