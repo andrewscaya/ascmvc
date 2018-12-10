@@ -75,18 +75,25 @@ abstract class AbstractControllerManager {
      * @var string|null
      */
     protected $method;
+    
+    /**
+     * Array containing the values of the request (GET, POST, PUT, PATCH, DELETE).
+     *
+     * @var string|null
+     */
+    protected $vars;
 
     /**
      * Initializes this class by assigning the objects contained in the
      * referenced App object's router object to the corresponding properties.
      *
      * @param AbstractApp &$app.
-     * @param string $controller.
+     * @param string $controllerName.
      * @param array $vars.
      *
      * @return void.
      */
-    public abstract function __construct(AbstractApp &$app, $controller, array $vars = []);
+    public abstract function __construct(AbstractApp &$app, $controllerName, array $vars = []);
     
     /**
      * Method that calls the MVC's appropriate request handler.

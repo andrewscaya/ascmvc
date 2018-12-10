@@ -50,7 +50,7 @@ class FastRouter extends AbstractRouter {
 			case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
 				$allowedMethods = $routeInfo[1];
 				// ... 405 Method Not Allowed
-				$this->controllerManager = new ControllerManager($this->app, 'c405');
+				$this->controllerManager = new ControllerManager($this->app, 'c405', $allowedMethods);
 				$this->app->setControllerManager($this->controllerManager);
 				break;
 			case FastRoute\Dispatcher::FOUND:

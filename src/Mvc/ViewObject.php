@@ -38,8 +38,8 @@ class ViewObject extends AbstractViewObject {
 				self::$templateInstance->setCacheDir($baseConfig['templates']['cacheDir']);
 				self::$templateInstance->caching = $baseConfig['templates']['caching'];
 			} elseif($baseConfig['templateManager'] === 'Twig') {
-				$loader = new Twig_Loader_Filesystem($baseConfig['templates']['templateDir']);
-				self::$templateInstance = new Twig_Environment($loader, array(
+				$loader = new \Twig_Loader_Filesystem($baseConfig['templates']['templateDir']);
+				self::$templateInstance = new \Twig_Environment($loader, array(
 					'cache' => $baseConfig['templates']['compileDir'],
 				));
 			}

@@ -22,18 +22,28 @@ class ControllerManager extends AbstractControllerManager {
      * referenced App object's router object to the corresponding properties.
      *
      * @param AbstractApp &$app.
+     * @param string $controllerName.
+     * @param array $vars.
      *
      * @return void.
      */
-    public function __construct(AbstractApp &$app, $controller, array $vars = [])
+    public function __construct(AbstractApp &$app, $controllerName, array $vars = [])
     {
 		$this->app = $app;
 		
-        $this->controllerName = ucfirst($controller) . 'Controller';
+		$this->vars = $vars;
+		
+		$baseConfig = $this->app->getBaseConfig();
+		
+		unset($baseConfig['doctrine']);
+		unset($baseConfig['routes']);
+		unset($baseConfig['templates']);
+		
+        $this->controllerName = ucfirst($controllerName) . 'Controller';
         
         $this->controllerName = 'Application\\Controllers\\' . $this->controllerName;
         
-        $this->controllerMethodName = (isset($vars['action'])) ? $vars['action'] . 'Action' : 'indexAction';
+        $this->controllerMethodName = (isset($this->vars['action'])) ? $this->vars['action'] . 'Action' : 'indexAction';
         
         try {
         
@@ -65,7 +75,7 @@ class ControllerManager extends AbstractControllerManager {
 			$this->controller = isset($sm[$controllerName]) ? $sm[$controllerName] : null;
 		}
         
-        $this->controller = ($this->controller == null && $controllerName != null) ? new $controllerName($this->app) : $this->controller;
+        $this->controller = ($this->controller == null && $controllerName != null) ? new $controllerName($baseConfig) : $this->controller;
         
         $this->method = ($this->controllerMethodName != null) ? $this->controllerMethodName : null;
 
@@ -75,12 +85,33 @@ class ControllerManager extends AbstractControllerManager {
 
             exit;
 
-        }
+        } else {
+			$this->app->setController($this->controller);
+		}
     }
 
     public function execute()
     {
-        $controllerOutput = $this->controller->{$this->method}();
+		if(!empty($this->vars)) {
+			$controllerOutput = $this->controller->{$this->method}($this->vars);
+		} else {
+			$controllerOutput = $this->controller->{$this->method}();
+		}
+		
+		if(!is_array($controllerOutput)){
+			echo $controllerOutput;
+			exit;
+		}
+		
+		$viewObject = $this->app->getViewObject();
+		
+		if($viewObject instanceof \Smarty) {
+			$viewObject->assign('view', $controllerOutput);
+			$viewObject->display($controllerOutput['templatefile']);
+		} else {
+			$twig = $viewObject->load($controllerOutput['templatefile']);
+			echo $twig->render(['view' => $controllerOutput]);
+		}
     }
 
 }

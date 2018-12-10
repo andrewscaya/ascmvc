@@ -17,24 +17,16 @@ use Ascmvc\AbstractController;
 
 class Controller extends AbstractController {
 
-    public function __construct(AbstractApp &$app)
+    public function __construct(array $baseConfig)
     {
-        $this->app = $app;
-        
-        $this->app->setController($this);
-        
-        $this->serviceManager = $this->app->getServiceManager();
-        
-        $this->viewObject = $this->app->getViewObject();
-        
-        $this->config($this->app);
-        
-        $this->baseConfig = $this->app->getBaseConfig();
+		$this->baseConfig = $baseConfig;
+		
+        $this->config($this->baseConfig);
         
         $this->view = $this->baseConfig['view'];
     }
     
-    public static function config(AbstractApp &$app)
+    public function config(array $baseConfig)
     {
     
     }
@@ -64,7 +56,7 @@ class Controller extends AbstractController {
         
     }
 
-    public function indexAction()
+    public function indexAction($vars = null)
     {
         
     }

@@ -18,28 +18,14 @@ namespace Ascmvc;
  * *Description* The AbstractController class is the one that needs to be extended
  * in order to create a LightMVC controller.
  */
-abstract class AbstractController implements EventManagerListenerInterface {
+abstract class AbstractController implements EventManagerListenerInterface, FactoryInterface {
     
     /**
-     * Contains a reference to the Singleton instance of the App class.
-     *
-     * @var AbstractApp|null
-     */
-    protected $app;
-    
-    /**
-     * Contains a reference to the array containing all of the app's basic configurations.
+     * Contains a reference to the array containing some of the app's basic configurations.
      *
      * @var Array|null
      */
     protected $baseConfig;
-    
-    /**
-     * Contains a reference to a Smarty instance.
-     *
-     * @var AbstractViewObject|null
-     */
-    protected $viewObject;
     
     /**
      * Array contains all of the values that will be assigned to the controller's view manager.
@@ -47,13 +33,6 @@ abstract class AbstractController implements EventManagerListenerInterface {
      * @var array|null
      */
     protected $view;
-    
-    /**
-     * Contains a reference to a ServiceManager instance.
-     *
-     * @var AbstractServiceManager|null
-     */
-    protected $serviceManager;
     
     /**
      * Array contains the controller's helper objects.
@@ -67,26 +46,26 @@ abstract class AbstractController implements EventManagerListenerInterface {
      * contained in the referenced App object to the corresponding
      * properties.
      *
-     * @param AbstractApp &$app
+     * @param array $baseConfig
      * 
      * @return void.
      */
-    public abstract function __construct(AbstractApp &$app);
+    public abstract function __construct(array $baseConfig);
 
     /**
      * Configure the application.
      *
-     * @param AbstractApp &$app
+     * @param array $baseConfig
      *
      * @return mixed.
      */
-    public static function config(AbstractApp &$app)
+    public function config(array $baseConfig)
     {
     
     }
     
     /**
-     * Create the controller.
+     * A factory method to create the controller.
      *
      * @param AbstractApp &$app
      *
@@ -104,6 +83,6 @@ abstract class AbstractController implements EventManagerListenerInterface {
      *
      * @return mixed.
      */
-    public abstract function indexAction();
+    public abstract function indexAction($vars = null);
 
 }

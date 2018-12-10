@@ -11,6 +11,7 @@
 
 namespace Ascmvc;
 
+use Ascmvc\Mvc\ViewObject;
 use Pimple\Container;
 
 /**
@@ -135,7 +136,7 @@ abstract class AbstractApp {
      *
      * @return array.
      */
-    public abstract function initialize(Array &$baseConfig, Container &$serviceManager = null, ViewObject &$viewObject = null);
+    public abstract function initialize(array &$baseConfig, Container &$serviceManager = null, ViewObject &$viewObject = null);
     
     /**
      * Get the application's base configuration.

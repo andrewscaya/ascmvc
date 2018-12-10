@@ -43,7 +43,7 @@ class App extends AbstractApp {
         return self::$appInstance;
     }
     
-    public function initialize(Array &$baseConfig, Container &$serviceManager = null, ViewObject &$viewObject = null)
+    public function initialize(array &$baseConfig, Container &$serviceManager = null, ViewObject &$viewObject = null)
     {
         if (!isset($this->request)) {
         
