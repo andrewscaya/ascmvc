@@ -18,7 +18,7 @@ namespace Ascmvc;
  * *Description* The AbstractController class is the one that needs to be extended
  * in order to create a LightMVC controller.
  */
-abstract class AbstractController implements EventManagerListenerInterface, FactoryInterface {
+abstract class AbstractController implements EventManagerListenerInterface {
     
     /**
      * Contains a reference to the array containing some of the app's basic configurations.
@@ -60,18 +60,6 @@ abstract class AbstractController implements EventManagerListenerInterface, Fact
      * @return mixed.
      */
     public function config(array $baseConfig)
-    {
-    
-    }
-    
-    /**
-     * A factory method to create the controller.
-     *
-     * @param AbstractApp &$app
-     *
-     * @return AbstractController.
-     */
-    public static function factory(AbstractApp &$app)
     {
     
     }

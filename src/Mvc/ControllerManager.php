@@ -38,6 +38,12 @@ class ControllerManager extends AbstractControllerManager {
 		unset($baseConfig['doctrine']);
 		unset($baseConfig['routes']);
 		unset($baseConfig['templates']);
+
+        $serviceManager = $this->app->getServiceManager();
+
+        $evenManager = $this->app->getEventManager();
+
+        $viewObject = $this->app->getViewObject();
 		
         $this->controllerName = ucfirst($controllerName) . 'Controller';
         
@@ -68,11 +74,9 @@ class ControllerManager extends AbstractControllerManager {
         
         $controllerName = $this->controllerName;
         
-        $sm = $this->app->getServiceManager();
-        
         if($this->controllerReflection->hasMethod('factory')) {
-			$controllerName::factory($this->app);
-			$this->controller = isset($sm[$controllerName]) ? $sm[$controllerName] : null;
+			$controllerName::factory($baseConfig, $viewObject, $serviceManager, $evenManager);
+			$this->controller = isset($serviceManager[$controllerName]) ? $serviceManager[$controllerName] : null;
 		}
         
         $this->controller = ($this->controller == null && $controllerName != null) ? new $controllerName($baseConfig) : $this->controller;

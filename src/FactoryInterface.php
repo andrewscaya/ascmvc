@@ -11,6 +11,7 @@
 
 namespace Ascmvc;
 
+use Pimple\Container;
 
 /**
  * FactoryInterface allows the implementing class
@@ -22,10 +23,13 @@ interface FactoryInterface {
      * Allows an implementing object to initialize itself using
      * application resources and parameters.
      *
-     * @param AbstractApp &$app
+     * @param array &$baseConfig
+     * @param &$viewObject
+     * @param Container &$serviceManager
+     * @param AbstractEventManager &$eventManager
      *
      * @return void
      */
-    public static function factory(AbstractApp &$app);
+    public static function factory(array &$baseConfig, &$viewObject, Container &$serviceManager, AbstractEventManager &$eventManager);
     
 }
