@@ -30,19 +30,31 @@ class ViewObject extends AbstractViewObject {
     {
         if(!self::$templateInstance) {
 			
-			if($baseConfig['templateManager'] === 'Smarty') {
-				self::$templateInstance = new \Smarty();
-				self::$templateInstance->setTemplateDir($baseConfig['templates']['templateDir']);
-				self::$templateInstance->setCompileDir($baseConfig['templates']['compileDir']);
-				self::$templateInstance->setConfigDir($baseConfig['templates']['configDir']);
-				self::$templateInstance->setCacheDir($baseConfig['templates']['cacheDir']);
-				self::$templateInstance->caching = $baseConfig['templates']['caching'];
-			} elseif($baseConfig['templateManager'] === 'Twig') {
-				$loader = new \Twig_Loader_Filesystem($baseConfig['templates']['templateDir']);
-				self::$templateInstance = new \Twig_Environment($loader, array(
-					'cache' => $baseConfig['templates']['compileDir'],
-				));
-			}
+            if($baseConfig['templateManager'] === 'Smarty') {
+                self::$templateInstance = new \Smarty();
+                self::$templateInstance->setTemplateDir($baseConfig['templates']['templateDir']);
+                self::$templateInstance->setCompileDir($baseConfig['templates']['compileDir']);
+                self::$templateInstance->setConfigDir($baseConfig['templates']['configDir']);
+
+                if($baseConfig['env'] === 'production') {
+                    self::$templateInstance->setCacheDir($baseConfig['templates']['cacheDir']);
+                    self::$templateInstance->caching = true;
+                } else {
+                    self::$templateInstance->caching = false;
+                }
+            } elseif($baseConfig['templateManager'] === 'Twig') {
+                $loader = new \Twig_Loader_Filesystem($baseConfig['templates']['templateDir']);
+                if($baseConfig['env'] === 'production') {
+                    self::$templateInstance = new \Twig_Environment($loader, array(
+                        'cache' => $baseConfig['templates']['compileDir'],
+                    ));
+                } else {
+                    self::$templateInstance = new \Twig_Environment($loader, array(
+                        'cache' => false,
+                    ));
+                }
+
+            }
 			
         }
         
