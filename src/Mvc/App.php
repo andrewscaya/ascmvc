@@ -42,6 +42,47 @@ class App extends AbstractApp {
     
         return self::$appInstance;
     }
+
+    public function boot()
+    {
+        if (PHP_SAPI !== 'cli') {
+            $_SERVER['SERVER_SIGNATURE'] = isset($_SERVER['SERVER_SIGNATURE']) ? $_SERVER['SERVER_SIGNATURE'] : '80';
+
+            $protocol = strpos($_SERVER['SERVER_SIGNATURE'], '443') !== false ? 'https://' : 'http://';
+
+            $requestUriArray = explode('/', $_SERVER['PHP_SELF']);
+
+            if (is_array($requestUriArray)) {
+                $indexKey = array_search('index.php', $requestUriArray);
+
+                array_splice($requestUriArray, $indexKey);
+
+                $requestUri = implode('/', $requestUriArray);
+            }
+
+            $requestUrl = $protocol . $_SERVER['HTTP_HOST'] . $requestUri . '/';
+
+            define('URLBASEADDR', $requestUrl);
+        } else {
+            define('URLBASEADDR', false);
+        }
+
+
+        $appFolder = basename(BASEDIR);
+
+        $baseConfig = ['BASEDIR' => BASEDIR,
+            'URLBASEADDR' => URLBASEADDR,
+            'appFolder' => $appFolder,
+        ];
+
+        require_once BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
+
+        if (file_exists(BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.local.php')) {
+            include_once BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.local.php';
+        }
+
+        return $baseConfig;
+    }
     
     public function initialize(array &$baseConfig, Container &$serviceManager = null, ViewObject &$viewObject = null)
     {
@@ -95,6 +136,8 @@ class App extends AbstractApp {
             $this->viewObject = $viewObject;
         
         }
+
+        return $this;
     }
     
     public function getBaseConfig()
