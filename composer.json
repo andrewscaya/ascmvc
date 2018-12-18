@@ -1,6 +1,6 @@
 {
   "name": "andrewscaya/ascmvc",
-  "description": "A lightweight MVC framework for educational purposes.",
+  "description": "A lightweight MVC framework for educational purposes",
   "type": "library",
   "license": "GPL-2.0-only",
   "keywords": [
@@ -23,7 +23,10 @@
     "pimple/pimple": "3.2.3",
     "doctrine/dbal": "2.5.2",
     "doctrine/orm": "2.5.2",
-    "nikic/fast-route": "^1.3"
+    "nikic/fast-route": "^1.3",
+    "zendframework/zend-eventmanager": "3.2.1",
+    "zendframework/zend-stdlib": "3.2.1",
+    "container-interop/container-interop": "1.2.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^4.8",
