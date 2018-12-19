@@ -13,22 +13,21 @@ namespace Ascmvc\Mvc;
 
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractController;
+use Ascmvc\AscmvcEventManagerListenerInterface;
 
 
-class Controller extends AbstractController {
+class Controller extends AbstractController implements AscmvcEventManagerListenerInterface {
 
     public function __construct(array $baseConfig)
     {
 		$this->baseConfig = $baseConfig;
-		
-        $this->config($this->baseConfig);
         
         $this->view = $this->baseConfig['view'];
     }
     
     public static function onBootstrap(AscmvcEvent $event)
     {
-        
+
     }
     
     public function onDispatch(AscmvcEvent $event)
@@ -39,6 +38,11 @@ class Controller extends AbstractController {
     public function onRender(AscmvcEvent $event)
     {
         
+    }
+
+    public function onFinish(AscmvcEvent $event)
+    {
+
     }
     
     public function indexAction($vars = null)

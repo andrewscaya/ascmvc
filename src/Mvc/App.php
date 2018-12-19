@@ -14,32 +14,34 @@ namespace Ascmvc\Mvc;
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractController;
 use Ascmvc\AbstractControllerManager;
+use Ascmvc\AbstractResponse;
 use Ascmvc\AbstractRouter;
 use Ascmvc\AbstractEventManager;
 use Ascmvc\AbstractViewObject;
 use Pimple\Container;
 
 
-class App extends AbstractApp {
-    
+class App extends AbstractApp
+{
+
     protected function __construct()
     {
-    
+
     }
-    
+
     protected function __clone()
     {
-        
+
     }
 
     public static function getInstance()
     {
-        if(!self::$appInstance) {
-    
+        if (!self::$appInstance) {
+
             self::$appInstance = new App();
-    
+
         }
-    
+
         return self::$appInstance;
     }
 
@@ -83,80 +85,177 @@ class App extends AbstractApp {
 
         return $baseConfig;
     }
-    
+
     public function initialize(array &$baseConfig, Container &$serviceManager = null, ViewObject &$viewObject = null)
     {
-        if (!isset($this->request)) {
-        
-            $this->request = new Request($this);
-        
-        }
-        
-        
-        if (!isset($serviceManager)) {
-            
-            $this->serviceManager = new Container();
-            
-        }
-        else {
-            
-            $this->serviceManager = $serviceManager;
-            
-        }
-        
-        
         $this->baseConfig = $baseConfig;
-        
-        
-        if (isset($this->baseConfig['doctrine'])) {
-            
-            foreach ($this->baseConfig['doctrine'] as $connType => $connections) {
-                
-                foreach ($connections as $connName => $params) {
-                    
-                    $dbManager = Doctrine::getInstance($connType, $connName, $params);
-                    
-                    $this->serviceManager["$connName"] = $dbManager;
-                    
-                }
-                
-            }
-            
+
+        $this->eventManager = AscmvcEventManagerFactory::create();
+        $this->event = new AscmvcEvent(AscmvcEvent::EVENT_BOOTSTRAP);
+        $this->event->setApplication($this);
+
+        if (!isset($serviceManager)) {
+            $this->serviceManager = new Container();
+        } else {
+            $this->serviceManager = $serviceManager;
         }
-        
+
+        if (!isset($this->request)) {
+            $this->request = new Request($this);
+        }
+
+        $this->router = new FastRouter($this->event);
+
         if (!isset($viewObject)) {
-			
+
             $this->viewObject = ViewObject::getInstance($this->baseConfig);
-        
-        }
-        else {
-        
+
+        } else {
+
             $this->viewObject = $viewObject;
-        
+
         }
-        
-        $eventManagerFactory = new AscmvcEventManagerFactory();
-        $this->eventManager = $eventManagerFactory->factory();
-        $this->event = new AscmvcEvent();
+
+        if (isset($this->baseConfig['doctrine'])) {
+
+            foreach ($this->baseConfig['doctrine'] as $connType => $connections) {
+
+                foreach ($connections as $connName => $params) {
+
+                    $dbManager = Doctrine::getInstance($connType, $connName, $params);
+
+                    $this->serviceManager["$connName"] = $dbManager;
+
+                }
+
+            }
+
+        }
 
         return $this;
     }
+
+    public function display(Response $response)
+    {
+        $header = $response->getHeader();
+        header("HTTP/1.1 $header");
+        echo $response;
+        return;
+    }
+
+    public function render(array $controllerOutput)
+    {
+        if(is_array($controllerOutput)) {
+            $viewObject = $this->getViewObject();
+
+            if ($viewObject instanceof \Twig_Environment) {
+                $twig = $viewObject->load($controllerOutput['templatefile']);
+                echo $twig->render(['view' => $controllerOutput]);
+            } elseif ($viewObject instanceof \Smarty) {
+                $viewObject->assign('view', $controllerOutput);
+                $viewObject->display($controllerOutput['templatefile']);
+            }
+
+            $response = new Response('200 OK', ob_get_clean());
+        } else {
+            $response = new Response('200 OK', $controllerOutput);
+        }
+
+        return $response;
+    }
     
+    public function run()
+    {
+        $event = $this->event;
+
+        $shortCircuit = function ($response) use ($event) {
+            if ($response instanceof Response) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        $this->event->stopPropagation(false); // Clear before triggering
+        $result = $this->eventManager->triggerEventUntil($shortCircuit, $this->event);
+
+        if ($result->stopped()) {
+            $response = $result->last();
+            if ($response instanceof Response) {
+                $this->event->setName(AscmvcEvent::EVENT_FINISH);
+                $this->event->stopPropagation(false); // Clear before triggering
+                $this->eventManager->triggerEvent($this->event);
+                $this->response = $response;
+                return;
+            }
+        }
+        
+        $this->event->setName(AscmvcEvent::EVENT_ROUTE);
+        $this->event->stopPropagation(false); // Clear before triggering
+        $result = $this->eventManager->triggerEvent($this->event);
+        
+        $this->event->setName(AscmvcEvent::EVENT_DISPATCH);
+        $this->event->stopPropagation(false); // Clear before triggering
+        $result = $this->eventManager->triggerEventUntil($shortCircuit, $this->event);
+
+        if ($result->stopped()) {
+            $response = $result->last();
+            if ($response instanceof Response) {
+                $this->event->setName(AscmvcEvent::EVENT_FINISH);
+                $this->event->stopPropagation(false); // Clear before triggering
+                $this->eventManager->triggerEvent($this->event);
+                $this->response = $response;
+                return;
+            }
+        } else {
+            $controllerOutput = $result->last();
+            $event = $this->event;
+            $this->eventManager->attach(AscmvcEvent::EVENT_RENDER, function($event) use ($controllerOutput) {
+                return $this->render($controllerOutput);
+            });
+            $this->event->setName(AscmvcEvent::EVENT_RENDER);
+            $this->event->stopPropagation(false); // Clear before triggering
+            $result = $this->eventManager->triggerEvent($this->event);
+            $response = $result->last();
+            $this->response = $response;
+        }
+
+        $response = $this->response;
+        $event = $this->event;
+        $this->eventManager->attach(AscmvcEvent::EVENT_FINISH, function($event) use ($response) {
+            return $this->display($response);
+        });
+        $this->event->setName(AscmvcEvent::EVENT_FINISH);
+        $this->event->stopPropagation(false); // Clear before triggering
+        $result = $this->eventManager->triggerEvent($this->event);
+    }
+
     public function getBaseConfig()
     {
         return $this->baseConfig;
     }
-    
+
     public function appendBaseConfig($name, $array)
     {
         $this->baseConfig[$name] = $array;
-    
+
         return $this->baseConfig;
     }
-    
+
     public function getRequest()
     {
         return $this->request;
+    }
+
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    public function setResponse(AbstractResponse $response)
+    {
+        $this->response = $response;
+        return $this->response;
     }
 
     public function getServiceManager()
@@ -170,7 +269,7 @@ class App extends AbstractApp {
 
         return $this;
     }
-    
+
     public function getEventManager()
     {
         return $this->eventManager;
@@ -181,6 +280,17 @@ class App extends AbstractApp {
         $this->eventManager = $eventManager;
 
         return $this;
+    }
+
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    public function setEvent(AscmvcEvent &$event)
+    {
+        $this->event = $event;
+        return $this->event;
     }
 
     public function getViewObject()
@@ -194,101 +304,41 @@ class App extends AbstractApp {
 
         return $this;
     }
-    
+
     public function getRouter()
     {
         return $this->router;
     }
-    
+
     public function setRouter(AbstractRouter &$router)
     {
         $this->router = $router;
-        
+
         return $this;
     }
-    
+
     public function getControllerManager()
     {
         return $this->controllerManager;
     }
-    
+
     public function setControllerManager(AbstractControllerManager &$controllerManager)
     {
         $this->controllerManager = $controllerManager;
-        
+
         return $this;
     }
-    
+
     public function getController()
     {
         return $this->controller;
     }
-    
+
     public function setController(AbstractController &$controller)
     {
         $this->controller = $controller;
-        
-        return $this;
-    }
-    
-    public function getCurrentRunLevel()
-    {
-        return $this->currentRunLevel;
-    }
 
-    public function setCurrentRunLevel($currentRunLevel)
-    {
-        $this->getEventManager()->updateRunLevel($this, $currentRunLevel);
-        
-        $this->currentRunLevel = $currentRunLevel;
-        
         return $this;
-    }
-    
-    public function run()
-    {
-		$this->event->setName(MvcEvent::EVENT_BOOTSTRAP);
-        $this->event->stopPropagation(false); // Clear before triggering
-        $result = $eventManager->triggerEvent($this->event);
-        
-        //$this->router = new FastRouter($this);
-        
-        $this->event->setName(MvcEvent::EVENT_ROUTE);
-        $this->event->stopPropagation(false); // Clear before triggering
-        $result = $eventManager->triggerEvent($this->event);
-        
-        //$this->eventManager->addRegisteredListener('controller', $this->controller);
-        
-        $this->event->setName(MvcEvent::EVENT_DISPATCH);
-        $this->event->stopPropagation(false); // Clear before triggering
-        $result = $eventManager->triggerEvent($this->event);
-        
-        //$controllerOutput = $this->controllerManager->execute();
-        
-        $this->event->setName(MvcEvent::EVENT_RENDER);
-        $this->event->stopPropagation(false); // Clear before triggering
-        $result = $eventManager->triggerEvent($this->event);
-        
-        if (is_object($controllerOutput) && $controllerOutput instanceof Response) {
-            echo $controllerOutput;
-        } elseif(is_array($controllerOutput)) {
-            $viewObject = $this->getViewObject();
-
-            if ($viewObject instanceof \Twig_Environment) {
-                $twig = $viewObject->load($controllerOutput['templatefile']);
-                echo $twig->render(['view' => $controllerOutput]);
-            } elseif ($viewObject instanceof \Smarty) {
-                $viewObject->assign('view', $controllerOutput);
-                $viewObject->display($controllerOutput['templatefile']);
-            }
-        } else {
-		    $response = new Response($controllerOutput);
-		    echo $response;
-        }
-        
-        $this->event->setName(MvcEvent::EVENT_FINISH);
-        $this->event->stopPropagation(false); // Clear before triggering
-        $result = $eventManager->triggerEvent($this->event);
     }
 
 }

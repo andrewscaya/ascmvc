@@ -18,12 +18,18 @@ use FastRoute;
 
 class FastRouter extends AbstractRouter {
 
-    public function __construct(AbstractApp &$app)
+    public function __construct(AscmvcEvent $event)
     {
-        $this->app = $app;
+        $this->app = $event->getApplication();
 
         $this->baseConfig = $this->app->getBaseConfig();
 
+        $eventManager = $this->app->getEventManager();
+        $eventManager->attach(AscmvcEvent::EVENT_ROUTE, array($this, 'resolve'));
+    }
+
+    public function resolve()
+    {
         if($this->baseConfig['env'] === 'production') {
             $dispatcher = FastRoute\cachedDispatcher(function(FastRoute\RouteCollector $r) {
                 foreach ($this->baseConfig['routes'] as $singleRoute) {
@@ -69,6 +75,11 @@ class FastRouter extends AbstractRouter {
                 $this->app->setControllerManager($this->controllerManager);
                 break;
         }
+
+        $eventManager = $this->app->getEventManager();
+        $eventManager->attach(AscmvcEvent::EVENT_DISPATCH, array($this->controllerManager, 'execute'));
+
+        return true;
     }
 
     public function getRequestURI()

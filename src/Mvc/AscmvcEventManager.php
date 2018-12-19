@@ -12,6 +12,7 @@
 namespace Ascmvc\Mvc;
 
 use Zend\EventManager\EventManager;
+use Zend\EventManager\SharedEventManagerInterface;
 
 
 class AscmvcEventManager extends EventManager {
@@ -19,12 +20,24 @@ class AscmvcEventManager extends EventManager {
 	public function __construct(SharedEventManagerInterface $sharedEventManager = null, array $identifiers = [])
 	{
 		parent::__construct($sharedEventManager, $identifiers);
+
+		$eventManager = $this;
 		
-		$this->attach(AscMvcEvent::EVENT_BOOTSTRAP, array($this, 'onBootstrap');
-		
-		$this->attach(AscMvcEvent::EVENT_DISPATCH, array($this, 'onDispatch');
-		
-		$this->attach(AscMvcEvent::EVENT_RENDER, array($this, 'onRender');
+		$this->attach(AscmvcEvent::EVENT_BOOTSTRAP, function ($event) use ($eventManager) {
+		    return $eventManager->onBootstrap($event);
+        });
+
+        $this->attach(AscmvcEvent::EVENT_DISPATCH, function ($event) use ($eventManager) {
+            return $eventManager->onDispatch($event);
+        }, 2);
+
+        $this->attach(AscmvcEvent::EVENT_RENDER, function ($event) use ($eventManager) {
+            return $eventManager->onRender($event);
+        }, 2);
+
+        $this->attach(AscmvcEvent::EVENT_FINISH, function ($event) use ($eventManager) {
+            return $eventManager->onFinish($event);
+        }, 2);
 	}
     
     public function onBootstrap(AscmvcEvent $event)
@@ -44,7 +57,11 @@ class AscmvcEventManager extends EventManager {
 		
 				require_once $path . DIRECTORY_SEPARATOR . $fileName;
 				
-				$controllerName::onBootstrap($event);
+				$response = $controllerName::onBootstrap($event);
+
+				if ($response instanceof Response) {
+				    return $response;
+                }
 			}
 		}
 	}
@@ -52,13 +69,24 @@ class AscmvcEventManager extends EventManager {
     public function onDispatch(AscmvcEvent $event)
     {
 		$controller = $event->getApplication()->getController();
-		$controller->onDispatch($event);
+		return $controller->onDispatch($event);
 	}
     
     public function onRender(AscmvcEvent $event)
     {
 		$controller = $event->getApplication()->getController();
-		$controller->onResponse($event);
+		return $controller->onRender($event);
 	}
+
+    public function onFinish(AscmvcEvent $event)
+    {
+        $controller = $event->getApplication()->getController();
+
+        if(isset($controller)) {
+            return $controller->onFinish($event);
+        } else {
+            return;
+        }
+    }
     
 }

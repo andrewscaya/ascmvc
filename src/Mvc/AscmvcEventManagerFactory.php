@@ -13,9 +13,9 @@ namespace Ascmvc\Mvc;
 
 use Zend\EventManager\SharedEventManager;
 
-class AscmvcEventManagerFactory implements FactoryInterface {
+class AscmvcEventManagerFactory {
 	
-	public function factory()
+	public static function create()
 	{
 		$shared = new SharedEventManager();
 		return new AscmvcEventManager($shared);

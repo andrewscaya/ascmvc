@@ -11,6 +11,8 @@
 
 namespace Ascmvc;
 
+use Ascmvc\Mvc\AscmvcEvent;
+use Ascmvc\Mvc\Response;
 use Ascmvc\Mvc\ViewObject;
 use Pimple\Container;
 
@@ -42,6 +44,13 @@ abstract class AbstractApp {
      * @var AbstractRequest|null
      */
     protected $request;
+
+    /**
+     * Contains a reference to a Response instance.
+     *
+     * @var AbstractRequest|null
+     */
+    protected $response;
     
     /**
      * Contains a reference to a Container instance.
@@ -91,13 +100,7 @@ abstract class AbstractApp {
      * @var AbstractController|null
      */
     protected $controller;
-    
-    /**
-     * Contains a string that signifies the AbstractApp's current runlevel.
-     *
-     * @var string|null
-     */
-    protected $currentRunLevel;
+
     
     /**
      * Protected method : this class cannot be instantiated by the new keyword
@@ -144,7 +147,34 @@ abstract class AbstractApp {
      * @return array.
      */
     public abstract function initialize(array &$baseConfig, Container &$serviceManager = null, ViewObject &$viewObject = null);
-    
+
+    /**
+     * Sends the final response to the output buffer.
+     *
+     * @param Response $response.
+     *
+     * @return void
+     */
+    public abstract function display(Response $response);
+
+    /**
+     * Executes the Application's bootstrap events.
+     *
+     * @param array $controllerOutput
+     *
+     * @return Response $response
+     */
+    public abstract function render(array $controllerOutput);
+
+    /**
+     * Executes the Application's bootstrap events.
+     *
+     * @param void.
+     *
+     * @return void.
+     */
+    public abstract function run();
+
     /**
      * Get the application's base configuration.
      *
@@ -168,6 +198,22 @@ abstract class AbstractApp {
      * @return AbstractRequest
      */
     public abstract function getRequest();
+
+    /**
+     * Get the AbstractResponse object.
+     *
+     * @return AbstractResponse
+     */
+    public abstract function getResponse();
+
+    /**
+     * Set the AbstractResponse object.
+     *
+     * @param AbstractResponse
+     *
+     * @return AbstractResponse
+     */
+    public abstract function setResponse(AbstractResponse $response);
     
     /**
      * Get the Container object.
@@ -200,6 +246,22 @@ abstract class AbstractApp {
      * @return AbstractApp
      */
     public abstract function setEventManager(AbstractEventManager &$eventManager);
+
+    /**
+     * Get the AscmvcEvent object.
+     *
+     * @return AscmvcEvent
+     */
+    public abstract function getEvent();
+
+    /**
+     * Set the AbstractEventManager object.
+     *
+     * @param AscmvcEvent
+     *
+     * @return AscmvcEvent
+     */
+    public abstract function setEvent(AscmvcEvent &$event);
 
     /**
      * Get the AbstractViewObject object.
@@ -265,29 +327,4 @@ abstract class AbstractApp {
      */
     public abstract function setController(AbstractController &$controller);
 
-    /**
-     * Get the application's current runlevel.
-     *
-     * @return string
-     */
-    public abstract function getCurrentRunLevel();
-    
-    /**
-     * Set the application's current runlevel.
-     *
-     * @param string $currentRunLevel
-     *
-     * @return AbstractApp
-     */
-    public abstract function setCurrentRunLevel($currentRunLevel);
-    
-    /**
-     * Executes the Application's bootstrap events.
-     *
-     * @param void.
-     *
-     * @return void.
-     */
-    public abstract function run();
-    
 }

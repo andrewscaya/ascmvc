@@ -11,20 +11,28 @@
 
 namespace Ascmvc;
 
+use Ascmvc\Mvc\AscmvcEvent;
+
 
 /**
- * EventManagerListenerInterface allows the implementing class
+ * AscmvcRenderListenerInterface allows the implementing class
  * to be consumed as a AscmvcEventManager class listener.
- * 
+ *
  * The interface's methods correspond exactly to the
- * App Class' runlevels as they are defined in its run() method
+ * App Class' events as they are used in its run() method
  * so that, in turn, these methods may be dynamically called by the
  * EventManager's event-driven triggerEvent() method.
  */
-interface AscmvcEventManagerListenerInterface extends
-                                                    AscmvcBootstrapListenerInterface,
-                                                    AscmvcDispatchListenerInterface,
-                                                    AscmvcRenderListenerInterface,
-                                                    AscmvcFinishListenerInterface {
+interface AscmvcRouteListenerInterface {
+
+    /**
+     * Allows an implementing object to interrupt the App's runtime when the
+     * FastRouter resolves the route.
+     *
+     * @param AscmvcEvent $event
+     *
+     * @return Response|void
+     */
+    public static function onRoute(AscmvcEvent $event);
     
 }

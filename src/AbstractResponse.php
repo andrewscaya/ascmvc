@@ -19,7 +19,14 @@ namespace Ascmvc;
  * in order to create a LightMVC Response object.
  */
 abstract class AbstractResponse {
-    
+
+    /**
+     * Contains the body of the Response.
+     *
+     * @var string
+     */
+    protected $header;
+
     /**
      * Contains the body of the Response.
      *
@@ -35,8 +42,13 @@ abstract class AbstractResponse {
      *
      * @return void.
      */
-    public abstract function __construct(string $content);
-    
+    public abstract function __construct(string $header, string $content = null);
+
+    /**
+     * @return string
+     */
+    public abstract function getHeader();
+
     /**
      * @return string
      */

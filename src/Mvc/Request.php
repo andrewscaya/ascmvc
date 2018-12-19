@@ -31,7 +31,9 @@ class Request extends AbstractRequest {
         
         $this->baseConfig = $this->app->getBaseConfig();
 
-        $this->requestURI['scheme'] = $_SERVER['REQUEST_SCHEME'];
+        if(isset($_SERVER['REQUEST_SCHEME'])) {
+            $this->requestURI['scheme'] = $_SERVER['REQUEST_SCHEME'];
+        }
         
         $this->requestURI['host'] = $_SERVER['HTTP_HOST'];
         

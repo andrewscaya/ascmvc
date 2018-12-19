@@ -11,6 +11,8 @@
 
 namespace Ascmvc;
 
+use Ascmvc\Mvc\AscmvcEvent;
+
 
 /**
  * The AbstractRouter class is the blueprint for the MVC's main router.
@@ -52,11 +54,11 @@ abstract class AbstractRouter {
      * Initializes this class by assigning the objects contained in the
      * referenced App object to the corresponding properties.
      *
-     * @param AbstractApp &$app.
+     * @param AscmvcEvent $event.
      *
      * @return void.
      */
-    public abstract function __construct(AbstractApp &$app);
+    public abstract function __construct(AscmvcEvent $event);
     
     /**
      * Get the current request URI.

@@ -11,6 +11,7 @@
 
 namespace Ascmvc\Mvc;
 
+use Application\Controllers\C404Controller;
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractControllerManager;
 
@@ -41,7 +42,7 @@ class ControllerManager extends AbstractControllerManager {
 
         $serviceManager = $this->app->getServiceManager();
 
-        $evenManager = $this->app->getEventManager();
+        $eventManager = $this->app->getEventManager();
 
         $viewObject = $this->app->getViewObject();
 		
@@ -75,23 +76,22 @@ class ControllerManager extends AbstractControllerManager {
         $controllerName = $this->controllerName;
         
         if($this->controllerReflection->hasMethod('factory')) {
-			$controllerName::factory($baseConfig, $viewObject, $serviceManager, $evenManager);
+			$controllerName::factory($baseConfig, $viewObject, $serviceManager, $eventManager);
 			$this->controller = isset($serviceManager[$controllerName]) ? $serviceManager[$controllerName] : null;
-		}
+        }
         
         $this->controller = ($this->controller == null && $controllerName != null) ? new $controllerName($baseConfig) : $this->controller;
         
         $this->method = ($this->controllerMethodName != null) ? $this->controllerMethodName : null;
 
         if ($this->controller == null || $this->method == null) {
+            $this->controller = new C404Controller($baseConfig);
+            $this->method = 'indexAction';
 
-            header("Location: ". URLBASEADDR ."c404");
+            return;
+        }
 
-            exit;
-
-        } else {
-			$this->app->setController($this->controller);
-		}
+        $this->app->setController($this->controller);
     }
 
     public function execute()

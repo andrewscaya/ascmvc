@@ -24,9 +24,13 @@ class Response extends AbstractResponse {
      *
      * @return void.
      */
-    public function __construct(string $content)
+    public function __construct(string $header, string $content = null)
     {
-        $this->response = $content;
+        $this->header = $header;
+
+        if (isset($content)) {
+            $this->response = $content;
+        }
     }
 
     public function __toString()
@@ -37,9 +41,17 @@ class Response extends AbstractResponse {
     /**
      * @return string
      */
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    /**
+     * @return string
+     */
     public function getResponse()
     {
-        return $this->requestURI;
+        return $this->response;
     }
     
 }
