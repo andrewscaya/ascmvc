@@ -18,7 +18,7 @@ namespace Ascmvc;
  * *Description* The AbstractController class is the one that needs to be extended
  * in order to create a LightMVC controller.
  */
-abstract class AbstractController implements EventManagerListenerInterface {
+abstract class AbstractController implements AscmvcEventManagerListenerInterface {
     
     /**
      * Contains a reference to the array containing some of the app's basic configurations.
@@ -51,18 +51,38 @@ abstract class AbstractController implements EventManagerListenerInterface {
      * @return void.
      */
     public abstract function __construct(array $baseConfig);
-
-    /**
-     * Configure the application.
-     *
-     * @param array $baseConfig
-     *
-     * @return mixed.
-     */
-    public function config(array $baseConfig)
-    {
     
-    }
+    /**
+     * Allows an implementing object to interrupt the App's runtime before
+     * the instantiation of the Router, Dispatcher and Controller classes.
+     *
+     * @param AscmvcEvent $event
+     *
+     * @return void
+     */
+    public static function onBootstrap(AscmvcEvent $event);
+    
+    /**
+     * Allows an implementing object to interrupt the App's runtime after the
+     * the Event Manager's registration of the Controller object but before
+     * the Dispatcher's call to the Controller's action method.  This phase allows
+     * for Controller configuration.
+     *
+     * @param AscmvcEvent $event
+     *
+     * @return void
+     */
+    public function onDispatch(AscmvcEvent $event);
+    
+    /**
+     * Allows an implementing object to interrupt the App's runtime before it
+     * sends the Controller's final response to the client.
+     *
+     * @param AscmvcEvent $event
+     *
+     * @return void
+     */
+    public function onRender(AscmvcEvent $event);
     
     /**
      * Method corresponding to the controller's default action.

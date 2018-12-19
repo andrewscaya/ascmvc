@@ -26,36 +26,21 @@ class Controller extends AbstractController {
         $this->view = $this->baseConfig['view'];
     }
     
-    public function config(array $baseConfig)
-    {
-    
-    }
-    
-    public static function preboot(AbstractApp &$app)
+    public static function onBootstrap(AscmvcEvent $event)
     {
         
     }
     
-    public static function postboot(AbstractApp &$app)
+    public function onDispatch(AscmvcEvent $event)
     {
         
     }
     
-    public function predispatch()
+    public function onRender(AscmvcEvent $event)
     {
         
     }
     
-    public function postdispatch()
-    {
-        
-    }
-    
-    public function preresponse()
-    {
-        
-    }
-
     public function indexAction($vars = null)
     {
         

@@ -58,6 +58,13 @@ abstract class AbstractApp {
     protected $eventManager;
     
     /**
+     * Contains a reference to the AscmvcEvent instance.
+     *
+     * @var AscmvcEvent|null
+     */
+    protected $event;
+    
+    /**
      * Contains a reference to a Smarty instance.
      *
      * @var AbstractViewObject|null

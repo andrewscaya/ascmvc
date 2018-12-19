@@ -101,23 +101,8 @@ class ControllerManager extends AbstractControllerManager {
         } else {
             $controllerOutput = $this->controller->{$this->method}();
         }
-
-        if (is_object($controllerOutput) && $controllerOutput instanceof Response) {
-            echo $controllerOutput;
-        } elseif(is_array($controllerOutput)) {
-            $viewObject = $this->app->getViewObject();
-
-            if ($viewObject instanceof \Twig_Environment) {
-                $twig = $viewObject->load($controllerOutput['templatefile']);
-                echo $twig->render(['view' => $controllerOutput]);
-            } elseif ($viewObject instanceof \Smarty) {
-                $viewObject->assign('view', $controllerOutput);
-                $viewObject->display($controllerOutput['templatefile']);
-            }
-        } else {
-		    $response = new Response($controllerOutput);
-		    echo $response;
-        }
+        
+        return $controllerOutput;
     }
 
 }

@@ -14,68 +14,45 @@ namespace Ascmvc;
 
 /**
  * EventManagerListenerInterface allows the implementing class
- * to be consumed as a EventManager class listener.
+ * to be consumed as a AscmvcEventManager class listener.
  * 
  * The interface's methods correspond exactly to the
  * App Class' runlevels as they are defined in its run() method
  * so that, in turn, these methods may be dynamically called by the
- * Event Manager's event-driven processEvents() method.
+ * EventManager's event-driven triggerEvent() method.
  */
-interface EventManagerListenerInterface {
+interface AscmvcEventManagerListenerInterface {
     
     /**
      * Allows an implementing object to interrupt the App's runtime before
      * the instantiation of the Router, Dispatcher and Controller classes.
      *
-     * @param AbstractApp &$app
+     * @param AscmvcEvent $event
      *
      * @return void
      */
-    public static function preboot(AbstractApp &$app);
-    
-    /**
-     * Allows an implementing object to interrupt the App's runtime immediately
-     * after the instantiation of the Router, Dispatcher and Controller classes
-     * but before the Event Manager's registration of the Controller object.
-     *
-     * @param AbstractApp &$app
-     *
-     * @return void
-     */
-    public static function postboot(AbstractApp &$app);
+    public static function onBootstrap(AscmvcEvent $event);
     
     /**
      * Allows an implementing object to interrupt the App's runtime after the
      * the Event Manager's registration of the Controller object but before
      * the Dispatcher's call to the Controller's action method.  This phase allows
-     * for Controller configuration.  By default, predispatch() calls the Controller's
-     * config() method.
+     * for Controller configuration.
      *
-     * @param void
-     *
-     * @return void
-     */
-    public function predispatch();
-    
-    /**
-     * Allows an implementing object to interrupt the App's runtime after the 
-     * completion of the Dispatcher's call to the Controller's action method and
-     * the rendering of this method's frontend.
-     *
-     * @param void
+     * @param AscmvcEvent $event
      *
      * @return void
      */
-    public function postdispatch();
+    public function onDispatch(AscmvcEvent $event);
     
     /**
      * Allows an implementing object to interrupt the App's runtime before it
      * sends the Controller's final response to the client.
      *
-     * @param void
+     * @param AscmvcEvent $event
      *
      * @return void
      */
-    public function preresponse();
+    public function onRender(AscmvcEvent $event);
     
 }

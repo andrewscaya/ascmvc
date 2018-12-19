@@ -104,8 +104,6 @@ class App extends AbstractApp {
             
         }
         
-        $this->eventManager = new EventManager();
-        
         
         $this->baseConfig = $baseConfig;
         
@@ -136,6 +134,10 @@ class App extends AbstractApp {
             $this->viewObject = $viewObject;
         
         }
+        
+        $eventManagerFactory = new AscmvcEventManagerFactory();
+        $this->eventManager = $eventManagerFactory->factory();
+        $this->event = new AscmvcEvent();
 
         return $this;
     }
@@ -245,21 +247,48 @@ class App extends AbstractApp {
     
     public function run()
     {
-        $this->setCurrentRunLevel('preboot');
+		$this->event->setName(MvcEvent::EVENT_BOOTSTRAP);
+        $this->event->stopPropagation(false); // Clear before triggering
+        $result = $eventManager->triggerEvent($this->event);
         
-        $this->router = new FastRouter($this);
+        //$this->router = new FastRouter($this);
         
-        $this->setCurrentRunLevel('postboot');
+        $this->event->setName(MvcEvent::EVENT_ROUTE);
+        $this->event->stopPropagation(false); // Clear before triggering
+        $result = $eventManager->triggerEvent($this->event);
         
-        $this->eventManager->addRegisteredListener('controller', $this->controller);
-                
-        $this->setCurrentRunLevel('predispatch');
+        //$this->eventManager->addRegisteredListener('controller', $this->controller);
         
-        $this->controllerManager->execute();
+        $this->event->setName(MvcEvent::EVENT_DISPATCH);
+        $this->event->stopPropagation(false); // Clear before triggering
+        $result = $eventManager->triggerEvent($this->event);
         
-        $this->setCurrentRunLevel('postdispatch');
+        //$controllerOutput = $this->controllerManager->execute();
         
-        $this->setCurrentRunLevel('preresponse');
+        $this->event->setName(MvcEvent::EVENT_RENDER);
+        $this->event->stopPropagation(false); // Clear before triggering
+        $result = $eventManager->triggerEvent($this->event);
+        
+        if (is_object($controllerOutput) && $controllerOutput instanceof Response) {
+            echo $controllerOutput;
+        } elseif(is_array($controllerOutput)) {
+            $viewObject = $this->getViewObject();
+
+            if ($viewObject instanceof \Twig_Environment) {
+                $twig = $viewObject->load($controllerOutput['templatefile']);
+                echo $twig->render(['view' => $controllerOutput]);
+            } elseif ($viewObject instanceof \Smarty) {
+                $viewObject->assign('view', $controllerOutput);
+                $viewObject->display($controllerOutput['templatefile']);
+            }
+        } else {
+		    $response = new Response($controllerOutput);
+		    echo $response;
+        }
+        
+        $this->event->setName(MvcEvent::EVENT_FINISH);
+        $this->event->stopPropagation(false); // Clear before triggering
+        $result = $eventManager->triggerEvent($this->event);
     }
 
 }
