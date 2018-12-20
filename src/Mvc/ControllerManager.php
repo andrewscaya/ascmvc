@@ -45,23 +45,36 @@ class ControllerManager extends AbstractControllerManager {
         $eventManager = $this->app->getEventManager();
 
         $viewObject = $this->app->getViewObject();
-		
-        $this->controllerName = ucfirst($controllerName) . 'Controller';
-        
-        $this->controllerName = 'Application\\Controllers\\' . $this->controllerName;
+
+        if(strpos($controllerName, '/') !== false) {
+            $controllerNameArray = explode('/', trim($controllerName));
+            $controllerName = ucfirst($controllerNameArray[1]) . 'Controller';
+            $this->controllerName = ucfirst($controllerNameArray[0]) . '\\Controllers\\' . $controllerName;
+        } else {
+            $controllerName = ucfirst($controllerName) . 'Controller';
+            $this->controllerName = 'Application\\Controllers\\' . $controllerName;
+        }
         
         $this->controllerMethodName = (isset($this->vars['action'])) ? $this->vars['action'] . 'Action' : 'indexAction';
-        
+
+        $controllerName = $this->controllerName;
+
         try {
         
-            $this->controllerReflection = new \ReflectionClass($this->controllerName);
+            $this->controllerReflection = new \ReflectionClass($controllerName);
         
             $this->controllerFileName = $this->controllerReflection->getFileName();
             
-            $this->controllerReflection->hasMethod($this->controllerMethodName);
+            if(!$this->controllerReflection->hasMethod($this->controllerMethodName)) {
+                throw new \ReflectionException;
+            }
+
+            if($this->controllerReflection->hasMethod('factory')) {
+                $controllerName::factory($baseConfig, $viewObject, $serviceManager, $eventManager);
+                $this->controller = isset($serviceManager[$controllerName]) ? $serviceManager[$controllerName] : null;
+            }
         
-        }
-        catch (\ReflectionException $e) {
+        } catch (\ReflectionException $e) {
         
             $this->controllerReflection = null;
             
@@ -70,14 +83,9 @@ class ControllerManager extends AbstractControllerManager {
             $this->controllerMethodName = null;
         
             $this->currentRequestURI = null;
+
+            $this->controller = null;
         
-        }
-        
-        $controllerName = $this->controllerName;
-        
-        if($this->controllerReflection->hasMethod('factory')) {
-			$controllerName::factory($baseConfig, $viewObject, $serviceManager, $eventManager);
-			$this->controller = isset($serviceManager[$controllerName]) ? $serviceManager[$controllerName] : null;
         }
         
         $this->controller = ($this->controller == null && $controllerName != null) ? new $controllerName($baseConfig) : $this->controller;
@@ -87,11 +95,11 @@ class ControllerManager extends AbstractControllerManager {
         if ($this->controller == null || $this->method == null) {
             $this->controller = new C404Controller($baseConfig);
             $this->method = 'indexAction';
-
-            return;
         }
 
         $this->app->setController($this->controller);
+
+        return;
     }
 
     public function execute()

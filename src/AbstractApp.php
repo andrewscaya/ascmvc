@@ -160,11 +160,11 @@ abstract class AbstractApp {
     /**
      * Executes the Application's bootstrap events.
      *
-     * @param array $controllerOutput
+     * @param mixed $controllerOutput
      *
      * @return Response $response
      */
-    public abstract function render(array $controllerOutput);
+    public abstract function render($controllerOutput);
 
     /**
      * Executes the Application's bootstrap events.

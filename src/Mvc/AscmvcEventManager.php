@@ -17,14 +17,14 @@ use Zend\EventManager\SharedEventManagerInterface;
 
 class AscmvcEventManager extends EventManager {
 	
-	public function __construct(SharedEventManagerInterface $sharedEventManager = null, array $identifiers = [])
-	{
-		parent::__construct($sharedEventManager, $identifiers);
+    public function __construct(SharedEventManagerInterface $sharedEventManager = null, array $identifiers = [])
+    {
+        parent::__construct($sharedEventManager, $identifiers);
 
-		$eventManager = $this;
-		
-		$this->attach(AscmvcEvent::EVENT_BOOTSTRAP, function ($event) use ($eventManager) {
-		    return $eventManager->onBootstrap($event);
+        $eventManager = $this;
+
+        $this->attach(AscmvcEvent::EVENT_BOOTSTRAP, function ($event) use ($eventManager) {
+            return $eventManager->onBootstrap($event);
         });
 
         $this->attach(AscmvcEvent::EVENT_DISPATCH, function ($event) use ($eventManager) {
@@ -35,48 +35,57 @@ class AscmvcEventManager extends EventManager {
             return $eventManager->onRender($event);
         }, 2);
 
+        $this->attach(AscmvcEvent::EVENT_RENDER, function($event) {
+            return $event->getApplication()->render($event->getApplication()->getResponse());
+        });
+
         $this->attach(AscmvcEvent::EVENT_FINISH, function ($event) use ($eventManager) {
             return $eventManager->onFinish($event);
         }, 2);
-	}
+
+        $this->attach(AscmvcEvent::EVENT_FINISH, function($event) {
+            return $event->getApplication()->display($event->getApplication()->getResponse());
+        });
+    }
     
     public function onBootstrap(AscmvcEvent $event)
     {
-		$baseConfig = $event->getApplication()->getBaseConfig();
-            
-		$path = $baseConfig['BASEDIR'] . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'Application' . DIRECTORY_SEPARATOR . 'Controllers';
-		
-		$dirIterator = new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS);
-		
-		foreach ($dirIterator as $fileInfo) {
-			if ($fileInfo->isFile() && preg_match('/^[A-Za-z0-9_\-]+Controller(?=.php)/', $fileInfo->getFilename())) {
-				
-				$fileName = $fileInfo->getFilename();
-				
-				$controllerName = 'Application\\Controllers\\' . substr($fileName, 0, strlen($fileName) - 4);
-		
-				require_once $path . DIRECTORY_SEPARATOR . $fileName;
-				
-				$response = $controllerName::onBootstrap($event);
+        $baseConfig = $event->getApplication()->getBaseConfig();
 
-				if ($response instanceof Response) {
-				    return $response;
+        $path = $baseConfig['BASEDIR'] . DIRECTORY_SEPARATOR . 'controllers';
+
+        $objects = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::SELF_FIRST);
+        foreach($objects as $name => $fileInfo){
+            if ($fileInfo->isFile() && preg_match('/^[A-Za-z0-9_\-]+Controller(?=.php)/', $fileInfo->getFilename())) {
+                $filePath = $fileInfo->getPathName();
+                require_once $filePath;
+
+                $filePathArray = explode('/', $filePath);
+                $fileName = array_pop($filePathArray);
+                array_pop($filePathArray);
+                $domainName = array_pop($filePathArray);
+                $controllerName = $domainName. '\\Controllers\\' . substr($fileName, 0, strlen($fileName) - 4);
+
+                $response = $controllerName::onBootstrap($event);
+
+                if ($response instanceof Response) {
+                    return $response;
                 }
-			}
-		}
-	}
+            }
+        }
+    }
 	
     public function onDispatch(AscmvcEvent $event)
     {
-		$controller = $event->getApplication()->getController();
-		return $controller->onDispatch($event);
-	}
+        $controller = $event->getApplication()->getController();
+        return $controller->onDispatch($event);
+    }
     
     public function onRender(AscmvcEvent $event)
     {
-		$controller = $event->getApplication()->getController();
-		return $controller->onRender($event);
-	}
+        $controller = $event->getApplication()->getController();
+        return $controller->onRender($event);
+    }
 
     public function onFinish(AscmvcEvent $event)
     {

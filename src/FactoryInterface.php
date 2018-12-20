@@ -12,6 +12,7 @@
 namespace Ascmvc;
 
 use Pimple\Container;
+use Zend\EventManager\EventManager;
 
 /**
  * FactoryInterface allows the implementing class
@@ -26,10 +27,10 @@ interface FactoryInterface {
      * @param array &$baseConfig
      * @param &$viewObject
      * @param Container &$serviceManager
-     * @param AbstractEventManager &$eventManager
+     * @param EventManager &$eventManager
      *
      * @return void
      */
-    public static function factory(array &$baseConfig, &$viewObject, Container &$serviceManager, AbstractEventManager &$eventManager);
+    public static function factory(array &$baseConfig, &$viewObject, Container &$serviceManager, EventManager &$eventManager);
     
 }

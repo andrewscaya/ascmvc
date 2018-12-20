@@ -122,9 +122,12 @@ class App extends AbstractApp
 
                 foreach ($connections as $connName => $params) {
 
-                    $dbManager = Doctrine::getInstance($connType, $connName, $params);
+                    $serviceManager = $this->serviceManager;
 
-                    $this->serviceManager["$connName"] = $dbManager;
+                    $serviceManager["$connName"] = $serviceManager->factory(function ($serviceManager) use ($connType, $connName, $params) {
+                        $dbManager = Doctrine::getInstance($connType, $connName, $params);
+                        return $dbManager;
+                    });
 
                 }
 
@@ -143,7 +146,7 @@ class App extends AbstractApp
         return;
     }
 
-    public function render(array $controllerOutput)
+    public function render($controllerOutput)
     {
         if(is_array($controllerOutput)) {
             $viewObject = $this->getViewObject();
@@ -182,10 +185,10 @@ class App extends AbstractApp
         if ($result->stopped()) {
             $response = $result->last();
             if ($response instanceof Response) {
+                $this->response = $response;
                 $this->event->setName(AscmvcEvent::EVENT_FINISH);
                 $this->event->stopPropagation(false); // Clear before triggering
                 $this->eventManager->triggerEvent($this->event);
-                $this->response = $response;
                 return;
             }
         }
@@ -198,33 +201,27 @@ class App extends AbstractApp
         $this->event->stopPropagation(false); // Clear before triggering
         $result = $this->eventManager->triggerEventUntil($shortCircuit, $this->event);
 
+        $response = $result->last();
+
+        $this->response = $response;
+
         if ($result->stopped()) {
-            $response = $result->last();
             if ($response instanceof Response) {
                 $this->event->setName(AscmvcEvent::EVENT_FINISH);
                 $this->event->stopPropagation(false); // Clear before triggering
                 $this->eventManager->triggerEvent($this->event);
-                $this->response = $response;
                 return;
             }
-        } else {
-            $controllerOutput = $result->last();
-            $event = $this->event;
-            $this->eventManager->attach(AscmvcEvent::EVENT_RENDER, function($event) use ($controllerOutput) {
-                return $this->render($controllerOutput);
-            });
-            $this->event->setName(AscmvcEvent::EVENT_RENDER);
-            $this->event->stopPropagation(false); // Clear before triggering
-            $result = $this->eventManager->triggerEvent($this->event);
-            $response = $result->last();
-            $this->response = $response;
         }
 
-        $response = $this->response;
-        $event = $this->event;
-        $this->eventManager->attach(AscmvcEvent::EVENT_FINISH, function($event) use ($response) {
-            return $this->display($response);
-        });
+        $this->event->setName(AscmvcEvent::EVENT_RENDER);
+        $this->event->stopPropagation(false); // Clear before triggering
+        $result = $this->eventManager->triggerEventUntil($shortCircuit, $this->event);
+
+        $response = $result->last();
+
+        $this->response = $response;
+
         $this->event->setName(AscmvcEvent::EVENT_FINISH);
         $this->event->stopPropagation(false); // Clear before triggering
         $result = $this->eventManager->triggerEvent($this->event);
@@ -293,18 +290,6 @@ class App extends AbstractApp
         return $this->event;
     }
 
-    public function getViewObject()
-    {
-        return $this->viewObject;
-    }
-
-    public function setViewObject(AbstractViewObject &$viewObject)
-    {
-        $this->viewObject = $viewObject;
-
-        return $this;
-    }
-
     public function getRouter()
     {
         return $this->router;
@@ -337,6 +322,18 @@ class App extends AbstractApp
     public function setController(AbstractController &$controller)
     {
         $this->controller = $controller;
+
+        return $this;
+    }
+
+    public function getViewObject()
+    {
+        return $this->viewObject;
+    }
+
+    public function setViewObject(AbstractViewObject &$viewObject)
+    {
+        $this->viewObject = $viewObject;
 
         return $this;
     }
