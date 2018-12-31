@@ -14,6 +14,7 @@ namespace Ascmvc\Mvc;
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractRouter;
 use FastRoute;
+use Zend\Diactoros\Response;
 
 
 class FastRouter extends AbstractRouter {
@@ -23,9 +24,6 @@ class FastRouter extends AbstractRouter {
         $this->app = $event->getApplication();
 
         $this->baseConfig = $this->app->getBaseConfig();
-
-        $eventManager = $this->app->getEventManager();
-        $eventManager->attach(AscmvcEvent::EVENT_ROUTE, array($this, 'resolve'));
     }
 
     public function resolve()
@@ -58,13 +56,11 @@ class FastRouter extends AbstractRouter {
             case FastRoute\Dispatcher::NOT_FOUND:
                 // ... 404 Not Found
                 $this->controllerManager = new ControllerManager($this->app, 'c404');
-                $this->app->setControllerManager($this->controllerManager);
                 break;
             case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
                 $allowedMethods = $routeInfo[1];
                 // ... 405 Method Not Allowed
                 $this->controllerManager = new ControllerManager($this->app, 'c405', $allowedMethods);
-                $this->app->setControllerManager($this->controllerManager);
                 break;
             case FastRoute\Dispatcher::FOUND:
                 $controller = $routeInfo[1];
@@ -77,14 +73,19 @@ class FastRouter extends AbstractRouter {
                 ];
                 // ... call $handler with $vars
                 $this->controllerManager = new ControllerManager($this->app, $controller, $vars);
-                $this->app->setControllerManager($this->controllerManager);
                 break;
         }
 
-        $eventManager = $this->app->getEventManager();
-        $eventManager->attach(AscmvcEvent::EVENT_DISPATCH, array($this->controllerManager, 'execute'));
+        $this->app->setControllerManager($this->controllerManager);
 
-        return true;
+        $controllerManager = $this->controllerManager;
+
+        $eventManager = $this->app->getEventManager();
+        $eventManager->attach(AscmvcEvent::EVENT_DISPATCH, function ($event) use ($controllerManager) {
+            return $controllerManager->execute();
+        });
+
+        return;
     }
 
     public function getRequestURI()

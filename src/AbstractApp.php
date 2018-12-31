@@ -12,9 +12,9 @@
 namespace Ascmvc;
 
 use Ascmvc\Mvc\AscmvcEvent;
-use Ascmvc\Mvc\Response;
 use Ascmvc\Mvc\ViewObject;
 use Pimple\Container;
+use Zend\Diactoros\Response;
 
 /**
  * The abstract AbstractApp class is the blueprint for the MVC's main engine.
@@ -213,7 +213,7 @@ abstract class AbstractApp {
      *
      * @return AbstractResponse
      */
-    public abstract function setResponse(AbstractResponse $response);
+    public abstract function setResponse(Response $response);
     
     /**
      * Get the Container object.

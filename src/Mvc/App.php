@@ -14,11 +14,11 @@ namespace Ascmvc\Mvc;
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractController;
 use Ascmvc\AbstractControllerManager;
-use Ascmvc\AbstractResponse;
 use Ascmvc\AbstractRouter;
 use Ascmvc\AbstractEventManager;
 use Ascmvc\AbstractViewObject;
 use Pimple\Container;
+use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
 
 
@@ -141,14 +141,26 @@ class App extends AbstractApp
 
     public function display(Response $response)
     {
-        $header = $response->getHeader();
-        header("HTTP/1.1 $header");
-        echo $response;
+        $statusCode = $response->getStatusCode();
+        $protocolVersion = $this->request->getProtocolVersion();
+        header("HTTP/$protocolVersion $statusCode");
+        $headers = $response->getHeaders();
+
+        foreach($response->getHeaders() as $header => $value) {
+            header("$header: $value[0]");
+        }
+
+        if (!empty($response->getBody())) {
+            echo $response->getBody();
+        }
+
         return;
     }
 
     public function render($controllerOutput)
     {
+        $response = new Response();
+
         if(is_array($controllerOutput)) {
             $viewObject = $this->getViewObject();
 
@@ -160,9 +172,15 @@ class App extends AbstractApp
                 $viewObject->display($controllerOutput['templatefile']);
             }
 
-            $response = new Response('200 OK', ob_get_clean());
+            $response->getBody()->write(ob_get_clean());
         } else {
-            $response = new Response('200 OK', $controllerOutput);
+            $response->getBody()->write($controllerOutput);
+        }
+
+        if (isset($controllerOutput['statuscode'])) {
+            $response = $response->withStatus($controllerOutput['statuscode']);
+        } else {
+            $response = $response->withStatus(200);
         }
 
         return $response;
@@ -250,7 +268,7 @@ class App extends AbstractApp
         return $this->response;
     }
 
-    public function setResponse(AbstractResponse $response)
+    public function setResponse(Response $response)
     {
         $this->response = $response;
         return $this->response;

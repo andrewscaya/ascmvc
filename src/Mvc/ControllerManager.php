@@ -11,7 +11,6 @@
 
 namespace Ascmvc\Mvc;
 
-use Application\Controllers\C404Controller;
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\FactoryInterface;
@@ -92,13 +91,14 @@ class ControllerManager extends AbstractControllerManager {
         
         }
         
-        $this->controller = ($this->controller == null && $controllerName != null) ? new $controllerName($baseConfig) : $this->controller;
+        $this->controller = ($this->controller == null && $this->controllerName != null) ? new $controllerName($baseConfig) : $this->controller;
         
         $this->method = ($this->controllerMethodName != null) ? $this->controllerMethodName : null;
 
         if ($this->controller == null || $this->method == null) {
-            $this->controller = new C404Controller($baseConfig);
-            $this->method = 'indexAction';
+            throw new \RuntimeException('Controller method not found');
+
+            return;
         }
 
         $this->app->setController($this->controller);

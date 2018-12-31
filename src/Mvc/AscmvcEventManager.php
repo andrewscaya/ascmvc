@@ -11,6 +11,7 @@
 
 namespace Ascmvc\Mvc;
 
+use Zend\Diactoros\Response;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\SharedEventManagerInterface;
 
@@ -25,6 +26,10 @@ class AscmvcEventManager extends EventManager {
 
         $this->attach(AscmvcEvent::EVENT_BOOTSTRAP, function ($event) use ($eventManager) {
             return $eventManager->onBootstrap($event);
+        });
+
+        $this->attach(AscmvcEvent::EVENT_ROUTE, function ($event) use ($eventManager) {
+            return $eventManager->onRoute($event);
         });
 
         $this->attach(AscmvcEvent::EVENT_DISPATCH, function ($event) use ($eventManager) {
@@ -73,6 +78,12 @@ class AscmvcEventManager extends EventManager {
                 }
             }
         }
+    }
+
+    public function onRoute(AscmvcEvent $event)
+    {
+        $router = $event->getApplication()->getRouter();
+        return $router->resolve();
     }
 	
     public function onDispatch(AscmvcEvent $event)
