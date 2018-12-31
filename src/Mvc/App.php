@@ -19,6 +19,7 @@ use Ascmvc\AbstractRouter;
 use Ascmvc\AbstractEventManager;
 use Ascmvc\AbstractViewObject;
 use Pimple\Container;
+use Zend\Diactoros\ServerRequestFactory;
 
 
 class App extends AbstractApp
@@ -101,7 +102,7 @@ class App extends AbstractApp
         }
 
         if (!isset($this->request)) {
-            $this->request = new Request($this);
+            $this->request = ServerRequestFactory::fromGlobals();
         }
 
         $this->router = new FastRouter($this->event);

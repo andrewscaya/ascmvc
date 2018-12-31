@@ -56,7 +56,7 @@ class ControllerManager extends AbstractControllerManager {
             $this->controllerName = 'Application\\Controllers\\' . $controllerName;
         }
         
-        $this->controllerMethodName = (isset($this->vars['action'])) ? $this->vars['action'] . 'Action' : 'indexAction';
+        $this->controllerMethodName = (isset($this->vars['get']['action'])) ? $this->vars['get']['action'] . 'Action' : 'indexAction';
 
         $controllerName = $this->controllerName;
 
@@ -108,11 +108,7 @@ class ControllerManager extends AbstractControllerManager {
 
     public function execute()
     {
-        if (!empty($this->vars)) {
-            $controllerOutput = $this->controller->{$this->method}($this->vars);
-        } else {
-            $controllerOutput = $this->controller->{$this->method}();
-        }
+        $controllerOutput = $this->controller->{$this->method}($this->vars);
         
         return $controllerOutput;
     }

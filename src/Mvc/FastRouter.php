@@ -47,11 +47,10 @@ class FastRouter extends AbstractRouter {
             });
         }
 
-        $this->requestURI = $this->app->getRequest()->getRequestURI();
-
-        // Fetch method and URI from somewhere
-        $httpMethod = $this->requestURI['httpmethod'];
-        $uri = $this->requestURI['uri'];
+        // Fetch method and URI
+        $this->requestURI = $this->app->getRequest()->getServerParams();
+        $httpMethod = $this->app->getRequest()->getMethod();
+        $uri = $this->requestURI['REQUEST_URI'];
 
         $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 
@@ -69,7 +68,13 @@ class FastRouter extends AbstractRouter {
                 break;
             case FastRoute\Dispatcher::FOUND:
                 $controller = $routeInfo[1];
-                $vars = $routeInfo[2];
+                $vars = [
+                    'get' => $routeInfo[2],
+                    'post' => $this->app->getRequest()->getParsedBody(),
+                    'files' => $this->app->getRequest()->getUploadedFiles(),
+                    'cookies' => $this->app->getRequest()->getCookieParams(),
+                    'server' => $this->requestURI,
+                ];
                 // ... call $handler with $vars
                 $this->controllerManager = new ControllerManager($this->app, $controller, $vars);
                 $this->app->setControllerManager($this->controllerManager);
