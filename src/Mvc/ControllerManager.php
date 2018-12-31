@@ -14,6 +14,7 @@ namespace Ascmvc\Mvc;
 use Application\Controllers\C404Controller;
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractControllerManager;
+use Ascmvc\FactoryInterface;
 
 
 class ControllerManager extends AbstractControllerManager {
@@ -69,7 +70,10 @@ class ControllerManager extends AbstractControllerManager {
                 throw new \ReflectionException;
             }
 
-            if($this->controllerReflection->hasMethod('factory')) {
+            if(
+                $this->controllerReflection->implementsInterface(FactoryInterface::class)
+                && $this->controllerReflection->hasMethod('factory')
+            ) {
                 $controllerName::factory($baseConfig, $viewObject, $serviceManager, $eventManager);
                 $this->controller = isset($serviceManager[$controllerName]) ? $serviceManager[$controllerName] : null;
             }
