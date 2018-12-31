@@ -20,6 +20,11 @@ use Ascmvc\AbstractViewObject;
 use Pimple\Container;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
+use Zend\Stratigility\MiddlewarePipe;
+use Zend\Stratigility\Exception\EmptyPipelineException;
+
+use function Zend\Stratigility\middleware;
+use function Zend\Stratigility\path;
 
 
 class App extends AbstractApp
@@ -78,10 +83,10 @@ class App extends AbstractApp
             'appFolder' => $appFolder,
         ];
 
-        require_once BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
-
         if (file_exists(BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.local.php')) {
-            include_once BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.local.php';
+            require_once BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.local.php';
+        } else {
+            require_once BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
         }
 
         return $baseConfig;
@@ -117,13 +122,13 @@ class App extends AbstractApp
 
         }
 
+        $serviceManager = $this->serviceManager;
+
         if (isset($this->baseConfig['doctrine'])) {
 
             foreach ($this->baseConfig['doctrine'] as $connType => $connections) {
 
                 foreach ($connections as $connName => $params) {
-
-                    $serviceManager = $this->serviceManager;
 
                     $serviceManager["$connName"] = $serviceManager->factory(function ($serviceManager) use ($connType, $connName, $params) {
                         $dbManager = Doctrine::getInstance($connType, $connName, $params);
@@ -133,6 +138,43 @@ class App extends AbstractApp
                 }
 
             }
+
+        }
+
+        $middlewarePipe = new MiddlewarePipe();
+
+        if (isset($this->baseConfig['middleware'])) {
+
+            foreach ($this->baseConfig['middleware'] as $path => $handler) {
+                if (strpos($path, '/') !== false) {
+                    if (is_callable($handler) && $handler instanceof \Closure) {
+                        $middlewarePipe->pipe(path($path, middleware($handler)));
+                    } else {
+                        $middlewarePipe->pipe(path($path, (new $handler($this->baseConfig))));
+                    }
+                } else {
+                    if (is_callable($handler) && $handler instanceof \Closure) {
+                        $middlewarePipe->pipe(middleware($handler));
+                    } else {
+                        $middlewarePipe->pipe((new $handler));
+                    }
+                }
+            }
+
+            $serviceManager['middleware'] = function ($serviceManager) use ($middlewarePipe) {
+                return $middlewarePipe;
+            };
+
+            $this->eventManager->attach(AscmvcEvent::EVENT_BOOTSTRAP, function ($event) use ($serviceManager) {
+                $middlewarePipe = $serviceManager['middleware'];
+                try {
+                    $response = $middlewarePipe->handle($this->request);
+                } catch (EmptyPipelineException $e) {
+                    return false;
+                }
+
+                return $response;
+            }, 3);
 
         }
 
