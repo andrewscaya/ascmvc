@@ -28,6 +28,7 @@
     "zendframework/zend-diactoros": "2.1.0",
     "zendframework/zend-eventmanager": "3.2.1",
     "zendframework/zend-stdlib": "3.2.1",
+    "zendframework/zend-stratigility": "3.0.2",
     "container-interop/container-interop": "1.2.0"
   },
   "require-dev": {
