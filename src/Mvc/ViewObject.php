@@ -29,8 +29,21 @@ class ViewObject extends AbstractViewObject {
     public static function getInstance(array $baseConfig)
     {
         if(!self::$templateInstance) {
-			
-            if($baseConfig['templateManager'] === 'Smarty') {
+
+            if($baseConfig['templateManager'] === 'Twig') {
+                $loader = new \Twig_Loader_Filesystem($baseConfig['templates']['templateDir']);
+                if($baseConfig['env'] === 'production') {
+                    self::$templateInstance = new \Twig_Environment($loader, array(
+                        'cache' => $baseConfig['templates']['compileDir'],
+                    ));
+                } else {
+                    self::$templateInstance = new \Twig_Environment($loader, array(
+                        'cache' => false,
+                    ));
+                }
+            } elseif($baseConfig['templateManager'] === 'Plates') {
+                self::$templateInstance = new \League\Plates\Engine($baseConfig['templates']['templateDir']);
+            } elseif($baseConfig['templateManager'] === 'Smarty') {
                 self::$templateInstance = new \Smarty();
                 self::$templateInstance->setTemplateDir($baseConfig['templates']['templateDir']);
                 self::$templateInstance->setCompileDir($baseConfig['templates']['compileDir']);
@@ -42,20 +55,8 @@ class ViewObject extends AbstractViewObject {
                 } else {
                     self::$templateInstance->caching = false;
                 }
-            } elseif($baseConfig['templateManager'] === 'Twig') {
-                $loader = new \Twig_Loader_Filesystem($baseConfig['templates']['templateDir']);
-                if($baseConfig['env'] === 'production') {
-                    self::$templateInstance = new \Twig_Environment($loader, array(
-                        'cache' => $baseConfig['templates']['compileDir'],
-                    ));
-                } else {
-                    self::$templateInstance = new \Twig_Environment($loader, array(
-                        'cache' => false,
-                    ));
-                }
-
             }
-			
+
         }
         
         return self::$templateInstance;
