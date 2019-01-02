@@ -206,14 +206,14 @@ class App extends AbstractApp
         if(is_array($controllerOutput)) {
             $viewObject = $this->getViewObject();
 
-            if ($viewObject instanceof \Twig_Environment) {
-                $twig = $viewObject->load($controllerOutput['templatefile']);
-                echo $twig->render(['view' => $controllerOutput]);
-            } elseif ($viewObject instanceof \League\Plates\Engine) {
+            if ($viewObject instanceof \League\Plates\Engine) {
                 echo $viewObject->render($controllerOutput['templatefile'], ['view' => $controllerOutput]);
+            } elseif ($viewObject instanceof \Twig_Environment) {
+                $twig = $viewObject->load($controllerOutput['templatefile'] . '.html.twig');
+                echo $twig->render(['view' => $controllerOutput]);
             } elseif ($viewObject instanceof \Smarty) {
                 $viewObject->assign('view', $controllerOutput);
-                $viewObject->display($controllerOutput['templatefile']);
+                $viewObject->display($controllerOutput['templatefile'] . '.tpl');
             }
 
             $response->getBody()->write(ob_get_clean());

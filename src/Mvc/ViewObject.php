@@ -30,7 +30,9 @@ class ViewObject extends AbstractViewObject {
     {
         if(!self::$templateInstance) {
 
-            if($baseConfig['templateManager'] === 'Twig') {
+            if($baseConfig['templateManager'] === 'Plates') {
+                self::$templateInstance = new \League\Plates\Engine($baseConfig['templates']['templateDir']);
+            } elseif($baseConfig['templateManager'] === 'Twig') {
                 $loader = new \Twig_Loader_Filesystem($baseConfig['templates']['templateDir']);
                 if($baseConfig['env'] === 'production') {
                     self::$templateInstance = new \Twig_Environment($loader, array(
@@ -41,8 +43,6 @@ class ViewObject extends AbstractViewObject {
                         'cache' => false,
                     ));
                 }
-            } elseif($baseConfig['templateManager'] === 'Plates') {
-                self::$templateInstance = new \League\Plates\Engine($baseConfig['templates']['templateDir']);
             } elseif($baseConfig['templateManager'] === 'Smarty') {
                 self::$templateInstance = new \Smarty();
                 self::$templateInstance->setTemplateDir($baseConfig['templates']['templateDir']);
