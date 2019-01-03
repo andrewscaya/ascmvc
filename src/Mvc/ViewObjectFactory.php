@@ -13,10 +13,9 @@
 
 namespace Ascmvc\Mvc;
 
-use Ascmvc\AbstractViewObject;
-
-class ViewObject extends AbstractViewObject
+class ViewObjectFactory
 {
+    protected static $templateInstance;
 
     protected function __construct()
     {

@@ -89,33 +89,24 @@ class App extends AbstractApp
         return $baseConfig;
     }
 
-    public function initialize(array &$baseConfig, Container &$serviceManager = null, ViewObject &$viewObject = null)
+    public function initialize(array &$baseConfig)
     {
         $this->baseConfig = $baseConfig;
-
-        $this->eventManager = AscmvcEventManagerFactory::create();
-        $this->event = new AscmvcEvent(AscmvcEvent::EVENT_BOOTSTRAP);
-        $this->event->setApplication($this);
-
-        if (!isset($serviceManager)) {
-            $this->serviceManager = new Container();
-        } else {
-            $this->serviceManager = $serviceManager;
-        }
 
         if (!isset($this->request)) {
             $this->request = ServerRequestFactory::fromGlobals();
         }
 
+        $this->serviceManager = new Container();
+        $serviceManager = $this->serviceManager;
+
+        $this->eventManager = AscmvcEventManagerFactory::create();
+        $this->event = new AscmvcEvent(AscmvcEvent::EVENT_BOOTSTRAP);
+        $this->event->setApplication($this);
+
         $this->router = new FastRouter($this->event);
 
-        if (!isset($viewObject)) {
-            $this->viewObject = ViewObject::getInstance($this->baseConfig);
-        } else {
-            $this->viewObject = $viewObject;
-        }
-
-        $serviceManager = $this->serviceManager;
+        $this->viewObject = ViewObjectFactory::getInstance($this->baseConfig);
 
         if (isset($this->baseConfig['doctrine'])) {
             foreach ($this->baseConfig['doctrine'] as $connType => $connections) {
@@ -189,7 +180,7 @@ class App extends AbstractApp
         $response = new Response();
 
         if (is_array($controllerOutput)) {
-            $viewObject = $this->getViewObject();
+            $viewObject = $this->viewObject;
 
             if ($viewObject instanceof \League\Plates\Engine) {
                 echo $viewObject->render($controllerOutput['templatefile'], ['view' => $controllerOutput]);
@@ -320,7 +311,7 @@ class App extends AbstractApp
         return $this->eventManager;
     }
 
-    public function setEventManager(AbstractEventManager &$eventManager)
+    public function setEventManager(AscmvcEventManager &$eventManager)
     {
         $this->eventManager = $eventManager;
 
@@ -379,7 +370,7 @@ class App extends AbstractApp
         return $this->viewObject;
     }
 
-    public function setViewObject(AbstractViewObject &$viewObject)
+    public function setViewObject(&$viewObject)
     {
         $this->viewObject = $viewObject;
 

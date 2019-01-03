@@ -14,13 +14,13 @@
 namespace Ascmvc;
 
 use Pimple\Container;
-use Zend\EventManager\EventManager;
+use Ascmvc\Mvc\AscmvcEventManager;
 
 /**
  * FactoryInterface allows the implementing class
  * to create itself using initialization logic.
  */
-interface FactoryInterface
+interface ControllerFactoryInterface
 {
 
     /**
@@ -30,9 +30,9 @@ interface FactoryInterface
      * @param array &$baseConfig
      * @param &$viewObject
      * @param Container &$serviceManager
-     * @param EventManager &$eventManager
+     * @param AscmvcEventManager &$eventManager
      *
      * @return void
      */
-    public static function factory(array &$baseConfig, &$viewObject, Container &$serviceManager, EventManager &$eventManager);
+    public static function factory(array &$baseConfig, &$viewObject, Container &$serviceManager, AscmvcEventManager &$eventManager);
 }

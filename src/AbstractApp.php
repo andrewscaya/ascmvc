@@ -14,7 +14,7 @@
 namespace Ascmvc;
 
 use Ascmvc\Mvc\AscmvcEvent;
-use Ascmvc\Mvc\ViewObject;
+use Ascmvc\Mvc\AscmvcEventManager;
 use Pimple\Container;
 use Zend\Diactoros\Response;
 
@@ -44,28 +44,28 @@ abstract class AbstractApp
     /**
      * Contains a reference to a Request instance.
      *
-     * @var AbstractRequest|null
+     * @var Zend\Diactoros\Request|null
      */
     protected $request;
 
     /**
      * Contains a reference to a Response instance.
      *
-     * @var AbstractRequest|null
+     * @var Zend\Diactoros\Request|null
      */
     protected $response;
 
     /**
-     * Contains a reference to a Container instance.
+     * Contains a reference to a Pimple\Container instance.
      *
-     * @var Container|null
+     * @var Pimple\Container|null
      */
     protected $serviceManager;
 
     /**
      * Contains a reference to the EventManager instance.
      *
-     * @var AbstractEventManager|null
+     * @var AscmvcEventManager|null
      */
     protected $eventManager;
 
@@ -77,9 +77,9 @@ abstract class AbstractApp
     protected $event;
 
     /**
-     * Contains a reference to a Smarty instance.
+     * Contains a reference to a Template Manager instance.
      *
-     * @var AbstractViewObject|null
+     * @var Object|null
      */
     protected $viewObject;
 
@@ -136,24 +136,19 @@ abstract class AbstractApp
     }
 
     /**
-     * Initializes this class by assigning the objects and arrays
-     * received in the parameters to the corresponding properties
-     * and by configuring the Smarty Template Manager.  It will
-     * also initialize a Doctrine Database Manager if the connection
-     * parameters are given in the config/config.php file.
+     * Initializes the application with the parameters that
+     * are given in the config/config.php file.
      *
      * @param array &$baseConfig  Contains all of the AbstractApp's basic configurations
-     * @param AbstractServiceManager &$serviceManager | NULL
-     * @param AbstractViewObject &$viewObject
      *
      * @return array.
      */
-    public abstract function initialize(array &$baseConfig, Container &$serviceManager = null, ViewObject &$viewObject = null);
+    public abstract function initialize(array &$baseConfig);
 
     /**
      * Sends the final response to the output buffer.
      *
-     * @param Response $response.
+     * @param Zend\Diactoros\Response $response.
      *
      * @return void
      */
@@ -164,16 +159,16 @@ abstract class AbstractApp
      *
      * @param mixed $controllerOutput
      *
-     * @return Response $response
+     * @return Zend\Diactoros\Response $response
      */
     public abstract function render($controllerOutput);
 
     /**
      * Executes the Application's bootstrap events.
      *
-     * @param void.
+     * @param void
      *
-     * @return void.
+     * @return void
      */
     public abstract function run();
 
@@ -197,57 +192,57 @@ abstract class AbstractApp
     /**
      * Get the AbstractRequest object.
      *
-     * @return AbstractRequest
+     * @return Zend\Diactoros\Request
      */
     public abstract function getRequest();
 
     /**
      * Get the AbstractResponse object.
      *
-     * @return AbstractResponse
+     * @return Zend\Diactoros\Response
      */
     public abstract function getResponse();
 
     /**
      * Set the AbstractResponse object.
      *
-     * @param AbstractResponse
+     * @param Zend\Diactoros\Response
      *
-     * @return AbstractResponse
+     * @return Zend\Diactoros\Response
      */
     public abstract function setResponse(Response $response);
 
     /**
-     * Get the Container object.
+     * Get the Pimple\Container object.
      *
-     * @return Container
+     * @return Pimple\Container
      */
     public abstract function getServiceManager();
 
     /**
-     * Set the Container object.
+     * Set the Pimple\Container object.
      *
-     * @param Container
+     * @param Pimple\Container
      *
      * @return AbstractApp
      */
     public abstract function setServiceManager(Container &$serviceManager);
 
     /**
-     * Get the AbstractEventManager object.
+     * Get the AscmvcEventManager object.
      *
-     * @return AbstractEventManager
+     * @return AscmvcEventManager
      */
     public abstract function getEventManager();
 
     /**
-     * Set the AbstractEventManager object.
+     * Set the AscmvcEventManager object.
      *
-     * @param AbstractEventManager
+     * @param AscmvcEventManager
      *
      * @return AbstractApp
      */
-    public abstract function setEventManager(AbstractEventManager &$eventManager);
+    public abstract function setEventManager(AscmvcEventManager &$eventManager);
 
     /**
      * Get the AscmvcEvent object.
@@ -257,7 +252,7 @@ abstract class AbstractApp
     public abstract function getEvent();
 
     /**
-     * Set the AbstractEventManager object.
+     * Set the AscmvcEvent object.
      *
      * @param AscmvcEvent
      *
@@ -268,18 +263,18 @@ abstract class AbstractApp
     /**
      * Get the AbstractViewObject object.
      *
-     * @return AbstractViewObject
+     * @return Object
      */
     public abstract function getViewObject();
 
     /**
-     * Set the AbstractViewObject object.
+     * Set the View object.
      *
-     * @param AbstractViewObject
+     * @param Object
      *
      * @return AbstractApp
      */
-    public abstract function setViewObject(AbstractViewObject &$viewObject);
+    public abstract function setViewObject(&$viewObject);
 
     /**
      * Get the AbstractRouter object.
@@ -298,16 +293,16 @@ abstract class AbstractApp
     public abstract function setRouter(AbstractRouter &$router);
 
     /**
-     * Get the AbstractDispatcher object.
+     * Get the AbstractControllerManager object.
      *
-     * @return AbstractDispatcher
+     * @return AbstractControllerManager
      */
     public abstract function getControllerManager();
 
     /**
-     * Set the AbstractDispatcher object.
+     * Set the AbstractControllerManager object.
      *
-     * @param AbstractDispatcher
+     * @param AbstractControllerManager
      *
      * @return AbstractApp
      */
