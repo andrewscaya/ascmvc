@@ -1,16 +1,26 @@
 <?php
+/**
+ * LightMVC/ASCMVC
+ *
+ * @package    LightMVC/ASCMVC
+ * @author     Andrew Caya
+ * @link       https://github.com/lightmvc/ascmvc
+ * @version    2.0.0
+ * @license    Apache License, Version 2.0, see above
+ * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @since      1.0.0
+ */
 
 namespace Ascmvc\Mvc;
-
 
 /**
  * An example of a general-purpose implementation that includes the optional
  * functionality of allowing multiple base directories for a single namespace
  * prefix.
- * 
+ *
  * Given a foo-bar package of classes in the file system at the following
  * paths ...
- * 
+ *
  *     /path/to/packages/foo-bar/
  *         src/
  *             Baz.php             # Foo\Bar\Baz
@@ -20,35 +30,36 @@ namespace Ascmvc\Mvc;
  *             BazTest.php         # Foo\Bar\BazTest
  *             Qux/
  *                 QuuxTest.php    # Foo\Bar\Qux\QuuxTest
- * 
+ *
  * ... add the path to the class files for the \Foo\Bar\ namespace prefix
  * as follows:
- * 
+ *
  *      <?php
  *      // instantiate the loader
  *      $loader = new \Example\Psr4AutoloaderClass;
- *      
+ *
  *      // register the autoloader
  *      $loader->register();
- *      
+ *
  *      // register the base directories for the namespace prefix
  *      $loader->addNamespace('Foo\Bar', '/path/to/packages/foo-bar/src');
  *      $loader->addNamespace('Foo\Bar', '/path/to/packages/foo-bar/tests');
- * 
+ *
  * The following line would cause the autoloader to attempt to load the
  * \Foo\Bar\Qux\Quux class from /path/to/packages/foo-bar/src/Qux/Quux.php:
- * 
+ *
  *      <?php
  *      new \Foo\Bar\Qux\Quux;
- * 
- * The following line would cause the autoloader to attempt to load the 
+ *
+ * The following line would cause the autoloader to attempt to load the
  * \Foo\Bar\Qux\QuuxTest class from /path/to/packages/foo-bar/tests/Qux/QuuxTest.php:
- * 
+ *
  *      <?php
  *      new \Foo\Bar\Qux\QuuxTest;
  */
-class Psr4Autoloader {
-    
+class Psr4Autoloader
+{
+
     /**
      * An associative array where the key is a namespace prefix and the value
      * is an array of base directories for classes in that namespace.
@@ -59,7 +70,7 @@ class Psr4Autoloader {
 
     /**
      * Register loader with SPL autoloader stack.
-     * 
+     *
      * @return void
      */
     public function register()
@@ -114,7 +125,6 @@ class Psr4Autoloader {
         // work backwards through the namespace names of the fully-qualified
         // class name to find a mapped file name
         while (false !== $pos = strrpos($prefix, '\\')) {
-
             // retain the trailing namespace separator in the prefix
             $prefix = substr($class, 0, $pos + 1);
 
@@ -129,7 +139,7 @@ class Psr4Autoloader {
 
             // remove the trailing namespace separator for the next iteration
             // of strrpos()
-            $prefix = rtrim($prefix, '\\');   
+            $prefix = rtrim($prefix, '\\');
         }
 
         // never found a mapped file
@@ -138,7 +148,7 @@ class Psr4Autoloader {
 
     /**
      * Load the mapped file for a namespace prefix and relative class.
-     * 
+     *
      * @param string $prefix The namespace prefix.
      * @param string $relative_class The relative class name.
      * @return mixed Boolean false if no mapped file can be loaded, or the
@@ -153,7 +163,6 @@ class Psr4Autoloader {
 
         // look through base directories for this namespace prefix
         foreach ($this->prefixes[$prefix] as $base_dir) {
-
             // replace the namespace prefix with the base directory,
             // replace namespace separators with directory separators
             // in the relative class name, append with .php
@@ -174,7 +183,7 @@ class Psr4Autoloader {
 
     /**
      * If a file exists, require it from the file system.
-     * 
+     *
      * @param string $file The file to require.
      * @return bool True if the file exists, false if not.
      */
@@ -186,5 +195,4 @@ class Psr4Autoloader {
         }
         return false;
     }
-    
 }

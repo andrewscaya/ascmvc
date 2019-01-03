@@ -1,12 +1,14 @@
 <?php
 /**
- * ASC LightMVC
+ * LightMVC/ASCMVC
  *
- * @package    ASC LightMVC
+ * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
- * @link       https://github.com/andrewscaya
- * @version    1.0.0
- * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
+ * @link       https://github.com/lightmvc/ascmvc
+ * @version    2.0.0
+ * @license    Apache License, Version 2.0, see above
+ * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @since      1.0.0
  */
 
 namespace Ascmvc;
@@ -22,22 +24,23 @@ use Zend\Diactoros\Response;
  * The abstract AbstractApp class is the one that needs to be extended
  * in order to create a LightMVC AbstractApp.
  */
-abstract class AbstractApp {
-    
+abstract class AbstractApp
+{
+
     /**
      * Contains the Singleton instance of this class.
      *
      * @var AbstractApp|null
      */
     protected static $appInstance;
-    
+
     /**
      * Array contains all of the AbstractApp's basic configurations.
      *
      * @var array|null
      */
     protected $baseConfig;
-    
+
     /**
      * Contains a reference to a Request instance.
      *
@@ -51,49 +54,49 @@ abstract class AbstractApp {
      * @var AbstractRequest|null
      */
     protected $response;
-    
+
     /**
      * Contains a reference to a Container instance.
      *
      * @var Container|null
      */
     protected $serviceManager;
-    
+
     /**
      * Contains a reference to the EventManager instance.
      *
      * @var AbstractEventManager|null
      */
     protected $eventManager;
-    
+
     /**
      * Contains a reference to the AscmvcEvent instance.
      *
      * @var AscmvcEvent|null
      */
     protected $event;
-    
+
     /**
      * Contains a reference to a Smarty instance.
      *
      * @var AbstractViewObject|null
      */
     protected $viewObject;
-    
+
     /**
      * Contains a reference to a Router instance.
      *
      * @var AbstractRouter|null
      */
     protected $router;
-    
+
     /**
      * Contains a reference to a ControllerManager instance.
      *
      * @var AbstractControllerManager|null
      */
     protected $controllerManager;
-    
+
     /**
      * Contains a reference to a polymorphic Controller instance.
      *
@@ -101,7 +104,7 @@ abstract class AbstractApp {
      */
     protected $controller;
 
-    
+
     /**
      * Protected method : this class cannot be instantiated by the new keyword
      * because it is a Singleton.
@@ -111,7 +114,7 @@ abstract class AbstractApp {
      * @return void.
      */
     protected abstract function __construct();
-    
+
     /**
      * Protected method : this class cannot be copied because it is a Singleton.
      *
@@ -120,7 +123,7 @@ abstract class AbstractApp {
      * @return void.
      */
     protected abstract function __clone();
-    
+
     /**
      * Static method : returns the Singleton instance of this class.
      *
@@ -130,9 +133,8 @@ abstract class AbstractApp {
      */
     public static function getInstance()
     {
-        
     }
-    
+
     /**
      * Initializes this class by assigning the objects and arrays
      * received in the parameters to the corresponding properties
@@ -181,7 +183,7 @@ abstract class AbstractApp {
      * @return array
      */
     public abstract function getBaseConfig();
-    
+
     /**
      * Modify the application's base configuration.
      *
@@ -191,7 +193,7 @@ abstract class AbstractApp {
      * @return AbstractApp
      */
     public abstract function appendBaseConfig($name, $array);
-    
+
     /**
      * Get the AbstractRequest object.
      *
@@ -214,7 +216,7 @@ abstract class AbstractApp {
      * @return AbstractResponse
      */
     public abstract function setResponse(Response $response);
-    
+
     /**
      * Get the Container object.
      *
@@ -230,7 +232,7 @@ abstract class AbstractApp {
      * @return AbstractApp
      */
     public abstract function setServiceManager(Container &$serviceManager);
-    
+
     /**
      * Get the AbstractEventManager object.
      *
@@ -278,7 +280,7 @@ abstract class AbstractApp {
      * @return AbstractApp
      */
     public abstract function setViewObject(AbstractViewObject &$viewObject);
-    
+
     /**
      * Get the AbstractRouter object.
      *
@@ -326,5 +328,4 @@ abstract class AbstractApp {
      * @return AbstractApp
      */
     public abstract function setController(AbstractController &$controller);
-
 }

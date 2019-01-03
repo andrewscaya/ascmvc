@@ -1,12 +1,14 @@
 <?php
 /**
- * ASC LightMVC
+ * LightMVC/ASCMVC
  *
- * @package    ASC LightMVC
+ * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
- * @link       https://github.com/andrewscaya
- * @version    1.0.0
- * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
+ * @link       https://github.com/lightmvc/ascmvc
+ * @version    2.0.0
+ * @license    Apache License, Version 2.0, see above
+ * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @since      2.0.0
  */
 
 namespace Ascmvc\Mvc;
@@ -15,9 +17,9 @@ use Zend\Diactoros\Response;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\SharedEventManagerInterface;
 
+class AscmvcEventManager extends EventManager
+{
 
-class AscmvcEventManager extends EventManager {
-	
     public function __construct(SharedEventManagerInterface $sharedEventManager = null, array $identifiers = [])
     {
         parent::__construct($sharedEventManager, $identifiers);
@@ -40,7 +42,7 @@ class AscmvcEventManager extends EventManager {
             return $eventManager->onRender($event);
         }, 2);
 
-        $this->attach(AscmvcEvent::EVENT_RENDER, function($event) {
+        $this->attach(AscmvcEvent::EVENT_RENDER, function ($event) {
             return $event->getApplication()->render($event->getApplication()->getResponse());
         });
 
@@ -48,11 +50,11 @@ class AscmvcEventManager extends EventManager {
             return $eventManager->onFinish($event);
         }, 2);
 
-        $this->attach(AscmvcEvent::EVENT_FINISH, function($event) {
+        $this->attach(AscmvcEvent::EVENT_FINISH, function ($event) {
             return $event->getApplication()->display($event->getApplication()->getResponse());
         });
     }
-    
+
     public function onBootstrap(AscmvcEvent $event)
     {
         $baseConfig = $event->getApplication()->getBaseConfig();
@@ -60,7 +62,7 @@ class AscmvcEventManager extends EventManager {
         $path = $baseConfig['BASEDIR'] . DIRECTORY_SEPARATOR . 'controllers';
 
         $objects = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::SELF_FIRST);
-        foreach($objects as $name => $fileInfo){
+        foreach ($objects as $name => $fileInfo) {
             if ($fileInfo->isFile() && preg_match('/^[A-Za-z0-9_\-]+Controller(?=.php)/', $fileInfo->getFilename())) {
                 $filePath = $fileInfo->getPathName();
                 require_once $filePath;
@@ -85,13 +87,13 @@ class AscmvcEventManager extends EventManager {
         $router = $event->getApplication()->getRouter();
         return $router->resolve();
     }
-	
+
     public function onDispatch(AscmvcEvent $event)
     {
         $controller = $event->getApplication()->getController();
         return $controller->onDispatch($event);
     }
-    
+
     public function onRender(AscmvcEvent $event)
     {
         $controller = $event->getApplication()->getController();
@@ -102,11 +104,10 @@ class AscmvcEventManager extends EventManager {
     {
         $controller = $event->getApplication()->getController();
 
-        if(isset($controller)) {
+        if (isset($controller)) {
             return $controller->onFinish($event);
         } else {
             return;
         }
     }
-    
 }

@@ -1,12 +1,14 @@
 <?php
 /**
- * ASC LightMVC
+ * LightMVC/ASCMVC
  *
- * @package    ASC LightMVC
+ * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
- * @link       https://github.com/andrewscaya
- * @version    1.0.0
- * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
+ * @link       https://github.com/lightmvc/ascmvc
+ * @version    2.0.0
+ * @license    Apache License, Version 2.0, see above
+ * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @since      1.0.0
  */
 
 namespace Ascmvc\Mvc;
@@ -26,26 +28,21 @@ use Zend\Stratigility\Exception\EmptyPipelineException;
 use function Zend\Stratigility\middleware;
 use function Zend\Stratigility\path;
 
-
 class App extends AbstractApp
 {
 
     protected function __construct()
     {
-
     }
 
     protected function __clone()
     {
-
     }
 
     public static function getInstance()
     {
         if (!self::$appInstance) {
-
             self::$appInstance = new App();
-
         }
 
         return self::$appInstance;
@@ -113,38 +110,27 @@ class App extends AbstractApp
         $this->router = new FastRouter($this->event);
 
         if (!isset($viewObject)) {
-
             $this->viewObject = ViewObject::getInstance($this->baseConfig);
-
         } else {
-
             $this->viewObject = $viewObject;
-
         }
 
         $serviceManager = $this->serviceManager;
 
         if (isset($this->baseConfig['doctrine'])) {
-
             foreach ($this->baseConfig['doctrine'] as $connType => $connections) {
-
                 foreach ($connections as $connName => $params) {
-
                     $serviceManager["$connName"] = $serviceManager->factory(function ($serviceManager) use ($connType, $connName, $params) {
                         $dbManager = Doctrine::getInstance($connType, $connName, $params);
                         return $dbManager;
                     });
-
                 }
-
             }
-
         }
 
         $middlewarePipe = new MiddlewarePipe();
 
         if (isset($this->baseConfig['middleware'])) {
-
             foreach ($this->baseConfig['middleware'] as $path => $handler) {
                 if (strpos($path, '/') !== false) {
                     if (is_callable($handler) && $handler instanceof \Closure) {
@@ -175,7 +161,6 @@ class App extends AbstractApp
 
                 return $response;
             }, 3);
-
         }
 
         return $this;
@@ -188,7 +173,7 @@ class App extends AbstractApp
         header("HTTP/$protocolVersion $statusCode");
         $headers = $response->getHeaders();
 
-        foreach($response->getHeaders() as $header => $value) {
+        foreach ($response->getHeaders() as $header => $value) {
             header("$header: $value[0]");
         }
 
@@ -203,7 +188,7 @@ class App extends AbstractApp
     {
         $response = new Response();
 
-        if(is_array($controllerOutput)) {
+        if (is_array($controllerOutput)) {
             $viewObject = $this->getViewObject();
 
             if ($viewObject instanceof \League\Plates\Engine) {
@@ -229,7 +214,7 @@ class App extends AbstractApp
 
         return $response;
     }
-    
+
     public function run()
     {
         $event = $this->event;
@@ -255,11 +240,11 @@ class App extends AbstractApp
                 return;
             }
         }
-        
+
         $this->event->setName(AscmvcEvent::EVENT_ROUTE);
         $this->event->stopPropagation(false); // Clear before triggering
         $result = $this->eventManager->triggerEvent($this->event);
-        
+
         $this->event->setName(AscmvcEvent::EVENT_DISPATCH);
         $this->event->stopPropagation(false); // Clear before triggering
         $result = $this->eventManager->triggerEventUntil($shortCircuit, $this->event);
@@ -400,5 +385,4 @@ class App extends AbstractApp
 
         return $this;
     }
-
 }

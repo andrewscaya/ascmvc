@@ -1,16 +1,17 @@
 <?php
 /**
- * ASC LightMVC
-*
-* @package    ASC LightMVC
-* @author     Andrew Caya
-* @link       https://github.com/andrewscaya
-* @version    1.0.0
-* @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
-*/
+ * LightMVC/ASCMVC
+ *
+ * @package    LightMVC/ASCMVC
+ * @author     Andrew Caya
+ * @link       https://github.com/lightmvc/ascmvc
+ * @version    2.0.0
+ * @license    Apache License, Version 2.0, see above
+ * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @since      1.0.0
+ */
 
 namespace Ascmvc;
-
 
 /**
  * The abstract AbstractControllerManager class is the blueprint for the MVC's ControllerManagers.
@@ -18,7 +19,8 @@ namespace Ascmvc;
  * The AbstractControllerManager class is the one that needs to be extended
  * in order to create a LightMVC ControllerManager.
  */
-abstract class AbstractControllerManager {
+abstract class AbstractControllerManager
+{
 
     /**
      * Contains a reference to the Singleton instance of the App class.
@@ -26,35 +28,35 @@ abstract class AbstractControllerManager {
      * @var AbstractApp|null
      */
     protected $app;
-    
+
     /**
      * Contains an associative array of all of the URI's elements.
      *
      * @var array|null
      */
     protected $currentRequestURI;
-    
+
     /**
      * Contains the name of the polymorphic Controller instance.
      *
      * @var string
      */
     protected $controllerName;
-    
+
     /**
      * Contains the name of the Controller's method.
      *
      * @var string
      */
     protected $controllerMethodName;
-    
+
     /**
      * Contains a reflection of the polymorphic Controller instance.
      *
      * @var \ReflectionClass
      */
     protected $controllerReflection;
-    
+
     /**
      * Contains the Controller's filename.
      *
@@ -75,7 +77,7 @@ abstract class AbstractControllerManager {
      * @var string|null
      */
     protected $method;
-    
+
     /**
      * Array containing the values of the request (GET, POST, PUT, PATCH, DELETE).
      *
@@ -94,7 +96,7 @@ abstract class AbstractControllerManager {
      * @return void.
      */
     public abstract function __construct(AbstractApp &$app, $controllerName, array $vars = []);
-    
+
     /**
      * Method that calls the MVC's appropriate request handler.
      *
@@ -103,5 +105,4 @@ abstract class AbstractControllerManager {
      * @return void.
      */
     public abstract function execute();
-
 }

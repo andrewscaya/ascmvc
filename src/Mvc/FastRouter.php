@@ -1,12 +1,14 @@
 <?php
 /**
- * ASC LightMVC
+ * LightMVC/ASCMVC
  *
- * @package    ASC LightMVC
+ * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
- * @link       https://github.com/andrewscaya
- * @version    1.0.0
- * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
+ * @link       https://github.com/lightmvc/ascmvc
+ * @version    2.0.0
+ * @license    Apache License, Version 2.0, see above
+ * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @since      2.0.0
  */
 
 namespace Ascmvc\Mvc;
@@ -16,8 +18,8 @@ use Ascmvc\AbstractRouter;
 use FastRoute;
 use Zend\Diactoros\Response;
 
-
-class FastRouter extends AbstractRouter {
+class FastRouter extends AbstractRouter
+{
 
     public function __construct(AscmvcEvent $event)
     {
@@ -28,8 +30,8 @@ class FastRouter extends AbstractRouter {
 
     public function resolve()
     {
-        if($this->baseConfig['env'] === 'production') {
-            $dispatcher = FastRoute\cachedDispatcher(function(FastRoute\RouteCollector $r) {
+        if ($this->baseConfig['env'] === 'production') {
+            $dispatcher = FastRoute\cachedDispatcher(function (FastRoute\RouteCollector $r) {
                 foreach ($this->baseConfig['routes'] as $singleRoute) {
                     $r->addRoute($singleRoute[0], $singleRoute[1], $singleRoute[2]);
                 }
@@ -38,7 +40,7 @@ class FastRouter extends AbstractRouter {
                 'cacheDisabled' => false,     // optional, enabled by default
             ]);
         } else {
-            $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
+            $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
                 foreach ($this->baseConfig['routes'] as $singleRoute) {
                     $r->addRoute($singleRoute[0], $singleRoute[1], $singleRoute[2]);
                 }
@@ -92,5 +94,4 @@ class FastRouter extends AbstractRouter {
     {
         return $this->requestURI;
     }
-    
 }
