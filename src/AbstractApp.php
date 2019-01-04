@@ -175,9 +175,20 @@ abstract class AbstractApp
     /**
      * Get the application's base configuration.
      *
+     * @param void
+     *
      * @return array
      */
     public abstract function getBaseConfig();
+
+    /**
+     * Get what is useful to the controllers from the application's base configuration.
+     *
+     * @param void
+     *
+     * @return array
+     */
+    public abstract function getBaseConfigForControllers();
 
     /**
      * Modify the application's base configuration.

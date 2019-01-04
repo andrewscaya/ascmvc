@@ -36,11 +36,7 @@ class ControllerManager extends AbstractControllerManager
 
         $this->vars = $vars;
 
-        $baseConfig = $this->app->getBaseConfig();
-
-        unset($baseConfig['doctrine']);
-        unset($baseConfig['routes']);
-        unset($baseConfig['templates']);
+        $baseConfig = $this->app->getBaseConfigForControllers();
 
         $serviceManager = $this->app->getServiceManager();
 

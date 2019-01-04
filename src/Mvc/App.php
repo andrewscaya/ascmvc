@@ -263,12 +263,22 @@ class App extends AbstractApp
 
         $this->event->setName(AscmvcEvent::EVENT_FINISH);
         $this->event->stopPropagation(false); // Clear before triggering
-        $result = $this->eventManager->triggerEvent($this->event);
+        $this->eventManager->triggerEvent($this->event);
     }
 
     public function getBaseConfig()
     {
         return $this->baseConfig;
+    }
+
+    public function getBaseConfigForControllers()
+    {
+        $baseConfig = $this->getBaseConfig();
+        unset($baseConfig['doctrine']);
+        unset($baseConfig['routes']);
+        unset($baseConfig['templates']);
+
+        return $baseConfig;
     }
 
     public function appendBaseConfig($name, $array)
