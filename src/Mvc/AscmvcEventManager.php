@@ -6,8 +6,7 @@
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
  * @version    2.0.0
- * @license    Apache License, Version 2.0, see above
- * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
 
@@ -43,7 +42,7 @@ class AscmvcEventManager extends EventManager
         }, 2);
 
         $this->attach(AscmvcEvent::EVENT_RENDER, function ($event) {
-            return $event->getApplication()->render($event->getApplication()->getResponse());
+            return $event->getApplication()->render($event->getApplication()->getControllerOutput());
         });
 
         $this->attach(AscmvcEvent::EVENT_FINISH, function ($event) use ($eventManager) {
@@ -62,6 +61,7 @@ class AscmvcEventManager extends EventManager
         $path = $baseConfig['BASEDIR'] . DIRECTORY_SEPARATOR . 'controllers';
 
         $objects = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::SELF_FIRST);
+
         foreach ($objects as $name => $fileInfo) {
             if ($fileInfo->isFile() && preg_match('/^[A-Za-z0-9_\-]+Controller(?=.php)/', $fileInfo->getFilename())) {
                 $filePath = $fileInfo->getPathName();
@@ -80,6 +80,10 @@ class AscmvcEventManager extends EventManager
                 }
             }
         }
+
+        // @codeCoverageIgnoreStart
+        return true;
+        // @codeCoverageIgnoreEnd
     }
 
     public function onRoute(AscmvcEvent $event)

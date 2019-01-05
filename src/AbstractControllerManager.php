@@ -6,15 +6,14 @@
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
  * @version    2.0.0
- * @license    Apache License, Version 2.0, see above
- * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
 
 namespace Ascmvc;
 
 /**
- * The abstract AbstractControllerManager class is the blueprint for the MVC's ControllerManagers.
+ * The abstract AbstractControllerManager class is the blueprint for the MVC's ControllerManager.
  *
  * The AbstractControllerManager class is the one that needs to be extended
  * in order to create a LightMVC ControllerManager.
@@ -23,7 +22,7 @@ abstract class AbstractControllerManager
 {
 
     /**
-     * Contains a reference to the Singleton instance of the App class.
+     * Contains a reference to the Singleton instance of the AbstractApp class.
      *
      * @var AbstractApp|null
      */
@@ -37,35 +36,35 @@ abstract class AbstractControllerManager
     protected $currentRequestURI;
 
     /**
-     * Contains the name of the polymorphic Controller instance.
+     * Contains the name of the AbstractController instance.
      *
      * @var string
      */
     protected $controllerName;
 
     /**
-     * Contains the name of the Controller's method.
+     * Contains the name of the AbstractController's method.
      *
      * @var string
      */
     protected $controllerMethodName;
 
     /**
-     * Contains a reflection of the polymorphic Controller instance.
+     * Contains a reflection of the AbstractController instance.
      *
      * @var \ReflectionClass
      */
     protected $controllerReflection;
 
     /**
-     * Contains the Controller's filename.
+     * Contains the controller's filename.
      *
      * @var string
      */
     protected $controllerFileName;
 
     /**
-     * Contains a reference to a polymorphic Controller instance.
+     * Contains a reference to a AbstractController instance.
      *
      * @var AbstractController|null
      */
@@ -79,15 +78,15 @@ abstract class AbstractControllerManager
     protected $method;
 
     /**
-     * Array containing the values of the request (GET, POST, PUT, PATCH, DELETE).
+     * Array containing the values of the request (SERVER, REQUEST, GET, POST, PUT, PATCH, DELETE).
      *
-     * @var string|null
+     * @var array|null
      */
     protected $vars;
 
     /**
      * Initializes this class by assigning the objects contained in the
-     * referenced App object's router object to the corresponding properties.
+     * referenced application object's router object to the corresponding properties.
      *
      * @param AbstractApp &$app.
      * @param string $controllerName.

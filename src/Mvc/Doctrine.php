@@ -6,8 +6,7 @@
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
  * @version    2.0.0
- * @license    Apache License, Version 2.0, see above
- * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
 
@@ -23,7 +22,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 
 class Doctrine extends AbstractModelObject
 {
-
+    // @codeCoverageIgnoreStart
     protected function __construct()
     {
     }
@@ -31,10 +30,11 @@ class Doctrine extends AbstractModelObject
     protected function __clone()
     {
     }
+    // @codeCoverageIgnoreEnd
 
     public static function getInstance($connType, $connName, Array $params)
     {
-        if (!isset($connType) || !isset($connName) || !isset($params)) {
+        if (empty($connType) || empty($connName) || empty($params)) {
             return false;
         }
 
@@ -48,8 +48,6 @@ class Doctrine extends AbstractModelObject
 
                 $paths = array(
                     BASEDIR
-                    . DIRECTORY_SEPARATOR
-                    . 'libs'
                     . DIRECTORY_SEPARATOR
                     . 'vendor'
                     . DIRECTORY_SEPARATOR

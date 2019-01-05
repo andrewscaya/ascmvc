@@ -1,7 +1,7 @@
 <?php
 
 /**
- * lightmvc/ascmvc
+ * LightMVC/ASCMVC
  *
  * Copyright 2010 - 2019 Foreach Code Factory <ascmvc@asclinux.net>
  * Version 2.0.0
@@ -26,7 +26,7 @@
  * @since 2.0.0
  */
 
-namespace AscmvcTest\Mvc;
+namespace AscmvcTest;
 
 use Ascmvc\Mvc\ViewObjectFactory;
 use League\Plates\Engine;
@@ -106,20 +106,49 @@ class ViewObjectFactoryTest extends TestCase
             ->once();
     } */
 
-    public function testGetPlatesInstance()
+    public function testGetPlatesInstanceWithDevelopmentEnvironment()
     {
+        $baseConfig['BASEDIR'] = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app';
+
         $baseConfig['templateManager'] = 'Plates';
-        $baseConfig['templates']['templateDir'] = getcwd();
+        $baseConfig['templates']['templateDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
 
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
         $this->assertInstanceOf(Engine::class, $viewObject);
     }
 
-    public function testGetTwigInstance()
+    public function testGetTwigInstanceWithDevelopmentEnvironment()
     {
+        $baseConfig['BASEDIR'] = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app';
+
         $baseConfig['templateManager'] = 'Twig';
-        $baseConfig['templates']['templateDir'] = getcwd();
+        $baseConfig['templates']['templateDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'config';
+
         $baseConfig['env'] = 'development';
 
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
@@ -127,13 +156,112 @@ class ViewObjectFactoryTest extends TestCase
         $this->assertInstanceOf(\Twig_Environment::class, $viewObject);
     }
 
-    public function testGetSmartyInstance()
+    public function testGetSmartyInstanceWithDevelopmentEnvironment()
     {
+        $baseConfig['BASEDIR'] = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app';
+
         $baseConfig['templateManager'] = 'Smarty';
-        $baseConfig['templates']['templateDir'] = getcwd();
-        $baseConfig['templates']['compileDir'] = getcwd();
-        $baseConfig['templates']['configDir'] = getcwd();
+        $baseConfig['templates']['templateDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'config';
+
         $baseConfig['env'] = 'development';
+
+        $viewObject = ViewObjectFactory::getInstance($baseConfig);
+
+        $this->assertInstanceOf(\Smarty::class, $viewObject);
+    }
+
+    public function testGetPlatesInstanceWithProductionEnvironment()
+    {
+        $baseConfig['BASEDIR'] = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app';
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'config';
+        $baseConfig['templates']['cacheDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'cache';
+
+        $baseConfig['env'] = 'production';
+
+        $viewObject = ViewObjectFactory::getInstance($baseConfig);
+
+        $this->assertInstanceOf(Engine::class, $viewObject);
+    }
+
+    public function testGetTwigInstanceWithProductionEnvironment()
+    {
+        $baseConfig['BASEDIR'] = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app';
+
+        $baseConfig['templateManager'] = 'Twig';
+        $baseConfig['templates']['templateDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'config';
+        $baseConfig['templates']['cacheDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'cache';
+
+        $baseConfig['env'] = 'production';
+
+        $viewObject = ViewObjectFactory::getInstance($baseConfig);
+
+        $this->assertInstanceOf(\Twig_Environment::class, $viewObject);
+    }
+
+    public function testGetSmartyInstanceWithProductionEnvironment()
+    {
+        $baseConfig['BASEDIR'] = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app';
+
+        $baseConfig['templateManager'] = 'Smarty';
+        $baseConfig['templates']['templateDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'config';
+        $baseConfig['templates']['cacheDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'cache';
+
+        $baseConfig['env'] = 'production';
 
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 

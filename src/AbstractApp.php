@@ -6,8 +6,7 @@
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
  * @version    2.0.0
- * @license    Apache License, Version 2.0, see above
- * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
 
@@ -16,6 +15,7 @@ namespace Ascmvc;
 use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\AscmvcEventManager;
 use Pimple\Container;
+use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
 
 /**
@@ -84,25 +84,32 @@ abstract class AbstractApp
     protected $viewObject;
 
     /**
-     * Contains a reference to a Router instance.
+     * Contains a reference to an AbstractRouter instance.
      *
      * @var AbstractRouter|null
      */
     protected $router;
 
     /**
-     * Contains a reference to a ControllerManager instance.
+     * Contains a reference to a AbstractControllerManager instance.
      *
      * @var AbstractControllerManager|null
      */
     protected $controllerManager;
 
     /**
-     * Contains a reference to a polymorphic Controller instance.
+     * Contains a reference to a AbstractController instance.
      *
      * @var AbstractController|null
      */
     protected $controller;
+
+    /**
+     * Contains the controller's output.
+     *
+     * @var Response|array|string|null
+     */
+    protected $controllerOutput;
 
 
     /**
@@ -136,30 +143,37 @@ abstract class AbstractApp
     }
 
     /**
+     * Builds the baseConfig array from the various configuration files.
+     *
+     * @return array
+     */
+    public abstract function boot();
+
+    /**
      * Initializes the application with the parameters that
-     * are given in the config/config.php file.
+     * are given in the baseConfig array.
      *
      * @param array &$baseConfig  Contains all of the AbstractApp's basic configurations
      *
-     * @return array.
+     * @return AbstractApp
      */
     public abstract function initialize(array &$baseConfig);
 
     /**
      * Sends the final response to the output buffer.
      *
-     * @param Zend\Diactoros\Response $response.
+     * @param \Zend\Diactoros\Response $response.
      *
      * @return void
      */
     public abstract function display(Response $response);
 
     /**
-     * Executes the Application's bootstrap events.
+     * Renders the response.
      *
-     * @param mixed $controllerOutput
+     * @param Response|array|string $controllerOutput
      *
-     * @return Zend\Diactoros\Response $response
+     * @return \Zend\Diactoros\Response
      */
     public abstract function render($controllerOutput);
 
@@ -201,39 +215,48 @@ abstract class AbstractApp
     public abstract function appendBaseConfig($name, $array);
 
     /**
-     * Get the AbstractRequest object.
+     * Get the Zend\Diactoros\Request object.
      *
-     * @return Zend\Diactoros\Request
+     * @return \Zend\Diactoros\Request
      */
     public abstract function getRequest();
 
     /**
-     * Get the AbstractResponse object.
+     * Set the Zend\Diactoros\Request object.
      *
-     * @return Zend\Diactoros\Response
+     * @param \Zend\Diactoros\Request
+     *
+     * @return \Zend\Diactoros\Request
+     */
+    public abstract function setRequest(Request $request);
+
+    /**
+     * Get the Zend\Diactoros\Response object.
+     *
+     * @return \Zend\Diactoros\Response
      */
     public abstract function getResponse();
 
     /**
-     * Set the AbstractResponse object.
+     * Set the Zend\Diactoros\Response object.
      *
-     * @param Zend\Diactoros\Response
+     * @param \Zend\Diactoros\Response
      *
-     * @return Zend\Diactoros\Response
+     * @return \Zend\Diactoros\Response
      */
     public abstract function setResponse(Response $response);
 
     /**
      * Get the Pimple\Container object.
      *
-     * @return Pimple\Container
+     * @return \Pimple\Container
      */
     public abstract function getServiceManager();
 
     /**
      * Set the Pimple\Container object.
      *
-     * @param Pimple\Container
+     * @param \Pimple\Container
      *
      * @return AbstractApp
      */
@@ -267,25 +290,9 @@ abstract class AbstractApp
      *
      * @param AscmvcEvent
      *
-     * @return AscmvcEvent
-     */
-    public abstract function setEvent(AscmvcEvent &$event);
-
-    /**
-     * Get the AbstractViewObject object.
-     *
-     * @return Object
-     */
-    public abstract function getViewObject();
-
-    /**
-     * Set the View object.
-     *
-     * @param Object
-     *
      * @return AbstractApp
      */
-    public abstract function setViewObject(&$viewObject);
+    public abstract function setEvent(AscmvcEvent &$event);
 
     /**
      * Get the AbstractRouter object.
@@ -334,4 +341,36 @@ abstract class AbstractApp
      * @return AbstractApp
      */
     public abstract function setController(AbstractController &$controller);
+
+    /**
+     * Get the Controller's output.
+     *
+     * @return Response|array|string|null
+     */
+    public abstract function getControllerOutput();
+
+    /**
+     * Set the Controller's output.
+     *
+     * @param array $controllerOutput
+     *
+     * @return AbstractApp
+     */
+    public abstract function setControllerOutput($controllerOutput);
+
+    /**
+     * Get the Template Manager object.
+     *
+     * @return Object
+     */
+    public abstract function getViewObject();
+
+    /**
+     * Set the Template Manager object.
+     *
+     * @param Object
+     *
+     * @return AbstractApp
+     */
+    public abstract function setViewObject(&$viewObject);
 }

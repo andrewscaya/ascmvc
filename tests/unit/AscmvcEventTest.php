@@ -11,7 +11,7 @@
  * @since      2.0.0
  */
 
-namespace AscmvcTest\Mvc;
+namespace AscmvcTest;
 
 use Ascmvc\Mvc\App;
 use Ascmvc\Mvc\AscmvcEvent;

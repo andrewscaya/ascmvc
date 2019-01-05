@@ -6,8 +6,7 @@
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
  * @version    2.0.0
- * @license    Apache License, Version 2.0, see above
- * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
 
@@ -23,14 +22,15 @@ abstract class AbstractController
 {
 
     /**
-     * Contains a reference to the array containing some of the app's basic configurations.
+     * Contains a reference to the array containing some of the app's basic configurations
+     * useful to controllers.
      *
      * @var Array|null
      */
     protected $baseConfig;
 
     /**
-     * Array contains all of the values that will be assigned to the controller's view manager.
+     * Array contains all of the values that will be assigned to the View manager's template.
      *
      * @var array|null
      */

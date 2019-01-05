@@ -6,8 +6,7 @@
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
  * @version    2.0.0
- * @license    Apache License, Version 2.0, see above
- * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
 
@@ -18,9 +17,9 @@ namespace Ascmvc;
  * to be consumed as a AscmvcEventManager class listener.
  *
  * The interface's methods correspond exactly to the
- * App Class' runlevels as they are defined in its run() method
+ * application's main events as they are defined in its run() method
  * so that, in turn, these methods may be dynamically called by the
- * EventManager's event-driven triggerEvent() method.
+ * EventManager's event-driven "trigger" methods.
  */
 interface AscmvcEventManagerListenerInterface extends
     AscmvcBootstrapListenerInterface,
@@ -28,5 +27,4 @@ interface AscmvcEventManagerListenerInterface extends
     AscmvcRenderListenerInterface,
     AscmvcFinishListenerInterface
 {
-
 }

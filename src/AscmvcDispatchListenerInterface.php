@@ -6,8 +6,7 @@
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
  * @version    2.0.0
- * @license    Apache License, Version 2.0, see above
- * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
 
@@ -20,22 +19,21 @@ use Ascmvc\Mvc\AscmvcEvent;
  * to be consumed as a AscmvcEventManager class listener.
  *
  * The interface's methods correspond exactly to the
- * App Class' events as they are used in its run() method
+ * application's events as they are used in its run() method
  * so that, in turn, these methods may be dynamically called by the
- * EventManager's event-driven triggerEvent() method.
+ * EventManager's event-driven "trigger" methods.
  */
 interface AscmvcDispatchListenerInterface
 {
 
     /**
-     * Allows an implementing object to interrupt the App's runtime after the
-     * the Event Manager's registration of the Controller object but before
-     * the Dispatcher's call to the Controller's action method.  This phase allows
-     * for Controller configuration.
+     * Allows an implementing object to interrupt the application's runtime after the
+     * the event manager's registration of the controller object but before
+     * the controller manager's call to the controller's action method.  This phase allows
+     * for controller specific configuration.
      *
      * @param AscmvcEvent $event
      *
-     * @return Response|void
      */
     public function onDispatch(AscmvcEvent $event);
 }

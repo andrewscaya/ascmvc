@@ -6,8 +6,7 @@
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
  * @version    2.0.0
- * @license    Apache License, Version 2.0, see above
- * @license    http://www.apache.org/licenses/LICENSE-2.0
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
 
@@ -17,20 +16,20 @@ use Ascmvc\AbstractApp;
 use Ascmvc\AbstractController;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\AbstractRouter;
-use Ascmvc\AbstractEventManager;
-use Ascmvc\AbstractViewObject;
+use Ascmvc\Middleware\MiddlewareFactory;
 use Pimple\Container;
+use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
 use Zend\Stratigility\MiddlewarePipe;
 use Zend\Stratigility\Exception\EmptyPipelineException;
 
-use function Zend\Stratigility\middleware;
 use function Zend\Stratigility\path;
 
 class App extends AbstractApp
 {
 
+    // @codeCoverageIgnoreStart
     protected function __construct()
     {
     }
@@ -38,8 +37,9 @@ class App extends AbstractApp
     protected function __clone()
     {
     }
+    // @codeCoverageIgnoreEnd
 
-    public static function getInstance()
+    public static function getInstance() : AbstractApp
     {
         if (!self::$appInstance) {
             self::$appInstance = new App();
@@ -48,7 +48,7 @@ class App extends AbstractApp
         return self::$appInstance;
     }
 
-    public function boot()
+    public function boot() : array
     {
         if (PHP_SAPI !== 'cli') {
             $_SERVER['SERVER_SIGNATURE'] = isset($_SERVER['SERVER_SIGNATURE']) ? $_SERVER['SERVER_SIGNATURE'] : '80';
@@ -89,7 +89,7 @@ class App extends AbstractApp
         return $baseConfig;
     }
 
-    public function initialize(array &$baseConfig)
+    public function initialize(array &$baseConfig) : AbstractApp
     {
         $this->baseConfig = $baseConfig;
 
@@ -97,16 +97,21 @@ class App extends AbstractApp
             $this->request = ServerRequestFactory::fromGlobals();
         }
 
-        $this->serviceManager = new Container();
-        $serviceManager = $this->serviceManager;
+        $serviceManager = new Container();
+        $this->setServiceManager($serviceManager);
 
-        $this->eventManager = AscmvcEventManagerFactory::create();
-        $this->event = new AscmvcEvent(AscmvcEvent::EVENT_BOOTSTRAP);
-        $this->event->setApplication($this);
+        $eventManager = AscmvcEventManagerFactory::create();
+        $this->setEventManager($eventManager);
 
-        $this->router = new FastRouter($this->event);
+        $event = new AscmvcEvent(AscmvcEvent::EVENT_BOOTSTRAP);
+        $event->setApplication($this);
+        $this->setEvent($event);
 
-        $this->viewObject = ViewObjectFactory::getInstance($this->baseConfig);
+        $router = new FastRouter($this->event);
+        $this->setRouter($router);
+
+        $viewObject = ViewObjectFactory::getInstance($this->baseConfig);
+        $this->setViewObject($viewObject);
 
         if (isset($this->baseConfig['doctrine'])) {
             foreach ($this->baseConfig['doctrine'] as $connType => $connections) {
@@ -119,35 +124,29 @@ class App extends AbstractApp
             }
         }
 
-        $middlewarePipe = new MiddlewarePipe();
-
         if (isset($this->baseConfig['middleware'])) {
-            foreach ($this->baseConfig['middleware'] as $path => $handler) {
-                if (strpos($path, '/') !== false) {
-                    if (is_callable($handler) && $handler instanceof \Closure) {
-                        $middlewarePipe->pipe(path($path, middleware($handler)));
-                    } else {
-                        $middlewarePipe->pipe(path($path, (new $handler($this->baseConfig))));
-                    }
-                } else {
-                    if (is_callable($handler) && $handler instanceof \Closure) {
-                        $middlewarePipe->pipe(middleware($handler));
-                    } else {
-                        $middlewarePipe->pipe((new $handler));
-                    }
-                }
+            $middlewarePipe = new MiddlewarePipe();
+
+            $middlewareFactory = new MiddlewareFactory($serviceManager);
+
+            foreach ($this->baseConfig['middleware'] as $path => $middleware) {
+                $path = strpos($path, '/') !== false ? $path : '/';
+                $middleware = $path !== '/'
+                    ? path($path, $middlewareFactory->prepare($middleware))
+                    : $middlewareFactory->prepare($middleware);
+                $middlewarePipe->pipe($middleware);
             }
 
-            $serviceManager['middleware'] = function ($serviceManager) use ($middlewarePipe) {
+            $serviceManager['middlewarePipe'] = function ($serviceManager) use ($middlewarePipe) {
                 return $middlewarePipe;
             };
 
             $this->eventManager->attach(AscmvcEvent::EVENT_BOOTSTRAP, function ($event) use ($serviceManager) {
-                $middlewarePipe = $serviceManager['middleware'];
+                $middlewarePipe = $serviceManager['middlewarePipe'];
                 try {
                     $response = $middlewarePipe->handle($this->request);
                 } catch (EmptyPipelineException $e) {
-                    return false;
+                    return true;
                 }
 
                 return $response;
@@ -157,14 +156,14 @@ class App extends AbstractApp
         return $this;
     }
 
-    public function display(Response $response)
+    public function display(Response $response) : void
     {
         $statusCode = $response->getStatusCode();
         $protocolVersion = $this->request->getProtocolVersion();
         header("HTTP/$protocolVersion $statusCode");
         $headers = $response->getHeaders();
 
-        foreach ($response->getHeaders() as $header => $value) {
+        foreach ($headers as $header => $value) {
             header("$header: $value[0]");
         }
 
@@ -175,7 +174,7 @@ class App extends AbstractApp
         return;
     }
 
-    public function render($controllerOutput)
+    public function render($controllerOutput) : Response
     {
         $response = new Response();
 
@@ -206,7 +205,7 @@ class App extends AbstractApp
         return $response;
     }
 
-    public function run()
+    public function run() : void
     {
         $event = $this->event;
 
@@ -242,15 +241,16 @@ class App extends AbstractApp
 
         $response = $result->last();
 
-        $this->response = $response;
-
         if ($result->stopped()) {
             if ($response instanceof Response) {
+                $this->response = $response;
                 $this->event->setName(AscmvcEvent::EVENT_FINISH);
                 $this->event->stopPropagation(false); // Clear before triggering
                 $this->eventManager->triggerEvent($this->event);
                 return;
             }
+        } else {
+            $this->controllerOutput = $response;
         }
 
         $this->event->setName(AscmvcEvent::EVENT_RENDER);
@@ -264,14 +264,16 @@ class App extends AbstractApp
         $this->event->setName(AscmvcEvent::EVENT_FINISH);
         $this->event->stopPropagation(false); // Clear before triggering
         $this->eventManager->triggerEvent($this->event);
+
+        return;
     }
 
-    public function getBaseConfig()
+    public function getBaseConfig() : array
     {
         return $this->baseConfig;
     }
 
-    public function getBaseConfigForControllers()
+    public function getBaseConfigForControllers() : array
     {
         $baseConfig = $this->getBaseConfig();
         unset($baseConfig['doctrine']);
@@ -281,96 +283,117 @@ class App extends AbstractApp
         return $baseConfig;
     }
 
-    public function appendBaseConfig($name, $array)
+    public function appendBaseConfig($name, $array) : AbstractApp
     {
         $this->baseConfig[$name] = $array;
 
-        return $this->baseConfig;
+        return $this;
     }
 
-    public function getRequest()
+    public function getRequest() : Request
     {
         return $this->request;
     }
 
-    public function getResponse()
+    public function setRequest(Request $request) : Request
+    {
+        $this->request = $request;
+
+        return $this->request;
+    }
+
+    public function getResponse() : Response
     {
         return $this->response;
     }
 
-    public function setResponse(Response $response)
+    public function setResponse(Response $response) : Response
     {
         $this->response = $response;
+
         return $this->response;
     }
 
-    public function getServiceManager()
+    public function getServiceManager() : Container
     {
         return $this->serviceManager;
     }
 
-    public function setServiceManager(Container &$serviceManager)
+    public function setServiceManager(Container &$serviceManager) : AbstractApp
     {
         $this->serviceManager = $serviceManager;
 
         return $this;
     }
 
-    public function getEventManager()
+    public function getEventManager() : AscmvcEventManager
     {
         return $this->eventManager;
     }
 
-    public function setEventManager(AscmvcEventManager &$eventManager)
+    public function setEventManager(AscmvcEventManager &$eventManager) : AbstractApp
     {
         $this->eventManager = $eventManager;
 
         return $this;
     }
 
-    public function getEvent()
+    public function getEvent() : AscmvcEvent
     {
         return $this->event;
     }
 
-    public function setEvent(AscmvcEvent &$event)
+    public function setEvent(AscmvcEvent &$event) : AbstractApp
     {
         $this->event = $event;
-        return $this->event;
+
+        return $this;
     }
 
-    public function getRouter()
+    public function getRouter() : AbstractRouter
     {
         return $this->router;
     }
 
-    public function setRouter(AbstractRouter &$router)
+    public function setRouter(AbstractRouter &$router) : AbstractApp
     {
         $this->router = $router;
 
         return $this;
     }
 
-    public function getControllerManager()
+    public function getControllerManager() : AbstractControllerManager
     {
         return $this->controllerManager;
     }
 
-    public function setControllerManager(AbstractControllerManager &$controllerManager)
+    public function setControllerManager(AbstractControllerManager &$controllerManager) : AbstractApp
     {
         $this->controllerManager = $controllerManager;
 
         return $this;
     }
 
-    public function getController()
+    public function getController() : AbstractController
     {
         return $this->controller;
     }
 
-    public function setController(AbstractController &$controller)
+    public function setController(AbstractController &$controller) : AbstractApp
     {
         $this->controller = $controller;
+
+        return $this;
+    }
+
+    public function getControllerOutput()
+    {
+        return $this->controllerOutput;
+    }
+
+    public function setControllerOutput($controllerOutput)
+    {
+        $this->controllerOutput = $controllerOutput;
 
         return $this;
     }
