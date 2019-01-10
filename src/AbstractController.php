@@ -45,7 +45,7 @@ abstract class AbstractController
 
     /**
      * Initializes this class by assigning the objects and arrays
-     * contained in the referenced App object to the corresponding
+     * contained in the referenced application object to the corresponding
      * properties.
      *
      * @param array $baseConfig

@@ -86,7 +86,7 @@ abstract class AbstractControllerManager
 
     /**
      * Initializes this class by assigning the objects contained in the
-     * referenced application object's router object to the corresponding properties.
+     * referenced application object to the corresponding properties.
      *
      * @param AbstractApp &$app
      * @param string $controllerName
