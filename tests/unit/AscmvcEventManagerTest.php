@@ -202,6 +202,7 @@ class AscmvcEventManagerTest extends TestCase
     public function testDefaultMVCEventsTriggersControllerOnFinish()
     {
         ob_start();
+
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
         $serverRequestFactoryMock
             ->shouldReceive('fromGlobals')
@@ -257,6 +258,7 @@ class AscmvcEventManagerTest extends TestCase
     public function testDefaultMVCEventsCanBeTriggeredWithArrayAsControllerOutput()
     {
         ob_start();
+
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
         $serverRequestFactoryMock
             ->shouldReceive('fromGlobals')
@@ -384,6 +386,7 @@ class AscmvcEventManagerTest extends TestCase
     public function testDefaultMVCEventsCanBeTriggeredWithResponseAsControllerOutput()
     {
         ob_start();
+
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
         $serverRequestFactoryMock
             ->shouldReceive('fromGlobals')
@@ -494,6 +497,7 @@ class AscmvcEventManagerTest extends TestCase
     public function testDefaultMVCEventsCanBeTriggeredWithStringAsControllerOutput()
     {
         ob_start();
+
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
         $serverRequestFactoryMock
             ->shouldReceive('fromGlobals')
@@ -616,6 +620,7 @@ class AscmvcEventManagerTest extends TestCase
     public function testDefaultMVCEventsCanBeTriggeredWithShortCircuitOnBootstrap()
     {
         ob_start();
+
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
         $serverRequestFactoryMock
             ->shouldReceive('fromGlobals')

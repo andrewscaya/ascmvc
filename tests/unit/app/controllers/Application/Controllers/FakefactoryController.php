@@ -2,12 +2,12 @@
 
 namespace Application\Controllers;
 
-use Ascmvc\ControllerFactoryInterface;
+use Ascmvc\AscmvcControllerFactoryInterface;
 use Ascmvc\Mvc\AscmvcEventManager;
 use Ascmvc\Mvc\Controller;
 use Pimple\Container;
 
-class FakefactoryController extends Controller implements ControllerFactoryInterface
+class FakefactoryController extends Controller implements AscmvcControllerFactoryInterface
 {
     protected $testMessage;
 
