@@ -17,6 +17,7 @@ phpunit.* export-ignore
 phpcs.* export-ignore
 # phpDocumentor files
 phpdoc.* export-ignore
+phpDocumentor.phar export-ignore
 # Codeception files
 codeception.* export-ignore
 codeception-setup.* export-ignore
