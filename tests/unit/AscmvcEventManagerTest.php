@@ -18,6 +18,7 @@ use Ascmvc\Mvc\App;
 use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\AscmvcEventManagerFactory;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
@@ -73,8 +74,10 @@ class AscmvcEventManagerTest extends TestCase
         };
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $ascmvcEvent->setApplication($app);
 
         $ascmvcEvent->stopPropagation(false); // Clear before triggering
@@ -127,8 +130,10 @@ class AscmvcEventManagerTest extends TestCase
         };
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $controller = new FakeController($baseConfig);
         $app->setController($controller);
         $ascmvcEvent->setApplication($app);
@@ -183,8 +188,10 @@ class AscmvcEventManagerTest extends TestCase
         };
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $controller = new FakeController($baseConfig);
         $app->setController($controller);
         $ascmvcEvent->setApplication($app);
@@ -208,7 +215,10 @@ class AscmvcEventManagerTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
         $requestMock
             ->shouldReceive('getProtocolVersion')
             ->once()
@@ -239,8 +249,10 @@ class AscmvcEventManagerTest extends TestCase
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_FINISH);
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $controller = new FakeController($baseConfig);
         $app->setController($controller);
         $app->setRequest($requestMock);
@@ -264,7 +276,10 @@ class AscmvcEventManagerTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -316,8 +331,10 @@ class AscmvcEventManagerTest extends TestCase
         $baseConfig['view'] = [];
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $app->setRequest($requestMock);
 
         $ascmvcEvent = $app->getEvent();
@@ -392,7 +409,10 @@ class AscmvcEventManagerTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -444,8 +464,10 @@ class AscmvcEventManagerTest extends TestCase
         $baseConfig['view'] = [];
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $app->setRequest($requestMock);
 
         $ascmvcEvent = $app->getEvent();
@@ -503,7 +525,10 @@ class AscmvcEventManagerTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -555,8 +580,10 @@ class AscmvcEventManagerTest extends TestCase
         $baseConfig['view'] = [];
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $app->setRequest($requestMock);
 
         $ascmvcEvent = $app->getEvent();
@@ -626,7 +653,10 @@ class AscmvcEventManagerTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -678,8 +708,10 @@ class AscmvcEventManagerTest extends TestCase
         $baseConfig['view'] = [];
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $app->setRequest($requestMock);
 
         $ascmvcEvent = $app->getEvent();

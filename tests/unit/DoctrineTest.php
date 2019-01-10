@@ -27,7 +27,7 @@ class DoctrineTest extends TestCase
     public function testGetDoctrineInstanceWillReturnFalseOnEmptyParams()
     {
         if (!defined('BASEDIR')) {
-            define('BASEDIR', dirname(__FILE__));
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
         }
 
         $baseConfig['doctrine']['DBAL']['dm1'] = [
@@ -53,7 +53,7 @@ class DoctrineTest extends TestCase
     public function testGetDoctrineInstanceWillReturnFalseOnUnknownConnectionType()
     {
         if (!defined('BASEDIR')) {
-            define('BASEDIR', dirname(__FILE__));
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
         }
 
         $baseConfig['doctrine']['WRONG']['dm1'] = [
@@ -78,7 +78,7 @@ class DoctrineTest extends TestCase
     public function testGetDoctrineDBALnstance()
     {
         if (!defined('BASEDIR')) {
-            define('BASEDIR', dirname(__FILE__));
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
         }
 
         $baseConfig['doctrine']['DBAL']['dm1'] = [
@@ -103,7 +103,7 @@ class DoctrineTest extends TestCase
     public function testGetDoctrineORMInstance()
     {
         if (!defined('BASEDIR')) {
-            define('BASEDIR', dirname(__FILE__));
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
         }
 
         $baseConfig['doctrine']['ORM']['em1'] = [

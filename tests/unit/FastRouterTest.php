@@ -21,6 +21,7 @@ use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\ControllerManager;
 use Ascmvc\Mvc\FastRouter;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\ServerRequestFactory;
 
@@ -44,7 +45,10 @@ class FastRouterTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -94,8 +98,10 @@ class FastRouterTest extends TestCase
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $app->setRequest($requestMock);
 
         $ascmvcEvent->setApplication($app);
@@ -120,7 +126,10 @@ class FastRouterTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -176,8 +185,10 @@ class FastRouterTest extends TestCase
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $app->setRequest($requestMock);
 
         $ascmvcEvent->setApplication($app);
@@ -202,7 +213,10 @@ class FastRouterTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -253,8 +267,10 @@ class FastRouterTest extends TestCase
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $app->setRequest($requestMock);
 
         $ascmvcEvent->setApplication($app);
@@ -285,7 +301,10 @@ class FastRouterTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -341,8 +360,10 @@ class FastRouterTest extends TestCase
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $app->setRequest($requestMock);
 
         $ascmvcEvent->setApplication($app);
@@ -375,7 +396,10 @@ class FastRouterTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -426,8 +450,10 @@ class FastRouterTest extends TestCase
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $app->setRequest($requestMock);
 
         $ascmvcEvent->setApplication($app);
@@ -450,7 +476,10 @@ class FastRouterTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -501,8 +530,10 @@ class FastRouterTest extends TestCase
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
+
         $app->setRequest($requestMock);
 
         $ascmvcEvent->setApplication($app);

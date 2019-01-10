@@ -15,6 +15,8 @@ namespace Ascmvc;
 use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\AscmvcEventManager;
 use Pimple\Container;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
@@ -216,36 +218,36 @@ abstract class AbstractApp
     public abstract function appendBaseConfig($name, $array);
 
     /**
-     * Gets the ServerRequest object.
+     * Gets the ServerRequestInterface object.
      *
-     * @return ServerRequest
+     * @return ServerRequestInterface
      */
     public abstract function getRequest();
 
     /**
-     * Sets the ServerRequest object.
+     * Sets the ServerRequestInterface object.
      *
-     * @param ServerRequest
+     * @param ServerRequestInterface
      *
-     * @return ServerRequest
+     * @return ServerRequestInterface
      */
-    public abstract function setRequest(ServerRequest $request);
+    public abstract function setRequest(ServerRequestInterface $request);
 
     /**
      * Gets the Response object.
      *
-     * @return Response
+     * @return ResponseInterface
      */
     public abstract function getResponse();
 
     /**
      * Sets the Response object.
      *
-     * @param Response
+     * @param ResponseInterface
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public abstract function setResponse(Response $response);
+    public abstract function setResponse(ResponseInterface $response);
 
     /**
      * Gets the Pimple\Container object.

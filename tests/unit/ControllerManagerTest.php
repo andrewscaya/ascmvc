@@ -65,6 +65,7 @@ class ControllerManagerTest extends TestCase
         $baseConfig['view'] = [];
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 
@@ -111,6 +112,7 @@ class ControllerManagerTest extends TestCase
         $baseConfig['view'] = [];
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 
@@ -164,6 +166,7 @@ class ControllerManagerTest extends TestCase
         $baseConfig['view'] = [];
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 
@@ -216,6 +219,7 @@ class ControllerManagerTest extends TestCase
         $baseConfig['view'] = [];
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 
@@ -269,6 +273,7 @@ class ControllerManagerTest extends TestCase
         $baseConfig['view'] = [];
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 
@@ -315,6 +320,7 @@ class ControllerManagerTest extends TestCase
         $baseConfig['view'] = [];
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 
@@ -361,6 +367,7 @@ class ControllerManagerTest extends TestCase
         $baseConfig['view'] = [];
 
         $app = App::getInstance();
+
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 

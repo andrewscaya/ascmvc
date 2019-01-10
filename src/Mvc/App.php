@@ -18,6 +18,8 @@ use Ascmvc\AbstractControllerManager;
 use Ascmvc\AbstractRouter;
 use Ascmvc\Middleware\MiddlewareFactory;
 use Pimple\Container;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\ServerRequestFactory;
@@ -71,6 +73,7 @@ class App extends AbstractApp
      */
     public function boot() : array
     {
+        // @codeCoverageIgnoreStart
         if (PHP_SAPI !== 'cli') {
             $_SERVER['SERVER_SIGNATURE'] = isset($_SERVER['SERVER_SIGNATURE']) ? $_SERVER['SERVER_SIGNATURE'] : '80';
 
@@ -92,7 +95,7 @@ class App extends AbstractApp
         } else {
             define('URLBASEADDR', false);
         }
-
+        // @codeCoverageIgnoreEnd
 
         $appFolder = basename(BASEDIR);
 
@@ -159,6 +162,7 @@ class App extends AbstractApp
 
             $middlewareFactory = new MiddlewareFactory($serviceManager);
 
+            // @codeCoverageIgnoreStart
             foreach ($this->baseConfig['middleware'] as $path => $middleware) {
                 $path = strpos($path, '/') !== false ? $path : '/';
                 $middleware = $path !== '/'
@@ -166,6 +170,7 @@ class App extends AbstractApp
                     : $middlewareFactory->prepare($middleware);
                 $middlewarePipe->pipe($middleware);
             }
+            // @codeCoverageIgnoreEnd
 
             $serviceManager['middlewarePipe'] = function ($serviceManager) use ($middlewarePipe) {
                 return $middlewarePipe;
@@ -365,23 +370,23 @@ class App extends AbstractApp
     }
 
     /**
-     * Gets the ServerRequest object.
+     * Gets the ServerRequestInterface object.
      *
-     * @return ServerRequest
+     * @return ServerRequestInterface
      */
-    public function getRequest() : ServerRequest
+    public function getRequest() : ServerRequestInterface
     {
         return $this->request;
     }
 
     /**
-     * Sets the ServerRequest object.
+     * Sets the ServerRequestInterface object.
      *
-     * @param ServerRequest $request
+     * @param ServerRequestInterface $request
      *
-     * @return ServerRequest
+     * @return ServerRequestInterface
      */
-    public function setRequest(ServerRequest $request) : ServerRequest
+    public function setRequest(ServerRequestInterface $request) : ServerRequestInterface
     {
         $this->request = $request;
 
@@ -389,11 +394,11 @@ class App extends AbstractApp
     }
 
     /**
-     * Gets the Response object.
+     * Gets the ResponseInterface object.
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function getResponse() : Response
+    public function getResponse() : ResponseInterface
     {
         return $this->response;
     }
@@ -401,11 +406,11 @@ class App extends AbstractApp
     /**
      * Sets the Response object.
      *
-     * @param Response
+     * @param ResponseInterface
      *
-     * @return Response
+     * @return ResponseInterface
      */
-    public function setResponse(Response $response) : Response
+    public function setResponse(ResponseInterface $response) : ResponseInterface
     {
         $this->response = $response;
 
