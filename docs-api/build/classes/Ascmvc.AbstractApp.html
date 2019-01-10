@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>    ASCMVC &raquo; \Ascmvc\AbstractApp
+</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+            <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+            <!--[if lt IE 9]>
+        <script src="https://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+        <![endif]-->
+        <script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+        <script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.js" type="text/javascript"></script>
+        <script src="../js/template.js" type="text/javascript"></script>
+        <script src="../js/prettify/prettify.min.js" type="text/javascript"></script>
+    
+            <link rel="shortcut icon" href="../img/favicon.ico"/>
+        <link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+        <link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png"/>
+        <link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png"/>
+    </head>
+<body>
+
+        <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> </a>
+                <a class="brand" href="../index.html">ASCMVC</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                API Documentation <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                                                    <li><a>Namespaces</a></li>
+                                                                        <li><a href="../namespaces/Ascmvc.html">Ascmvc</a></li>
+                                                                                                                                </ul>
+                        </li>
+                        <li class="dropdown" id="charts-menu">
+                            <a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                Charts <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../graph_class.html">
+                                        <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" id="reports-menu">
+                            <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                Reports <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../errors.html">
+                                        <i class="icon-list-alt"></i>&#160;Errors
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../markers.html">
+                                        <i class="icon-list-alt"></i>&#160;Markers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../deprecated.html">
+                                        <i class="icon-list-alt"></i>&#160;Deprecated
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="go_to_top">
+            <a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>
+        </div>
+    </div>
+    
+    <div id="___" class="container">
+        <noscript>
+            <div class="alert alert-warning">
+                Javascript is disabled; several features are only available if Javascript is enabled.
+            </div>
+        </noscript>
+
+        
+            <style>
+        .deprecated h2 {
+            text-decoration: line-through;
+        }
+    </style>
+    <div class="row">
+        <div class="span4">
+                    <div class="btn-group view pull-right" data-toggle="buttons-radio">
+        <button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button>
+        <button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+    </div>
+    <div class="btn-group visibility" data-toggle="buttons-checkbox">
+        <button class="btn public active" title="Show public elements">Public</button>
+        <button class="btn protected" title="Show protected elements">Protected</button>
+        <button class="btn private" title="Show private elements">Private</button>
+        <button class="btn inherited active" title="Show inherited elements">Inherited</button>
+    </div>
+
+        <ul class="side-nav nav nav-list">
+        <li class="nav-header">
+            <i class="icon-custom icon-method"></i> Methods
+            <ul>
+                                                                                                                                                                                                                    <li class="method public">
+        <a href="#method_appendBaseConfig" title="appendBaseConfig :: Adds an element to the application&#039;s base configuration.">
+            <span class="description">Adds an element to the application&#039;s base configuration.</span><pre>appendBaseConfig</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_boot" title="boot :: Builds the baseConfig array from the various configuration files.">
+            <span class="description">Builds the baseConfig array from the various configuration files.</span><pre>boot</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_display" title="display :: Sends the final response to the output buffer.">
+            <span class="description">Sends the final response to the output buffer.</span><pre>display</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getBaseConfig" title="getBaseConfig :: Gets the application&#039;s base configuration.">
+            <span class="description">Gets the application&#039;s base configuration.</span><pre>getBaseConfig</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getBaseConfigForControllers" title="getBaseConfigForControllers :: Gets what is useful to the controllers from the application&#039;s base configuration.">
+            <span class="description">Gets what is useful to the controllers from the application&#039;s base configuration.</span><pre>getBaseConfigForControllers</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getController" title="getController :: Gets the AbstractController object.">
+            <span class="description">Gets the AbstractController object.</span><pre>getController</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getControllerManager" title="getControllerManager :: Gets the AbstractControllerManager object.">
+            <span class="description">Gets the AbstractControllerManager object.</span><pre>getControllerManager</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getControllerOutput" title="getControllerOutput :: Gets the Controller&#039;s output.">
+            <span class="description">Gets the Controller&#039;s output.</span><pre>getControllerOutput</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getEvent" title="getEvent :: Gets the AscmvcEvent object.">
+            <span class="description">Gets the AscmvcEvent object.</span><pre>getEvent</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getEventManager" title="getEventManager :: Gets the AscmvcEventManager object.">
+            <span class="description">Gets the AscmvcEventManager object.</span><pre>getEventManager</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getInstance" title="getInstance :: Static method : returns the Singleton instance of this class.">
+            <span class="description">Static method : returns the Singleton instance of this class.</span><pre>getInstance</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getRequest" title="getRequest :: Gets the Request object.">
+            <span class="description">Gets the Request object.</span><pre>getRequest</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getResponse" title="getResponse :: Gets the Response object.">
+            <span class="description">Gets the Response object.</span><pre>getResponse</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getRouter" title="getRouter :: Gets the AbstractRouter object.">
+            <span class="description">Gets the AbstractRouter object.</span><pre>getRouter</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getServiceManager" title="getServiceManager :: Gets the Pimple\Container object.">
+            <span class="description">Gets the Pimple\Container object.</span><pre>getServiceManager</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getViewObject" title="getViewObject :: Gets the Template Manager object.">
+            <span class="description">Gets the Template Manager object.</span><pre>getViewObject</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_initialize" title="initialize :: Initializes the application with the parameters that
+are given in the baseConfig array.">
+            <span class="description">Initializes the application with the parameters that
+are given in the baseConfig array.</span><pre>initialize</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_render" title="render :: Renders the response.">
+            <span class="description">Renders the response.</span><pre>render</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_run" title="run :: The application&#039;s main runtime method. It executes the Application&#039;s bootstrap events.">
+            <span class="description">The application&#039;s main runtime method. It executes the Application&#039;s bootstrap events.</span><pre>run</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_setController" title="setController :: Sets the AbstractController object.">
+            <span class="description">Sets the AbstractController object.</span><pre>setController</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_setControllerManager" title="setControllerManager :: Sets the AbstractControllerManager object.">
+            <span class="description">Sets the AbstractControllerManager object.</span><pre>setControllerManager</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_setControllerOutput" title="setControllerOutput :: Sets the Controller&#039;s output.">
+            <span class="description">Sets the Controller&#039;s output.</span><pre>setControllerOutput</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_setEvent" title="setEvent :: Sets the AscmvcEvent object.">
+            <span class="description">Sets the AscmvcEvent object.</span><pre>setEvent</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_setEventManager" title="setEventManager :: Sets the AscmvcEventManager object.">
+            <span class="description">Sets the AscmvcEventManager object.</span><pre>setEventManager</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_setRequest" title="setRequest :: Sets the Request object.">
+            <span class="description">Sets the Request object.</span><pre>setRequest</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_setResponse" title="setResponse :: Sets the Response object.">
+            <span class="description">Sets the Response object.</span><pre>setResponse</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_setRouter" title="setRouter :: Sets the AbstractRouter object.">
+            <span class="description">Sets the AbstractRouter object.</span><pre>setRouter</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_setServiceManager" title="setServiceManager :: Sets the Pimple\Container object.">
+            <span class="description">Sets the Pimple\Container object.</span><pre>setServiceManager</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_setViewObject" title="setViewObject :: Sets the Template Manager object.">
+            <span class="description">Sets the Template Manager object.</span><pre>setViewObject</pre>
+        </a>
+    </li>
+
+                                                </ul>
+        </li>
+        <li class="nav-header protected">» Protected
+            <ul>
+                                                                            <li class="method protected">
+                            <a href="#method___clone" title="__clone :: Protected method : this class cannot be copied because it is a Singleton.">
+                                <span class="description">Protected method : this class cannot be copied because it is a Singleton.</span><pre>__clone</pre>
+                            </a>
+                        </li>
+                                                                                <li class="method protected">
+                            <a href="#method___construct" title="__construct :: Protected method : this class cannot be instantiated by the new keyword
+because it is a Singleton.">
+                                <span class="description">Protected method : this class cannot be instantiated by the new keyword
+because it is a Singleton.</span><pre>__construct</pre>
+                            </a>
+                        </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
+        </li>
+        <li class="nav-header private">» Private
+            <ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </ul>
+        </li>
+        <li class="nav-header">
+            <i class="icon-custom icon-constant"></i> Constants
+            <ul>
+                            </ul>
+        </li>
+    </ul>
+
+
+        </div>
+
+        <div class="span8">
+            <div class="element class">
+                <h1>AbstractApp</h1>
+                <small style="display: block; text-align: right">
+                                                        </small>
+                <p class="short_description">The abstract AbstractApp class is the blueprint for the MVC&#039;s main engine.</p>
+                <div class="details">
+                    <div class="long_description">
+                        <p>The abstract AbstractApp class is the one that needs to be extended
+in order to create a LightMVC AbstractApp.</p>
+                    </div>
+                    <table class="table table-bordered">
+                                                                                    <tr>
+                                    <th>
+                                        package
+                                                                            </th>
+                                    <td>
+                                                                                    
+                                                                                <p>LightMVC/ASCMVC</p>
+                                    </td>
+                                </tr>
+                                                                                                                                                                                </table>
+
+                    <h3><i class="icon-custom icon-method"></i> Methods</h3>
+                                                                <a id="method___clone"></a>
+                        <div class="element clickable method protected  method___clone" data-toggle="collapse" data-target=".method___clone .collapse">
+                            <h2>Protected method : this class cannot be copied because it is a Singleton.</h2>
+                            <pre>__clone() : \Ascmvc\void.</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>\Ascmvc\void.</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method___construct"></a>
+                        <div class="element clickable method protected  method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+                            <h2>Protected method : this class cannot be instantiated by the new keyword
+because it is a Singleton.</h2>
+                            <pre>__construct() : \Ascmvc\void.</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>\Ascmvc\void.</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_appendBaseConfig"></a>
+                        <div class="element clickable method public  method_appendBaseConfig" data-toggle="collapse" data-target=".method_appendBaseConfig .collapse">
+                            <h2>Adds an element to the application&#039;s base configuration.</h2>
+                            <pre>appendBaseConfig(string $name, array $array) : \Ascmvc\AbstractApp</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$name</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$array</h4>
+                                                <code>array</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_boot"></a>
+                        <div class="element clickable method public  method_boot" data-toggle="collapse" data-target=".method_boot .collapse">
+                            <h2>Builds the baseConfig array from the various configuration files.</h2>
+                            <pre>boot() : array</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>array</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_display"></a>
+                        <div class="element clickable method public  method_display" data-toggle="collapse" data-target=".method_display .collapse">
+                            <h2>Sends the final response to the output buffer.</h2>
+                            <pre>display(\Zend\Diactoros\Response $response) : void</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$response</h4>
+                                                <code>\Zend\Diactoros\Response</code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getBaseConfig"></a>
+                        <div class="element clickable method public  method_getBaseConfig" data-toggle="collapse" data-target=".method_getBaseConfig .collapse">
+                            <h2>Gets the application&#039;s base configuration.</h2>
+                            <pre>getBaseConfig() : array</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>array</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getBaseConfigForControllers"></a>
+                        <div class="element clickable method public  method_getBaseConfigForControllers" data-toggle="collapse" data-target=".method_getBaseConfigForControllers .collapse">
+                            <h2>Gets what is useful to the controllers from the application&#039;s base configuration.</h2>
+                            <pre>getBaseConfigForControllers() : array</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>array</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getController"></a>
+                        <div class="element clickable method public  method_getController" data-toggle="collapse" data-target=".method_getController .collapse">
+                            <h2>Gets the AbstractController object.</h2>
+                            <pre>getController() : \Ascmvc\AbstractController</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractController.html">\Ascmvc\AbstractController</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getControllerManager"></a>
+                        <div class="element clickable method public  method_getControllerManager" data-toggle="collapse" data-target=".method_getControllerManager .collapse">
+                            <h2>Gets the AbstractControllerManager object.</h2>
+                            <pre>getControllerManager() : \Ascmvc\AbstractControllerManager</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractControllerManager.html">\Ascmvc\AbstractControllerManager</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getControllerOutput"></a>
+                        <div class="element clickable method public  method_getControllerOutput" data-toggle="collapse" data-target=".method_getControllerOutput .collapse">
+                            <h2>Gets the Controller&#039;s output.</h2>
+                            <pre>getControllerOutput() : \Zend\Diactoros\Response|array|string|null</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>\Zend\Diactoros\Response|array|string|null</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getEvent"></a>
+                        <div class="element clickable method public  method_getEvent" data-toggle="collapse" data-target=".method_getEvent .collapse">
+                            <h2>Gets the AscmvcEvent object.</h2>
+                            <pre>getEvent() : \Ascmvc\Mvc\AscmvcEvent</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.Mvc.AscmvcEvent.html">\Ascmvc\Mvc\AscmvcEvent</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getEventManager"></a>
+                        <div class="element clickable method public  method_getEventManager" data-toggle="collapse" data-target=".method_getEventManager .collapse">
+                            <h2>Gets the AscmvcEventManager object.</h2>
+                            <pre>getEventManager() : \Ascmvc\Mvc\AscmvcEventManager</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.Mvc.AscmvcEventManager.html">\Ascmvc\Mvc\AscmvcEventManager</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getInstance"></a>
+                        <div class="element clickable method public  method_getInstance" data-toggle="collapse" data-target=".method_getInstance .collapse">
+                            <h2>Static method : returns the Singleton instance of this class.</h2>
+                            <pre>getInstance() : \Ascmvc\AbstractApp</pre>
+                            <div class="labels">
+                                                                <span class="label">static</span>                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getRequest"></a>
+                        <div class="element clickable method public  method_getRequest" data-toggle="collapse" data-target=".method_getRequest .collapse">
+                            <h2>Gets the Request object.</h2>
+                            <pre>getRequest() : \Zend\Diactoros\Request</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>\Zend\Diactoros\Request</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getResponse"></a>
+                        <div class="element clickable method public  method_getResponse" data-toggle="collapse" data-target=".method_getResponse .collapse">
+                            <h2>Gets the Response object.</h2>
+                            <pre>getResponse() : \Zend\Diactoros\Response</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>\Zend\Diactoros\Response</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getRouter"></a>
+                        <div class="element clickable method public  method_getRouter" data-toggle="collapse" data-target=".method_getRouter .collapse">
+                            <h2>Gets the AbstractRouter object.</h2>
+                            <pre>getRouter() : \Ascmvc\AbstractRouter</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractRouter.html">\Ascmvc\AbstractRouter</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getServiceManager"></a>
+                        <div class="element clickable method public  method_getServiceManager" data-toggle="collapse" data-target=".method_getServiceManager .collapse">
+                            <h2>Gets the Pimple\Container object.</h2>
+                            <pre>getServiceManager() : \Pimple\Container</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>\Pimple\Container</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getViewObject"></a>
+                        <div class="element clickable method public  method_getViewObject" data-toggle="collapse" data-target=".method_getViewObject .collapse">
+                            <h2>Gets the Template Manager object.</h2>
+                            <pre>getViewObject() : \League\Plates\Engine|\Smarty|\Twig_Environment</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>\League\Plates\Engine|\Smarty|\Twig_Environment</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_initialize"></a>
+                        <div class="element clickable method public  method_initialize" data-toggle="collapse" data-target=".method_initialize .collapse">
+                            <h2>Initializes the application with the parameters that
+are given in the baseConfig array.</h2>
+                            <pre>initialize(array &$baseConfig) : \Ascmvc\AbstractApp</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$baseConfig</h4>
+                                                <code>array</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_render"></a>
+                        <div class="element clickable method public  method_render" data-toggle="collapse" data-target=".method_render .collapse">
+                            <h2>Renders the response.</h2>
+                            <pre>render(\Zend\Diactoros\Response|array|string $controllerOutput) : \Zend\Diactoros\Response</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$controllerOutput</h4>
+                                                <code>\Zend\Diactoros\Response|array|string</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>\Zend\Diactoros\Response</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_run"></a>
+                        <div class="element clickable method public  method_run" data-toggle="collapse" data-target=".method_run .collapse">
+                            <h2>The application&#039;s main runtime method. It executes the Application&#039;s bootstrap events.</h2>
+                            <pre>run() : void</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setController"></a>
+                        <div class="element clickable method public  method_setController" data-toggle="collapse" data-target=".method_setController .collapse">
+                            <h2>Sets the AbstractController object.</h2>
+                            <pre>setController(\Ascmvc\AbstractController &$controller) : \Ascmvc\AbstractApp</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$controller</h4>
+                                                <code><a href="../classes/Ascmvc.AbstractController.html">\Ascmvc\AbstractController</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setControllerManager"></a>
+                        <div class="element clickable method public  method_setControllerManager" data-toggle="collapse" data-target=".method_setControllerManager .collapse">
+                            <h2>Sets the AbstractControllerManager object.</h2>
+                            <pre>setControllerManager(\Ascmvc\AbstractControllerManager &$controllerManager) : \Ascmvc\AbstractApp</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$controllerManager</h4>
+                                                <code><a href="../classes/Ascmvc.AbstractControllerManager.html">\Ascmvc\AbstractControllerManager</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setControllerOutput"></a>
+                        <div class="element clickable method public  method_setControllerOutput" data-toggle="collapse" data-target=".method_setControllerOutput .collapse">
+                            <h2>Sets the Controller&#039;s output.</h2>
+                            <pre>setControllerOutput(array $controllerOutput) : \Ascmvc\AbstractApp</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$controllerOutput</h4>
+                                                <code>array</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setEvent"></a>
+                        <div class="element clickable method public  method_setEvent" data-toggle="collapse" data-target=".method_setEvent .collapse">
+                            <h2>Sets the AscmvcEvent object.</h2>
+                            <pre>setEvent(\Ascmvc\Mvc\AscmvcEvent &$event) : \Ascmvc\AbstractApp</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$event</h4>
+                                                <code><a href="../classes/Ascmvc.Mvc.AscmvcEvent.html">\Ascmvc\Mvc\AscmvcEvent</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setEventManager"></a>
+                        <div class="element clickable method public  method_setEventManager" data-toggle="collapse" data-target=".method_setEventManager .collapse">
+                            <h2>Sets the AscmvcEventManager object.</h2>
+                            <pre>setEventManager(\Ascmvc\Mvc\AscmvcEventManager &$eventManager) : \Ascmvc\AbstractApp</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$eventManager</h4>
+                                                <code><a href="../classes/Ascmvc.Mvc.AscmvcEventManager.html">\Ascmvc\Mvc\AscmvcEventManager</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setRequest"></a>
+                        <div class="element clickable method public  method_setRequest" data-toggle="collapse" data-target=".method_setRequest .collapse">
+                            <h2>Sets the Request object.</h2>
+                            <pre>setRequest(\Zend\Diactoros\Request $request) : \Zend\Diactoros\Request</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$request</h4>
+                                                <code>\Zend\Diactoros\Request</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>\Zend\Diactoros\Request</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setResponse"></a>
+                        <div class="element clickable method public  method_setResponse" data-toggle="collapse" data-target=".method_setResponse .collapse">
+                            <h2>Sets the Response object.</h2>
+                            <pre>setResponse(\Zend\Diactoros\Response $response) : \Zend\Diactoros\Response</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$response</h4>
+                                                <code>\Zend\Diactoros\Response</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>\Zend\Diactoros\Response</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setRouter"></a>
+                        <div class="element clickable method public  method_setRouter" data-toggle="collapse" data-target=".method_setRouter .collapse">
+                            <h2>Sets the AbstractRouter object.</h2>
+                            <pre>setRouter(\Ascmvc\AbstractRouter &$router) : \Ascmvc\AbstractApp</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$router</h4>
+                                                <code><a href="../classes/Ascmvc.AbstractRouter.html">\Ascmvc\AbstractRouter</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setServiceManager"></a>
+                        <div class="element clickable method public  method_setServiceManager" data-toggle="collapse" data-target=".method_setServiceManager .collapse">
+                            <h2>Sets the Pimple\Container object.</h2>
+                            <pre>setServiceManager(\Pimple\Container &$serviceManager) : \Ascmvc\AbstractApp</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$serviceManager</h4>
+                                                <code>\Pimple\Container</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setViewObject"></a>
+                        <div class="element clickable method public  method_setViewObject" data-toggle="collapse" data-target=".method_setViewObject .collapse">
+                            <h2>Sets the Template Manager object.</h2>
+                            <pre>setViewObject( &$viewObject) : \Ascmvc\AbstractApp</pre>
+                            <div class="labels">
+                                                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$viewObject</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                    
+                    
+                                                                <h3><i class="icon-custom icon-property"></i> Properties</h3>
+                                                    <a id="property_appInstance"> </a>
+                            <div class="element clickable property  protected property_appInstance" data-toggle="collapse" data-target=".property_appInstance .collapse">
+                                <h2>Contains the Singleton instance of this class.</h2>
+                                <pre>appInstance : \Ascmvc\AbstractApp|null</pre>
+                                <div class="labels">
+                                                                        <span class="label">static</span>                                </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a>|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_baseConfig"> </a>
+                            <div class="element clickable property  protected property_baseConfig" data-toggle="collapse" data-target=".property_baseConfig .collapse">
+                                <h2>Array contains all of the AbstractApp&#039;s basic configurations.</h2>
+                                <pre>baseConfig : array|null</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>array|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_request"> </a>
+                            <div class="element clickable property  protected property_request" data-toggle="collapse" data-target=".property_request .collapse">
+                                <h2>Contains a reference to a Request instance.</h2>
+                                <pre>request : \Zend\Diactoros\Request|null</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>\Zend\Diactoros\Request|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_response"> </a>
+                            <div class="element clickable property  protected property_response" data-toggle="collapse" data-target=".property_response .collapse">
+                                <h2>Contains a reference to a Response instance.</h2>
+                                <pre>response : \Zend\Diactoros\Request|null</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>\Zend\Diactoros\Request|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_serviceManager"> </a>
+                            <div class="element clickable property  protected property_serviceManager" data-toggle="collapse" data-target=".property_serviceManager .collapse">
+                                <h2>Contains a reference to a Pimple\Container instance.</h2>
+                                <pre>serviceManager : \Pimple\Container|null</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>\Pimple\Container|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_eventManager"> </a>
+                            <div class="element clickable property  protected property_eventManager" data-toggle="collapse" data-target=".property_eventManager .collapse">
+                                <h2>Contains a reference to the EventManager instance.</h2>
+                                <pre>eventManager : \Ascmvc\Mvc\AscmvcEventManager|null</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code><a href="../classes/Ascmvc.Mvc.AscmvcEventManager.html">\Ascmvc\Mvc\AscmvcEventManager</a>|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_event"> </a>
+                            <div class="element clickable property  protected property_event" data-toggle="collapse" data-target=".property_event .collapse">
+                                <h2>Contains a reference to the AscmvcEvent instance.</h2>
+                                <pre>event : \Ascmvc\Mvc\AscmvcEvent|null</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code><a href="../classes/Ascmvc.Mvc.AscmvcEvent.html">\Ascmvc\Mvc\AscmvcEvent</a>|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_viewObject"> </a>
+                            <div class="element clickable property  protected property_viewObject" data-toggle="collapse" data-target=".property_viewObject .collapse">
+                                <h2>Contains a reference to a Template Manager instance.</h2>
+                                <pre>viewObject : Object|null</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>Object|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_router"> </a>
+                            <div class="element clickable property  protected property_router" data-toggle="collapse" data-target=".property_router .collapse">
+                                <h2>Contains a reference to an AbstractRouter instance.</h2>
+                                <pre>router : \Ascmvc\AbstractRouter|null</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code><a href="../classes/Ascmvc.AbstractRouter.html">\Ascmvc\AbstractRouter</a>|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_controllerManager"> </a>
+                            <div class="element clickable property  protected property_controllerManager" data-toggle="collapse" data-target=".property_controllerManager .collapse">
+                                <h2>Contains a reference to a AbstractControllerManager instance.</h2>
+                                <pre>controllerManager : \Ascmvc\AbstractControllerManager|null</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code><a href="../classes/Ascmvc.AbstractControllerManager.html">\Ascmvc\AbstractControllerManager</a>|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_controller"> </a>
+                            <div class="element clickable property  protected property_controller" data-toggle="collapse" data-target=".property_controller .collapse">
+                                <h2>Contains a reference to a AbstractController instance.</h2>
+                                <pre>controller : \Ascmvc\AbstractController|null</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code><a href="../classes/Ascmvc.AbstractController.html">\Ascmvc\AbstractController</a>|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_controllerOutput"> </a>
+                            <div class="element clickable property  protected property_controllerOutput" data-toggle="collapse" data-target=".property_controllerOutput .collapse">
+                                <h2>Contains the controller&#039;s output.</h2>
+                                <pre>controllerOutput : \Zend\Diactoros\Response|array|string|null</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>\Zend\Diactoros\Response|array|string|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                            </div>
+            </div>
+            <a id="\Ascmvc\AbstractApp"></a>
+            <ul class="breadcrumb">
+                <li><a href="../index.html"><i class="icon-custom icon-class"></i></a></li>
+                    
+    
+    <li><span class="divider">\</span><a href="../namespaces/Ascmvc.html">Ascmvc</a></li>
+
+                <li class="active"><span class="divider">\</span><a href="../classes/Ascmvc.AbstractApp.html">AbstractApp</a></li>
+            </ul>
+        </div>
+    </div>
+
+    </div>
+
+        <footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
+            <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
+            generated on Thu, 10 Jan 2019 05:01:07 +0000.<br/>
+    </footer>
+    </body>
+</html>

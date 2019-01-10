@@ -88,20 +88,20 @@ abstract class AbstractControllerManager
      * Initializes this class by assigning the objects contained in the
      * referenced application object's router object to the corresponding properties.
      *
-     * @param AbstractApp &$app.
-     * @param string $controllerName.
-     * @param array $vars.
+     * @param AbstractApp &$app
+     * @param string $controllerName
+     * @param array $vars
      *
-     * @return void.
+     * @return void
      */
     public abstract function __construct(AbstractApp &$app, $controllerName, array $vars = []);
 
     /**
      * Method that calls the MVC's appropriate request handler.
      *
-     * @param void.
+     * @param void
      *
-     * @return void.
+     * @return void
      */
     public abstract function execute();
 }

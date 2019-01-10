@@ -12,20 +12,46 @@
 
 namespace Ascmvc\Mvc;
 
+/**
+ * Class ViewObjectFactory
+ *
+ * The ViewObjectFactory creates an instance of the Plates, Twig or Smarty template manager,
+ * according to specified configuration.
+ *
+ */
 class ViewObjectFactory
 {
+    /**
+     * Contains an instance of a template manager.
+     *
+     * @var \League\Plates\Engine|\Smarty|\Twig_Environment
+     */
     protected static $templateInstance;
 
     // @codeCoverageIgnoreStart
+
+    /**
+     * ViewObjectFactory constructor.
+     */
     protected function __construct()
     {
     }
 
+    /**
+     * ViewObjectFactory clone method.
+     */
     protected function __clone()
     {
     }
     // @codeCoverageIgnoreEnd
 
+    /**
+     * Gets a Singleton instance of the Doctrine class.
+     *
+     * @param array $baseConfig
+     *
+     * @return \League\Plates\Engine|\Smarty|\Twig_Environment
+     */
     public static function getInstance(array $baseConfig)
     {
         if (!self::$templateInstance) {

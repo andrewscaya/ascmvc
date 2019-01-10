@@ -55,14 +55,14 @@ abstract class AbstractRouter
      * Initializes this class by assigning the objects contained in the
      * referenced application object to the corresponding properties.
      *
-     * @param AscmvcEvent $event.
+     * @param AscmvcEvent $event
      *
-     * @return void.
+     * @return void
      */
     public abstract function __construct(AscmvcEvent $event);
 
     /**
-     * Get the current request URI.
+     * Get the current request URI
      *
      * @return array|null
      */

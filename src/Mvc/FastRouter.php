@@ -17,9 +17,17 @@ use Ascmvc\AbstractRouter;
 use FastRoute;
 use Zend\Diactoros\Response;
 
+/**
+ * Class FastRouter
+ *
+ * The FastRouter class extends the AbstractRouter class and uses the nikic/fast-route library.
+ */
 class FastRouter extends AbstractRouter
 {
-
+    /**
+     * FastRouter constructor.
+     * @param AscmvcEvent $event
+     */
     public function __construct(AscmvcEvent $event)
     {
         $this->app = $event->getApplication();
@@ -27,6 +35,9 @@ class FastRouter extends AbstractRouter
         $this->baseConfig = $this->app->getBaseConfig();
     }
 
+    /**
+     * This method tries to find a handler that corresponds to the requested route.
+     */
     public function resolve()
     {
         if ($this->baseConfig['env'] === 'production') {
@@ -89,6 +100,11 @@ class FastRouter extends AbstractRouter
         return;
     }
 
+    /**
+     * Returns an array containing the request's parameters.
+     *
+     * @return array
+     */
     public function getRequestURI() : array
     {
         return $this->requestURI;

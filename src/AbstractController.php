@@ -25,7 +25,7 @@ abstract class AbstractController
      * Contains a reference to the array containing some of the app's basic configurations
      * useful to controllers.
      *
-     * @var Array|null
+     * @var array|null
      */
     protected $baseConfig;
 
@@ -50,16 +50,16 @@ abstract class AbstractController
      *
      * @param array $baseConfig
      *
-     * @return void.
+     * @return void
      */
     public abstract function __construct(array $baseConfig);
 
     /**
      * Method corresponding to the controller's default action.
      *
-     * @param void.
+     * @param null $vars
      *
-     * @return mixed.
+     * @return mixed|void
      */
     public abstract function indexAction($vars = null);
 }

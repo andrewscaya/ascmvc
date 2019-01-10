@@ -15,7 +15,15 @@ namespace Ascmvc\Mvc;
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\AscmvcControllerFactoryInterface;
+use Zend\Diactoros\Response;
 
+/**
+ * Class ControllerManager
+ *
+ * The ControllerManager class extends the AbstractControllerManager and
+ * acts as the MVC's dispatcher object.
+ *
+ */
 class ControllerManager extends AbstractControllerManager
 {
 
@@ -23,11 +31,11 @@ class ControllerManager extends AbstractControllerManager
      * Initializes this class by assigning the objects contained in the
      * referenced App object's router object to the corresponding properties.
      *
-     * @param AbstractApp &$app.
-     * @param string $controllerName.
-     * @param array $vars.
+     * @param AbstractApp &$app
+     * @param string $controllerName
+     * @param array $vars
      *
-     * @return void.
+     * @return void
      */
     public function __construct(AbstractApp &$app, $controllerName, array $vars = [])
     {
@@ -98,6 +106,11 @@ class ControllerManager extends AbstractControllerManager
         return;
     }
 
+    /**
+     * Executes the request handler.
+     *
+     * @return Response|array|string
+     */
     public function execute()
     {
         $controllerOutput = $this->controller->{$this->method}($this->vars);

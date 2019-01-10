@@ -8,9 +8,7 @@
  * @version    2.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
- */
-
-/**
+ *
  * @see       https://github.com/zendframework/zend-expressive for the canonical source repository
  * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
  * @license   https://github.com/zendframework/zend-expressive/blob/master/LICENSE.md New BSD License
@@ -24,6 +22,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Stratigility\Middleware\CallableMiddlewareDecorator;
 use Zend\Stratigility\Middleware\RequestHandlerMiddleware;
 use Zend\Stratigility\MiddlewarePipe;
+
 use function array_shift;
 use function count;
 use function is_array;
@@ -31,6 +30,8 @@ use function is_callable;
 use function is_string;
 
 /**
+ * Class MiddlewareFactory
+ *
  * Marshal middleware for use in the application.
  *
  * This class provides a number of methods for preparing and returning
@@ -55,25 +56,36 @@ use function is_string;
  *   factory instance, as a LazyLoadingMiddleware instance.
  * - pipeline() will create a MiddlewarePipe instance from the array of
  *   middleware passed to it, after passing each first to prepare().
+ *
  */
 class MiddlewareFactory
 {
     /**
+     * Contains an instance of the Pimple\Container class.
+     *
      * @var Container
      */
     protected $container;
 
+    /**
+     * MiddlewareFactory constructor.
+     *
+     * @param Container $container
+     */
     public function __construct(Container $container)
     {
         $this->container = $container;
     }
 
     /**
+     * Prepares the middleware according to type.
+     *
      * @param string|array|callable|MiddlewareInterface|RequestHandlerInterface $middleware
-     * @throws \Exception if argument is not one of
-     *    the specified types.
      *
      * @return MiddlewareInterface
+     *
+     * @throws \Exception if argument is not one of
+     *    the specified types.
      */
     public function prepare($middleware) : MiddlewareInterface
     {
@@ -102,6 +114,10 @@ class MiddlewareFactory
 
     /**
      * Decorate callable standards-signature middleware via a CallableMiddlewareDecorator.
+     *
+     * @param callable $middleware
+     *
+     * @return CallableMiddlewareDecorator
      */
     public function callable(callable $middleware) : CallableMiddlewareDecorator
     {
@@ -122,6 +138,10 @@ class MiddlewareFactory
 
     /**
      * Create lazy loading middleware based on a service name.
+     *
+     * @param string $middleware
+     *
+     * @return LazyLoadingMiddleware
      */
     public function lazy(string $middleware) : LazyLoadingMiddleware
     {
@@ -143,6 +163,8 @@ class MiddlewareFactory
      * @param string|array|MiddlewarePipe $middleware
      *
      * @return MiddlewarePipe
+     *
+     * @throws \Exception
      */
     public function pipeline(...$middleware) : MiddlewarePipe
     {

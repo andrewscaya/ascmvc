@@ -12,13 +12,23 @@
 
 namespace Ascmvc\Mvc;
 
-use Ascmvc\AbstractApp;
 use Ascmvc\AbstractController;
 use Ascmvc\AscmvcEventManagerListenerInterface;
 
+/**
+ * Class Controller
+ *
+ * The Controller class extends the AbstractController and
+ * implements the AscmvcEventManagerListenerInterface.
+ *
+ */
 class Controller extends AbstractController implements AscmvcEventManagerListenerInterface
 {
-
+    /**
+     * Controller constructor.
+     *
+     * @param array $baseConfig
+     */
     public function __construct(array $baseConfig)
     {
         $this->baseConfig = $baseConfig;
@@ -27,22 +37,57 @@ class Controller extends AbstractController implements AscmvcEventManagerListene
     }
 
     // @codeCoverageIgnoreStart
+    /**
+     * OnBootstrap listener method.
+     *
+     * @param AscmvcEvent $event
+     *
+     * @return mixed|void
+     */
     public static function onBootstrap(AscmvcEvent $event)
     {
     }
 
+    /**
+     * OnDispatch listener method.
+     *
+     * @param AscmvcEvent $event
+     *
+     * @return mixed|void
+     */
     public function onDispatch(AscmvcEvent $event)
     {
     }
 
+    /**
+     * OnRender listener method.
+     *
+     * @param AscmvcEvent $event
+     *
+     * @return mixed|void
+     */
     public function onRender(AscmvcEvent $event)
     {
     }
 
+    /**
+     * OnFinish listener method.
+     *
+     * @param AscmvcEvent $event
+     *
+     * @return mixed|void
+     */
     public function onFinish(AscmvcEvent $event)
     {
     }
 
+    /**
+     * The controller's default action.
+     *
+     * @param null $vars
+     *
+     * @return mixed|void
+     */
     public function indexAction($vars = null)
     {
     }

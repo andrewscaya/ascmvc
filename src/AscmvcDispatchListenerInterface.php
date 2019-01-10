@@ -28,9 +28,9 @@ interface AscmvcDispatchListenerInterface
 
     /**
      * Allows an implementing object to interrupt the application's runtime after the
-     * the event manager's registration of the controller object but before
-     * the controller manager's call to the controller's action method.  This phase allows
-     * for controller specific configuration.
+     * registration of the controller object, but before the controller manager's call
+     * to the controller's action method.  This phase allows for controller specific
+     * configuration.
      *
      * @param AscmvcEvent $event
      *

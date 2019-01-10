@@ -12,26 +12,47 @@
 
 namespace Ascmvc\Mvc;
 
-// external namespaces to reference
 use Ascmvc\AbstractModelObject;
 use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
+/**
+ * Class Doctrine
+ *
+ * The Doctrine class extends the AbstractModelObject and uses the doctrine/dbal and doctrine/orm libraries.
+ */
 class Doctrine extends AbstractModelObject
 {
     // @codeCoverageIgnoreStart
+    /**
+     * Doctrine constructor.
+     */
     protected function __construct()
     {
     }
 
+    /**
+     * Doctrine clone method.
+     */
     protected function __clone()
     {
     }
     // @codeCoverageIgnoreEnd
 
+    /**
+     * Gets a Singleton instance of the Doctrine class.
+     *
+     * @param string $connType
+     * @param string $connName
+     * @param array $params
+     *
+     * @return AbstractModelObject|bool
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\ORM\ORMException
+     */
     public static function getInstance($connType, $connName, Array $params)
     {
         if (empty($connType) || empty($connName) || empty($params)) {

@@ -12,6 +12,14 @@
 
 namespace Ascmvc;
 
+/**
+ * Class AbstractModelObject
+ *
+ * The abstract AbstractModelObject class is the blueprint for the MVC's main model objects.
+ *
+ * *Description* The AbstractModelObject class is the one that needs to be extended
+ * in order to create a LightMVC model object.
+ */
 abstract class AbstractModelObject
 {
 

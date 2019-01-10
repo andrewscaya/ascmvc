@@ -14,9 +14,18 @@ namespace Ascmvc\Mvc;
 
 //use Zend\EventManager\SharedEventManager;
 
+/**
+ * Class AscmvcEventManagerFactory
+ *
+ * Returns an instance of the AscmvcEventManager without a shared manager.
+ */
 class AscmvcEventManagerFactory
 {
-
+    /**
+     * Returns an instance of the AscmvcEventManager without a shared manager.
+     *
+     * @return AscmvcEventManager
+     */
     public static function create() : AscmvcEventManager
     {
         //$shared = new SharedEventManager();

@@ -23,22 +23,38 @@ use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
 use Zend\Stratigility\MiddlewarePipe;
 use Zend\Stratigility\Exception\EmptyPipelineException;
-
 use function Zend\Stratigility\path;
 
+/**
+ * Class App
+ *
+ * The MVC application class.
+ *
+ */
 class App extends AbstractApp
 {
 
     // @codeCoverageIgnoreStart
+    /**
+     * App constructor.
+     */
     protected function __construct()
     {
     }
 
+    /**
+     * App clone method.
+     */
     protected function __clone()
     {
     }
     // @codeCoverageIgnoreEnd
 
+    /**
+     * Gets a Singleton instance of the App class.
+     *
+     * @return AbstractApp
+     */
     public static function getInstance() : AbstractApp
     {
         if (!self::$appInstance) {
@@ -48,6 +64,11 @@ class App extends AbstractApp
         return self::$appInstance;
     }
 
+    /**
+     * Boots the application by preparing its configuration.
+     *
+     * @return array
+     */
     public function boot() : array
     {
         if (PHP_SAPI !== 'cli') {
@@ -89,6 +110,15 @@ class App extends AbstractApp
         return $baseConfig;
     }
 
+    /**
+     * Initializes all of the application's objects based on received configuration.
+     *
+     * @param array $baseConfig
+     *
+     * @return AbstractApp
+     *
+     * @throws \Exception
+     */
     public function initialize(array &$baseConfig) : AbstractApp
     {
         $this->baseConfig = $baseConfig;
@@ -156,6 +186,13 @@ class App extends AbstractApp
         return $this;
     }
 
+    /**
+     * Emits the response to the server's buffers.
+     *
+     * @param Response $response
+     *
+     * @return null
+     */
     public function display(Response $response) : void
     {
         $statusCode = $response->getStatusCode();
@@ -174,6 +211,18 @@ class App extends AbstractApp
         return;
     }
 
+    /**
+     * Parses the templates and the controller's output.
+     *
+     * @param array|string|Response $controllerOutput
+     *
+     * @return Response
+     *
+     * @throws \SmartyException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function render($controllerOutput) : Response
     {
         $response = new Response();
@@ -205,6 +254,9 @@ class App extends AbstractApp
         return $response;
     }
 
+    /**
+     * The application's main runtime method. It executes the Application's bootstrap events.
+     */
     public function run() : void
     {
         $event = $this->event;
@@ -268,11 +320,25 @@ class App extends AbstractApp
         return;
     }
 
+    /**
+     * Gets the application's base configuration.
+     *
+     * @param void
+     *
+     * @return array
+     */
     public function getBaseConfig() : array
     {
         return $this->baseConfig;
     }
 
+    /**
+     * Gets what is useful to the controllers from the application's base configuration.
+     *
+     * @param void
+     *
+     * @return array
+     */
     public function getBaseConfigForControllers() : array
     {
         $baseConfig = $this->getBaseConfig();
@@ -283,6 +349,14 @@ class App extends AbstractApp
         return $baseConfig;
     }
 
+    /**
+     * Adds an element to the application's base configuration.
+     *
+     * @param string $name
+     * @param array $array
+     *
+     * @return AbstractApp
+     */
     public function appendBaseConfig($name, $array) : AbstractApp
     {
         $this->baseConfig[$name] = $array;
@@ -290,11 +364,23 @@ class App extends AbstractApp
         return $this;
     }
 
+    /**
+     * Gets the Request object.
+     *
+     * @return Request
+     */
     public function getRequest() : Request
     {
         return $this->request;
     }
 
+    /**
+     * Sets the Request object.
+     *
+     * @param Request
+     *
+     * @return Request
+     */
     public function setRequest(Request $request) : Request
     {
         $this->request = $request;
@@ -302,11 +388,23 @@ class App extends AbstractApp
         return $this->request;
     }
 
+    /**
+     * Gets the Response object.
+     *
+     * @return Response
+     */
     public function getResponse() : Response
     {
         return $this->response;
     }
 
+    /**
+     * Sets the Response object.
+     *
+     * @param Response
+     *
+     * @return Response
+     */
     public function setResponse(Response $response) : Response
     {
         $this->response = $response;
@@ -314,11 +412,23 @@ class App extends AbstractApp
         return $this->response;
     }
 
+    /**
+     * Gets the Pimple\Container object.
+     *
+     * @return \Pimple\Container
+     */
     public function getServiceManager() : Container
     {
         return $this->serviceManager;
     }
 
+    /**
+     * Sets the Pimple\Container object.
+     *
+     * @param \Pimple\Container
+     *
+     * @return AbstractApp
+     */
     public function setServiceManager(Container &$serviceManager) : AbstractApp
     {
         $this->serviceManager = $serviceManager;
@@ -326,11 +436,23 @@ class App extends AbstractApp
         return $this;
     }
 
+    /**
+     * Gets the AscmvcEventManager object.
+     *
+     * @return AscmvcEventManager
+     */
     public function getEventManager() : AscmvcEventManager
     {
         return $this->eventManager;
     }
 
+    /**
+     * Sets the AscmvcEventManager object.
+     *
+     * @param AscmvcEventManager
+     *
+     * @return AbstractApp
+     */
     public function setEventManager(AscmvcEventManager &$eventManager) : AbstractApp
     {
         $this->eventManager = $eventManager;
@@ -338,11 +460,23 @@ class App extends AbstractApp
         return $this;
     }
 
+    /**
+     * Gets the AscmvcEvent object.
+     *
+     * @return AscmvcEvent
+     */
     public function getEvent() : AscmvcEvent
     {
         return $this->event;
     }
 
+    /**
+     * Sets the AscmvcEvent object.
+     *
+     * @param AscmvcEvent
+     *
+     * @return AbstractApp
+     */
     public function setEvent(AscmvcEvent &$event) : AbstractApp
     {
         $this->event = $event;
@@ -350,11 +484,23 @@ class App extends AbstractApp
         return $this;
     }
 
+    /**
+     * Gets the AbstractRouter object.
+     *
+     * @return AbstractRouter
+     */
     public function getRouter() : AbstractRouter
     {
         return $this->router;
     }
 
+    /**
+     * Sets the AbstractRouter object.
+     *
+     * @param AbstractRouter
+     *
+     * @return AbstractApp
+     */
     public function setRouter(AbstractRouter &$router) : AbstractApp
     {
         $this->router = $router;
@@ -362,11 +508,23 @@ class App extends AbstractApp
         return $this;
     }
 
+    /**
+     * Gets the AbstractControllerManager object.
+     *
+     * @return AbstractControllerManager
+     */
     public function getControllerManager() : AbstractControllerManager
     {
         return $this->controllerManager;
     }
 
+    /**
+     * Sets the AbstractControllerManager object.
+     *
+     * @param AbstractControllerManager
+     *
+     * @return AbstractApp
+     */
     public function setControllerManager(AbstractControllerManager &$controllerManager) : AbstractApp
     {
         $this->controllerManager = $controllerManager;
@@ -374,11 +532,23 @@ class App extends AbstractApp
         return $this;
     }
 
-    public function getController() : AbstractController
+    /**
+     * Gets the AbstractController object.
+     *
+     * @return AbstractController|null
+     */
+    public function getController()
     {
         return $this->controller;
     }
 
+    /**
+     * Sets the AbstractController object.
+     *
+     * @param AbstractController
+     *
+     * @return AbstractApp
+     */
     public function setController(AbstractController &$controller) : AbstractApp
     {
         $this->controller = $controller;
@@ -386,11 +556,23 @@ class App extends AbstractApp
         return $this;
     }
 
+    /**
+     * Gets the Controller's output.
+     *
+     * @return Response|array|string|null
+     */
     public function getControllerOutput()
     {
         return $this->controllerOutput;
     }
 
+    /**
+     * Sets the Controller's output.
+     *
+     * @param array $controllerOutput
+     *
+     * @return AbstractApp
+     */
     public function setControllerOutput($controllerOutput)
     {
         $this->controllerOutput = $controllerOutput;
@@ -398,11 +580,23 @@ class App extends AbstractApp
         return $this;
     }
 
+    /**
+     * Gets the Template Manager object.
+     *
+     * @return \League\Plates\Engine|\Smarty|\Twig_Environment
+     */
     public function getViewObject()
     {
         return $this->viewObject;
     }
 
+    /**
+     * Sets the Template Manager object.
+     *
+     * @param \League\Plates\Engine|\Smarty|\Twig_Environment
+     *
+     * @return AbstractApp
+     */
     public function setViewObject(&$viewObject)
     {
         $this->viewObject = $viewObject;

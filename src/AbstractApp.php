@@ -44,21 +44,21 @@ abstract class AbstractApp
     /**
      * Contains a reference to a Request instance.
      *
-     * @var Zend\Diactoros\Request|null
+     * @var Request|null
      */
     protected $request;
 
     /**
      * Contains a reference to a Response instance.
      *
-     * @var Zend\Diactoros\Request|null
+     * @var Request|null
      */
     protected $response;
 
     /**
      * Contains a reference to a Pimple\Container instance.
      *
-     * @var Pimple\Container|null
+     * @var \Pimple\Container|null
      */
     protected $serviceManager;
 
@@ -153,7 +153,7 @@ abstract class AbstractApp
      * Initializes the application with the parameters that
      * are given in the baseConfig array.
      *
-     * @param array &$baseConfig  Contains all of the AbstractApp's basic configurations
+     * @param array &$baseConfig
      *
      * @return AbstractApp
      */
@@ -162,7 +162,7 @@ abstract class AbstractApp
     /**
      * Sends the final response to the output buffer.
      *
-     * @param \Zend\Diactoros\Response $response.
+     * @param Response $response
      *
      * @return void
      */
@@ -173,12 +173,12 @@ abstract class AbstractApp
      *
      * @param Response|array|string $controllerOutput
      *
-     * @return \Zend\Diactoros\Response
+     * @return Response
      */
     public abstract function render($controllerOutput);
 
     /**
-     * Executes the Application's bootstrap events.
+     * The application's main runtime method. It executes the Application's bootstrap events.
      *
      * @param void
      *
@@ -187,7 +187,7 @@ abstract class AbstractApp
     public abstract function run();
 
     /**
-     * Get the application's base configuration.
+     * Gets the application's base configuration.
      *
      * @param void
      *
@@ -196,7 +196,7 @@ abstract class AbstractApp
     public abstract function getBaseConfig();
 
     /**
-     * Get what is useful to the controllers from the application's base configuration.
+     * Gets what is useful to the controllers from the application's base configuration.
      *
      * @param void
      *
@@ -205,7 +205,7 @@ abstract class AbstractApp
     public abstract function getBaseConfigForControllers();
 
     /**
-     * Modify the application's base configuration.
+     * Adds an element to the application's base configuration.
      *
      * @param string $name
      * @param array $array
@@ -215,46 +215,46 @@ abstract class AbstractApp
     public abstract function appendBaseConfig($name, $array);
 
     /**
-     * Get the Zend\Diactoros\Request object.
+     * Gets the Request object.
      *
-     * @return \Zend\Diactoros\Request
+     * @return Request
      */
     public abstract function getRequest();
 
     /**
-     * Set the Zend\Diactoros\Request object.
+     * Sets the Request object.
      *
-     * @param \Zend\Diactoros\Request
+     * @param Request
      *
-     * @return \Zend\Diactoros\Request
+     * @return Request
      */
     public abstract function setRequest(Request $request);
 
     /**
-     * Get the Zend\Diactoros\Response object.
+     * Gets the Response object.
      *
-     * @return \Zend\Diactoros\Response
+     * @return Response
      */
     public abstract function getResponse();
 
     /**
-     * Set the Zend\Diactoros\Response object.
+     * Sets the Response object.
      *
-     * @param \Zend\Diactoros\Response
+     * @param Response
      *
-     * @return \Zend\Diactoros\Response
+     * @return Response
      */
     public abstract function setResponse(Response $response);
 
     /**
-     * Get the Pimple\Container object.
+     * Gets the Pimple\Container object.
      *
      * @return \Pimple\Container
      */
     public abstract function getServiceManager();
 
     /**
-     * Set the Pimple\Container object.
+     * Sets the Pimple\Container object.
      *
      * @param \Pimple\Container
      *
@@ -263,14 +263,14 @@ abstract class AbstractApp
     public abstract function setServiceManager(Container &$serviceManager);
 
     /**
-     * Get the AscmvcEventManager object.
+     * Gets the AscmvcEventManager object.
      *
      * @return AscmvcEventManager
      */
     public abstract function getEventManager();
 
     /**
-     * Set the AscmvcEventManager object.
+     * Sets the AscmvcEventManager object.
      *
      * @param AscmvcEventManager
      *
@@ -279,14 +279,14 @@ abstract class AbstractApp
     public abstract function setEventManager(AscmvcEventManager &$eventManager);
 
     /**
-     * Get the AscmvcEvent object.
+     * Gets the AscmvcEvent object.
      *
      * @return AscmvcEvent
      */
     public abstract function getEvent();
 
     /**
-     * Set the AscmvcEvent object.
+     * Sets the AscmvcEvent object.
      *
      * @param AscmvcEvent
      *
@@ -295,14 +295,14 @@ abstract class AbstractApp
     public abstract function setEvent(AscmvcEvent &$event);
 
     /**
-     * Get the AbstractRouter object.
+     * Gets the AbstractRouter object.
      *
      * @return AbstractRouter
      */
     public abstract function getRouter();
 
     /**
-     * Set the AbstractRouter object.
+     * Sets the AbstractRouter object.
      *
      * @param AbstractRouter
      *
@@ -311,14 +311,14 @@ abstract class AbstractApp
     public abstract function setRouter(AbstractRouter &$router);
 
     /**
-     * Get the AbstractControllerManager object.
+     * Gets the AbstractControllerManager object.
      *
      * @return AbstractControllerManager
      */
     public abstract function getControllerManager();
 
     /**
-     * Set the AbstractControllerManager object.
+     * Sets the AbstractControllerManager object.
      *
      * @param AbstractControllerManager
      *
@@ -327,14 +327,14 @@ abstract class AbstractApp
     public abstract function setControllerManager(AbstractControllerManager &$controllerManager);
 
     /**
-     * Get the AbstractController object.
+     * Gets the AbstractController object.
      *
-     * @return AbstractController
+     * @return AbstractController|null
      */
     public abstract function getController();
 
     /**
-     * Set the AbstractController object.
+     * Sets the AbstractController object.
      *
      * @param AbstractController
      *
@@ -343,14 +343,14 @@ abstract class AbstractApp
     public abstract function setController(AbstractController &$controller);
 
     /**
-     * Get the Controller's output.
+     * Gets the Controller's output.
      *
      * @return Response|array|string|null
      */
     public abstract function getControllerOutput();
 
     /**
-     * Set the Controller's output.
+     * Sets the Controller's output.
      *
      * @param array $controllerOutput
      *
@@ -359,16 +359,16 @@ abstract class AbstractApp
     public abstract function setControllerOutput($controllerOutput);
 
     /**
-     * Get the Template Manager object.
+     * Gets the Template Manager object.
      *
-     * @return Object
+     * @return \League\Plates\Engine|\Smarty|\Twig_Environment
      */
     public abstract function getViewObject();
 
     /**
-     * Set the Template Manager object.
+     * Sets the Template Manager object.
      *
-     * @param Object
+     * @param \League\Plates\Engine|\Smarty|\Twig_Environment
      *
      * @return AbstractApp
      */
