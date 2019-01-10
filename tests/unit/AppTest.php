@@ -13,6 +13,7 @@
 
 namespace AscmvcTest;
 
+use Application\Controllers\FakedispatchController;
 use Ascmvc\Mvc\App;
 use Ascmvc\Mvc\AscmvcEvent;
 use Doctrine\DBAL\Connection;
@@ -59,12 +60,12 @@ class AppTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
@@ -103,12 +104,12 @@ class AppTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
@@ -155,12 +156,12 @@ class AppTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
@@ -214,7 +215,7 @@ class AppTest extends TestCase
         );
     }
 
-    public function testBootMethodLoadsConfigurationFilesWithDoctrine()
+    public function testInitializeMethodLoadsConfigurationFilesWithDoctrine()
     {
         if (!defined('BASEDIR')) {
             define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
@@ -233,12 +234,12 @@ class AppTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
@@ -267,7 +268,7 @@ class AppTest extends TestCase
         $this->assertInstanceOf(Connection::class, $serviceManager['dm2']);
     }
 
-    public function testBootMethodLoadsConfigurationFilesWithMiddleware()
+    public function testInitializeMethodLoadsConfigurationFilesWithMiddleware()
     {
         if (!defined('BASEDIR')) {
             define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
@@ -308,12 +309,12 @@ class AppTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
@@ -370,7 +371,7 @@ class AppTest extends TestCase
         $this->assertSame('Hello from callable middleware 1', $contents);
     }
 
-    public function testBootMethodLoadsConfigurationFilesWithMiddlewareEmptyPipe()
+    public function testInitializeMethodLoadsConfigurationFilesWithMiddlewareEmptyPipe()
     {
         if (!defined('BASEDIR')) {
             define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
@@ -411,12 +412,12 @@ class AppTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
@@ -470,5 +471,829 @@ class AppTest extends TestCase
         $this->assertTrue($result->stopped());
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame('FakeController onBootstrap', $contents);
+    }
+
+    public function testDislayMethod()
+    {
+        // Redirect output to command output
+        $this->setOutputCallback(function () {
+        });
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $app = App::getInstance();
+
+        $app->setRequest($requestMock);
+
+        $response = new Response();
+        $response->getBody()->write('This is a test response');
+        $response = $response->withHeader('X-Special-Header', 'test');
+        $response = $response->withStatus(418);
+
+        $app->display($response);
+
+        $headerList = xdebug_get_headers();
+
+        $responseCode = http_response_code();
+
+        $this->assertSame('This is a test response', $this->getActualOutput());
+        $this->assertSame('X-Special-Header: test', $headerList[0]);
+        $this->assertEquals(418, $responseCode);
+    }
+
+    public function testRenderMethodWithString()
+    {
+        // Redirect output to command output
+        $this->setOutputCallback(function () {
+        });
+
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/test1']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $controllerOutput = 'This is the controller output';
+
+        $response = $app->render($controllerOutput);
+
+        $this->assertSame(
+            'This is the controller output',
+            $response->getBody()->__toString()
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testRenderMethodWithPlatesAndSpecialStatusCode()
+    {
+        ob_start();
+
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/test1']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $controllerOutput = [
+            'templatefile' => 'test_index',
+            'results' => 'AppTest_Render_Array_Plates',
+            'statuscode' => 418
+        ];
+
+        $response = $app->render($controllerOutput);
+
+        $this->assertSame(
+            "<html>\n"
+            . "<head>\n"
+            . "</head>\n"
+            . "<body>\n"
+            . "<!-- Plates template -->\n"
+            . "AppTest_Render_Array_Plates</body>\n"
+            . "</html>",
+            $response->getBody()->__toString()
+        );
+
+        $this->assertEquals(418, $response->getStatusCode());
+    }
+
+    public function testRenderMethodWithArrayAndPlates()
+    {
+        ob_start();
+
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/test1']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $controllerOutput = [
+            'templatefile' => 'test_index',
+            'results' => 'AppTest_Render_Array_Plates',
+        ];
+
+        $response = $app->render($controllerOutput);
+
+        $this->assertSame(
+            "<html>\n"
+            . "<head>\n"
+            . "</head>\n"
+            . "<body>\n"
+            . "<!-- Plates template -->\n"
+            . "AppTest_Render_Array_Plates</body>\n"
+            . "</html>",
+            $response->getBody()->__toString()
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testRenderMethodWithArrayAndTwig()
+    {
+        ob_start();
+
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/test1']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Twig';
+        $baseConfig['templates']['templateDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $controllerOutput = [
+            'templatefile' => 'test_index',
+            'results' => 'AppTest_Render_Array_Twig',
+        ];
+
+        $response = $app->render($controllerOutput);
+
+        $this->assertSame(
+            "<html>\n"
+            . "<head>\n"
+            . "</head>\n"
+            . "<body>\n"
+            . "<!-- Twig template -->\n"
+            . "AppTest_Render_Array_Twig\n"
+            . "</body>\n"
+            . "</html>",
+            $response->getBody()->__toString()
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testRenderMethodWithArrayAndSmarty()
+    {
+        ob_start();
+
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/test1']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Smarty';
+        $baseConfig['templates']['templateDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $controllerOutput = [
+            'templatefile' => 'test_index',
+            'results' => 'AppTest_Render_Array_Smarty',
+        ];
+
+        $response = $app->render($controllerOutput);
+
+        $this->assertSame(
+            "<html>\n"
+            . "<head>\n"
+            . "</head>\n"
+            . "<body>\n"
+            . "<!-- Smarty template -->\n"
+            . "AppTest_Render_Array_Smarty\n"
+            . "</body>\n"
+            . "</html>",
+            $response->getBody()->__toString()
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testRunMethodWithOnBootstrapShortCircuit()
+    {
+        // Redirect output to command output
+        $this->setOutputCallback(function () {
+        });
+
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/test1']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $app->run();
+
+        $this->assertSame('FakeController onBootstrap', $this->getActualOutput());
+    }
+
+    public function testRunMethodWithOnDispatchShortCircuit()
+    {
+        // Redirect output to command output
+        $this->setOutputCallback(function () {
+        });
+
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        rename(
+            BASEDIR
+            . DIRECTORY_SEPARATOR
+            . 'controllers'
+            . DIRECTORY_SEPARATOR
+            . 'Application'
+            . DIRECTORY_SEPARATOR
+            . 'Controllers'
+            . DIRECTORY_SEPARATOR
+            . 'FakeController.php',
+            BASEDIR
+            . DIRECTORY_SEPARATOR
+            . 'controllers'
+            . DIRECTORY_SEPARATOR
+            . 'Application'
+            . DIRECTORY_SEPARATOR
+            . 'Controllers'
+            . DIRECTORY_SEPARATOR
+            . 'FakeController.php.OLD'
+        );
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/fake/index/fakeparamsrun1']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $baseConfig['routes'] = [
+            0 => [
+                'GET',
+                '/fake[/{action}[/{test}]]',
+                'fakedispatch',
+            ],
+        ];
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $ascmvcEvent = $app->getEvent();
+        $ascmvcEvent->setName(AscmvcEvent::EVENT_ROUTE);
+        $ascmvcEvent->setApplication($app);
+        $app->setEvent($ascmvcEvent);
+
+        $app->run();
+
+        $this->assertSame('FakedispatchController onDispatch', $this->getActualOutput());
+
+        rename(
+            BASEDIR
+            . DIRECTORY_SEPARATOR
+            . 'controllers'
+            . DIRECTORY_SEPARATOR
+            . 'Application'
+            . DIRECTORY_SEPARATOR
+            . 'Controllers'
+            . DIRECTORY_SEPARATOR
+            . 'FakeController.php.OLD',
+            BASEDIR
+            . DIRECTORY_SEPARATOR
+            . 'controllers'
+            . DIRECTORY_SEPARATOR
+            . 'Application'
+            . DIRECTORY_SEPARATOR
+            . 'Controllers'
+            . DIRECTORY_SEPARATOR
+            . 'FakeController.php'
+        );
+    }
+
+    public function testRunMethodWithAllEvents()
+    {
+        // Redirect output to command output
+        $this->setOutputCallback(function () {
+        });
+
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        rename(
+            BASEDIR
+            . DIRECTORY_SEPARATOR
+            . 'controllers'
+            . DIRECTORY_SEPARATOR
+            . 'Application'
+            . DIRECTORY_SEPARATOR
+            . 'Controllers'
+            . DIRECTORY_SEPARATOR
+            . 'FakeController.php',
+            BASEDIR
+            . DIRECTORY_SEPARATOR
+            . 'controllers'
+            . DIRECTORY_SEPARATOR
+            . 'Application'
+            . DIRECTORY_SEPARATOR
+            . 'Controllers'
+            . DIRECTORY_SEPARATOR
+            . 'FakeController.php.OLD'
+        );
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/fake/index/fakeparamsrun1']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $baseConfig['routes'] = [
+            0 => [
+                'GET',
+                '/fake[/{action}[/{test}]]',
+                'fakestandard',
+            ],
+        ];
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $ascmvcEvent = $app->getEvent();
+        $ascmvcEvent->setName(AscmvcEvent::EVENT_ROUTE);
+        $ascmvcEvent->setApplication($app);
+        $app->setEvent($ascmvcEvent);
+
+        $app->run();
+
+        $this->assertSame(
+            'AppTest'
+            . '_testControllerManagerWillReturnAppropriateControllerWithDefaultIndexAction'
+            . '_fakeparamsrun1',
+            $this->getActualOutput()
+        );
+
+        rename(
+            BASEDIR
+            . DIRECTORY_SEPARATOR
+            . 'controllers'
+            . DIRECTORY_SEPARATOR
+            . 'Application'
+            . DIRECTORY_SEPARATOR
+            . 'Controllers'
+            . DIRECTORY_SEPARATOR
+            . 'FakeController.php.OLD',
+            BASEDIR
+            . DIRECTORY_SEPARATOR
+            . 'controllers'
+            . DIRECTORY_SEPARATOR
+            . 'Application'
+            . DIRECTORY_SEPARATOR
+            . 'Controllers'
+            . DIRECTORY_SEPARATOR
+            . 'FakeController.php'
+        );
     }
 }

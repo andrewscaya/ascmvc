@@ -392,6 +392,7 @@ class AscmvcEventManagerTest extends TestCase
             . "<head>\n"
             . "</head>\n"
             . "<body>\n"
+            . "<!-- Plates template -->\n"
             . "AscmvcEventManagerTest_testDefaultMVCEventsCanBeTriggeredWithArrayAsControllerOutput_eventmanagertestfakeparams1</body>\n"
             . "</html>",
             $this->getActualOutput()

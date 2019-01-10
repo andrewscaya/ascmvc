@@ -49,12 +49,12 @@ class ControllerManagerTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
@@ -96,12 +96,12 @@ class ControllerManagerTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
@@ -150,12 +150,12 @@ class ControllerManagerTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
@@ -203,12 +203,12 @@ class ControllerManagerTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
@@ -257,12 +257,12 @@ class ControllerManagerTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
@@ -304,12 +304,12 @@ class ControllerManagerTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
@@ -351,12 +351,12 @@ class ControllerManagerTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['compileDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
-        $baseConfig['templates']['templateDir'] =
+        $baseConfig['templates']['configDir'] =
             dirname(__FILE__)
             . DIRECTORY_SEPARATOR
             . 'app' . DIRECTORY_SEPARATOR
