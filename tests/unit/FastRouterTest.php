@@ -21,7 +21,7 @@ use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\ControllerManager;
 use Ascmvc\Mvc\FastRouter;
 use PHPUnit\Framework\TestCase;
-use Zend\Diactoros\Request;
+use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\ServerRequestFactory;
 
 /**
@@ -44,7 +44,7 @@ class FastRouterTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . Request::class);
+        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -120,7 +120,7 @@ class FastRouterTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . Request::class);
+        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -202,7 +202,7 @@ class FastRouterTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . Request::class);
+        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -285,7 +285,7 @@ class FastRouterTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . Request::class);
+        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -375,7 +375,7 @@ class FastRouterTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . Request::class);
+        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -450,7 +450,7 @@ class FastRouterTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . Request::class);
+        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()

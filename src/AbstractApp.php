@@ -17,6 +17,7 @@ use Ascmvc\Mvc\AscmvcEventManager;
 use Pimple\Container;
 use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
+use Zend\Diactoros\ServerRequest;
 
 /**
  * The abstract AbstractApp class is the blueprint for the MVC's main engine.
@@ -215,20 +216,20 @@ abstract class AbstractApp
     public abstract function appendBaseConfig($name, $array);
 
     /**
-     * Gets the Request object.
+     * Gets the ServerRequest object.
      *
-     * @return Request
+     * @return ServerRequest
      */
     public abstract function getRequest();
 
     /**
-     * Sets the Request object.
+     * Sets the ServerRequest object.
      *
-     * @param Request
+     * @param ServerRequest
      *
-     * @return Request
+     * @return ServerRequest
      */
-    public abstract function setRequest(Request $request);
+    public abstract function setRequest(ServerRequest $request);
 
     /**
      * Gets the Response object.

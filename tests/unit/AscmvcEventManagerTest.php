@@ -18,7 +18,7 @@ use Ascmvc\Mvc\App;
 use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\AscmvcEventManagerFactory;
 use PHPUnit\Framework\TestCase;
-use Zend\Diactoros\Request;
+use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
 
@@ -208,7 +208,7 @@ class AscmvcEventManagerTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . Request::class);
+        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
         $requestMock
             ->shouldReceive('getProtocolVersion')
             ->once()
@@ -264,7 +264,7 @@ class AscmvcEventManagerTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . Request::class);
+        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -392,7 +392,7 @@ class AscmvcEventManagerTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . Request::class);
+        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -503,7 +503,7 @@ class AscmvcEventManagerTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . Request::class);
+        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()
@@ -626,7 +626,7 @@ class AscmvcEventManagerTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $requestMock = \Mockery::mock('overload:' . Request::class);
+        $requestMock = \Mockery::mock('overload:' . ServerRequest::class);
         $requestMock
             ->shouldReceive('getServerParams')
             ->once()

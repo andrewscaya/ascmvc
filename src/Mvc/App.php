@@ -18,8 +18,8 @@ use Ascmvc\AbstractControllerManager;
 use Ascmvc\AbstractRouter;
 use Ascmvc\Middleware\MiddlewareFactory;
 use Pimple\Container;
-use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
+use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\ServerRequestFactory;
 use Zend\Stratigility\MiddlewarePipe;
 use Zend\Stratigility\Exception\EmptyPipelineException;
@@ -365,23 +365,23 @@ class App extends AbstractApp
     }
 
     /**
-     * Gets the Request object.
+     * Gets the ServerRequest object.
      *
-     * @return Request
+     * @return ServerRequest
      */
-    public function getRequest() : Request
+    public function getRequest() : ServerRequest
     {
         return $this->request;
     }
 
     /**
-     * Sets the Request object.
+     * Sets the ServerRequest object.
      *
-     * @param Request
+     * @param ServerRequest $request
      *
-     * @return Request
+     * @return ServerRequest
      */
-    public function setRequest(Request $request) : Request
+    public function setRequest(ServerRequest $request) : ServerRequest
     {
         $this->request = $request;
 
