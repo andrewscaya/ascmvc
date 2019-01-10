@@ -186,8 +186,8 @@
     </li>
 
                                                                                                         <li class="method public inherited">
-        <a href="#method_getRequest" title="getRequest :: Gets the Request object.">
-            <span class="description">Gets the Request object.</span><pre>getRequest</pre>
+        <a href="#method_getRequest" title="getRequest :: Gets the ServerRequest object.">
+            <span class="description">Gets the ServerRequest object.</span><pre>getRequest</pre>
         </a>
     </li>
 
@@ -266,8 +266,8 @@ are given in the baseConfig array.</span><pre>initialize</pre>
     </li>
 
                                                                                                         <li class="method public inherited">
-        <a href="#method_setRequest" title="setRequest :: Sets the Request object.">
-            <span class="description">Sets the Request object.</span><pre>setRequest</pre>
+        <a href="#method_setRequest" title="setRequest :: Sets the ServerRequest object.">
+            <span class="description">Sets the ServerRequest object.</span><pre>setRequest</pre>
         </a>
     </li>
 
@@ -528,7 +528,7 @@ because it is a Singleton.</h2>
                                             <a id="method_getController"></a>
                         <div class="element clickable method public  method_getController inherited" data-toggle="collapse" data-target=".method_getController .collapse">
                             <h2>Gets the AbstractController object.</h2>
-                            <pre>getController() : \Ascmvc\AbstractController</pre>
+                            <pre>getController() : \Ascmvc\AbstractController|null</pre>
                             <div class="labels">
                                 <span class="label">inherited</span>                                                                                                <span class="label">abstract</span>                                                            </div>
 
@@ -549,7 +549,7 @@ because it is a Singleton.</h2>
 
                                     
                                                                             <h3>Response</h3>
-                                        <code><a href="../classes/Ascmvc.AbstractController.html">\Ascmvc\AbstractController</a></code><p></p>
+                                        <code><a href="../classes/Ascmvc.AbstractController.html">\Ascmvc\AbstractController</a>|null</code><p></p>
                                                                     </div>
                             </div>
 
@@ -694,8 +694,8 @@ because it is a Singleton.</h2>
                         </div>
                                             <a id="method_getRequest"></a>
                         <div class="element clickable method public  method_getRequest inherited" data-toggle="collapse" data-target=".method_getRequest .collapse">
-                            <h2>Gets the Request object.</h2>
-                            <pre>getRequest() : \Zend\Diactoros\Request</pre>
+                            <h2>Gets the ServerRequest object.</h2>
+                            <pre>getRequest() : \Zend\Diactoros\ServerRequest</pre>
                             <div class="labels">
                                 <span class="label">inherited</span>                                                                                                <span class="label">abstract</span>                                                            </div>
 
@@ -716,7 +716,7 @@ because it is a Singleton.</h2>
 
                                     
                                                                             <h3>Response</h3>
-                                        <code>\Zend\Diactoros\Request</code><p></p>
+                                        <code>\Zend\Diactoros\ServerRequest</code><p></p>
                                                                     </div>
                             </div>
 
@@ -1049,8 +1049,8 @@ are given in the baseConfig array.</h2>
                         </div>
                                             <a id="method_setRequest"></a>
                         <div class="element clickable method public  method_setRequest inherited" data-toggle="collapse" data-target=".method_setRequest .collapse">
-                            <h2>Sets the Request object.</h2>
-                            <pre>setRequest(\Zend\Diactoros\Request $request) : \Zend\Diactoros\Request</pre>
+                            <h2>Sets the ServerRequest object.</h2>
+                            <pre>setRequest(\Zend\Diactoros\ServerRequest $request) : \Zend\Diactoros\ServerRequest</pre>
                             <div class="labels">
                                 <span class="label">inherited</span>                                                                                                <span class="label">abstract</span>                                                            </div>
 
@@ -1065,11 +1065,11 @@ are given in the baseConfig array.</h2>
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
                                                 <h4>$request</h4>
-                                                <code>\Zend\Diactoros\Request</code><p></p>
+                                                <code>\Zend\Diactoros\ServerRequest</code><p></p>
                                             </div>
                                                                             
                                                                             <h3>Response</h3>
-                                        <code>\Zend\Diactoros\Request</code><p></p>
+                                        <code>\Zend\Diactoros\ServerRequest</code><p></p>
                                                                     </div>
                             </div>
 
@@ -1517,7 +1517,7 @@ are given in the baseConfig array.</h2>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Thu, 10 Jan 2019 05:01:07 +0000.<br/>
+            generated on Thu, 10 Jan 2019 05:40:23 +0000.<br/>
     </footer>
     </body>
 </html>
