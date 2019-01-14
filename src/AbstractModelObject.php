@@ -24,11 +24,11 @@ abstract class AbstractModelObject
 {
 
     /**
-     * Array contains instances of Doctrine objects (DBAL or ORM).
+     * Array contains instances of model objects (DBAL or ORM).
      *
      * @var array|null
      */
-    protected static $doctrineInstance;
+    protected static $modelInstance;
 
     /**
      * Protected method : this class cannot be instantiated by the new keyword

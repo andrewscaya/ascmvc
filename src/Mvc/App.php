@@ -21,7 +21,6 @@ use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\ServerRequestFactory;
 use Zend\Stratigility\MiddlewarePipe;
 use Zend\Stratigility\Exception\EmptyPipelineException;
@@ -151,6 +150,17 @@ class App extends AbstractApp
                 foreach ($connections as $connName => $params) {
                     $serviceManager["$connName"] = $serviceManager->factory(function ($serviceManager) use ($connType, $connName, $params) {
                         $dbManager = Doctrine::getInstance($connType, $connName, $params);
+                        return $dbManager;
+                    });
+                }
+            }
+        }
+
+        if (isset($this->baseConfig['atlas'])) {
+            foreach ($this->baseConfig['atlas'] as $connType => $connections) {
+                foreach ($connections as $connName => $params) {
+                    $serviceManager["$connName"] = $serviceManager->factory(function ($serviceManager) use ($connType, $connName, $params) {
+                        $dbManager = Atlas::getInstance($connType, $connName, $params);
                         return $dbManager;
                     });
                 }

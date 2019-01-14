@@ -59,11 +59,11 @@ class Doctrine extends AbstractModelObject
             return false;
         }
 
-        if (!self::$doctrineInstance[$connName]) {
+        if (!self::$modelInstance[$connName]) {
             if ($connType == 'DBAL') {
                 $config = new \Doctrine\DBAL\Configuration();
 
-                self::$doctrineInstance[$connName] = \Doctrine\DBAL\DriverManager::getConnection($params, $config);
+                self::$modelInstance[$connName] = \Doctrine\DBAL\DriverManager::getConnection($params, $config);
             } elseif ($connType == 'ORM') {
                 $isDevMode = false;
 
@@ -108,12 +108,12 @@ class Doctrine extends AbstractModelObject
 
                 $config->setMetadataDriverImpl($driver);
 
-                self::$doctrineInstance[$connName] = \Doctrine\ORM\EntityManager::create($params, $config);
+                self::$modelInstance[$connName] = \Doctrine\ORM\EntityManager::create($params, $config);
             } else {
                 return false;
             }
         }
 
-        return self::$doctrineInstance[$connName];
+        return self::$modelInstance[$connName];
     }
 }
