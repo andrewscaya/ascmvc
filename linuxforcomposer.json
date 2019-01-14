@@ -1,0 +1,21 @@
+{
+    "name": "linuxforphp/linuxforcomposer",
+    "description": "A Composer interface to run 'Linux for PHP' Docker containers.",
+    "php-versions": [
+        "custom-7.1.24-ascmvc-1"
+    ],
+    "modes": {
+        "mode2": "interactive",
+        "mode3": "tty"
+    },
+    "ports": {
+        "port1": [
+            "8282:80"
+        ]
+    },
+    "volumes": {
+        "volume1": "${PWD}/:/srv/ascmvc"
+    },
+    "script": "/bin/bash",
+    "thread-safe": "false"
+}
