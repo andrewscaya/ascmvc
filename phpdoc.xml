@@ -11,6 +11,6 @@
         <target>docs-api/build</target>
     </transformer>
     <files>
-        <directory>./src</directory>
+        <directory>src</directory>
     </files>
 </phpdoc>
