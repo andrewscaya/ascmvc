@@ -370,6 +370,36 @@ acts as the MVC&#039;s dispatcher object.</div>
         <a href="../classes/Ascmvc.Middleware.LazyLoadingMiddleware.html" class="more">« More »</a>
     </div>
 
+                                        <div id="MiddlewareFactory" class="element ajax clickable class">
+        <h1>MiddlewareFactory<a href="../classes/Ascmvc.Middleware.MiddlewareFactory.html">¶</a></h1>
+        <p class="short_description">Class MiddlewareFactory</p>
+        <div class="details collapse">Marshal middleware for use in the application.
+
+This class provides a number of methods for preparing and returning
+middleware for use within an application.
+
+If any middleware provided is already a MiddlewareInterface, it can be used
+verbatim or decorated as-is. Other middleware types acceptable are:
+
+- PSR-15 RequestHandlerInterface instances; these will be decorated as
+  RequestHandlerMiddleware instances.
+- string service names resolving to middleware
+- arrays of service names and/or MiddlewareInterface instances
+- PHP callables that follow the PSR-15 signature
+
+Additionally, the class provides the following decorator/utility methods:
+
+- callableMiddleware() will decorate the callable middleware passed to it using
+  CallableMiddlewareDecorator.
+- handlerMiddleware() will decorate the request handler passed to it using
+  RequestHandlerMiddleware.
+- lazyMiddleware() will decorate the string service name passed to it, along with the
+  factory instance, as a LazyLoadingMiddleware instance.
+- pipeline() will create a MiddlewarePipe instance from the array of
+  middleware passed to it, after passing each first to prepare().</div>
+        <a href="../classes/Ascmvc.Middleware.MiddlewareFactory.html" class="more">« More »</a>
+    </div>
+
                                         <div id="Psr4Autoloader" class="element ajax clickable class">
         <h1>Psr4Autoloader<a href="../classes/Ascmvc.Mvc.Psr4Autoloader.html">¶</a></h1>
         <p class="short_description">An example of a general-purpose implementation that includes the optional
@@ -449,7 +479,7 @@ according to specified configuration.</div>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Mon, 14 Jan 2019 05:10:15 +0000.<br/>
+            generated on Mon, 14 Jan 2019 23:13:53 +0000.<br/>
     </footer>
     </body>
 </html>
