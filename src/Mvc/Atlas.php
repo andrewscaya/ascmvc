@@ -54,7 +54,7 @@ class Atlas extends AbstractModelObject
             return false;
         }
 
-        if (!self::$modelInstance[$connName]) {
+        if (!isset(self::$modelInstance[$connName]) || !self::$modelInstance[$connName]) {
             if ($connType == 'ORM') {
                 self::$modelInstance[$connName] = AtlasORM::new(
                     "{$params['driver']}:host={$params['host']};dbname={$params['dbname']}",

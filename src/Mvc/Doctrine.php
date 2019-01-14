@@ -59,7 +59,7 @@ class Doctrine extends AbstractModelObject
             return false;
         }
 
-        if (!self::$modelInstance[$connName]) {
+        if (!isset(self::$modelInstance[$connName]) || !self::$modelInstance[$connName]) {
             if ($connType == 'DBAL') {
                 $config = new \Doctrine\DBAL\Configuration();
 
