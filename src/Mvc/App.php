@@ -148,7 +148,7 @@ class App extends AbstractApp
         if (isset($this->baseConfig['doctrine'])) {
             foreach ($this->baseConfig['doctrine'] as $connType => $connections) {
                 foreach ($connections as $connName => $params) {
-                    $serviceManager["$connName"] = $serviceManager->factory(function ($serviceManager) use ($connType, $connName, $params) {
+                    $serviceManager[$connName] = $serviceManager->factory(function ($serviceManager) use ($connType, $connName, $params) {
                         $dbManager = Doctrine::getInstance($connType, $connName, $params);
                         return $dbManager;
                     });
@@ -159,7 +159,7 @@ class App extends AbstractApp
         if (isset($this->baseConfig['atlas'])) {
             foreach ($this->baseConfig['atlas'] as $connType => $connections) {
                 foreach ($connections as $connName => $params) {
-                    $serviceManager["$connName"] = $serviceManager->factory(function ($serviceManager) use ($connType, $connName, $params) {
+                    $serviceManager[$connName] = $serviceManager->factory(function ($serviceManager) use ($connType, $connName, $params) {
                         $dbManager = Atlas::getInstance($connType, $connName, $params);
                         return $dbManager;
                     });
