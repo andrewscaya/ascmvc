@@ -16,6 +16,7 @@ namespace AscmvcTest;
 use Application\Controllers\FakedispatchController;
 use Ascmvc\Mvc\App;
 use Ascmvc\Mvc\AscmvcEvent;
+use Atlas\Orm\Atlas;
 use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
@@ -266,6 +267,59 @@ class AppTest extends TestCase
 
         $this->assertArrayHasKey('dm2', $serviceManager);
         $this->assertInstanceOf(Connection::class, $serviceManager['dm2']);
+    }
+
+    public function testInitializeMethodLoadsConfigurationFilesWithAtlas()
+    {
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $baseConfig['atlas']['ORM']['aem1'] = [
+            'driver'   => 'pdo_mysql',
+            'host'     => 'localhost',
+            'user'     => 'USERNAME',
+            'password' => 'PASSWORD',
+            'dbname'   => 'DATABASE',
+        ];
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $serviceManager = $app->getServiceManager();
+
+        $this->assertArrayHasKey('aem1', $serviceManager);
+        $this->assertInstanceOf(Atlas::class, $serviceManager['aem1']);
     }
 
     public function testInitializeMethodLoadsConfigurationFilesWithMiddleware()
