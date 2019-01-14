@@ -48,11 +48,11 @@ use function is_string;
  *
  * Additionally, the class provides the following decorator/utility methods:
  *
- * - callable() will decorate the callable middleware passed to it using
+ * - callableMiddleware() will decorate the callable middleware passed to it using
  *   CallableMiddlewareDecorator.
- * - handler() will decorate the request handler passed to it using
+ * - handlerMiddleware() will decorate the request handler passed to it using
  *   RequestHandlerMiddleware.
- * - lazy() will decorate the string service name passed to it, along with the
+ * - lazyMiddleware() will decorate the string service name passed to it, along with the
  *   factory instance, as a LazyLoadingMiddleware instance.
  * - pipeline() will create a MiddlewarePipe instance from the array of
  *   middleware passed to it, after passing each first to prepare().
@@ -84,8 +84,7 @@ class MiddlewareFactory
      *
      * @return MiddlewareInterface
      *
-     * @throws \Exception if argument is not one of
-     *    the specified types.
+     * @throws \Exception if argument is not one of the specified types.
      */
     public function prepare($middleware) : MiddlewareInterface
     {
@@ -94,11 +93,11 @@ class MiddlewareFactory
         }
 
         if ($middleware instanceof RequestHandlerInterface) {
-            return $this->handler($middleware);
+            return $this->handlerMiddleware($middleware);
         }
 
         if (is_callable($middleware)) {
-            return $this->callable($middleware);
+            return $this->callableMiddleware($middleware);
         }
 
         if (is_array($middleware)) {
@@ -109,7 +108,7 @@ class MiddlewareFactory
             throw \Exception('Invalid Middleware:' . $middleware);
         }
 
-        return $this->lazy($middleware);
+        return $this->lazyMiddleware($middleware);
     }
 
     /**
@@ -119,7 +118,7 @@ class MiddlewareFactory
      *
      * @return CallableMiddlewareDecorator
      */
-    public function callable(callable $middleware) : CallableMiddlewareDecorator
+    public function callableMiddleware(callable $middleware) : CallableMiddlewareDecorator
     {
         return new CallableMiddlewareDecorator($middleware);
     }
@@ -131,7 +130,7 @@ class MiddlewareFactory
      *
      * @return RequestHandlerMiddleware
      */
-    public function handler(RequestHandlerInterface $handler) : RequestHandlerMiddleware
+    public function handlerMiddleware(RequestHandlerInterface $handler) : RequestHandlerMiddleware
     {
         return new RequestHandlerMiddleware($handler);
     }
@@ -143,7 +142,7 @@ class MiddlewareFactory
      *
      * @return LazyLoadingMiddleware
      */
-    public function lazy(string $middleware) : LazyLoadingMiddleware
+    public function lazyMiddleware(string $middleware) : LazyLoadingMiddleware
     {
         return new LazyLoadingMiddleware($this->container, $middleware);
     }

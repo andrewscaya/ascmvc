@@ -48,7 +48,7 @@ class Doctrine extends AbstractModelObject
      * @param string $connName
      * @param array $params
      *
-     * @return AbstractModelObject|bool
+     * @return \Doctrine\DBAL\Connection|\Doctrine\ORM\EntityManager|bool
      *
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\ORM\ORMException

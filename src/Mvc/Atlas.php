@@ -13,7 +13,7 @@
 namespace Ascmvc\Mvc;
 
 use Ascmvc\AbstractModelObject;
-use Atlas\Orm\Atlas as AtlasORM;
+use Ascmvc\Proxy\AtlasORM;
 use Atlas\Orm\Transaction\AutoTransact;
 
 /**
@@ -46,7 +46,7 @@ class Atlas extends AbstractModelObject
      * @param string $connName
      * @param array $params
      *
-     * @return AbstractModelObject|bool
+     * @return \Atlas\Orm\Atlas|bool
      */
     public static function getInstance($connType, $connName, Array $params)
     {
@@ -56,7 +56,7 @@ class Atlas extends AbstractModelObject
 
         if (!isset(self::$modelInstance[$connName]) || !self::$modelInstance[$connName]) {
             if ($connType == 'ORM') {
-                self::$modelInstance[$connName] = AtlasORM::new(
+                self::$modelInstance[$connName] = AtlasORM::create(
                     "{$params['driver']}:host={$params['host']};dbname={$params['dbname']}",
                     $params['user'],
                     $params['password'],

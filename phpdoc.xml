@@ -12,5 +12,6 @@
     </transformer>
     <files>
         <directory>src</directory>
+        <directory>src/Proxy</directory>
     </files>
 </phpdoc>

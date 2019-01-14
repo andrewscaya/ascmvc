@@ -50,13 +50,13 @@ abstract class AbstractModelObject
     abstract protected function __clone();
 
     /**
-     * Static method : returns the Singleton instance of this class.
+     * Static method : returns the Singleton instance of the model class.
      *
      * @param string $connType
      * @param string $connName
-     * @param Array $params
+     * @param array $params
      *
-     * @return AbstractModelObject
+     * @return mixed
      */
     public static function getInstance($connType, $connName, Array $params)
     {
