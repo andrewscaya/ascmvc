@@ -73,26 +73,24 @@ class App extends AbstractApp
     public function boot() : array
     {
         // @codeCoverageIgnoreStart
-        if (PHP_SAPI !== 'cli') {
-            $_SERVER['SERVER_SIGNATURE'] = isset($_SERVER['SERVER_SIGNATURE']) ? $_SERVER['SERVER_SIGNATURE'] : '80';
+        $_SERVER['SERVER_SIGNATURE'] = isset($_SERVER['SERVER_SIGNATURE']) ? $_SERVER['SERVER_SIGNATURE'] : '80';
 
-            $protocol = strpos($_SERVER['SERVER_SIGNATURE'], '443') !== false ? 'https://' : 'http://';
+        $protocol = strpos($_SERVER['SERVER_SIGNATURE'], '443') !== false ? 'https://' : 'http://';
 
-            $requestUriArray = explode('/', $_SERVER['PHP_SELF']);
+        $requestUriArray = explode('/', $_SERVER['PHP_SELF']);
 
-            if (is_array($requestUriArray)) {
-                $indexKey = array_search('index.php', $requestUriArray);
+        if (is_array($requestUriArray)) {
+            $indexKey = array_search('index.php', $requestUriArray);
 
-                array_splice($requestUriArray, $indexKey);
+            array_splice($requestUriArray, $indexKey);
 
-                $requestUri = implode('/', $requestUriArray);
-            }
+            $requestUri = implode('/', $requestUriArray);
+        }
 
-            $requestUrl = $protocol . $_SERVER['HTTP_HOST'] . $requestUri . '/';
+        $requestUrl = $protocol . $_SERVER['HTTP_HOST'] . $requestUri . '/';
 
+        if (!defined('URLBASEADDR')) {
             define('URLBASEADDR', $requestUrl);
-        } else {
-            define('URLBASEADDR', false);
         }
         // @codeCoverageIgnoreEnd
 
@@ -104,9 +102,9 @@ class App extends AbstractApp
         ];
 
         if (file_exists(BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.local.php')) {
-            require_once BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.local.php';
+            require BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.local.php';
         } else {
-            require_once BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
+            require BASEDIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
         }
 
         return $baseConfig;

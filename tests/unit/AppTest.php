@@ -13,7 +13,6 @@
 
 namespace AscmvcTest;
 
-use Application\Controllers\FakedispatchController;
 use Ascmvc\Mvc\App;
 use Ascmvc\Mvc\AscmvcEvent;
 use Atlas\Orm\Atlas;
@@ -120,16 +119,18 @@ class AppTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $_SERVER['HTTP_HOST'] = 'localhost';
+
         $app = App::getInstance();
 
         $baseConfig = $app->boot();
 
-        $this->assertFalse(URLBASEADDR);
+        $this->assertSame('http://localhost/', URLBASEADDR);
 
         $this->assertSame(
             [
                 'BASEDIR' => '/srv/ascmvc/tests/unit/app',
-                'URLBASEADDR' => false,
+                'URLBASEADDR' => 'http://localhost/',
                 'appFolder' => 'app',
                 'env' => 'development',
                 'appName' => 'The LightMVC Framework Skeleton Test Application',
@@ -185,16 +186,18 @@ class AppTest extends TestCase
             . 'config.local.php'
         );
 
+        $_SERVER['HTTP_HOST'] = 'localhost';
+
         $app = App::getInstance();
 
         $baseConfig = $app->boot();
 
-        $this->assertFalse(URLBASEADDR);
+        $this->assertSame('http://localhost/', URLBASEADDR);
 
         $this->assertSame(
             [
             'BASEDIR' => '/srv/ascmvc/tests/unit/app',
-            'URLBASEADDR' => false,
+            'URLBASEADDR' => 'http://localhost/',
             'appFolder' => 'app',
             'env' => 'development',
             'appName' => 'The LightMVC Framework Skeleton Test 2 Application',
