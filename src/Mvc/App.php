@@ -39,7 +39,7 @@ class App extends AbstractApp
     /**
      * App constructor.
      */
-    protected function __construct()
+    public function __construct()
     {
     }
 
