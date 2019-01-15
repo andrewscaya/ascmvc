@@ -2,20 +2,27 @@
     "name": "linuxforphp/linuxforcomposer",
     "description": "A Composer interface to run 'Linux for PHP' Docker containers.",
     "php-versions": [
-        "custom-7.1.24-ascmvc-1"
+        "7.3.0",
+        "7.2.12",
+        "7.1.24",
+        "5.6.37"
     ],
     "modes": {
+        "mode1": "detached",
         "mode2": "interactive",
         "mode3": "tty"
     },
     "ports": {
         "port1": [
-            "8282:80"
+            "8181:80",
+            "8282:80",
+            "8383:80",
+            "8484:80"
         ]
     },
     "volumes": {
-        "volume1": "${PWD}/:/srv/ascmvc"
+        "volume1": ""
     },
-    "script": "/bin/bash",
+    "script": "lfphp",
     "thread-safe": "false"
 }
