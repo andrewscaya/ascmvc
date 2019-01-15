@@ -12,10 +12,8 @@
 
 namespace Ascmvc\Mvc;
 
-use Ascmvc\AbstractApp;
 use Ascmvc\AbstractRouter;
 use FastRoute;
-use Zend\Diactoros\Response;
 
 /**
  * Class FastRouter

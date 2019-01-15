@@ -19,7 +19,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequest;
 
 /**
  * The abstract AbstractApp class is the blueprint for the MVC's main engine.
