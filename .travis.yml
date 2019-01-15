@@ -1,0 +1,66 @@
+sudo: false
+
+language: php
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - vendor
+
+branches:
+  except:
+    - develop
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.1
+      env:
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK_COVER=false
+        - TEST_CHECK=true
+        - CS_CHECK=true
+        - CC_CHECK=false
+    - php: 7.2
+      env:
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK_COVER=false
+        - TEST_CHECK=true
+        - CS_CHECK=true
+        - CC_CHECK=false
+    - php: 7.3
+      env:
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK_COVER=false
+        - TEST_CHECK=true
+        - CS_CHECK=true
+        - CC_CHECK=false
+    - php: hhvm
+      env:
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK_COVER=false
+        - TEST_CHECK=false
+        - CS_CHECK=true
+        - CC_CHECK=false
+  allow_failures:
+    - php: hhvm
+
+before_install:
+  - travis_retry composer self-update
+  - if [[ -z "$TEST_CHECK_COVER" ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
+
+install:
+  - travis_retry composer install --no-interaction
+
+before_script:
+  - if [[ $CC_CHECK == 'true' ]]; then $TRAVIS_BUILD_DIR/bin/selenium-setup.sh ; fi
+  - if [[ $CC_CHECK == 'true' ]]; then npm install -g se-interpreter ; fi
+
+script:
+  - if [[ $CC_CHECK == 'true' ]]; then se-interpreter tests/selenium/se-interpreter_config.json ; fi
+  - if [[ $TEST_CHECK == 'true' ]]; then composer test ; fi
+  - if [[ $TEST_CHECK_COVER == 'true' ]]; then composer test-cover ; fi
+  - if [[ $CS_CHECK == 'true' ]]; then composer cs ; fi
+
+after_success:
+  - if [[ $TEST_CHECK_COVER == 'true' ]]; then composer test-report ; fi
