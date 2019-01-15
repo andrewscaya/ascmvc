@@ -1,8 +1,10 @@
+.. _ConfigurationAnchor:
+
 .. index:: Configuration
 
-.. index:: Configuration Files
+.. index:: Configuration files
 
-.. _Configuration:
+.. _configuration:
 
 Configuration
 =============
@@ -25,11 +27,11 @@ The main preconfigured indexes of this array are:
 
 .. note:: The Twig and Smarty template managers require additional indexes under the ``templates`` index. These are: ``compileDir``, ``configDir`` and ``cacheDir``.
 
-Also, there are two optional preconfigured indexes in the ``$baseConfig`` array:
+Also, there are three optional preconfigured indexes in the ``$baseConfig`` array:
 
 * ``middleware``, which contains an array of PSR-15 compliant middleware to be used,
 * ``doctrine``, which contains an array of parameters in order to configure one or more Doctrine connections.
-
+* ``atlas``, which contains an array of parameters in order to configure one or more Atlas connections.
 
 Here is an example of a ``config/config.php`` file:
 
@@ -41,9 +43,9 @@ Here is an example of a ``config/config.php`` file:
 
     $baseConfig['appName'] = 'The LightMVC Framework Skeleton Application';
 
-    require_once 'routes.config.php';
+    require 'routes.config.php';
 
-    require_once 'middleware.config.php';
+    require 'middleware.config.php';
 
 Where the ``config/routes.config.php`` file might look like the following:
 
@@ -57,7 +59,7 @@ Where the ``config/routes.config.php`` file might look like the following:
         ],
     ];
 
-.. note:: For more information on configuring the application's routes, please see the :ref:`Routing` section.
+.. note:: For more information on configuring the application's routes, please see the :ref:`routing` section.
 
 And, the ``config/middleware.config.php`` file might look like the following:
 
@@ -86,13 +88,13 @@ And, the ``config/middleware.config.php`` file might look like the following:
         ],
     ];
 
-.. note:: The :ref:`Middleware` section contains all the needed information in order to set up PSR-15 compliant middleware.
+.. note:: The :ref:`middleware` section contains all the needed information in order to set up PSR-15 compliant middleware.
 
 .. index:: View configuration
 
 .. index:: Configuration View
 
-.. _Configuration view:
+.. _configuration view:
 
 View Configuration
 ------------------
@@ -150,13 +152,13 @@ Here is an example of setting up common view elements within a ``config/view.con
 
     ];
 
-For more information on configuring the application's view, please see the :ref:`Views` section.
+For more information on configuring the application's view, please see the :ref:`views` section.
 
 .. index:: Model configuration
 
 .. index:: Configuration Model
 
-.. _Configuration model:
+.. _configuration model:
 
 Model Configuration
 -------------------
@@ -165,7 +167,7 @@ Finally, you can configure Doctrine within a ``config/config.local.php`` file, a
 
 .. code-block:: php
 
-    $baseConfig['doctrine']['DBAL']['dbm1'] = [
+    $baseConfig['doctrine']['DBAL']['dcm1'] = [
         'driver'   => 'pdo_mysql',
         'host'     => 'localhost',
         'user'     => 'USERNAME',
@@ -175,8 +177,16 @@ Finally, you can configure Doctrine within a ``config/config.local.php`` file, a
 
     // AND/OR
 
-    $baseConfig['doctrine']['ORM']['em1'] = [
+    $baseConfig['doctrine']['ORM']['dem1'] = [
         'driver'   => 'pdo_mysql',
+        'host'     => 'localhost',
+        'user'     => 'USERNAME',
+        'password' => 'PASSWORD',
+        'dbname'   => 'DATABASE',
+    ];
+
+    $baseConfig['atlas']['ORM']['aem1'] = [
+        'driver'   => 'mysql',
         'host'     => 'localhost',
         'user'     => 'USERNAME',
         'password' => 'PASSWORD',
@@ -188,12 +198,16 @@ from within a controller factory for example, in this way:
 
 .. code-block:: php
 
-    $connection = $serviceManager['dbm1'];
+    $dcm1 = $serviceManager['dcm1'];
 
     // AND/OR
 
-    $em = $serviceManager['em1'];
+    $dem1 = $serviceManager['dem1'];
 
-.. note:: The Doctrine DBAL and ORM objects are lazy-loaded, which avoids creating instances of these classes if they are unused.
+    // AND/OR
 
-For more information on configuring the application's model, please see the :ref:`Models` section.
+    $aem1 = $serviceManager['aem1'];
+
+.. note:: Atlas and Doctrine DBAL and ORM objects are lazy-loaded, which avoids creating instances of these classes if they remain unused.
+
+For more information on configuring the application's model, please see the :ref:`models` section.

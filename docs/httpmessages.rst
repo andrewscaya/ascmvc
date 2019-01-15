@@ -1,6 +1,6 @@
 .. index:: HTTP Messages
 
-.. _Http messages:
+.. _HttpmessagesAnchor:
 
 HTTP Messages
 =============
@@ -11,7 +11,7 @@ PSR-15 compliant middleware.
 
 .. index:: Request
 
-.. _Request:
+.. _request:
 
 ServerRequest Object
 --------------------
@@ -21,7 +21,7 @@ In order to get a better understanding of the ``ServerRequest`` object, please s
 
 .. index:: Response
 
-.. _Response:
+.. _response:
 
 Response Object
 ---------------

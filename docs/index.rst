@@ -1,4 +1,4 @@
-.. _Index:
+.. _IndexAnchor:
 
 LightMVC Framework's documentation
 ==================================
@@ -8,26 +8,24 @@ LightMVC Framework's documentation
 
 `LightMVC Framework Home Page <https://lightmvcframework.net/>`_
 
-**Easily create PHP applications by using any PHP library within this very modular framework!**
+**Easily create PHP applications by using any PHP library within this very modular, event-driven and Swoole-enabled framework!**
 
 .. toctree::
    :maxdepth: 3
 
-  license
-  installation
-  configuration
-  autoloading
-  httpmessages
-  services
-  routing
-  controllers
-  views
-  models
-  middleware
-  skeleton
-
-.. whats_new
-
+   whats_new
+   license
+   installation
+   configuration
+   autoloading
+   httpmessages
+   services
+   routing
+   controllers
+   views
+   models
+   middleware
+   skeleton
 
 Indices and tables
 ==================

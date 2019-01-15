@@ -1,6 +1,8 @@
+.. _AutoloadingAnchor:
+
 .. index:: Autoloading
 
-.. _Autololoading:
+.. _autoloading:
 
 Autoloading
 ===========
@@ -24,3 +26,5 @@ Therefore, adding new namespaces is simply a question of adding new entries in t
 the following command from a CLI::
 
     $ composer update
+
+.. note:: A PSR-4 autoloader class is available within the framework if you wish to use configuration files instead of Composer's autoloading capabilities.
