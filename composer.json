@@ -1,12 +1,15 @@
 {
-    "name": "andrewscaya/ascmvc",
-    "description": "The lightweight MVC framework",
+    "name": "lightmvc/ascmvc",
+    "description": "A modular, event-driven and Swoole-enabled framework.",
     "type": "library",
     "license": "Apache-2.0",
     "keywords": [
+        "lightmvc",
         "ascmvc",
         "framework",
-        "mvc"
+        "mvc",
+        "middleware",
+        "swoole"
     ],
     "homepage": "https://github.com/lightmvc/ascmvc",
     "authors": [

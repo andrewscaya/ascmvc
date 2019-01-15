@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32f7a0168d7eaf59327e2cdcae7392f3",
+    "content-hash": "9f99561053197cbc22b123c2efa55adc",
     "packages": [
         {
             "name": "atlas/mapper",
@@ -2264,16 +2264,16 @@
         },
         {
             "name": "linuxforphp/linuxforcomposer",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/linuxforphp/linuxforcomposer.git",
-                "reference": "09d678f2801615ef7598f23814388816564b635b"
+                "reference": "c1b824b17a3df98d0cc6d0dc6723a39583ca220b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/linuxforphp/linuxforcomposer/zipball/09d678f2801615ef7598f23814388816564b635b",
-                "reference": "09d678f2801615ef7598f23814388816564b635b",
+                "url": "https://api.github.com/repos/linuxforphp/linuxforcomposer/zipball/c1b824b17a3df98d0cc6d0dc6723a39583ca220b",
+                "reference": "c1b824b17a3df98d0cc6d0dc6723a39583ca220b",
                 "shasum": ""
             },
             "require": {
@@ -2302,7 +2302,7 @@
                 "docker",
                 "php"
             ],
-            "time": "2019-01-13T06:31:15+00:00"
+            "time": "2019-01-15T22:04:19+00:00"
         },
         {
             "name": "mockery/mockery",
