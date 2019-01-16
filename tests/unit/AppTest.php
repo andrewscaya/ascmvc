@@ -129,7 +129,7 @@ class AppTest extends TestCase
 
         $this->assertSame(
             [
-                'BASEDIR' => '/srv/ascmvc/tests/unit/app',
+                'BASEDIR' => BASEDIR,
                 'URLBASEADDR' => 'http://localhost/',
                 'appFolder' => 'app',
                 'env' => 'development',
@@ -196,11 +196,11 @@ class AppTest extends TestCase
 
         $this->assertSame(
             [
-            'BASEDIR' => '/srv/ascmvc/tests/unit/app',
-            'URLBASEADDR' => 'http://localhost/',
-            'appFolder' => 'app',
-            'env' => 'development',
-            'appName' => 'The LightMVC Framework Skeleton Test 2 Application',
+                'BASEDIR' => BASEDIR,
+                'URLBASEADDR' => 'http://localhost/',
+                'appFolder' => 'app',
+                'env' => 'development',
+                'appName' => 'The LightMVC Framework Skeleton Test 2 Application',
             ],
             $baseConfig
         );
