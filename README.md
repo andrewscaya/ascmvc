@@ -7,7 +7,7 @@ Easily create PHP applications by using any PHP library within this very modular
 
 [![Build Status](https://travis-ci.org/lightmvc/ascmvc.svg?branch=master)](https://travis-ci.org/lightmvc/ascmvc)
 [![Coverage Status](docs/images/code_coverage.svg)](https://lightmvcframework.net/)
-[![Documentation Status](https://readthedocs.org/projects/lightmvc/badge/?version=latest)](https://lightmvc.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/lightmvc-framework/badge/?version=latest)](https://lightmvc-framework.readthedocs.io/en/latest/?badge=latest)
 [![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg?style=flat-square)](https://github.com/php-pds/skeleton)
 
 To add the **LightMVC Framework** package to your PHP project, you can simply run the following command on your computer's CLI:
