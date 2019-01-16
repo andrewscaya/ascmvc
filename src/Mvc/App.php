@@ -73,9 +73,11 @@ class App extends AbstractApp
     public function boot() : array
     {
         // @codeCoverageIgnoreStart
-        $_SERVER['SERVER_SIGNATURE'] = isset($_SERVER['SERVER_SIGNATURE']) ? $_SERVER['SERVER_SIGNATURE'] : '80';
-
-        $protocol = strpos($_SERVER['SERVER_SIGNATURE'], '443') !== false ? 'https://' : 'http://';
+        $protocol =
+            (isset($_SERVER['SERVER_SIGNATURE']) && strpos($_SERVER['SERVER_SIGNATURE'], '443') !== false)
+            || (isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']))
+            ? 'https://'
+            : 'http://';
 
         $requestUriArray = explode('/', $_SERVER['PHP_SELF']);
 
