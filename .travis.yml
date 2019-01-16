@@ -43,6 +43,7 @@ matrix:
         - CS_CHECK=true
         - CC_CHECK=false
   allow_failures:
+    - php: 7.3
     - php: hhvm
 
 before_install:
