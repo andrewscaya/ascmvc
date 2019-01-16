@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <title>ASCMVC</title>
+    <transformations>
+        <template name="responsive-twig"/>
+    </transformations>
+    <parser>
+        <target>docs-api/output</target>
+    </parser>
+    <transformer>
+        <target>docs-api/build</target>
+    </transformer>
+    <files>
+        <directory>src</directory>
+        <directory>src/Proxy</directory>
+    </files>
+</phpdoc>

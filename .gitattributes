@@ -1,0 +1,59 @@
+# Used to remove files from deployment using `git archive`
+# git files
+.gitattributes export-ignore
+.gitignore export-ignore
+# buildpath files
+.buildpath export-ignore
+# project files and settings
+.project export-ignore
+.settings
+# composer files
+composer.* export-ignore
+# travis file
+.travis.yml export-ignore
+# phpunit files
+phpunit.* export-ignore
+# CodeSniffer files
+phpcs.* export-ignore
+# phpDocumentor files
+phpdoc.* export-ignore
+phpDocumentor.phar export-ignore
+# Codeception files
+codeception.* export-ignore
+codeception-setup.* export-ignore
+# general text files
+*README.txt export-ignore
+*readme.md export-ignore
+*README.md export-ignore
+*README export-ignore
+*LICENSE.txt export-ignore
+*license.txt export-ignore
+*LICENSE.html export-ignore
+COPYRIGHT.txt export-ignore
+CHANGELOG.* export-ignore
+*changelog.txt export-ignore
+*changelog.html export-ignore
+*CHANGES.html export-ignore
+*INSTALL.html export-ignore
+*TODO.txt export-ignore
+*API.txt export-ignore
+*api.html export-ignore
+*KNOWN_ISSUES.txt export-ignore
+UPGRADE.txt export-ignore
+web.config export-ignore
+MAINTAINERS.txt export-ignore
+INSTALL*.txt export-ignore
+# scripts
+bin export-ignore
+# data files
+data export-ignore
+# docs
+docs export-ignore
+# docs-api
+docs-api export-ignore
+# libs
+lib export-ignore
+# tests
+tests export-ignore
+# vendor
+vendor export-ignore

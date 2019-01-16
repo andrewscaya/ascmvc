@@ -1,26 +1,34 @@
 <?php
 /**
- * ASC LightMVC
+ * LightMVC/ASCMVC
  *
- * @package    ASC LightMVC
+ * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
- * @link       https://github.com/andrewscaya
- * @version    1.0.0
- * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
+ * @link       https://github.com/lightmvc/ascmvc
+ * @version    2.0.0
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
+ * @since      1.0.0
  */
 
 namespace Ascmvc;
 
-
+/**
+ * Class AbstractModelObject
+ *
+ * The abstract AbstractModelObject class is the blueprint for the MVC's main model objects.
+ *
+ * *Description* The AbstractModelObject class is the one that needs to be extended
+ * in order to create a LightMVC model object.
+ */
 abstract class AbstractModelObject
 {
 
     /**
-     * Array contains instances of Doctrine objects (DBAL or ORM).
+     * Array contains instances of model objects (DBAL or ORM).
      *
      * @var array|null
      */
-    protected static $doctrineInstance;
+    protected static $modelInstance;
 
     /**
      * Protected method : this class cannot be instantiated by the new keyword
@@ -42,17 +50,15 @@ abstract class AbstractModelObject
     abstract protected function __clone();
 
     /**
-     * Static method : returns the Singleton instance of this class.
+     * Static method : returns the Singleton instance of the model class.
      *
      * @param string $connType
      * @param string $connName
-     * @param Array $params
+     * @param array $params
      *
-     * @return AbstractModelObject
+     * @return mixed
      */
     public static function getInstance($connType, $connName, Array $params)
     {
-
     }
-
 }

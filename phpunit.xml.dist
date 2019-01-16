@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         verbose="true">
+    <testsuites>
+        <testsuite name="Main ASCMVC Tests">
+            <directory>tests/unit</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+            <!-- <file>src/Mvc/App.php</file> -->
+            <!-- <file>src/Mvc/AscmvcEvent.php</file> -->
+            <!-- <file>src/Mvc/AscmvcEventManager.php</file> -->
+            <!-- <file>src/Mvc/AscmvcEventManagerFactory.php</file> -->
+            <!-- <file>src/Mvc/Controller.php</file> -->
+            <!-- <file>src/Mvc/ControllerManager.php</file> -->
+            <!-- <file>src/Mvc/Doctrine.php</file> -->
+            <!-- <file>src/Mvc/FastRouter.php</file> -->
+            <!-- <file>src/Mvc/ViewObjectFactory.php</file> -->
+            <exclude>
+                <directory suffix=".php">src/Middleware</directory>
+                <directory suffix=".php">src/Proxy</directory>
+                <file>src/AbstractApp.php</file>
+                <file>src/AbstractController.php</file>
+                <file>src/AbstractControllerManager.php</file>
+                <file>src/AbstractModelObject.php</file>
+                <file>src/AbstractRouter.php</file>
+                <file>src/AscmvcBootstrapListenerInterface.php</file>
+                <file>src/AscmvcDispatchListenerInterface.php</file>
+                <file>src/AscmvcEventManagerListenerInterface.php</file>
+                <file>src/AscmvcFinishListenerInterface.php</file>
+                <file>src/AscmvcRenderListenerInterface.php</file>
+                <file>src/AscmvcRouteListenerInterface.php</file>
+                <file>src/AscmvcControllerFactoryInterface.php</file>
+                <file>src/Mvc/Psr4Autoloader.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+    <!-- <logging>
+        <log type="coverage-html" target="./data/codeCoverage" charset="UTF-8"
+            yui="true" highlight="true"
+            lowUpperBound="50" highLowerBound="80"/>
+        <log type="testdox-html" target="./data/testdox.html" />
+    </logging> -->
+</phpunit>

@@ -1,72 +1,95 @@
 <?php
 /**
- * ASC LightMVC
+ * LightMVC/ASCMVC
  *
- * @package    ASC LightMVC
+ * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
- * @link       https://github.com/andrewscaya
- * @version    1.0.0
- * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
+ * @link       https://github.com/lightmvc/ascmvc
+ * @version    2.0.0
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
+ * @since      1.0.0
  */
 
 namespace Ascmvc\Mvc;
 
-use Ascmvc\AbstractApp;
 use Ascmvc\AbstractController;
+use Ascmvc\AscmvcEventManagerListenerInterface;
 
-
-class Controller extends AbstractController {
-
-    public function __construct(AbstractApp &$app)
+/**
+ * Class Controller
+ *
+ * The Controller class extends the AbstractController and
+ * implements the AscmvcEventManagerListenerInterface.
+ *
+ */
+class Controller extends AbstractController implements AscmvcEventManagerListenerInterface
+{
+    /**
+     * Controller constructor.
+     *
+     * @param array $baseConfig
+     */
+    public function __construct(array $baseConfig)
     {
-        $this->app = $app;
-        
-        $this->app->setController($this);
-        
-        $this->serviceManager = $this->app->getServiceManager();
-        
-        $this->viewObject = $this->app->getViewObject();
-        
-        $this->config($this->app);
-        
-        $this->baseConfig = $this->app->getBaseConfig();
-        
+        $this->baseConfig = $baseConfig;
+
         $this->view = $this->baseConfig['view'];
     }
-    
-    public static function config(AbstractApp &$app)
+
+    // @codeCoverageIgnoreStart
+    /**
+     * OnBootstrap listener method.
+     *
+     * @param AscmvcEvent $event
+     *
+     * @return mixed|void
+     */
+    public static function onBootstrap(AscmvcEvent $event)
     {
-    
-    }
-    
-    public static function preboot(AbstractApp &$app)
-    {
-        
-    }
-    
-    public static function postboot(AbstractApp &$app)
-    {
-        
-    }
-    
-    public function predispatch()
-    {
-        
-    }
-    
-    public function postdispatch()
-    {
-        
-    }
-    
-    public function preresponse()
-    {
-        
     }
 
-    public function indexAction()
+    /**
+     * OnDispatch listener method.
+     *
+     * @param AscmvcEvent $event
+     *
+     * @return mixed|void
+     */
+    public function onDispatch(AscmvcEvent $event)
     {
-        
     }
 
+    /**
+     * OnRender listener method.
+     *
+     * @param AscmvcEvent $event
+     *
+     * @return mixed|void
+     */
+    public function onRender(AscmvcEvent $event)
+    {
+    }
+
+    /**
+     * OnFinish listener method.
+     *
+     * @param AscmvcEvent $event
+     *
+     * @return mixed|void
+     */
+    public function onFinish(AscmvcEvent $event)
+    {
+    }
+
+    /**
+     * The controller's default action.
+     *
+     * @param null $vars
+     *
+     * @return mixed|void
+     */
+    public function indexAction($vars = null)
+    {
+    }
+    // @codeCoverageIgnoreEnd
 }

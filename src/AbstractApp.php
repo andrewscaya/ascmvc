@@ -1,16 +1,24 @@
 <?php
 /**
- * ASC LightMVC
+ * LightMVC/ASCMVC
  *
- * @package    ASC LightMVC
+ * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
- * @link       https://github.com/andrewscaya
- * @version    1.0.0
- * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
+ * @link       https://github.com/lightmvc/ascmvc
+ * @version    2.0.0
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
+ * @since      1.0.0
  */
 
 namespace Ascmvc;
 
+use Ascmvc\Mvc\AscmvcEvent;
+use Ascmvc\Mvc\AscmvcEventManager;
+use Pimple\Container;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Request;
+use Zend\Diactoros\Response;
 
 /**
  * The abstract AbstractApp class is the blueprint for the MVC's main engine.
@@ -18,71 +26,94 @@ namespace Ascmvc;
  * The abstract AbstractApp class is the one that needs to be extended
  * in order to create a LightMVC AbstractApp.
  */
-abstract class AbstractApp {
-    
+abstract class AbstractApp
+{
+
     /**
      * Contains the Singleton instance of this class.
      *
      * @var AbstractApp|null
      */
     protected static $appInstance;
-    
+
     /**
      * Array contains all of the AbstractApp's basic configurations.
      *
      * @var array|null
      */
     protected $baseConfig;
-    
+
     /**
      * Contains a reference to a Request instance.
      *
-     * @var AbstractRequest|null
+     * @var Request|null
      */
     protected $request;
-    
+
     /**
-     * Contains a reference to a ServiceManager instance.
+     * Contains a reference to a Response instance.
      *
-     * @var AbstractServiceManager|null
+     * @var Request|null
+     */
+    protected $response;
+
+    /**
+     * Contains a reference to a Pimple\Container instance.
+     *
+     * @var \Pimple\Container|null
      */
     protected $serviceManager;
-    
+
     /**
-     * Contains a reference to a Smarty instance.
+     * Contains a reference to the EventManager instance.
      *
-     * @var AbstractViewObject|null
+     * @var AscmvcEventManager|null
+     */
+    protected $eventManager;
+
+    /**
+     * Contains a reference to the AscmvcEvent instance.
+     *
+     * @var AscmvcEvent|null
+     */
+    protected $event;
+
+    /**
+     * Contains a reference to a Template Manager instance.
+     *
+     * @var Object|null
      */
     protected $viewObject;
-    
+
     /**
-     * Contains a reference to a Router instance.
+     * Contains a reference to an AbstractRouter instance.
      *
      * @var AbstractRouter|null
      */
     protected $router;
-    
+
     /**
-     * Contains a reference to a Dispatcher instance.
+     * Contains a reference to a AbstractControllerManager instance.
      *
-     * @var AbstractDispatcher|null
+     * @var AbstractControllerManager|null
      */
-    protected $dispatcher;
-    
+    protected $controllerManager;
+
     /**
-     * Contains a reference to a polymorphic Controller instance.
+     * Contains a reference to a AbstractController instance.
      *
      * @var AbstractController|null
      */
     protected $controller;
-    
+
     /**
-     * Contains a string that signifies the AbstractApp's current runlevel.
+     * Contains the controller's output.
      *
-     * @var string|null
+     * @var Response|array|string|null
      */
-    protected $currentRunLevel;
-    
+    protected $controllerOutput;
+
+
     /**
      * Protected method : this class cannot be instantiated by the new keyword
      * because it is a Singleton.
@@ -92,7 +123,7 @@ abstract class AbstractApp {
      * @return void.
      */
     protected abstract function __construct();
-    
+
     /**
      * Protected method : this class cannot be copied because it is a Singleton.
      *
@@ -101,7 +132,7 @@ abstract class AbstractApp {
      * @return void.
      */
     protected abstract function __clone();
-    
+
     /**
      * Static method : returns the Singleton instance of this class.
      *
@@ -111,33 +142,72 @@ abstract class AbstractApp {
      */
     public static function getInstance()
     {
-        
     }
-    
+
     /**
-     * Initializes this class by assigning the objects and arrays
-     * received in the parameters to the corresponding properties
-     * and by configuring the Smarty Template Manager.  It will
-     * also initialize a Doctrine Database Manager if the connection
-     * parameters are given in the config/config.php file.
+     * Builds the baseConfig array from the various configuration files.
      *
-     * @param array &$baseConfig  Contains all of the AbstractApp's basic configurations
-     * @param AbstractServiceManager &$serviceManager | NULL
-     * @param AbstractViewObject &$viewObject
-     *
-     * @return array.
+     * @return array
      */
-    public abstract function initialize(Array &$baseConfig, AbstractServiceManager &$serviceManager = NULL, \Smarty &$viewObject = NULL);
-    
+    public abstract function boot();
+
     /**
-     * Get the application's base configuration.
+     * Initializes the application with the parameters that
+     * are given in the baseConfig array.
+     *
+     * @param array &$baseConfig
+     *
+     * @return AbstractApp
+     */
+    public abstract function initialize(array &$baseConfig);
+
+    /**
+     * Sends the final response to the output buffer.
+     *
+     * @param Response $response
+     *
+     * @return void
+     */
+    public abstract function display(Response $response);
+
+    /**
+     * Renders the response.
+     *
+     * @param Response|array|string $controllerOutput
+     *
+     * @return Response
+     */
+    public abstract function render($controllerOutput);
+
+    /**
+     * The application's main runtime method. It executes the Application's bootstrap events.
+     *
+     * @param void
+     *
+     * @return void
+     */
+    public abstract function run();
+
+    /**
+     * Gets the application's base configuration.
+     *
+     * @param void
      *
      * @return array
      */
     public abstract function getBaseConfig();
-    
+
     /**
-     * Modify the application's base configuration.
+     * Gets what is useful to the controllers from the application's base configuration.
+     *
+     * @param void
+     *
+     * @return array
+     */
+    public abstract function getBaseConfigForControllers();
+
+    /**
+     * Adds an element to the application's base configuration.
      *
      * @param string $name
      * @param array $array
@@ -145,55 +215,96 @@ abstract class AbstractApp {
      * @return AbstractApp
      */
     public abstract function appendBaseConfig($name, $array);
-    
+
     /**
-     * Get the AbstractRequest object.
+     * Gets the ServerRequestInterface object.
      *
-     * @return AbstractRequest
+     * @return ServerRequestInterface
      */
     public abstract function getRequest();
-    
+
     /**
-     * Get the AbstractServiceManager object.
+     * Sets the ServerRequestInterface object.
      *
-     * @return AbstractServiceManager
+     * @param ServerRequestInterface
+     *
+     * @return ServerRequestInterface
+     */
+    public abstract function setRequest(ServerRequestInterface $request);
+
+    /**
+     * Gets the Response object.
+     *
+     * @return ResponseInterface
+     */
+    public abstract function getResponse();
+
+    /**
+     * Sets the Response object.
+     *
+     * @param ResponseInterface
+     *
+     * @return ResponseInterface
+     */
+    public abstract function setResponse(ResponseInterface $response);
+
+    /**
+     * Gets the Pimple\Container object.
+     *
+     * @return \Pimple\Container
      */
     public abstract function getServiceManager();
 
     /**
-     * Set the AbstractServiceManager object.
+     * Sets the Pimple\Container object.
      *
-     * @param AbstractServiceManager
-     *
-     * @return AbstractApp
-     */
-    public abstract function setServiceManager(AbstractServiceManager &$serviceManager);
-
-    /**
-     * Get the AbstractViewObject object.
-     *
-     * @return AbstractViewObject
-     */
-    public abstract function getViewObject();
-
-    /**
-     * Set the AbstractViewObject object.
-     *
-     * @param AbstractViewObject
+     * @param \Pimple\Container
      *
      * @return AbstractApp
      */
-    public abstract function setViewObject(AbstractViewObject &$viewObject);
-    
+    public abstract function setServiceManager(Container &$serviceManager);
+
     /**
-     * Get the AbstractRouter object.
+     * Gets the AscmvcEventManager object.
+     *
+     * @return AscmvcEventManager
+     */
+    public abstract function getEventManager();
+
+    /**
+     * Sets the AscmvcEventManager object.
+     *
+     * @param AscmvcEventManager
+     *
+     * @return AbstractApp
+     */
+    public abstract function setEventManager(AscmvcEventManager &$eventManager);
+
+    /**
+     * Gets the AscmvcEvent object.
+     *
+     * @return AscmvcEvent
+     */
+    public abstract function getEvent();
+
+    /**
+     * Sets the AscmvcEvent object.
+     *
+     * @param AscmvcEvent
+     *
+     * @return AbstractApp
+     */
+    public abstract function setEvent(AscmvcEvent &$event);
+
+    /**
+     * Gets the AbstractRouter object.
      *
      * @return AbstractRouter
      */
     public abstract function getRouter();
 
     /**
-     * Set the AbstractRouter object.
+     * Sets the AbstractRouter object.
      *
      * @param AbstractRouter
      *
@@ -202,30 +313,30 @@ abstract class AbstractApp {
     public abstract function setRouter(AbstractRouter &$router);
 
     /**
-     * Get the AbstractDispatcher object.
+     * Gets the AbstractControllerManager object.
      *
-     * @return AbstractDispatcher
+     * @return AbstractControllerManager
      */
-    public abstract function getDispatcher();
+    public abstract function getControllerManager();
 
     /**
-     * Set the AbstractDispatcher object.
+     * Sets the AbstractControllerManager object.
      *
-     * @param AbstractDispatcher
+     * @param AbstractControllerManager
      *
      * @return AbstractApp
      */
-    public abstract function setDispatcher(AbstractDispatcher &$dispatcher);
+    public abstract function setControllerManager(AbstractControllerManager &$controllerManager);
 
     /**
-     * Get the AbstractController object.
+     * Gets the AbstractController object.
      *
-     * @return AbstractController
+     * @return AbstractController|null
      */
     public abstract function getController();
 
     /**
-     * Set the AbstractController object.
+     * Sets the AbstractController object.
      *
      * @param AbstractController
      *
@@ -234,28 +345,34 @@ abstract class AbstractApp {
     public abstract function setController(AbstractController &$controller);
 
     /**
-     * Get the application's current runlevel.
+     * Gets the Controller's output.
      *
-     * @return string
+     * @return Response|array|string|null
      */
-    public abstract function getCurrentRunLevel();
-    
+    public abstract function getControllerOutput();
+
     /**
-     * Set the application's current runlevel.
+     * Sets the Controller's output.
      *
-     * @param string $currentRunLevel
+     * @param array $controllerOutput
      *
      * @return AbstractApp
      */
-    public abstract function setCurrentRunLevel($currentRunLevel);
-    
+    public abstract function setControllerOutput($controllerOutput);
+
     /**
-     * Executes the Application's bootstrap events.
+     * Gets the Template Manager object.
      *
-     * @param void.
-     *
-     * @return void.
+     * @return \League\Plates\Engine|\Smarty|\Twig_Environment
      */
-    public abstract function run();
-    
+    public abstract function getViewObject();
+
+    /**
+     * Sets the Template Manager object.
+     *
+     * @param \League\Plates\Engine|\Smarty|\Twig_Environment
+     *
+     * @return AbstractApp
+     */
+    public abstract function setViewObject(&$viewObject);
 }

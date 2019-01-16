@@ -1,16 +1,16 @@
 <?php
 /**
- * ASC LightMVC
+ * LightMVC/ASCMVC
  *
- * @package    ASC LightMVC
+ * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
- * @link       https://github.com/andrewscaya
- * @version    1.0.0
- * @license    http://opensource.org/licenses/GPL-2.0 GNU General Public License, version 2 (GPL-2.0)
+ * @link       https://github.com/lightmvc/ascmvc
+ * @version    2.0.0
+ * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
+ * @since      1.0.0
  */
 
 namespace Ascmvc;
-
 
 /**
  * The abstract AbstractController class is the blueprint for the MVC's controllers.
@@ -18,80 +18,48 @@ namespace Ascmvc;
  * *Description* The AbstractController class is the one that needs to be extended
  * in order to create a LightMVC controller.
  */
-abstract class AbstractController implements ServiceManagerListenerInterface {
-    
+abstract class AbstractController
+{
+
     /**
-     * Contains a reference to the Singleton instance of the App class.
+     * Contains a reference to the array containing some of the app's basic configurations
+     * useful to controllers.
      *
-     * @var AbstractApp|null
-     */
-    protected $app;
-    
-    /**
-     * Contains a reference to the array containing all of the app's basic configurations.
-     *
-     * @var Array|null
+     * @var array|null
      */
     protected $baseConfig;
-    
+
     /**
-     * Contains a reference to a Smarty instance.
-     *
-     * @var AbstractViewObject|null
-     */
-    protected $viewObject;
-    
-    /**
-     * Array contains all of the values that will be assigned to the controller's view manager.
+     * Array contains all of the values that will be assigned to the View manager's template.
      *
      * @var array|null
      */
     protected $view;
-    
-    /**
-     * Contains a reference to a ServiceManager instance.
-     *
-     * @var AbstractServiceManager|null
-     */
-    protected $serviceManager;
-    
+
     /**
      * Array contains the controller's helper objects.
      *
      * @var array|null
      */
     protected $helpers;
-    
-    /**
-     * Initializes this class by assigning the objects and arrays
-     * contained in the referenced App object to the corresponding
-     * properties.
-     *
-     * @param AbstractApp &$app
-     * 
-     * @return void.
-     */
-    public abstract function __construct(AbstractApp &$app);
 
     /**
-     * Configure the application.
+     * Initializes this class by assigning the objects and arrays
+     * contained in the referenced application object to the corresponding
+     * properties.
      *
-     * @param AbstractApp &$app
+     * @param array $baseConfig
      *
-     * @return mixed.
+     * @return void
      */
-    public static function config(AbstractApp &$app)
-    {
-    
-    }
-    
+    public abstract function __construct(array $baseConfig);
+
     /**
      * Method corresponding to the controller's default action.
      *
-     * @param void.
+     * @param null $vars
      *
-     * @return mixed.
+     * @return mixed|void
      */
-    public abstract function indexAction();
-
+    public abstract function indexAction($vars = null);
 }
