@@ -76,8 +76,9 @@ class ControllerManager extends AbstractControllerManager
             if ($this->controllerReflection->implementsInterface(AscmvcControllerFactoryInterface::class)
                 && $this->controllerReflection->hasMethod('factory')
             ) {
-                $controllerName::factory($baseConfig, $viewObject, $serviceManager, $eventManager);
-                $this->controller = isset($serviceManager[$controllerName]) ? $serviceManager[$controllerName] : null;
+                $controller = $controllerName::factory($baseConfig, $viewObject, $serviceManager, $eventManager);
+                $this->controller = $controller instanceof Controller ? $controller : null;
+                $this->controller = !isset($this->controller) && isset($serviceManager[$controllerName]) ? $serviceManager[$controllerName] : null;
             }
         } catch (\ReflectionException $e) {
             $this->controllerReflection = null;
