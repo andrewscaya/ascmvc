@@ -87,7 +87,7 @@ class AscmvcEventManager extends EventManager
                 $filePath = $fileInfo->getPathName();
                 require_once $filePath;
 
-                $filePathArray = explode('/', $filePath);
+                $filePathArray = explode(DIRECTORY_SEPARATOR, $filePath);
                 $fileName = array_pop($filePathArray);
                 array_pop($filePathArray);
                 $domainName = array_pop($filePathArray);
