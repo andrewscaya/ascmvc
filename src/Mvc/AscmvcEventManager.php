@@ -16,6 +16,8 @@ use Zend\Diactoros\Response;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\SharedEventManagerInterface;
 
+use function Ascmvc\getNamespaceFromPath;
+
 /**
  * Class AscmvcEventManager
  *
@@ -87,11 +89,9 @@ class AscmvcEventManager extends EventManager
                 $filePath = $fileInfo->getPathName();
                 require_once $filePath;
 
-                $filePathArray = explode('/', $filePath);
-                $fileName = array_pop($filePathArray);
-                array_pop($filePathArray);
-                $domainName = array_pop($filePathArray);
-                $controllerName = $domainName. '\\Controllers\\' . substr($fileName, 0, strlen($fileName) - 4);
+                $filePathArray = getNamespaceFromPath($filePath);
+
+                $controllerName = $filePathArray['domainName'] . '\\Controllers\\' . substr($filePathArray['fileName'], 0, strlen($filePathArray['fileName']) - 4);
 
                 $response = $controllerName::onBootstrap($event);
 
