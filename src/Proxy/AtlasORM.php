@@ -14,8 +14,20 @@ namespace Ascmvc\Proxy;
 
 use Atlas\Orm\Atlas;
 
+/**
+ * Class AtlasORM
+ *
+ * Proxy to class \Atlas\Orm\Atlas
+ */
 class AtlasORM extends Atlas
 {
+    /**
+     * Wrapper function to the Atlas::new(...$args) method.
+     *
+     * @param array ...$args
+     *
+     * @return Atlas
+     */
     public static function create(...$args) : Atlas
     {
         return parent::new($args);

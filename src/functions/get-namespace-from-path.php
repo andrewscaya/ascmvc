@@ -22,6 +22,11 @@ namespace Ascmvc;
  * // [...]
  * $namespaceArray = getNamespaceFromPath('/foo/bar/baz');
  * </code>
+ *
+ * @param string $path
+ * @param string $separator
+ *
+ * @return array
  */
 function getNamespaceFromPath(string $path, string $separator = DIRECTORY_SEPARATOR) : array
 {
