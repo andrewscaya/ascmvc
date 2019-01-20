@@ -3,7 +3,7 @@
  * LightMVC/ASCMVC
  *
  * Copyright 2010 - 2019 Foreach Code Factory <ascmvc@asclinux.net>
- * Version 2.0.0
+ * Version 2.0.1
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
