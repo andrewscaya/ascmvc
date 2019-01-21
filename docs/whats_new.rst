@@ -1,5 +1,16 @@
 .. _WhatsNewAnchor:
 
+What's new in version 2.0.1 (2019-01-20)
+========================================
+
+* Fixes an issue with the Bootstrap event on Windows.
+
+* Modifies the Controller Manager in order to receive an instance from a Controller Factory directly.
+
+* Updates the documentation.
+
+* Updates the API documentation.
+
 What's new in version 2.0.0 (2019-01-15)
 ========================================
 

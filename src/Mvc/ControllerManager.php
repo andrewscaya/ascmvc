@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.0.0
+ * @version    2.0.1
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -76,8 +76,9 @@ class ControllerManager extends AbstractControllerManager
             if ($this->controllerReflection->implementsInterface(AscmvcControllerFactoryInterface::class)
                 && $this->controllerReflection->hasMethod('factory')
             ) {
-                $controllerName::factory($baseConfig, $viewObject, $serviceManager, $eventManager);
-                $this->controller = isset($serviceManager[$controllerName]) ? $serviceManager[$controllerName] : null;
+                $controller = $controllerName::factory($baseConfig, $viewObject, $serviceManager, $eventManager);
+                $this->controller = $controller instanceof Controller ? $controller : null;
+                $this->controller = !isset($this->controller) && isset($serviceManager[$controllerName]) ? $serviceManager[$controllerName] : null;
             }
         } catch (\ReflectionException $e) {
             $this->controllerReflection = null;

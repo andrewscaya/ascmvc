@@ -44,6 +44,9 @@
         "linuxforphp/linuxforcomposer": "^1.0"
     },
     "autoload": {
+        "files": [
+            "src/functions/get-namespace-from-path.php"
+        ],
         "psr-4": {
             "Ascmvc\\": "src/"
         }
