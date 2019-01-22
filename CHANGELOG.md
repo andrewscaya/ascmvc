@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## 2.0.2 (2019-02-14)
+## 2.0.2 (2019-01-28)
 
+- Fixes an issue with the way the controller namespace was obtained from the file path.
 - Updates the documentation.
 
 ## 2.0.1 (2019-01-20)

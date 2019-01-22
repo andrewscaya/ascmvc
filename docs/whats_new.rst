@@ -1,5 +1,12 @@
 .. _WhatsNewAnchor:
 
+What's new in version 2.0.2 (2019-01-28)
+========================================
+
+* Fixes an issue with the way the controller namespace was obtained from the file path.
+
+* Updates the documentation.
+
 What's new in version 2.0.1 (2019-01-20)
 ========================================
 
