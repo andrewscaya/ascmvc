@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.2 (2019-02-14)
+
+- Updates the documentation.
+
 ## 2.0.1 (2019-01-20)
 
 - Fixes an issue with the Bootstrap event on Windows.
