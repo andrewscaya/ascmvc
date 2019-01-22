@@ -23,20 +23,20 @@ You can also use the **LightMVC Skeleton Application** by issuing these commands
 > The LightMVC Skeleton Application can also be downloaded as an archive file from https://lightmvc.net/download.
 
 The **LightMVC Framework Skeleton Application** can run on Swoole in order to make it lightning fast. In order
-to do so, you must make sure to install Swoole. From the CLI, type the following:
+to do so, you must make sure to install Swoole. From the CLI, as the root user, type the following:
 
     $ pecl install swoole
 
-After answering a few questions, Swoole will be compiled and installed. Then, run the following command (on Linux/Unix/Mac):
+After answering a few questions, Swoole will be compiled and installed. Then, as the root user, run the following command (on Linux/Unix/Mac):
 
     $ echo "extension=swoole.so" >> /etc/php.ini
 
-> If running Swoole on Windows, please add the extension manually in **PHP**'s php.ini file.
+> If running **Swoole** on **Windows**, please add the extension manually in **PHP**'s ``php.ini`` file. The ``php.ini`` file might be located elsewhere on your system. For example, on **Ubuntu** 18.04, when running **PHP** 7.2, you will find this file in ``/etc/php/7.2/apache2``. You can discover the location of this file by entering the command ``php --ini`` on the command line. It must also be mentioned that some systems have multiple INI files (CLI vs Web). Please modify all those that apply.
 
 Then, from within the root directory of the project, you can run the following command:
 
-    $ composer run-swoole
+    $ COMPOSER_PROCESS_TIMEOUT=0 composer run-swoole
 
 > By default, Swoole will listen on the ``localhost`` loopback, on port 9501. If you wish to change this, please modify the ``run-swoole`` command inside the ``composer.json`` file accordingly.
 
-Have a lot of fun! :)
+### Have a lot of fun! :)
