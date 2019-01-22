@@ -20,20 +20,21 @@ namespace Ascmvc;
  * <code>
  * use function Ascmvc\getNamespaceFromPath;
  * // [...]
- * $namespaceArray = getNamespaceFromPath('/foo/bar/baz');
+ * $namespaceName = getNamespaceFromPath('/foo/bar/baz');
  * </code>
  *
  * @param string $path
  * @param string $separator
  *
- * @return array
+ * @return string
  */
-function getNamespaceFromPath(string $path, string $separator = DIRECTORY_SEPARATOR) : array
+function getNamespaceFromPath(string $path, string $separator = DIRECTORY_SEPARATOR) : string
 {
     $pathArray = explode($separator, $path);
     $filePathArray['fileName'] = array_pop($pathArray);
     array_pop($pathArray);
     $filePathArray['domainName'] = array_pop($pathArray);
+    $namespaceName = ucfirst($filePathArray['domainName']) . '\\Controllers\\' . ucfirst(substr($filePathArray['fileName'], 0, strlen($filePathArray['fileName']) - 4));
 
-    return $filePathArray;
+    return $namespaceName;
 }

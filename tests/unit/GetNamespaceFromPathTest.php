@@ -27,25 +27,21 @@ class GetNamespaceFromPathTest extends TestCase
     {
         $path = '/this/is/an/absolute/unix/path.php';
 
-        $filePathArray = getNamespaceFromPath($path);
+        $namespaceName = getNamespaceFromPath($path);
 
-        $this->assertTrue(is_array($filePathArray));
+        $this->assertTrue(is_string($namespaceName));
 
-        $this->assertSame('absolute', $filePathArray['domainName']);
-
-        $this->assertSame('path.php', $filePathArray['fileName']);
+        $this->assertSame('Absolute\\Controllers\\Path', $namespaceName);
     }
 
     public function testGetNamespaceFromPathWithWindowsPath()
     {
         $path = 'C:\this\is\an\absolute\windows\path.php';
 
-        $filePathArray = getNamespaceFromPath($path, '\\');
+        $namespaceName = getNamespaceFromPath($path, '\\');
 
-        $this->assertTrue(is_array($filePathArray));
+        $this->assertTrue(is_string($namespaceName));
 
-        $this->assertSame('absolute', $filePathArray['domainName']);
-
-        $this->assertSame('path.php', $filePathArray['fileName']);
+        $this->assertSame('Absolute\\Controllers\\Path', $namespaceName);
     }
 }
