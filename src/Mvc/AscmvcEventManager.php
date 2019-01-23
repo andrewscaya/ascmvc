@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.0.1
+ * @version    2.0.2
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
@@ -87,11 +87,10 @@ class AscmvcEventManager extends EventManager
         foreach ($objects as $name => $fileInfo) {
             if ($fileInfo->isFile() && preg_match('/^[A-Za-z0-9_\-]+Controller(?=.php)/', $fileInfo->getFilename())) {
                 $filePath = $fileInfo->getPathName();
+
                 require_once $filePath;
 
-                $filePathArray = getNamespaceFromPath($filePath);
-
-                $controllerName = $filePathArray['domainName'] . '\\Controllers\\' . substr($filePathArray['fileName'], 0, strlen($filePathArray['fileName']) - 4);
+                $controllerName = getNamespaceFromPath($filePath);
 
                 $response = $controllerName::onBootstrap($event);
 

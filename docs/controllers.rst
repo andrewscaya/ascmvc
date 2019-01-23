@@ -68,14 +68,17 @@ For more information on the event manager and the main MVC events, please see th
 
 .. index:: Controller factory interface
 
+.. index:: Controller Manager
+
 .. _controller factories:
 
 Controller Factories
 --------------------
 
 Any controller can implement the ``Ascmvc\AscmvcControllerFactoryInterface`` interface and become a
-factory that will store a factory of itself in the service manager (**Pimple** container) and/or return an instance
-of itself to the controller manager, after completing some specific logic.
+factory that will store a factory of itself in the service manager (**Pimple** container) and/or return
+an instance of itself to the controller manager, after completing some specific logic.
+
 This is useful if you need to set up some specific service or resource before injecting it into an instance
 of the controller.
 

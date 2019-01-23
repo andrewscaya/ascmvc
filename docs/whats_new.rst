@@ -1,5 +1,14 @@
 .. _WhatsNewAnchor:
 
+What's new in version 2.0.2 (2019-01-23)
+========================================
+
+* Fixes an issue when running in Swoole mode behind an NGINX HTTPS proxy server.
+
+* Fixes an issue with the way the controller namespace was obtained from the file path.
+
+* Updates the documentation.
+
 What's new in version 2.0.1 (2019-01-20)
 ========================================
 
