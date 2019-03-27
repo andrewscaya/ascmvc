@@ -82,7 +82,13 @@ class FastRouter extends AbstractRouter
                     'server' => $this->requestURI,
                 ];
                 // ... call $handler with $vars
-                $this->controllerManager = new ControllerManager($this->app, $controller, $vars);
+                try {
+                    $this->controllerManager = new ControllerManager($this->app, $controller, $vars);
+                } catch (\Exception $e) {
+                    // ... 404 Not Found
+                    $this->controllerManager = new ControllerManager($this->app, 'c404');
+                }
+
                 break;
         }
 
