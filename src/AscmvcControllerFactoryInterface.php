@@ -12,6 +12,7 @@
 
 namespace Ascmvc;
 
+use Ascmvc\EventSourcing\EventProcessor;
 use Pimple\Container;
 use Ascmvc\Mvc\AscmvcEventManager;
 
@@ -32,5 +33,5 @@ interface AscmvcControllerFactoryInterface
      * @param AscmvcEventManager &$eventManager
      *
      */
-    public static function factory(array &$baseConfig, &$viewObject, Container &$serviceManager, AscmvcEventManager &$eventManager);
+    public static function factory(array &$baseConfig, EventProcessor &$eventProcessor, Container &$serviceManager, &$viewObject);
 }

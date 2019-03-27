@@ -13,6 +13,7 @@
 namespace AscmvcTest;
 
 use Application\Controllers\FakeController;
+use Ascmvc\EventSourcing\EventProcessor;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -31,7 +32,9 @@ class ControllerTest extends TestCase
             'description' => 'Small CRUD application',
         ];
 
-        $controller = new FakeController($baseConfig);
+        $eventProcessor = new EventProcessor();
+
+        $controller = new FakeController($baseConfig, $eventProcessor);
 
         $controllerReflection = new \ReflectionClass($controller);
 

@@ -14,6 +14,7 @@
 namespace AscmvcTest;
 
 use \Application\Controllers\FakeController;
+use Ascmvc\EventSourcing\EventProcessor;
 use Ascmvc\Mvc\App;
 use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\AscmvcEventManagerFactory;
@@ -134,7 +135,9 @@ class AscmvcEventManagerTest extends TestCase
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 
-        $controller = new FakeController($baseConfig);
+        $eventProcessor = new EventProcessor();
+
+        $controller = new FakeController($baseConfig, $eventProcessor);
         $app->setController($controller);
         $ascmvcEvent->setApplication($app);
 
@@ -192,7 +195,9 @@ class AscmvcEventManagerTest extends TestCase
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 
-        $controller = new FakeController($baseConfig);
+        $eventProcessor = new EventProcessor();
+
+        $controller = new FakeController($baseConfig, $eventProcessor);
         $app->setController($controller);
         $ascmvcEvent->setApplication($app);
 
@@ -253,7 +258,9 @@ class AscmvcEventManagerTest extends TestCase
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 
-        $controller = new FakeController($baseConfig);
+        $eventProcessor = new EventProcessor();
+
+        $controller = new FakeController($baseConfig, $eventProcessor);
         $app->setController($controller);
         $app->setRequest($requestMock);
         $ascmvcEvent->setApplication($app);
