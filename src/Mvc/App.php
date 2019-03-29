@@ -17,6 +17,7 @@ use Ascmvc\AbstractController;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\AbstractRouter;
 use Ascmvc\Middleware\MiddlewareFactory;
+use Ascmvc\Session\SessionManager;
 use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -426,6 +427,25 @@ class App extends AbstractApp
         $this->response = $response;
 
         return $this->response;
+    }
+
+    /**
+     * @return SessionManager|null
+     */
+    public function getSessionManager(): ?SessionManager
+    {
+        return $this->sessionManager;
+    }
+
+    /**
+     * @param SessionManager|null $session
+     * @return SessionManager|null
+     */
+    public function setSessionManager(?SessionManager $sessionManager): ?SessionManager
+    {
+        $this->sessionManager = $sessionManager;
+
+        return $this->sessionManager;
     }
 
     /**

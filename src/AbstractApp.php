@@ -14,6 +14,7 @@ namespace Ascmvc;
 
 use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\AscmvcEventManager;
+use Ascmvc\Session\SessionManager;
 use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -56,6 +57,13 @@ abstract class AbstractApp
      * @var Request|null
      */
     protected $response;
+
+    /**
+     * Contains a reference to the SessionManager instance.
+     *
+     * @var SessionManager|null
+     */
+    protected $sessionManager;
 
     /**
      * Contains a reference to a Pimple\Container instance.
@@ -248,6 +256,17 @@ abstract class AbstractApp
      */
     public abstract function setResponse(ResponseInterface $response);
 
+    /**
+     * @return SessionManager|null
+     */
+    public abstract function getSessionManager(): ?SessionManager;
+
+    /**
+     * @param SessionManager|null $session
+     * @return SessionManager
+     */
+    public abstract function setSessionManager(?SessionManager $sessionManager): ?SessionManager;
+    
     /**
      * Gets the Pimple\Container object.
      *
