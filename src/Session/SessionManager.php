@@ -100,6 +100,24 @@ class SessionManager
     }
 
     /**
+     * Gets the singleton Swoole Session interface.
+     *
+     * @param \swoole_http_request|null $request
+     * @param \swoole_http_response|null $response
+     * @param Config|null $config
+     * @return SessionManager|null
+     * @throws \Exception
+     */
+    public static function getSwooleSessionInterface(\swoole_http_request $request = null, \swoole_http_response $response = null, Config $config = null)
+    {
+        if(!self::$session_swoole_interface) {
+            self::$session_swoole_interface = new static($request, $response, $config);
+        }
+
+        return self::$session_swoole_interface;
+    }
+
+    /**
      * Starts the session.
      *
      * @return $this
@@ -125,6 +143,14 @@ class SessionManager
     }
 
     /**
+     * Persists the session data in the storage.
+     */
+    public function persist()
+    {
+        $this->session = null;
+    }
+
+    /**
      * Gets the SessionManager interface.
      *
      * @return SessionManager|null
@@ -132,10 +158,10 @@ class SessionManager
      */
     public static function getSessionManager()
     {
-
         if(!self::$sessionManager){
             self::$sessionManager = new static();
         }
+
         return self::$sessionManager;
     }
 
@@ -158,6 +184,7 @@ class SessionManager
     public function setConfig(Config $config)
     {
         $this->config = $config;
+
         return $this;
     }
 
@@ -199,24 +226,7 @@ class SessionManager
     public function setDriver(\Doctrine\Common\Cache\Cache $driver)
     {
         $this->driver = $driver;
+
         return $this;
-    }
-
-    /**
-     * Gets the Swoole Session interface.
-     *
-     * @param \swoole_http_request|null $request
-     * @param \swoole_http_response|null $response
-     * @param Config|null $config
-     * @return SessionManager|null
-     * @throws \Exception
-     */
-    public static function getSwooleSessionInterface(\swoole_http_request $request = null, \swoole_http_response $response = null, Config $config = null)
-    {
-        if(!self::$session_swoole_interface) {
-            self::$session_swoole_interface = new static($request, $response, $config);
-        }
-
-        return self::$session_swoole_interface;
     }
 }

@@ -83,25 +83,31 @@ class Session
         $config = $this->sessionManager->getConfig();
         $http = $this->sessionManager->getHttp();
 
+        // TODO : Add extra security check for session/cookie tampering.
+
         if (strlen($http->getCookie($config->get('session_name'))) == $config->get('session_id_length')) {
             $this->setSessionId($http->getCookie($config->get('session_name')));
 
             return $this->sessionId;
+        } else {
+            if ($config->get('session_id_type') == Config::TYPE_STR) {
+                $this->setSessionId(Random::randStr($config->get('session_id_length')));
+            } elseif ($config->get('session_id_type') == Config::TYPE_NUMBER) {
+                $this->setSessionId(Random::randNumStr($config->get('session_id_length')));
+            }
+
+            try {
+                $http->setCookie(
+                    $config->get('session_name'),
+                    $this->sessionId,
+                    $config->get('session_expire') + time()
+                );
+            } catch (\Exception $e) {
+                $e->getMessage();
+            }
+
+            return $this->sessionId;
         }
-
-        if ($config->get('session_id_type') == Config::TYPE_STR) {
-            $this->setSessionId(Random::randStr($config->get('session_id_length')));
-        } elseif ($config->get('session_id_type') == Config::TYPE_NUMBER) {
-            $this->setSessionId(Random::randNumStr($config->get('session_id_length')));
-        }
-
-        $http->setCookie(
-            $config->get('session_name'),
-            $this->sessionId,
-            $config->get('session_expire') + time()
-        );
-
-        return $this->sessionId;
     }
 
     /**
@@ -109,9 +115,10 @@ class Session
      *
      * @param $sessionId
      */
-    public function setSessionId(string $sessionId)
+    public function setSessionId($sessionId)
     {
         $this->sessionId = $sessionId;
+
         $this->readData();
     }
 
@@ -167,7 +174,7 @@ class Session
      *
      * @return bool
      */
-    public function saveData()
+    protected function saveData()
     {
         return $this->storage->write($this->sessionId, $this->data);
     }
