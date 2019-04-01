@@ -87,7 +87,7 @@ class Swoole
     {
         $path = explode('.', $name);
 
-        $value = $_COOKIE; // problem with $this->request->cookie on multiple sessions on same worker
+        $value = $this->request->cookie;
 
         foreach ($path as $item){
             if($item == ''){

@@ -158,6 +158,7 @@ class Session
     public function set(string $name, $value)
     {
         $this->data[$name] = $value;
+
         return $this;
     }
 

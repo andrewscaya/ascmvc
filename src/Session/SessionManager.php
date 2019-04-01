@@ -24,6 +24,13 @@ namespace Ascmvc\Session;
 class SessionManager
 {
     /**
+     * Contains the SessionManager instance.
+     *
+     * @var SessionManager
+     */
+    protected static $sessionManager;
+
+    /**
      * Contains the session Config object.
      * 
      * @var Config|null 
@@ -52,20 +59,6 @@ class SessionManager
     protected $driver = null;
 
     /**
-     * Swoole Session interface
-     *
-     * @var null
-     */
-    protected static $session_swoole_interface = null;
-
-    /**
-     * Contains the SessionManager instance.
-     *
-     * @var null
-     */
-    protected static $sessionManager = null;
-
-    /**
      * Contains the Swoole Request object.
      *
      * @var \swoole_http_request
@@ -86,35 +79,40 @@ class SessionManager
      * @param \swoole_http_response|null $response
      * @param Config|null $config
      */
-    protected function __construct(\swoole_http_request $request = null, \swoole_http_response $response = null, Config $config = null)
+    protected function __construct(\swoole_http_request $request, \swoole_http_response $response, Config $config = null)
     {
+        $this->request = $request;
+
+        $this->response = $response;
+
         if (isset($config)) {
             $this->config = $config;
         } else {
             $this->config = new Config();
         }
-
-        $this->request = $request;
-
-        $this->response = $response;
     }
 
     /**
-     * Gets the singleton Swoole Session interface.
+     * Gets the singleton SessionManager.
      *
      * @param \swoole_http_request|null $request
      * @param \swoole_http_response|null $response
      * @param Config|null $config
-     * @return SessionManager|null
-     * @throws \Exception
+     * @param bool $reset
+     * @return SessionManager|null|static
      */
-    public static function getSwooleSessionInterface(\swoole_http_request $request = null, \swoole_http_response $response = null, Config $config = null)
+    public static function getSessionManager(
+        \swoole_http_request $request,
+        \swoole_http_response $response,
+        Config $config = null,
+        bool $reset = false
+    )
     {
-        if(!self::$session_swoole_interface) {
-            self::$session_swoole_interface = new static($request, $response, $config);
+        if(!self::$sessionManager || $reset === true) {
+            self::$sessionManager = new static($request, $response, $config);
         }
 
-        return self::$session_swoole_interface;
+        return self::$sessionManager;
     }
 
     /**
@@ -148,21 +146,6 @@ class SessionManager
     public function persist()
     {
         $this->session = null;
-    }
-
-    /**
-     * Gets the SessionManager interface.
-     *
-     * @return SessionManager|null
-     * @throws \Exception
-     */
-    public static function getSessionManager()
-    {
-        if(!self::$sessionManager){
-            self::$sessionManager = new static();
-        }
-
-        return self::$sessionManager;
     }
 
     /**
