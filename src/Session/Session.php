@@ -16,6 +16,8 @@
 
 namespace Ascmvc\Session;
 
+use Psr\Cache\CacheItemPoolInterface;
+
 /**
  * Class Session
  *
@@ -31,18 +33,25 @@ class Session
     protected $sessionManager;
 
     /**
+     * Contains the session Config object.
+     *
+     * @var Config
+     */
+    protected $config;
+
+    /**
+     * Contains the session Http object.
+     *
+     * @var Http|null
+     */
+    protected $http = null;
+
+    /**
      * Contains the session id string.
      *
      * @var string|null
      */
     protected $sessionId = null;
-
-    /**
-     * Contains a Storage instance.
-     *
-     * @var Storage|null
-     */
-    protected $storage = null;
 
     /**
      * Contains the session's data.
@@ -52,15 +61,33 @@ class Session
     protected $data = [];
 
     /**
+     * Contains a PSR-6 CacheItemPoolInterface instance.
+     *
+     * @var CacheItemPoolInterface|null
+     */
+    protected $sessionCachePool = null;
+
+    /**
+     * Contains the session's cache item.
+     *
+     * @var CacheItemInterface|null
+     */
+    protected $sessionCacheItem = null;
+
+    /**
      * Session constructor.
      *
      * @param SessionManager $manager
      */
-    public function __construct(SessionManager $sessionManager)
+    public function __construct(SessionManager $sessionManager, CacheItemPoolInterface $sessionCachePool)
     {
         $this->sessionManager = $sessionManager;
 
-        $this->storage = new Storage($this->sessionManager->getDriver(), $this->sessionManager->getConfig());
+        $this->sessionCachePool = $sessionCachePool;
+
+        $this->config = $this->sessionManager->getConfig();
+
+        $this->http = $this->sessionManager->getHttp();
 
         $this->getSessionId();
     }
@@ -80,8 +107,8 @@ class Session
      */
     public function getSessionId()
     {
-        $config = $this->sessionManager->getConfig();
-        $http = $this->sessionManager->getHttp();
+        $config = $this->config;
+        $http = $this->http;
 
         // TODO : Add extra security check for session/cookie tampering.
 
@@ -131,7 +158,7 @@ class Session
     public function get(string $name = null)
     {
         if ($name === null) {
-            return $this -> data;
+            return $this->data;
         }
 
         $path = explode('.', $name);
@@ -167,7 +194,11 @@ class Session
      */
     protected function readData()
     {
-        $this->data = unserialize($this->storage->read($this->sessionId));
+        $this->sessionCacheItem = $this->sessionCachePool->getItem($this->config->get('session_storage_prefix') . $this->sessionId);
+
+        $this->data = $this->sessionCacheItem->getUnserialized();
+
+        return true;
     }
 
     /**
@@ -177,6 +208,10 @@ class Session
      */
     protected function saveData()
     {
-        return $this->storage->write($this->sessionId, $this->data);
+        $this->sessionCacheItem->setSerialized($this->data);
+
+        $this->sessionCacheItem->expiresAfter($this->config->get('session_expire'));
+
+        return $this->sessionCachePool->save($this->sessionCacheItem);
     }
 }

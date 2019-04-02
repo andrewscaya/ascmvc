@@ -135,7 +135,15 @@ class SessionManager
             $this->http = (new Http($this->config));
         }
 
-        $this->session = new Session($this);
+        $sessionCachePoolName = $this->config->get('psr6_cache');
+
+        $doctrineCacheDriverName = $this->config->get('doctrine_cache_driver') ?? null;
+
+        $doctrineCacheParams = $this->config->get('doctrine_cache_params') ?? null;
+
+        $sessionCachePool = new $sessionCachePoolName($doctrineCacheDriverName, $doctrineCacheParams);
+
+        $this->session = new Session($this, $sessionCachePool);
 
         return $this;
     }
