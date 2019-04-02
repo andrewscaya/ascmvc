@@ -10,9 +10,15 @@
  * @since      2.1.0
  */
 
-namespace Ascmvc\Cache;
+namespace Ascmvc\Session\Cache;
 
+use Ascmvc\Session\Config;
 use Doctrine\Common\Cache\Cache;
+use Doctrine\Common\Cache\FilesystemCache;
+use Doctrine\Common\Cache\MemcacheCache;
+use Doctrine\Common\Cache\MemcachedCache;
+use Doctrine\Common\Cache\RedisCache;
+use Doctrine\Common\Cache\XcacheCache;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -32,9 +38,49 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      */
     protected $deferred = [];
 
-    public function __construct($driver, $params)
+    public function __construct(Config $config)
     {
-        $this->driver = new $driver($params);
+        $driverName = $config->get('doctrine_cache_driver');
+
+        if ($driverName === FilesystemCache::class) {
+            $cacheDirectory = $config->get('doctrine_filesystem_cache_directory');
+
+            $this->driver = new $driverName($cacheDirectory);
+        } elseif ($driverName === XcacheCache::class) {
+            $this->driver = new $driverName();
+        } else {
+            $host = $config->get('doctrine_cache_server_params')['host'];
+
+            $port = $config->get('doctrine_cache_server_params')['port'];
+
+            if ($driverName === RedisCache::class) {
+                $redis = new \Redis();
+
+                $redis->connect($host, $port);
+
+                $this->driver = new $driverName();
+
+                $this->driver->setRedis($redis);
+            } elseif ($driverName === MemcachedCache::class) {
+                $memcached = new \Memcached();
+
+                $memcached->addServer($host, $port);
+
+                $this->driver = new $driverName();
+
+                $this->driver->setMemcached($memcached);
+            } elseif ($driverName === MemcacheCache::class) {
+                $memcache = new \Memcache();
+
+                $memcache->connect($host, $port);
+
+                $this->driver = new $driverName();
+
+                $this->driver->setMemcache($memcache);
+            }
+        }
+
+        return;
     }
 
     /**

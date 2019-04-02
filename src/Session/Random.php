@@ -21,7 +21,6 @@ class Random
     static function randStr($length)
     {
         return substr(bin2hex(random_bytes($length)), 0, $length);
-        //return substr(str_shuffle("abcdefghijkmnpqrstuvwxyzABCDEFGHIJKMNPQRSTUVWXYZ23456789"), 0, $length);
     }
 
     static function randNumStr($length)
@@ -34,7 +33,6 @@ class Random
 
         while (strlen($password) <= $length) {
             $password .= (string) random_int(0, 9);
-            //$password .= $chars[rand(0, 9)];
         }
 
         return $password;

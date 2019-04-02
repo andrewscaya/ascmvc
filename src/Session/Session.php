@@ -194,9 +194,14 @@ class Session
      */
     protected function readData()
     {
-        $this->sessionCacheItem = $this->sessionCachePool->getItem($this->config->get('session_storage_prefix') . $this->sessionId);
+        $this->sessionCacheItem = $this->sessionCachePool->getItem(
+            $this->config->get('session_storage_prefix')
+            . $this->sessionId
+        );
 
-        $this->data = $this->sessionCacheItem->getUnserialized();
+        if($this->sessionCacheItem->isHit()) {
+            $this->data = unserialize($this->sessionCacheItem->get());
+        }
 
         return true;
     }
@@ -208,7 +213,9 @@ class Session
      */
     protected function saveData()
     {
-        $this->sessionCacheItem->setSerialized($this->data);
+        $data = serialize($this->data);
+
+        $this->sessionCacheItem->set($data);
 
         $this->sessionCacheItem->expiresAfter($this->config->get('session_expire'));
 

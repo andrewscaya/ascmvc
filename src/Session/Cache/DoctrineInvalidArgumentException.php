@@ -10,7 +10,7 @@
  * @since      2.1.0
  */
 
-namespace Ascmvc\Cache;
+namespace Ascmvc\Session\Cache;
 
 use Psr\Cache\InvalidArgumentException;
 

@@ -31,11 +31,32 @@ class SessionManager
     protected static $sessionManager;
 
     /**
+     * Contains the Swoole Request object.
+     *
+     * @var \swoole_http_request|null
+     */
+    protected $request;
+
+    /**
+     * Contains the Swoole Response object.
+     *
+     * @var \swoole_http_response|null
+     */
+    protected $response;
+
+    /**
      * Contains the session Config object.
      * 
      * @var Config|null 
      */
     protected $config = null;
+
+    /**
+     * Contains the session flag.
+     *
+     * @var bool
+     */
+    protected $enabled = false;
 
     /**
      * Contains the session Http object.
@@ -50,27 +71,6 @@ class SessionManager
      * @var Session|null 
      */
     protected $session = null;
-    
-    /**
-     * Contains an instance of the Cache Driver object.
-     *
-     * @var \Doctrine\Common\Cache\Cache|null
-     */
-    protected $driver = null;
-
-    /**
-     * Contains the Swoole Request object.
-     *
-     * @var \swoole_http_request
-     */
-    protected $request;
-
-    /**
-     * Contains the Swoole Response object.
-     *
-     * @var \swoole_http_response
-     */
-    protected $response;
 
     /**
      * SessionManager constructor.
@@ -79,7 +79,7 @@ class SessionManager
      * @param \swoole_http_response|null $response
      * @param Config|null $config
      */
-    protected function __construct(\swoole_http_request $request, \swoole_http_response $response, Config $config = null)
+    protected function __construct($request = null, $response = null, Config $config = null)
     {
         $this->request = $request;
 
@@ -87,6 +87,8 @@ class SessionManager
 
         if (isset($config)) {
             $this->config = $config;
+
+            $this->enabled = $this->config->get('enabled');
         } else {
             $this->config = new Config();
         }
@@ -102,8 +104,8 @@ class SessionManager
      * @return SessionManager|null|static
      */
     public static function getSessionManager(
-        \swoole_http_request $request,
-        \swoole_http_response $response,
+        $request = null,
+        $response = null,
         Config $config = null,
         bool $reset = false
     )
@@ -123,33 +125,33 @@ class SessionManager
      */
     public function start()
     {
-        if($this->request != null && $this->response != null) {
-            if($this->request instanceof \swoole_http_request
-                && $this->response instanceof \swoole_http_response
-            ) {
-                $this->http = (new Swoole($this->request, $this->response));
+        if ($this->isEnabled()) {
+            if($this->request != null && $this->response != null) {
+                if($this->request instanceof \swoole_http_request
+                    && $this->response instanceof \swoole_http_response
+                ) {
+                    $this->http = (new Swoole($this->request, $this->response));
+                } else {
+                    throw new \Exception('Request or Response invalid');
+                }
             } else {
-                throw new \Exception('Request or Response invalid');
+                $this->http = (new Http($this->config));
             }
+
+            $sessionCachePoolName = $this->config->get('psr6_cache_pool');
+
+            $sessionCachePool = new $sessionCachePoolName($this->config);
+
+            $this->session = new Session($this, $sessionCachePool);
+
+            return $this;
         } else {
-            $this->http = (new Http($this->config));
+            return false;
         }
-
-        $sessionCachePoolName = $this->config->get('psr6_cache');
-
-        $doctrineCacheDriverName = $this->config->get('doctrine_cache_driver') ?? null;
-
-        $doctrineCacheParams = $this->config->get('doctrine_cache_params') ?? null;
-
-        $sessionCachePool = new $sessionCachePoolName($doctrineCacheDriverName, $doctrineCacheParams);
-
-        $this->session = new Session($this, $sessionCachePool);
-
-        return $this;
     }
 
     /**
-     * Persists the session data in the storage.
+     * Persists the session data in the cache storage.
      */
     public function persist()
     {
@@ -180,6 +182,16 @@ class SessionManager
     }
 
     /**
+     * Checks the session flag.
+     *
+     * @return bool
+     */
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    /**
      * Gets the Http instance.
      *
      * @return Http|null
@@ -197,27 +209,5 @@ class SessionManager
     public function getSession()
     {
         return $this->session;
-    }
-
-    /**
-     * Gets the storage driver instance.
-     *
-     * @return mixed
-     */
-    public function getDriver()
-    {
-        return $this->driver;
-    }
-
-    /**
-     * Sets the storage driver instance.
-     * @param \Doctrine\Common\Cache\Cache $driver
-     * @return $this
-     */
-    public function setDriver(\Doctrine\Common\Cache\Cache $driver)
-    {
-        $this->driver = $driver;
-
-        return $this;
     }
 }

@@ -10,7 +10,7 @@
  * @since      2.1.0
  */
 
-namespace Ascmvc\Cache;
+namespace Ascmvc\Session\Cache;
 
 use Psr\Cache\CacheItemInterface;
 
@@ -93,16 +93,6 @@ class DoctrineCacheItem implements CacheItemInterface
     }
 
     /**
-     * Retrieves the unserialized value of the item from the cache associated with this object's key.
-     *
-     * @return mixed
-     */
-    public function getUnserialized()
-    {
-        return unserialize($this->data);
-    }
-
-    /**
      * Confirms if the cache item lookup resulted in a cache hit.
      *
      * Note: This method MUST NOT have a race condition between calling isHit()
@@ -133,26 +123,6 @@ class DoctrineCacheItem implements CacheItemInterface
         $this->data = null;
 
         $this->data = $value;
-
-        return $this;
-    }
-
-    /**
-     * Sets the serialized value represented by this cache item.
-     *
-     * The $value argument may be any item that can be serialized by PHP,
-     * although the method of serialization is left up to the Implementing
-     * Library.
-     *
-     * @param mixed $value
-     *   The serializable value to be stored.
-     *
-     * @return static
-     *   The invoked object.
-     */
-    public function setSerialized($value)
-    {
-        $this->data = serialize($value);
 
         return $this;
     }
