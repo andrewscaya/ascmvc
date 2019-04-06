@@ -135,7 +135,7 @@ class SessionManager
                     throw new \Exception('Request or Response invalid');
                 }
             } else {
-                $this->http = (new Http($this->config));
+                $this->http = (new Http());
             }
 
             $sessionCachePoolName = $this->config->get('psr6_cache_pool');

@@ -105,33 +105,54 @@ class Session
      *
      * @return string|null
      */
-    public function getSessionId()
+    protected function getSessionId()
     {
         $config = $this->config;
         $http = $this->http;
+        $cookie = $http->getCookie($config->get('session_name'));
+        $useragent = $http->getServerGlobalEnv()['user-agent'] ?? $_SERVER['HTTP_USER_AGENT'];
+        $useragent .= $config->get('session_name');
 
-        // TODO : Add extra security check for session/cookie tampering.
+        if (strlen($cookie) == $config->get('session_id_length')) {
+            $sessionId = $this->setSessionId($cookie);
+            $this->readData();
 
-        if (strlen($http->getCookie($config->get('session_name'))) == $config->get('session_id_length')) {
-            $this->setSessionId($http->getCookie($config->get('session_name')));
+            if (
+                !is_null($this->get('initiated'))
+                && !is_null($this->get('created'))
+                && !is_null($this->get('http_user_agent'))
+                && $this->get('http_user_agent') == hash('sha256', $useragent)
+                && !is_null($this->get('last_activity'))
+                && (time() - $this->get('last_activity') < $config->get('session_expire'))
+            ) {
+                if (time() - $this->get('created') > $config->get('session_expire')) {
+                    $http->setCookie(
+                        $config->get('session_name'),
+                        $this->sessionId,
+                        $config->get('session_expire') - 3600
+                    );
 
-            return $this->sessionId;
+                    // Session expiration.
+                    // Change session ID for the current session an invalidate old session ID.
+                    $this->sessionCacheItem = $this->sessionCachePool->deleteItem(
+                        $this->config->get('session_storage_prefix')
+                        . $this->sessionId
+                    );
+
+                    $this->createNewSession();
+                }
+
+                // Update last activity timestamp.
+                $this->set('last_activity', time());
+
+                return $this->sessionId;
+            } else {
+                $this->createNewSession();
+
+                return $this->sessionId;
+            }
         } else {
-            if ($config->get('session_id_type') == Config::TYPE_STR) {
-                $this->setSessionId(Random::randStr($config->get('session_id_length')));
-            } elseif ($config->get('session_id_type') == Config::TYPE_NUMBER) {
-                $this->setSessionId(Random::randNumStr($config->get('session_id_length')));
-            }
-
-            try {
-                $http->setCookie(
-                    $config->get('session_name'),
-                    $this->sessionId,
-                    $config->get('session_expire') + time()
-                );
-            } catch (\Exception $e) {
-                $e->getMessage();
-            }
+            $this->createNewSession();
 
             return $this->sessionId;
         }
@@ -142,11 +163,62 @@ class Session
      *
      * @param $sessionId
      */
-    public function setSessionId($sessionId)
+    protected function setSessionId($sessionId)
     {
         $this->sessionId = $sessionId;
 
+        return $this->sessionId;
+    }
+
+    /**
+     * Generates a new session ID.
+     *
+     * @return bool|string
+     */
+    protected function generateSessionId()
+    {
+        $config = $this->config;
+
+        // Create or regenerate session ID - avoid session prediction.
+        if ($config->get('session_id_type') == Config::TYPE_STR) {
+            return Random::randStr($config->get('session_id_length'));
+        } elseif ($config->get('session_id_type') == Config::TYPE_NUMBER) {
+            return Random::randNumStr($config->get('session_id_length'));
+        }
+    }
+
+    /**
+     * Creates a new session.
+     *
+     */
+    protected function createNewSession()
+    {
+        $config = $this->config;
+        $http = $this->http;
+
+        $sessionId = $this->setSessionId($this->generateSessionId());
         $this->readData();
+
+        try {
+            $http->setCookie(
+                $config->get('session_name'),
+                $this->sessionId,
+                $config->get('session_expire') + time()
+            );
+
+            // Avoid session fixation.
+            $this->set('initiated', true);
+            $this->set('created', time());
+
+            // Avoid session hijacking.
+            $useragent = $http->getServerGlobalEnv()['user-agent'] ?? $_SERVER['HTTP_USER_AGENT'];
+            $useragent .= $config->get('session_name');
+            $this->set('http_user_agent', hash('sha256', $useragent));
+
+            $this->set('last_activity', time());
+        } catch (\Exception $e) {
+            $e->getMessage();
+        }
     }
 
     /**

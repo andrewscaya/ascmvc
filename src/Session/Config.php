@@ -59,14 +59,17 @@ class Config
      */
     public function get($name = '')
     {
-        $path = explode('.',$name);
-        $value = $this -> data;
+        $path = explode('.', $name);
+
+        $value = $this->data;
+
         foreach ($path as $item){
-            if($item == ''){
+            if ($item == ''){
                 break;
             }
-            $value = isset($value[$item])?$value[$item]:null;
+            $value = isset($value[$item]) ? $value[$item] : null;
         }
+
         return $value;
     }
 
@@ -76,8 +79,8 @@ class Config
      * @param $name
      * @param $value
      */
-    public function set($name,$value)
+    public function set($name, $value)
     {
-        $this -> data[$name] = $value;
+        $this->data[$name] = $value;
     }
 }

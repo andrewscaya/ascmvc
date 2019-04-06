@@ -151,7 +151,7 @@ class DoctrineCacheItem implements CacheItemInterface
     {
         if ($expiration instanceof \DateTimeInterface) {
             $time = $expiration->diff(new \DateTime('NOW'));
-            $this->expiration = $time->s;
+            $this->expiration = $time->i * $time->s;
         } else {
             $this->expiration = 0;
         }
@@ -179,7 +179,7 @@ class DoctrineCacheItem implements CacheItemInterface
         }
 
         if ($time instanceof \DateInterval) {
-            $this->expiration = $time->s;
+            $this->expiration = $time->i * $time->s;
         } else {
             $this->expiration = 0;
         }

@@ -24,23 +24,6 @@ namespace Ascmvc\Session;
 class Http
 {
     /**
-     * Contains the session Config object.
-     *
-     * @var Config
-     */
-    protected $config;
-
-    /**
-     * Http constructor.
-     *
-     * @param Config $config
-     */
-    public function __construct(Config $config)
-    {
-        $this->config = $config;
-    }
-
-    /**
      * Gets a cookie by name.
      *
      * @param string $name
@@ -78,5 +61,15 @@ class Http
     public function setCookie(string $name, string $value = "", int $expire = 0, string $path = "", string $domain = "", bool $secure = false, bool $httponly = false)
     {
         return setcookie(...func_get_args());
+    }
+
+    /**
+     * Returns the $_SERVER array.
+     *
+     * @return mixed
+     */
+    public function getServerGlobalEnv()
+    {
+        return $_SERVER;
     }
 }

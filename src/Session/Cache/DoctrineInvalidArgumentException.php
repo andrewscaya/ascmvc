@@ -16,16 +16,26 @@ use Psr\Cache\InvalidArgumentException;
 
 class DoctrineInvalidArgumentException extends \Exception implements InvalidArgumentException
 {
+    /**
+     * Contains the argument that caused the exception.
+     *
+     * @var string
+     */
     protected $argument = '';
 
-    protected $message = 'An invalid argument was used with Doctrine Cache';
-
+    /**
+     * DoctrineInvalidArgumentException constructor.
+     *
+     * @param $argument
+     */
     public function __construct($argument)
     {
         $this->argument = $argument;
     }
 
     /**
+     * Gets the argument that caused the exception.
+     *
      * @return mixed
      */
     public function getArgument()

@@ -18,12 +18,25 @@ namespace Ascmvc\Session;
 
 class Random
 {
-    static function randStr($length)
+    /**
+     * Generates a random string of the specified length.
+     *
+     * @param $length
+     * @return bool|string
+     */
+    public static function randStr($length)
     {
         return substr(bin2hex(random_bytes($length)), 0, $length);
     }
 
-    static function randNumStr($length)
+    /**
+     * Generates a random string of numerical values of the specified length.
+     *
+     * @param $length
+     *
+     * @return string
+     */
+    public static function randNumStr($length)
     {
         $chars = array(
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -31,7 +44,7 @@ class Random
 
         $password = '';
 
-        while (strlen($password) <= $length) {
+        for ($i = 0; strlen($password) < $length; $i++) {
             $password .= (string) random_int(0, 9);
         }
 

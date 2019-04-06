@@ -14,6 +14,7 @@ namespace Ascmvc\Session\Cache;
 
 use Ascmvc\Session\Config;
 use Doctrine\Common\Cache\Cache;
+use Doctrine\Common\Cache\ClearableCache;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\Common\Cache\MemcacheCache;
 use Doctrine\Common\Cache\MemcachedCache;
@@ -38,10 +39,16 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      */
     protected $deferred = [];
 
+    /**
+     * DoctrineCacheItemPool constructor.
+     *
+     * @param Config $config
+     */
     public function __construct(Config $config)
     {
         $driverName = $config->get('doctrine_cache_driver');
 
+        // @codeCoverageIgnoreStart
         if ($driverName === FilesystemCache::class) {
             $cacheDirectory = $config->get('doctrine_filesystem_cache_directory');
 
@@ -79,6 +86,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
                 $this->driver->setMemcache($memcache);
             }
         }
+        // @codeCoverageIgnoreEnd
 
         return;
     }
@@ -173,9 +181,11 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
     {
         /**
          * Not all Doctrine Caches implement the ClearableCache interface.
-         * Will uphold the *Dependency inversion principle* (SOLID) -
-         * depend upon abstractions rather than concretions.
          */
+        if ($this->driver instanceof ClearableCache) {
+            return $this->driver->deleteAll();
+        }
+
         return false;
     }
 

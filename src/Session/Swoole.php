@@ -23,6 +23,7 @@ namespace Ascmvc\Session;
  */
 class Swoole
 {
+    // @codeCoverageIgnoreStart
     /**
      * Contains a swoole_http_request instance.
      * @var \swoole_http_request
@@ -55,7 +56,7 @@ class Swoole
      */
     public function setRequest(\swoole_http_request $request = null)
     {
-        if($request != null){
+        if ($request != null){
             $this->request = $request;
             return $this;
         }
@@ -70,7 +71,7 @@ class Swoole
      */
     public function setResponse(\swoole_http_response $response = null)
     {
-        if($response != null){
+        if ($response != null){
             $this->response = $response;
             return $this;
         }
@@ -116,4 +117,15 @@ class Swoole
     {
         return $this->response->cookie(...func_get_args());
     }
+
+    /**
+     * Returns the equivalent of the $_SERVER array from the Swoole environment.
+     *
+     * @return mixed
+     */
+    public function getServerGlobalEnv()
+    {
+        return array_merge($this->request->server, $this->request->header);
+    }
+    // @codeCoverageIgnoreEnd
 }
