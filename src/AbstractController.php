@@ -12,6 +12,8 @@
 
 namespace Ascmvc;
 
+use Ascmvc\EventSourcing\EventProcessor;
+
 /**
  * The abstract AbstractController class is the blueprint for the MVC's controllers.
  *
@@ -37,6 +39,13 @@ abstract class AbstractController
     protected $view;
 
     /**
+     * Contains an instance of the Ascmvc\EventSourcing\EventProcessor class.
+     *
+     * @var EventProcessor
+     */
+    protected $eventProcessor;
+
+    /**
      * Array contains the controller's helper objects.
      *
      * @var array|null
@@ -49,10 +58,9 @@ abstract class AbstractController
      * properties.
      *
      * @param array $baseConfig
-     *
-     * @return void
+     * @param EventProcessor $eventProcessor
      */
-    public abstract function __construct(array $baseConfig);
+    public abstract function __construct(array $baseConfig, EventProcessor $eventProcessor);
 
     /**
      * Method corresponding to the controller's default action.

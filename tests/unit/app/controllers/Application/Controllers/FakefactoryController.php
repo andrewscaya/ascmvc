@@ -3,7 +3,7 @@
 namespace Application\Controllers;
 
 use Ascmvc\AscmvcControllerFactoryInterface;
-use Ascmvc\Mvc\AscmvcEventManager;
+use Ascmvc\EventSourcing\EventProcessor;
 use Ascmvc\Mvc\Controller;
 use Pimple\Container;
 
@@ -16,10 +16,10 @@ class FakefactoryController extends Controller implements AscmvcControllerFactor
         $this->testMessage = $testMessage;
     }
 
-    public static function factory(array &$baseConfig, &$viewObject, Container &$serviceManager, AscmvcEventManager &$eventManager)
+    public static function factory(array &$baseConfig, EventProcessor &$eventProcessor, Container &$serviceManager, &$viewObject)
     {
-        $serviceManager[FakefactoryController::class] = $serviceManager->factory(function ($serviceManager) use ($baseConfig) {
-            $controller = new FakefactoryController($baseConfig);
+        $serviceManager[FakefactoryController::class] = $serviceManager->factory(function ($serviceManager) use ($baseConfig, $eventProcessor) {
+            $controller = new FakefactoryController($baseConfig, $eventProcessor);
             $controller->setTestMessage('This is the test message');
             return $controller;
         });

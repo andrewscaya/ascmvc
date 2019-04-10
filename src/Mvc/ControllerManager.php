@@ -15,6 +15,7 @@ namespace Ascmvc\Mvc;
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\AscmvcControllerFactoryInterface;
+use Ascmvc\EventSourcing\EventProcessor;
 use Zend\Diactoros\Response;
 
 /**
@@ -49,6 +50,8 @@ class ControllerManager extends AbstractControllerManager
 
         $eventManager = $this->app->getEventManager();
 
+        $eventProcessor = new EventProcessor($eventManager->getSharedManager());
+
         $viewObject = $this->app->getViewObject();
 
         if (strpos($controllerName, '/') !== false) {
@@ -76,7 +79,7 @@ class ControllerManager extends AbstractControllerManager
             if ($this->controllerReflection->implementsInterface(AscmvcControllerFactoryInterface::class)
                 && $this->controllerReflection->hasMethod('factory')
             ) {
-                $controller = $controllerName::factory($baseConfig, $viewObject, $serviceManager, $eventManager);
+                $controller = $controllerName::factory($baseConfig, $eventProcessor, $serviceManager, $viewObject);
                 $this->controller = $controller instanceof Controller ? $controller : null;
                 $this->controller = !isset($this->controller) && isset($serviceManager[$controllerName]) ? $serviceManager[$controllerName] : null;
             }
@@ -92,7 +95,7 @@ class ControllerManager extends AbstractControllerManager
             $this->controller = null;
         }
 
-        $this->controller = ($this->controller == null && $this->controllerName != null) ? new $controllerName($baseConfig) : $this->controller;
+        $this->controller = ($this->controller == null && $this->controllerName != null) ? new $controllerName($baseConfig, $eventProcessor) : $this->controller;
 
         $this->method = ($this->controllerMethodName != null) ? $this->controllerMethodName : null;
 
