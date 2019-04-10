@@ -20,7 +20,7 @@ You can also use the **LightMVC Skeleton Application** by issuing these commands
     $ cd lightmvcskel
     $ composer install
 
-> The LightMVC Skeleton Application can also be downloaded as an archive file from https://lightmvc.net/download.
+> The LightMVC Skeleton Application can also be downloaded as an archive file from https://lightmvcframework.net/download.
 
 The **LightMVC Framework Skeleton Application** can run on Swoole in order to make it lightning fast. In order
 to do so, you must make sure to install Swoole. From the CLI, as the root user, type the following:

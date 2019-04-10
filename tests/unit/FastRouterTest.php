@@ -389,7 +389,87 @@ class FastRouterTest extends TestCase
         $this->assertInstanceOf(FakeController::class, $app->getController());
     }
 
-    public function testRouterResolutionInDevelopmentEnvironmentWithNotFoundRoute()
+    public function testRouterResolutionInDevelopmentEnvironmentWithControllerFoundRoute()
+    {
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/fake']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+
+        $baseConfig['BASEDIR'] = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app';
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'config';
+
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['routes'] = [
+            0 => [
+                'GET',
+                '/fake[/{action}]',
+                'fake',
+            ],
+        ];
+
+        $baseConfig['view'] = [];
+
+        $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $ascmvcEvent->setApplication($app);
+
+        $fastRouter = new FastRouter($ascmvcEvent);
+
+        $app->setRouter($fastRouter);
+
+        $fastRouter->resolve();
+
+        $this->assertInstanceOf(ControllerManager::class, $app->getControllerManager());
+
+        $this->assertInstanceOf(FakeController::class, $app->getController());
+    }
+
+    public function testRouterResolutionInDevelopmentEnvironmentWithControllerNotFoundRoute()
     {
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
         $serverRequestFactoryMock
@@ -404,6 +484,166 @@ class FastRouterTest extends TestCase
             ->shouldReceive('getServerParams')
             ->once()
             ->andReturn(['REQUEST_URI' => '/wrong']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+
+        $baseConfig['BASEDIR'] = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app';
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'config';
+
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['routes'] = [
+            0 => [
+                'GET',
+                '/fake[/{action}]',
+                'fake',
+            ],
+        ];
+
+        $baseConfig['view'] = [];
+
+        $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $ascmvcEvent->setApplication($app);
+
+        $fastRouter = new FastRouter($ascmvcEvent);
+
+        $app->setRouter($fastRouter);
+
+        $fastRouter->resolve();
+
+        $this->assertInstanceOf(ControllerManager::class, $app->getControllerManager());
+
+        $this->assertInstanceOf(C404Controller::class, $app->getController());
+    }
+
+    public function testRouterResolutionInDevelopmentEnvironmentWithMethodFoundRoute()
+    {
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/fake/index']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+
+        $baseConfig['BASEDIR'] = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app';
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'config';
+
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['routes'] = [
+            0 => [
+                'GET',
+                '/fake[/{action}]',
+                'fake',
+            ],
+        ];
+
+        $baseConfig['view'] = [];
+
+        $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $ascmvcEvent->setApplication($app);
+
+        $fastRouter = new FastRouter($ascmvcEvent);
+
+        $app->setRouter($fastRouter);
+
+        $fastRouter->resolve();
+
+        $this->assertInstanceOf(ControllerManager::class, $app->getControllerManager());
+
+        $this->assertInstanceOf(FakeController::class, $app->getController());
+    }
+
+    public function testRouterResolutionInDevelopmentEnvironmentWithMethodNotFoundRoute()
+    {
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/fake/wrong']);
         $requestMock
             ->shouldReceive('getMethod')
             ->once()

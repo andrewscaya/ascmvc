@@ -27,7 +27,7 @@ The main preconfigured indexes of this array are:
 
 .. note:: The Twig and Smarty template managers require additional indexes under the ``templates`` index. These are: ``compileDir``, ``configDir`` and ``cacheDir``.
 
-Also, there are three optional preconfigured indexes in the ``$baseConfig`` array:
+Also, there are four optional preconfigured indexes in the ``$baseConfig`` array:
 
 * ``middleware``, which contains an array of PSR-15 compliant middleware to be used,
 * ``doctrine``, which contains an array of parameters in order to configure one or more Doctrine connections.
@@ -47,6 +47,11 @@ Here is an example of a ``config/config.php`` file:
 
     require 'middleware.config.php';
 
+    require 'session.config.php';
+
+Routing Configuration
+---------------------
+
 Where the ``config/routes.config.php`` file might look like the following:
 
 .. code-block:: php
@@ -60,6 +65,9 @@ Where the ``config/routes.config.php`` file might look like the following:
     ];
 
 .. note:: For more information on configuring the application's routes, please see the :ref:`routing` section.
+
+Middleware Configuration
+------------------------
 
 And, the ``config/middleware.config.php`` file might look like the following:
 

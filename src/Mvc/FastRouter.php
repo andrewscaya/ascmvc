@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.0.2
+ * @version    2.0.3
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
@@ -82,7 +82,13 @@ class FastRouter extends AbstractRouter
                     'server' => $this->requestURI,
                 ];
                 // ... call $handler with $vars
-                $this->controllerManager = new ControllerManager($this->app, $controller, $vars);
+                try {
+                    $this->controllerManager = new ControllerManager($this->app, $controller, $vars);
+                } catch (\Exception $e) {
+                    // ... 404 Not Found
+                    $this->controllerManager = new ControllerManager($this->app, 'c404');
+                }
+
                 break;
         }
 

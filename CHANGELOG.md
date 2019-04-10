@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.3 (2019-04-10)
+
+- Fixes an issue when requesting an unknown controller method.
+
 ## 2.0.2 (2019-01-23)
 
 - Fixes an issue when running in Swoole mode behind an NGINX HTTPS proxy server.

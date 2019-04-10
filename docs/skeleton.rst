@@ -52,7 +52,7 @@ The application's file structure is quite straightforward:
 * ``models``: contains all of the application's model classes (entities, repositories, backend traits, etc.).
 * ``public``: contains the front controller file, the Swoole front controller file, and all other static files (CSS, JS, images, fonts, favicons, etc.).
 * ``templates``: contains all of the application's template files, grouped by template manager.
-* ``templates_c``: contains all of the application's compiled template files when running in ``production`` mode (except when using Plates).
+* ``templates_c``: contains all of the application's compiled template files when running in ``production`` mode (except when using ``Plates``).
 * ``vendor``: contains all of the application's installed dependencies through **Composer**.
 
 .. index:: Swoole
