@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.0.3
+ * @version    2.1.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -17,6 +17,7 @@ use Ascmvc\AbstractController;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\AbstractRouter;
 use Ascmvc\Middleware\MiddlewareFactory;
+use Ascmvc\Session\SessionManager;
 use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -29,8 +30,7 @@ use function Zend\Stratigility\path;
 /**
  * Class App
  *
- * The MVC application class.
- *
+ * @package Ascmvc\Mvc
  */
 class App extends AbstractApp
 {
@@ -426,6 +426,25 @@ class App extends AbstractApp
         $this->response = $response;
 
         return $this->response;
+    }
+
+    /**
+     * @return SessionManager|null
+     */
+    public function getSessionManager(): ?SessionManager
+    {
+        return $this->sessionManager;
+    }
+
+    /**
+     * @param SessionManager|null $session
+     * @return SessionManager|null
+     */
+    public function setSessionManager(?SessionManager $sessionManager): ?SessionManager
+    {
+        $this->sessionManager = $sessionManager;
+
+        return $this->sessionManager;
     }
 
     /**

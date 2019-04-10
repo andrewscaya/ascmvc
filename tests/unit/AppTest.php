@@ -15,6 +15,7 @@ namespace AscmvcTest;
 
 use Ascmvc\Mvc\App;
 use Ascmvc\Mvc\AscmvcEvent;
+use Ascmvc\Session\SessionManager;
 use Atlas\Orm\Atlas;
 use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
@@ -1352,5 +1353,223 @@ class AppTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'FakeController.php'
         );
+    }
+
+    public function testSessionIsEnabled()
+    {
+        // Redirect output to command output
+        $this->setOutputCallback(function () {
+        });
+
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/test1']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $baseConfig['session'] = [
+            'enabled' => true,
+            'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
+            'doctrine_cache_driver' => \Doctrine\Common\Cache\FilesystemCache::class,
+            //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
+            //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
+            //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
+            //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+            'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
+            'doctrine_cache_server_params' => [
+                'host' => '127.0.0.1',
+                'port' => 6379, // redis
+                //'port' => 11211 // memcached/memcache
+            ],
+            'session_name' => 'PHPSESSION',
+            'session_path' => '/',
+            'session_id_length' => 32,
+            'session_id_type' => 1,
+            'session_storage_prefix' => 'ascmvc',
+            'session_expire' => 60 * 30, // 30 minutes
+        ];
+
+        $app = App::getInstance();
+
+        $config = new \Ascmvc\Session\Config($baseConfig['session']);
+        $sessionManager = \Ascmvc\Session\SessionManager::getSessionManager(null, null, $config, true);
+
+        try {
+            $sessionManager->start();
+        } catch (\Throwable $exception) {
+            var_dump($exception);
+        }
+
+        $app->setSessionManager($sessionManager);
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $this->assertInstanceOf(SessionManager::class, $app->getSessionManager());
+
+        $this->assertTrue($app->getSessionManager()->isEnabled());
+    }
+
+    public function testSessionIsNotEnabled()
+    {
+        // Redirect output to command output
+        $this->setOutputCallback(function () {
+        });
+
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/test1']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            dirname(__FILE__)
+            . DIRECTORY_SEPARATOR
+            . 'app' . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $baseConfig['session'] = [
+            'enabled' => false,
+            'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
+            'doctrine_cache_driver' => \Doctrine\Common\Cache\FilesystemCache::class,
+            //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
+            //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
+            //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
+            //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+            'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
+            'doctrine_cache_server_params' => [
+                'host' => '127.0.0.1',
+                'port' => 6379, // redis
+                //'port' => 11211 // memcached/memcache
+            ],
+            'session_name' => 'PHPSESSION',
+            'session_path' => '/',
+            'session_id_length' => 32,
+            'session_id_type' => 1,
+            'session_storage_prefix' => 'ascmvc',
+            'session_expire' => 60 * 30, // 30 minutes
+        ];
+
+        $app = App::getInstance();
+
+        $config = new \Ascmvc\Session\Config($baseConfig['session']);
+        $sessionManager = \Ascmvc\Session\SessionManager::getSessionManager(null, null, $config, true);
+
+        try {
+            $sessionManager->start();
+        } catch (\Throwable $exception) {
+            var_dump($exception);
+        }
+
+        $app->setSessionManager($sessionManager);
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $this->assertInstanceOf(SessionManager::class, $app->getSessionManager());
+
+        $this->assertFalse($app->getSessionManager()->isEnabled());
     }
 }
