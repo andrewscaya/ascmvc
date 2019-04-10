@@ -31,6 +31,7 @@ Also, there are four optional preconfigured indexes in the ``$baseConfig`` array
 
 * ``middleware``, which contains an array of PSR-15 compliant middleware to be used,
 * ``doctrine``, which contains an array of parameters in order to configure one or more Doctrine connections.
+* ``session``, which contains an array of parameters in order to configure the LightMVC asynchronous PHP session.
 * ``atlas``, which contains an array of parameters in order to configure one or more Atlas connections.
 
 Here is an example of a ``config/config.php`` file:
@@ -97,6 +98,41 @@ And, the ``config/middleware.config.php`` file might look like the following:
     ];
 
 .. note:: The :ref:`middleware` section contains all the needed information in order to set up PSR-15 compliant middleware.
+
+Session Configuration
+---------------------
+
+And, finally, the ``config/session.config.php`` file might look like this:
+
+.. code-block:: php
+
+    $baseConfig['session'] = [
+        'enabled' => true,
+        'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
+        'doctrine_cache_driver' => \Doctrine\Common\Cache\FilesystemCache::class,
+        //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
+        //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
+        //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
+        //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+        'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
+        'doctrine_cache_server_params' => [
+            'host' => '127.0.0.1',
+            'port' => 6379, // redis
+            //'port' => 11211 // memcached/memcache
+        ],
+        'session_name' => 'PHPSESSION',
+        'session_path' => '/',
+        'session_id_length' => 32,
+        'session_id_type' => 1,
+        'session_storage_prefix' => 'ascmvc',
+        'session_expire' => 60 * 30, // 30 minutes
+    ];
+
+It is possible to replace the value of the ``psr6_cache_pool`` index with any PSR-6 compliant class. Also,
+any of the given Doctrine\\Common\\Cache classes can be used in order to store the session data when using
+the ``\Ascmvc\Session\Cache\DoctrineCacheItemPool`` class.
+
+For more information on sessions, please see the :ref:`sessions` section.
 
 .. index:: View configuration
 

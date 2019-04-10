@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.0.3
+ * @version    2.1.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -14,6 +14,7 @@ namespace Ascmvc;
 
 use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\AscmvcEventManager;
+use Ascmvc\Session\SessionManager;
 use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -21,10 +22,11 @@ use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
 
 /**
+ * Class AbstractApp
+ *
  * The abstract AbstractApp class is the blueprint for the MVC's main engine.
  *
- * The abstract AbstractApp class is the one that needs to be extended
- * in order to create a LightMVC AbstractApp.
+ * @package Ascmvc
  */
 abstract class AbstractApp
 {
@@ -56,6 +58,13 @@ abstract class AbstractApp
      * @var Request|null
      */
     protected $response;
+
+    /**
+     * Contains a reference to the SessionManager instance.
+     *
+     * @var SessionManager|null
+     */
+    protected $sessionManager;
 
     /**
      * Contains a reference to a Pimple\Container instance.
@@ -247,6 +256,17 @@ abstract class AbstractApp
      * @return ResponseInterface
      */
     public abstract function setResponse(ResponseInterface $response);
+
+    /**
+     * @return SessionManager|null
+     */
+    public abstract function getSessionManager(): ?SessionManager;
+
+    /**
+     * @param SessionManager|null $session
+     * @return SessionManager
+     */
+    public abstract function setSessionManager(?SessionManager $sessionManager): ?SessionManager;
 
     /**
      * Gets the Pimple\Container object.
