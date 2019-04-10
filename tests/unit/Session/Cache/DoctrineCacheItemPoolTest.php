@@ -624,4 +624,402 @@ class DoctrineCacheItemPoolTest extends TestCase
 
         $this->assertFalse($result);
     }
+
+    public function testDoctrineCacheItemPoolWithMockedFilesystemCacheAndSaveOneItemDeferred()
+    {
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $config = new Config(
+            [
+                'enabled' => true,
+                'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
+                'doctrine_cache_driver' => FilesystemCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
+                'doctrine_cache_server_params' => [
+                    'host' => '127.0.0.1',
+                    'port' => 6379, // redis
+                    //'port' => 11211 // memcached/memcache
+                ],
+                'session_name' => 'PHPSESSION',
+                'session_path' => '/',
+                'session_id_length' => 32,
+                'session_id_type' => 1,
+                'session_storage_prefix' => 'ascmvc',
+                'session_expire' => 60 * 30, // 30 minutes
+            ]
+        );
+
+        $doctrineCacheItemPool = new DoctrineCacheItemPool($config);
+
+        $doctrineCacheItem = new DoctrineCacheItem('testkey', ['testdata' => 'mydata']);
+
+        $result = $doctrineCacheItemPool->saveDeferred($doctrineCacheItem);
+
+        $this->assertTrue($result);
+
+        $doctrineCacheItemPoolReflection = new \ReflectionClass($doctrineCacheItemPool);
+
+        $propertyDeferred = $doctrineCacheItemPoolReflection->getProperty('deferred');
+
+        $propertyDeferred->setAccessible(true);
+
+        $this->assertTrue(key_exists('testkey', $propertyDeferred->getValue($doctrineCacheItemPool)));
+    }
+
+    public function testDoctrineCacheItemPoolWithMockedFilesystemCacheAndSaveOneItemDeferredWhenAlreadyOneItemDeferredWithDifferentKeys()
+    {
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $config = new Config(
+            [
+                'enabled' => true,
+                'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
+                'doctrine_cache_driver' => FilesystemCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
+                'doctrine_cache_server_params' => [
+                    'host' => '127.0.0.1',
+                    'port' => 6379, // redis
+                    //'port' => 11211 // memcached/memcache
+                ],
+                'session_name' => 'PHPSESSION',
+                'session_path' => '/',
+                'session_id_length' => 32,
+                'session_id_type' => 1,
+                'session_storage_prefix' => 'ascmvc',
+                'session_expire' => 60 * 30, // 30 minutes
+            ]
+        );
+
+        $doctrineCacheItemPool = new DoctrineCacheItemPool($config);
+
+        $doctrineCacheItem1 = new DoctrineCacheItem('testkey1', ['testdata1' => 'mydata1']);
+
+        $result = $doctrineCacheItemPool->saveDeferred($doctrineCacheItem1);
+
+        $this->assertTrue($result);
+
+        $doctrineCacheItem2 = new DoctrineCacheItem('testkey2', ['testdata2' => 'mydata2']);
+
+        $result = $doctrineCacheItemPool->saveDeferred($doctrineCacheItem2);
+
+        $this->assertTrue($result);
+
+        $doctrineCacheItemPoolReflection = new \ReflectionClass($doctrineCacheItemPool);
+
+        $propertyDeferred = $doctrineCacheItemPoolReflection->getProperty('deferred');
+
+        $propertyDeferred->setAccessible(true);
+
+        $this->assertTrue(key_exists('testkey1', $propertyDeferred->getValue($doctrineCacheItemPool)));
+
+        $this->assertTrue(key_exists('testkey2', $propertyDeferred->getValue($doctrineCacheItemPool)));
+    }
+
+    public function testDoctrineCacheItemPoolWithMockedFilesystemCacheAndSaveOneItemDeferredWhenAlreadyOneItemDeferredWithSameKey()
+    {
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $filesystemCacheMock = \Mockery::mock('overload:' . FilesystemCache::class);
+        $filesystemCacheMock
+            ->shouldReceive('save')
+            ->once()
+            ->andReturnTrue();
+
+        $config = new Config(
+            [
+                'enabled' => true,
+                'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
+                'doctrine_cache_driver' => FilesystemCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
+                'doctrine_cache_server_params' => [
+                    'host' => '127.0.0.1',
+                    'port' => 6379, // redis
+                    //'port' => 11211 // memcached/memcache
+                ],
+                'session_name' => 'PHPSESSION',
+                'session_path' => '/',
+                'session_id_length' => 32,
+                'session_id_type' => 1,
+                'session_storage_prefix' => 'ascmvc',
+                'session_expire' => 60 * 30, // 30 minutes
+            ]
+        );
+
+        $doctrineCacheItemPool = new DoctrineCacheItemPool($config);
+
+        $doctrineCacheItem1 = new DoctrineCacheItem('testkey1', ['testdata1' => 'mydata1']);
+
+        $result = $doctrineCacheItemPool->saveDeferred($doctrineCacheItem1);
+
+        $this->assertTrue($result);
+
+        $doctrineCacheItem2 = new DoctrineCacheItem('testkey1', ['testdata2' => 'mydata2']);
+
+        $result = $doctrineCacheItemPool->saveDeferred($doctrineCacheItem2);
+
+        $this->assertTrue($result);
+
+        $doctrineCacheItemPoolReflection = new \ReflectionClass($doctrineCacheItemPool);
+
+        $propertyDeferred = $doctrineCacheItemPoolReflection->getProperty('deferred');
+
+        $propertyDeferred->setAccessible(true);
+
+        $deferredArrayActual = $propertyDeferred->getValue($doctrineCacheItemPool);
+
+        $this->assertTrue(key_exists('testkey1', $deferredArrayActual));
+
+        $this->assertSame(
+            ['testdata2' => 'mydata2'],
+            $deferredArrayActual['testkey1']->get()
+        );
+    }
+
+    public function testDoctrineCacheItemPoolWithMockedFilesystemCacheAndSaveOneItemDeferredWhenAlreadyOneItemDeferredWithSameKeyFailed()
+    {
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $filesystemCacheMock = \Mockery::mock('overload:' . FilesystemCache::class);
+        $filesystemCacheMock
+            ->shouldReceive('save')
+            ->once()
+            ->andReturnFalse();
+
+        $config = new Config(
+            [
+                'enabled' => true,
+                'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
+                'doctrine_cache_driver' => FilesystemCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
+                'doctrine_cache_server_params' => [
+                    'host' => '127.0.0.1',
+                    'port' => 6379, // redis
+                    //'port' => 11211 // memcached/memcache
+                ],
+                'session_name' => 'PHPSESSION',
+                'session_path' => '/',
+                'session_id_length' => 32,
+                'session_id_type' => 1,
+                'session_storage_prefix' => 'ascmvc',
+                'session_expire' => 60 * 30, // 30 minutes
+            ]
+        );
+
+        $doctrineCacheItemPool = new DoctrineCacheItemPool($config);
+
+        $doctrineCacheItem1 = new DoctrineCacheItem('testkey1', ['testdata1' => 'mydata1']);
+
+        $result = $doctrineCacheItemPool->saveDeferred($doctrineCacheItem1);
+
+        $this->assertTrue($result);
+
+        $doctrineCacheItem2 = new DoctrineCacheItem('testkey1', ['testdata2' => 'mydata2']);
+
+        $result = $doctrineCacheItemPool->saveDeferred($doctrineCacheItem2);
+
+        $this->assertFalse($result);
+
+        $doctrineCacheItemPoolReflection = new \ReflectionClass($doctrineCacheItemPool);
+
+        $propertyDeferred = $doctrineCacheItemPoolReflection->getProperty('deferred');
+
+        $propertyDeferred->setAccessible(true);
+
+        $deferredArrayActual = $propertyDeferred->getValue($doctrineCacheItemPool);
+
+        $this->assertTrue(key_exists('testkey1', $deferredArrayActual));
+
+        $this->assertSame(
+            ['testdata1' => 'mydata1'],
+            $deferredArrayActual['testkey1']->get()
+        );
+    }
+
+    public function testDoctrineCacheItemPoolWithMockedFilesystemCacheAndCommitEmptyDeferredItems()
+    {
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $config = new Config(
+            [
+                'enabled' => true,
+                'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
+                'doctrine_cache_driver' => FilesystemCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
+                'doctrine_cache_server_params' => [
+                    'host' => '127.0.0.1',
+                    'port' => 6379, // redis
+                    //'port' => 11211 // memcached/memcache
+                ],
+                'session_name' => 'PHPSESSION',
+                'session_path' => '/',
+                'session_id_length' => 32,
+                'session_id_type' => 1,
+                'session_storage_prefix' => 'ascmvc',
+                'session_expire' => 60 * 30, // 30 minutes
+            ]
+        );
+
+        $doctrineCacheItemPool = new DoctrineCacheItemPool($config);
+
+        $result = $doctrineCacheItemPool->commit();
+
+        $this->assertTrue($result);
+    }
+
+    public function testDoctrineCacheItemPoolWithMockedFilesystemCacheAndCommitDeferredItemsWithDifferentKeys()
+    {
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $filesystemCacheMock = \Mockery::mock('overload:' . FilesystemCache::class);
+        $filesystemCacheMock
+            ->shouldReceive('save')
+            ->times(2)
+            ->andReturnTrue();
+
+        $config = new Config(
+            [
+                'enabled' => true,
+                'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
+                'doctrine_cache_driver' => FilesystemCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
+                'doctrine_cache_server_params' => [
+                    'host' => '127.0.0.1',
+                    'port' => 6379, // redis
+                    //'port' => 11211 // memcached/memcache
+                ],
+                'session_name' => 'PHPSESSION',
+                'session_path' => '/',
+                'session_id_length' => 32,
+                'session_id_type' => 1,
+                'session_storage_prefix' => 'ascmvc',
+                'session_expire' => 60 * 30, // 30 minutes
+            ]
+        );
+
+        $doctrineCacheItemPool = new DoctrineCacheItemPool($config);
+
+        $doctrineCacheItem1 = new DoctrineCacheItem('testkey1', ['testdata1' => 'mydata1']);
+
+        $result = $doctrineCacheItemPool->saveDeferred($doctrineCacheItem1);
+
+        $this->assertTrue($result);
+
+        $doctrineCacheItem2 = new DoctrineCacheItem('testkey2', ['testdata2' => 'mydata2']);
+
+        $result = $doctrineCacheItemPool->saveDeferred($doctrineCacheItem2);
+
+        $this->assertTrue($result);
+
+        $result = $doctrineCacheItemPool->commit();
+
+        $this->assertTrue($result);
+    }
+
+    public function testDoctrineCacheItemPoolWithMockedFilesystemCacheAndCommitDeferredItemsWithDifferentKeysAndOneFailure()
+    {
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $filesystemCacheMock = \Mockery::mock('overload:' . FilesystemCache::class);
+        $filesystemCacheMock
+            ->shouldReceive('save')
+            ->times(2)
+            ->andReturnValues([true, false]);
+
+        $config = new Config(
+            [
+                'enabled' => true,
+                'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
+                'doctrine_cache_driver' => FilesystemCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
+                'doctrine_cache_server_params' => [
+                    'host' => '127.0.0.1',
+                    'port' => 6379, // redis
+                    //'port' => 11211 // memcached/memcache
+                ],
+                'session_name' => 'PHPSESSION',
+                'session_path' => '/',
+                'session_id_length' => 32,
+                'session_id_type' => 1,
+                'session_storage_prefix' => 'ascmvc',
+                'session_expire' => 60 * 30, // 30 minutes
+            ]
+        );
+
+        $doctrineCacheItemPool = new DoctrineCacheItemPool($config);
+
+        $doctrineCacheItem1 = new DoctrineCacheItem('testkey1', ['testdata1' => 'mydata1']);
+
+        $result = $doctrineCacheItemPool->saveDeferred($doctrineCacheItem1);
+
+        $this->assertTrue($result);
+
+        $doctrineCacheItem2 = new DoctrineCacheItem('testkey2', ['testdata2' => 'mydata2']);
+
+        $result = $doctrineCacheItemPool->saveDeferred($doctrineCacheItem2);
+
+        $this->assertTrue($result);
+
+        $result = $doctrineCacheItemPool->commit();
+
+        $this->assertFalse($result);
+
+        $doctrineCacheItemPoolReflection = new \ReflectionClass($doctrineCacheItemPool);
+
+        $propertyDeferred = $doctrineCacheItemPoolReflection->getProperty('deferred');
+
+        $propertyDeferred->setAccessible(true);
+
+        $deferredArrayActual = $propertyDeferred->getValue($doctrineCacheItemPool);
+
+        $this->assertFalse(key_exists('testkey1', $deferredArrayActual));
+
+        $this->assertTrue(key_exists('testkey2', $deferredArrayActual));
+
+        $this->assertSame(
+            ['testdata2' => 'mydata2'],
+            $deferredArrayActual['testkey2']->get()
+        );
+    }
 }

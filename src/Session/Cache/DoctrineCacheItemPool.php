@@ -265,15 +265,17 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      */
     public function saveDeferred(CacheItemInterface $item)
     {
-        if(key_exists($item->getKey(), $this->deferred)) {
-            $result = $this->save($this->deferred[$item->getKey()]);
+        $key = $item->getKey();
+
+        if(key_exists($key, $this->deferred)) {
+            $result = $this->save($this->deferred[$key]);
 
             if(!$result) {
                 return false;
             }
         }
 
-        $this->deferred[$item->getKey()] = $item;
+        $this->deferred[$key] = $item;
 
         return true;
 
@@ -296,7 +298,11 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
                 if(!$result) {
                     return false;
                 }
+
+                unset($this->deferred[$key]);
             }
+
+            return true;
         }
     }
 }

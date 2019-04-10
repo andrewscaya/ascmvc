@@ -126,13 +126,13 @@ class Session
                 && (time() - $this->get('last_activity') < $config->get('session_expire'))
             ) {
                 if (time() - $this->get('created') > $config->get('session_expire')) {
+                    // Session expiration.
                     $http->setCookie(
                         $config->get('session_name'),
                         $this->sessionId,
-                        $config->get('session_expire') - 3600
+                        time() - 3600
                     );
 
-                    // Session expiration.
                     // Change session ID for the current session an invalidate old session ID.
                     $this->sessionCacheItem = $this->sessionCachePool->deleteItem(
                         $this->config->get('session_storage_prefix')
@@ -179,11 +179,11 @@ class Session
     {
         $config = $this->config;
 
-        // Create or regenerate session ID - avoid session prediction.
-        if ($config->get('session_id_type') == Config::TYPE_STR) {
-            return Random::randStr($config->get('session_id_length'));
-        } elseif ($config->get('session_id_type') == Config::TYPE_NUMBER) {
+        // Create session ID.
+        if ($config->get('session_id_type') == Config::TYPE_NUMBER) {
             return Random::randNumStr($config->get('session_id_length'));
+        } else {
+            return Random::randStr($config->get('session_id_length'));
         }
     }
 
@@ -200,6 +200,7 @@ class Session
         $this->readData();
 
         try {
+            // Avoid session prediction.
             $http->setCookie(
                 $config->get('session_name'),
                 $this->sessionId,
@@ -229,10 +230,6 @@ class Session
      */
     public function get(string $name = null)
     {
-        if ($name === null) {
-            return $this->data;
-        }
-
         $path = explode('.', $name);
         $value = $this->data;
 
@@ -273,9 +270,11 @@ class Session
 
         if($this->sessionCacheItem->isHit()) {
             $this->data = unserialize($this->sessionCacheItem->get());
+
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     /**
