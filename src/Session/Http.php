@@ -32,17 +32,17 @@ class Http
     public function getCookie($name = '')
     {
         $path = explode('.', $name);
-        
+
         $value = $_COOKIE;
-        
+
         foreach ($path as $item) {
-            if($item == ''){
+            if ($item == '') {
                 break;
             }
-            
+
             $value = isset($value[$item]) ? $value[$item] : null;
         }
-        
+
         return $value;
     }
 

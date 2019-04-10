@@ -56,7 +56,7 @@ class Swoole
      */
     public function setRequest(\swoole_http_request $request = null)
     {
-        if ($request != null){
+        if ($request != null) {
             $this->request = $request;
             return $this;
         }
@@ -71,7 +71,7 @@ class Swoole
      */
     public function setResponse(\swoole_http_response $response = null)
     {
-        if ($response != null){
+        if ($response != null) {
             $this->response = $response;
             return $this;
         }
@@ -90,8 +90,8 @@ class Swoole
 
         $value = $this->request->cookie;
 
-        foreach ($path as $item){
-            if($item == ''){
+        foreach ($path as $item) {
+            if ($item == '') {
                 break;
             }
 

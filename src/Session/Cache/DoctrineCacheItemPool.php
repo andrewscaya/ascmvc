@@ -109,7 +109,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      */
     public function getItem($key) : CacheItemInterface
     {
-        if(!ctype_alnum($key)) {
+        if (!ctype_alnum($key)) {
             throw new DoctrineInvalidArgumentException($key);
         }
 
@@ -136,7 +136,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      */
     public function getItems(array $keys = [])
     {
-        foreach($keys as $key) {
+        foreach ($keys as $key) {
             $result = $this->getItem($key);
 
             $collection[] = $result;
@@ -164,7 +164,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      */
     public function hasItem($key)
     {
-        if(!ctype_alnum($key)) {
+        if (!ctype_alnum($key)) {
             throw new DoctrineInvalidArgumentException($key);
         }
 
@@ -204,7 +204,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      */
     public function deleteItem($key)
     {
-        if(!ctype_alnum($key)) {
+        if (!ctype_alnum($key)) {
             throw new DoctrineInvalidArgumentException($key);
         }
 
@@ -224,8 +224,9 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      * @return bool
      *   True if the items were successfully removed. False if there was an error.
      */
-    public function deleteItems(array $keys){
-        foreach($keys as $key) {
+    public function deleteItems(array $keys)
+    {
+        foreach ($keys as $key) {
             $result = $this->deleteItem($key);
 
             if (!$result) {
@@ -267,10 +268,10 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
     {
         $key = $item->getKey();
 
-        if(key_exists($key, $this->deferred)) {
+        if (key_exists($key, $this->deferred)) {
             $result = $this->save($this->deferred[$key]);
 
-            if(!$result) {
+            if (!$result) {
                 return false;
             }
         }
@@ -278,7 +279,6 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
         $this->deferred[$key] = $item;
 
         return true;
-
     }
 
     /**
@@ -289,13 +289,13 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      */
     public function commit()
     {
-        if(empty($this->deferred)) {
+        if (empty($this->deferred)) {
             return true;
         } else {
-            foreach($this->deferred as $key => $item) {
+            foreach ($this->deferred as $key => $item) {
                 $result = $this->save($item);
 
-                if(!$result) {
+                if (!$result) {
                     return false;
                 }
 

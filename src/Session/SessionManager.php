@@ -18,7 +18,7 @@ namespace Ascmvc\Session;
 
 /**
  * Class SessionManager
- * 
+ *
  * @package Ascmvc\Session
  */
 class SessionManager
@@ -46,8 +46,8 @@ class SessionManager
 
     /**
      * Contains the session Config object.
-     * 
-     * @var Config|null 
+     *
+     * @var Config|null
      */
     protected $config = null;
 
@@ -60,15 +60,15 @@ class SessionManager
 
     /**
      * Contains the session Http object.
-     * 
-     * @var Http|null 
+     *
+     * @var Http|null
      */
     protected $http = null;
 
     /**
      * Contains the Session object.
-     * 
-     * @var Session|null 
+     *
+     * @var Session|null
      */
     protected $session = null;
 
@@ -108,9 +108,8 @@ class SessionManager
         $response = null,
         Config $config = null,
         bool $reset = false
-    )
-    {
-        if(!self::$sessionManager || $reset === true) {
+    ) {
+        if (!self::$sessionManager || $reset === true) {
             self::$sessionManager = new static($request, $response, $config);
         }
 
@@ -126,8 +125,8 @@ class SessionManager
     public function start()
     {
         if ($this->isEnabled()) {
-            if($this->request != null && $this->response != null) {
-                if($this->request instanceof \swoole_http_request
+            if ($this->request != null && $this->response != null) {
+                if ($this->request instanceof \swoole_http_request
                     && $this->response instanceof \swoole_http_response
                 ) {
                     $this->http = (new Swoole($this->request, $this->response));

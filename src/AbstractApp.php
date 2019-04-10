@@ -266,7 +266,7 @@ abstract class AbstractApp
      * @return SessionManager
      */
     public abstract function setSessionManager(?SessionManager $sessionManager): ?SessionManager;
-    
+
     /**
      * Gets the Pimple\Container object.
      *

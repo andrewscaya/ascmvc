@@ -117,8 +117,7 @@ class Session
             $sessionId = $this->setSessionId($cookie);
             $this->readData();
 
-            if (
-                !is_null($this->get('initiated'))
+            if (!is_null($this->get('initiated'))
                 && !is_null($this->get('created'))
                 && !is_null($this->get('http_user_agent'))
                 && $this->get('http_user_agent') == hash('sha256', $useragent)
@@ -233,8 +232,8 @@ class Session
         $path = explode('.', $name);
         $value = $this->data;
 
-        foreach ($path as $item){
-            if($item == ''){
+        foreach ($path as $item) {
+            if ($item == '') {
                 break;
             }
 
@@ -268,7 +267,7 @@ class Session
             . $this->sessionId
         );
 
-        if($this->sessionCacheItem->isHit()) {
+        if ($this->sessionCacheItem->isHit()) {
             $this->data = unserialize($this->sessionCacheItem->get());
 
             return true;

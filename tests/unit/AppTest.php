@@ -1448,7 +1448,7 @@ class AppTest extends TestCase
 
         try {
             $sessionManager->start();
-        } catch (\Throwable $exception){
+        } catch (\Throwable $exception) {
             var_dump($exception);
         }
 
@@ -1557,7 +1557,7 @@ class AppTest extends TestCase
 
         try {
             $sessionManager->start();
-        } catch (\Throwable $exception){
+        } catch (\Throwable $exception) {
             var_dump($exception);
         }
 

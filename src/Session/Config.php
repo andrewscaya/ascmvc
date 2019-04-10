@@ -18,19 +18,19 @@ namespace Ascmvc\Session;
 
 /**
  * Class Config
- * 
+ *
  * @package Ascmvc\Session
  */
 class Config
 {
     const TYPE_STR = 1;
-    
+
     const TYPE_NUMBER = 2;
 
     /**
      * Contains the basic session data.
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $data = [
         'session_name' => 'PHPSESSION',
@@ -43,7 +43,7 @@ class Config
 
     /**
      * Config constructor.
-     * 
+     *
      * @param array $config
      */
     public function __construct($config = [])
@@ -63,8 +63,8 @@ class Config
 
         $value = $this->data;
 
-        foreach ($path as $item){
-            if ($item == ''){
+        foreach ($path as $item) {
+            if ($item == '') {
                 break;
             }
             $value = isset($value[$item]) ? $value[$item] : null;
