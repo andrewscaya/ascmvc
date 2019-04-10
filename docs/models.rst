@@ -16,4 +16,4 @@ For more information on **Doctrine**, please see the `Doctrine website <https://
 
 For more information on **Atlas**, please see the `Atlas website <http://atlasphp.io/>`_.
 
-Code examples of how to use these backend frameworks are given in the :ref:`skeleton application`.
+Code examples of how to use these backend frameworks are given in the :ref:`skeleton` application section of this documentation.

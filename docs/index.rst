@@ -25,6 +25,7 @@ LightMVC Framework's documentation
    views
    models
    middleware
+   sessions
    skeleton
 
 Indices and tables

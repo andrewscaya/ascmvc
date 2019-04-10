@@ -17,7 +17,7 @@ ServerRequest Object
 --------------------
 
 In order to get a better understanding of the ``ServerRequest`` object, please see the
-`ZF documentation <https://zendframework.github.io/zend-diactoros/v2/usage/#server-side-applications>`_.
+`ZF documentation on server-side applications <https://zendframework.github.io/zend-diactoros/v2/usage/#server-side-applications>`_.
 
 .. index:: Response
 

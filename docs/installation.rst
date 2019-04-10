@@ -23,4 +23,4 @@ You can also use the **LightMVC Skeleton Application** by issuing these commands
     $ cd lightmvcskel
     $ composer install
 
-.. note:: The LightMVC Skeleton Application can also be downloaded as an archive file from the `LightMVC Download Page <https://lightmvc.net/download>`_.
+.. note:: The LightMVC Skeleton Application can also be downloaded as an archive file from the `LightMVC Download Page <https://lightmvcframework.net/download>`_.
