@@ -16,6 +16,11 @@
 
 namespace Ascmvc\Session;
 
+/**
+ * Class Random
+ *
+ * @package Ascmvc\Session
+ */
 class Random
 {
     /**

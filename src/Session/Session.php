@@ -16,6 +16,7 @@
 
 namespace Ascmvc\Session;
 
+use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
 /**
@@ -77,7 +78,8 @@ class Session
     /**
      * Session constructor.
      *
-     * @param SessionManager $manager
+     * @param SessionManager $sessionManager
+     * @param CacheItemPoolInterface $sessionCachePool
      */
     public function __construct(SessionManager $sessionManager, CacheItemPoolInterface $sessionCachePool)
     {

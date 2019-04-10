@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta charset="utf-8"/>
-    <title>     &raquo; \Ascmvc\Middleware
+    <title>     &raquo; \Ascmvc\Session\Cache
 </title>
     <meta name="author" content=""/>
     <meta name="description" content=""/>
@@ -111,8 +111,8 @@
                 <li class="nav-header">
                     <i class="icon-map-marker"></i> Namespaces
                 </li>
-                <a href="../namespaces/Ascmvc.Middleware.html" title="Middleware">
-                    <i class="icon-th"></i> Middleware
+                <a href="../namespaces/Ascmvc.Session.Cache.html" title="Cache">
+                    <i class="icon-th"></i> Cache
                 </a>
                 <ul class="nav nav-list nav-namespaces">
                         
@@ -128,6 +128,7 @@
             <li><a href="../index.html"><i class="icon-th"></i></a></li>
                 
                 
+                
     
     <li>
         <span class="divider">\</span><a href="../namespaces/Ascmvc.html">Ascmvc</a>
@@ -135,7 +136,12 @@
 
     
     <li>
-        <span class="divider">\</span><a href="../namespaces/Ascmvc.Middleware.html">Middleware</a>
+        <span class="divider">\</span><a href="../namespaces/Ascmvc.Session.html">Session</a>
+    </li>
+
+    
+    <li>
+        <span class="divider">\</span><a href="../namespaces/Ascmvc.Session.Cache.html">Cache</a>
     </li>
 
         </ul>
@@ -146,43 +152,29 @@
                 <h3><i class="icon-custom icon-class"></i> Classes, interfaces and traits</h3>
                 
                 
-                                        <div id="class_LazyLoadingMiddleware" class="element ajax clickable class" data-toggle="collapse" data-target="#class_LazyLoadingMiddleware .collapse">
-        <h1>LazyLoadingMiddleware<a href="../classes/Ascmvc.Middleware.LazyLoadingMiddleware.html">¶</a></h1>
-        <p class="short_description">Class LazyLoadingMiddleware</p>
+                                        <div id="class_DoctrineCacheItem" class="element ajax clickable class" data-toggle="collapse" data-target="#class_DoctrineCacheItem .collapse">
+        <h1>DoctrineCacheItem<a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItem.html">¶</a></h1>
+        <p class="short_description">Class DoctrineCacheItem</p>
         <div class="details collapse">
-                            <p>This class stores given middleware inside a Container factory in order to load them only when needed.</p>
+                            
                     </div>
-        <a href="../classes/Ascmvc.Middleware.LazyLoadingMiddleware.html" class="more">« More »</a>    </div>
+        <a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItem.html" class="more">« More »</a>    </div>
 
-                                        <div id="class_MiddlewareFactory" class="element ajax clickable class" data-toggle="collapse" data-target="#class_MiddlewareFactory .collapse">
-        <h1>MiddlewareFactory<a href="../classes/Ascmvc.Middleware.MiddlewareFactory.html">¶</a></h1>
-        <p class="short_description">Class MiddlewareFactory</p>
+                                        <div id="class_DoctrineCacheItemPool" class="element ajax clickable class" data-toggle="collapse" data-target="#class_DoctrineCacheItemPool .collapse">
+        <h1>DoctrineCacheItemPool<a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItemPool.html">¶</a></h1>
+        <p class="short_description">Class DoctrineCacheItemPool</p>
         <div class="details collapse">
-                            <p>Marshal middleware for use in the application.</p>
-<p>This class provides a number of methods for preparing and returning
-middleware for use within an application.</p>
-<p>If any middleware provided is already a MiddlewareInterface, it can be used
-verbatim or decorated as-is. Other middleware types acceptable are:</p>
-<ul>
-<li>PSR-15 RequestHandlerInterface instances; these will be decorated as
-RequestHandlerMiddleware instances.</li>
-<li>string service names resolving to middleware</li>
-<li>arrays of service names and/or MiddlewareInterface instances</li>
-<li>PHP callables that follow the PSR-15 signature</li>
-</ul>
-<p>Additionally, the class provides the following decorator/utility methods:</p>
-<ul>
-<li>callableMiddleware() will decorate the callable middleware passed to it using
-CallableMiddlewareDecorator.</li>
-<li>handlerMiddleware() will decorate the request handler passed to it using
-RequestHandlerMiddleware.</li>
-<li>lazyMiddleware() will decorate the string service name passed to it, along with the
-factory instance, as a LazyLoadingMiddleware instance.</li>
-<li>pipeline() will create a MiddlewarePipe instance from the array of
-middleware passed to it, after passing each first to prepare().</li>
-</ul>
+                            
                     </div>
-        <a href="../classes/Ascmvc.Middleware.MiddlewareFactory.html" class="more">« More »</a>    </div>
+        <a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItemPool.html" class="more">« More »</a>    </div>
+
+                                        <div id="class_DoctrineInvalidArgumentException" class="element ajax clickable class" data-toggle="collapse" data-target="#class_DoctrineInvalidArgumentException .collapse">
+        <h1>DoctrineInvalidArgumentException<a href="../classes/Ascmvc.Session.Cache.DoctrineInvalidArgumentException.html">¶</a></h1>
+        <p class="short_description">Class DoctrineInvalidArgumentException</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.Session.Cache.DoctrineInvalidArgumentException.html" class="more">« More »</a>    </div>
 
                             </div>
             

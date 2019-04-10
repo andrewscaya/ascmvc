@@ -30,8 +30,7 @@ use function Zend\Stratigility\path;
 /**
  * Class App
  *
- * The MVC application class.
- *
+ * @package Ascmvc\Mvc
  */
 class App extends AbstractApp
 {

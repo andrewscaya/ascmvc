@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta charset="utf-8"/>
-    <title>    ASCMVC &raquo; \Ascmvc\Middleware\MiddlewareFactory
+    <title>    ASCMVC &raquo; \Ascmvc\Session\Swoole
 </title>
     <meta name="author" content=""/>
     <meta name="description" content=""/>
@@ -120,38 +120,38 @@
             <i class="icon-custom icon-method"></i> Methods
             <ul>
                                                                                                     <li class="method public">
-        <a href="#method___construct" title="__construct :: MiddlewareFactory constructor.">
-            <span class="description">MiddlewareFactory constructor.</span><pre>__construct</pre>
+        <a href="#method___construct" title="__construct :: Swoole constructor.">
+            <span class="description">Swoole constructor.</span><pre>__construct</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_callableMiddleware" title="callableMiddleware :: Decorate callable standards-signature middleware via a CallableMiddlewareDecorator.">
-            <span class="description">Decorate callable standards-signature middleware via a CallableMiddlewareDecorator.</span><pre>callableMiddleware</pre>
+        <a href="#method_getCookie" title="getCookie :: Gets the cookie from the Swoole Request object.">
+            <span class="description">Gets the cookie from the Swoole Request object.</span><pre>getCookie</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_handlerMiddleware" title="handlerMiddleware :: Decorate a RequestHandlerInterface as middleware via RequestHandlerMiddleware.">
-            <span class="description">Decorate a RequestHandlerInterface as middleware via RequestHandlerMiddleware.</span><pre>handlerMiddleware</pre>
+        <a href="#method_getServerGlobalEnv" title="getServerGlobalEnv :: Returns the equivalent of the $_SERVER array from the Swoole environment.">
+            <span class="description">Returns the equivalent of the $_SERVER array from the Swoole environment.</span><pre>getServerGlobalEnv</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_lazyMiddleware" title="lazyMiddleware :: Create lazy loading middleware based on a service name.">
-            <span class="description">Create lazy loading middleware based on a service name.</span><pre>lazyMiddleware</pre>
+        <a href="#method_setCookie" title="setCookie :: Sets the cookie in the Swoole Response object.">
+            <span class="description">Sets the cookie in the Swoole Response object.</span><pre>setCookie</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_pipeline" title="pipeline :: Create a middleware pipeline from an array of middleware.">
-            <span class="description">Create a middleware pipeline from an array of middleware.</span><pre>pipeline</pre>
+        <a href="#method_setRequest" title="setRequest :: Sets the \swoole_http_request object.">
+            <span class="description">Sets the \swoole_http_request object.</span><pre>setRequest</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_prepare" title="prepare :: Prepares the middleware according to type.">
-            <span class="description">Prepares the middleware according to type.</span><pre>prepare</pre>
+        <a href="#method_setResponse" title="setResponse :: Sets the \swoole_http_response object.">
+            <span class="description">Sets the \swoole_http_response object.</span><pre>setResponse</pre>
         </a>
     </li>
 
@@ -177,35 +177,13 @@
 
         <div class="span8">
             <div class="element class">
-                <h1>MiddlewareFactory</h1>
+                <h1>Swoole</h1>
                 <small style="display: block; text-align: right">
                                                         </small>
-                <p class="short_description">Class MiddlewareFactory</p>
+                <p class="short_description">Class Swoole</p>
                 <div class="details">
                     <div class="long_description">
-                        <p>Marshal middleware for use in the application.</p>
-<p>This class provides a number of methods for preparing and returning
-middleware for use within an application.</p>
-<p>If any middleware provided is already a MiddlewareInterface, it can be used
-verbatim or decorated as-is. Other middleware types acceptable are:</p>
-<ul>
-<li>PSR-15 RequestHandlerInterface instances; these will be decorated as
-RequestHandlerMiddleware instances.</li>
-<li>string service names resolving to middleware</li>
-<li>arrays of service names and/or MiddlewareInterface instances</li>
-<li>PHP callables that follow the PSR-15 signature</li>
-</ul>
-<p>Additionally, the class provides the following decorator/utility methods:</p>
-<ul>
-<li>callableMiddleware() will decorate the callable middleware passed to it using
-CallableMiddlewareDecorator.</li>
-<li>handlerMiddleware() will decorate the request handler passed to it using
-RequestHandlerMiddleware.</li>
-<li>lazyMiddleware() will decorate the string service name passed to it, along with the
-factory instance, as a LazyLoadingMiddleware instance.</li>
-<li>pipeline() will create a MiddlewarePipe instance from the array of
-middleware passed to it, after passing each first to prepare().</li>
-</ul>
+                        
                     </div>
                     <table class="table table-bordered">
                                                                                     <tr>
@@ -214,7 +192,7 @@ middleware passed to it, after passing each first to prepare().</li>
                                                                             </th>
                                     <td>
                                                                                     
-                                                                                <p>LightMVC/ASCMVC</p>
+                                                                                <p>Ascmvc\Session</p>
                                     </td>
                                 </tr>
                                                                                                                                                                                 </table>
@@ -222,8 +200,8 @@ middleware passed to it, after passing each first to prepare().</li>
                     <h3><i class="icon-custom icon-method"></i> Methods</h3>
                                                                 <a id="method___construct"></a>
                         <div class="element clickable method public  method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
-                            <h2>MiddlewareFactory constructor.</h2>
-                            <pre>__construct(\Pimple\Container $container) </pre>
+                            <h2>Swoole constructor.</h2>
+                            <pre>__construct(\swoole_http_request $request, \swoole_http_response $response) </pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -244,18 +222,22 @@ middleware passed to it, after passing each first to prepare().</li>
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
-                                                <h4>$container</h4>
-                                                <code>\Pimple\Container</code><p></p>
+                                                <h4>$request</h4>
+                                                <code>\swoole_http_request</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$response</h4>
+                                                <code>\swoole_http_response</code><p></p>
                                             </div>
                                                                             
                                                                     </div>
                             </div>
 
                         </div>
-                                            <a id="method_callableMiddleware"></a>
-                        <div class="element clickable method public  method_callableMiddleware" data-toggle="collapse" data-target=".method_callableMiddleware .collapse">
-                            <h2>Decorate callable standards-signature middleware via a CallableMiddlewareDecorator.</h2>
-                            <pre>callableMiddleware(callable $middleware) : \Zend\Stratigility\Middleware\CallableMiddlewareDecorator</pre>
+                                            <a id="method_getCookie"></a>
+                        <div class="element clickable method public  method_getCookie" data-toggle="collapse" data-target=".method_getCookie .collapse">
+                            <h2>Gets the cookie from the Swoole Request object.</h2>
+                            <pre>getCookie(string $name = &#039;&#039;) : null</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -269,117 +251,20 @@ middleware passed to it, after passing each first to prepare().</li>
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
-                                                <h4>$middleware</h4>
-                                                <code>callable</code><p></p>
-                                            </div>
-                                                                            
-                                                                            <h3>Response</h3>
-                                        <code>\Zend\Stratigility\Middleware\CallableMiddlewareDecorator</code><p></p>
-                                                                    </div>
-                            </div>
-
-                        </div>
-                                            <a id="method_handlerMiddleware"></a>
-                        <div class="element clickable method public  method_handlerMiddleware" data-toggle="collapse" data-target=".method_handlerMiddleware .collapse">
-                            <h2>Decorate a RequestHandlerInterface as middleware via RequestHandlerMiddleware.</h2>
-                            <pre>handlerMiddleware(\Psr\Http\Server\RequestHandlerInterface $handler) : \Zend\Stratigility\Middleware\RequestHandlerMiddleware</pre>
-                            <div class="labels">
-                                                                                                                                                                                            </div>
-
-                            
-                            <div class="row collapse">
-                                <div class="detail-description">
-                                    <div class="long_description"></div>
-
-                                    <table class="table">
-                                                                                                                    </table>
-
-                                                                            <h3>Arguments</h3>
-                                                                                    <div class="subelement argument">
-                                                <h4>$handler</h4>
-                                                <code>\Psr\Http\Server\RequestHandlerInterface</code><p></p>
-                                            </div>
-                                                                            
-                                                                            <h3>Response</h3>
-                                        <code>\Zend\Stratigility\Middleware\RequestHandlerMiddleware</code><p></p>
-                                                                    </div>
-                            </div>
-
-                        </div>
-                                            <a id="method_lazyMiddleware"></a>
-                        <div class="element clickable method public  method_lazyMiddleware" data-toggle="collapse" data-target=".method_lazyMiddleware .collapse">
-                            <h2>Create lazy loading middleware based on a service name.</h2>
-                            <pre>lazyMiddleware(string $middleware) : \Ascmvc\Middleware\LazyLoadingMiddleware</pre>
-                            <div class="labels">
-                                                                                                                                                                                            </div>
-
-                            
-                            <div class="row collapse">
-                                <div class="detail-description">
-                                    <div class="long_description"></div>
-
-                                    <table class="table">
-                                                                                                                    </table>
-
-                                                                            <h3>Arguments</h3>
-                                                                                    <div class="subelement argument">
-                                                <h4>$middleware</h4>
+                                                <h4>$name</h4>
                                                 <code>string</code><p></p>
                                             </div>
                                                                             
                                                                             <h3>Response</h3>
-                                        <code><a href="../classes/Ascmvc.Middleware.LazyLoadingMiddleware.html">\Ascmvc\Middleware\LazyLoadingMiddleware</a></code><p></p>
+                                        <code>null</code><p></p>
                                                                     </div>
                             </div>
 
                         </div>
-                                            <a id="method_pipeline"></a>
-                        <div class="element clickable method public  method_pipeline" data-toggle="collapse" data-target=".method_pipeline .collapse">
-                            <h2>Create a middleware pipeline from an array of middleware.</h2>
-                            <pre>pipeline(string|array|\Zend\Stratigility\MiddlewarePipe $middleware) : \Zend\Stratigility\MiddlewarePipe</pre>
-                            <div class="labels">
-                                                                                                                                                                                            </div>
-
-                            
-                            <div class="row collapse">
-                                <div class="detail-description">
-                                    <div class="long_description"><p>This method allows passing an array of middleware as either:</p>
-<ul>
-<li>discrete arguments</li>
-<li>an array of middleware, using the splat operator: pipeline(...$array)</li>
-<li>an array of middleware as the sole argument: pipeline($array)</li>
-</ul>
-<p>Each item is passed to prepare() before being passed to the
-MiddlewarePipe instance the method returns.</p></div>
-
-                                    <table class="table">
-                                                                                                                            <tr>
-                                                <th>Throws</th>
-                                                <td>
-                                                    <dl>
-                                                                                                            <dt>\Exception</dt>
-                                                        <dd></dd>
-                                                                                                                                                            </dl>
-                                                </td>
-                                            </tr>
-                                                                            </table>
-
-                                                                            <h3>Arguments</h3>
-                                                                                    <div class="subelement argument">
-                                                <h4>$middleware</h4>
-                                                <code>string|array|\Zend\Stratigility\MiddlewarePipe</code><p></p>
-                                            </div>
-                                                                            
-                                                                            <h3>Response</h3>
-                                        <code>\Zend\Stratigility\MiddlewarePipe</code><p></p>
-                                                                    </div>
-                            </div>
-
-                        </div>
-                                            <a id="method_prepare"></a>
-                        <div class="element clickable method public  method_prepare" data-toggle="collapse" data-target=".method_prepare .collapse">
-                            <h2>Prepares the middleware according to type.</h2>
-                            <pre>prepare(string|array|callable|\Psr\Http\Server\MiddlewareInterface|\Psr\Http\Server\RequestHandlerInterface $middleware) : \Psr\Http\Server\MiddlewareInterface</pre>
+                                            <a id="method_getServerGlobalEnv"></a>
+                        <div class="element clickable method public  method_getServerGlobalEnv" data-toggle="collapse" data-target=".method_getServerGlobalEnv .collapse">
+                            <h2>Returns the equivalent of the $_SERVER array from the Swoole environment.</h2>
+                            <pre>getServerGlobalEnv() : mixed</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -389,25 +274,123 @@ MiddlewarePipe instance the method returns.</p></div>
                                     <div class="long_description"></div>
 
                                     <table class="table">
-                                                                                                                            <tr>
-                                                <th>Throws</th>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
                                                 <td>
-                                                    <dl>
-                                                                                                            <dt>\Exception</dt>
-                                                        <dd><p>if argument is not one of the specified types.</p></dd>
-                                                                                                                                                            </dl>
-                                                </td>
+                                                                                                    </td>
                                             </tr>
-                                                                            </table>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>mixed</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setCookie"></a>
+                        <div class="element clickable method public  method_setCookie" data-toggle="collapse" data-target=".method_setCookie .collapse">
+                            <h2>Sets the cookie in the Swoole Response object.</h2>
+                            <pre>setCookie(string $name, string $value = &quot;&quot;, integer $expire, string $path = &quot;&quot;, string $domain = &quot;&quot;, boolean $secure = false, boolean $httponly = false) : mixed</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
-                                                <h4>$middleware</h4>
-                                                <code>string|array|callable|\Psr\Http\Server\MiddlewareInterface|\Psr\Http\Server\RequestHandlerInterface</code><p></p>
+                                                <h4>$name</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$value</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$expire</h4>
+                                                <code>integer</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$path</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$domain</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$secure</h4>
+                                                <code>boolean</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$httponly</h4>
+                                                <code>boolean</code><p></p>
                                             </div>
                                                                             
                                                                             <h3>Response</h3>
-                                        <code>\Psr\Http\Server\MiddlewareInterface</code><p></p>
+                                        <code>mixed</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setRequest"></a>
+                        <div class="element clickable method public  method_setRequest" data-toggle="collapse" data-target=".method_setRequest .collapse">
+                            <h2>Sets the \swoole_http_request object.</h2>
+                            <pre>setRequest(\swoole_http_request|null $request = null) : $this|\swoole_http_request</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$request</h4>
+                                                <code>\swoole_http_request|null</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>$this|\swoole_http_request</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setResponse"></a>
+                        <div class="element clickable method public  method_setResponse" data-toggle="collapse" data-target=".method_setResponse .collapse">
+                            <h2>Sets the \swoole_http_response object.</h2>
+                            <pre>setResponse(\swoole_http_response|null $response = null) : $this|\swoole_http_response</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$response</h4>
+                                                <code>\swoole_http_response|null</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>$this|\swoole_http_response</code><p></p>
                                                                     </div>
                             </div>
 
@@ -415,10 +398,10 @@ MiddlewarePipe instance the method returns.</p></div>
                     
                     
                                                                 <h3><i class="icon-custom icon-property"></i> Properties</h3>
-                                                    <a id="property_container"> </a>
-                            <div class="element clickable property  protected property_container" data-toggle="collapse" data-target=".property_container .collapse">
-                                <h2>Contains an instance of the Pimple\Container class.</h2>
-                                <pre>container : \Pimple\Container</pre>
+                                                    <a id="property_request"> </a>
+                            <div class="element clickable property  protected property_request" data-toggle="collapse" data-target=".property_request .collapse">
+                                <h2>Contains a swoole_http_request instance.</h2>
+                                <pre>request : \swoole_http_request</pre>
                                 <div class="labels">
                                                                                                         </div>
                                 <div class="row collapse">
@@ -437,20 +420,46 @@ MiddlewarePipe instance the method returns.</p></div>
                                                                                     </table>
 
                                                                                     <h3>Type(s)</h3>
-                                            <code>\Pimple\Container</code>
+                                            <code>\swoole_http_request</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_response"> </a>
+                            <div class="element clickable property  protected property_response" data-toggle="collapse" data-target=".property_response .collapse">
+                                <h2>Contains a swoole_http_response instance.</h2>
+                                <pre>response : \swoole_http_response</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>\swoole_http_response</code>
                                                                             </div>
                                 </div>
                             </div>
                                                             </div>
             </div>
-            <a id="\Ascmvc\Middleware\MiddlewareFactory"></a>
+            <a id="\Ascmvc\Session\Swoole"></a>
             <ul class="breadcrumb">
                 <li><a href="../index.html"><i class="icon-custom icon-class"></i></a></li>
                     
     
-    <li><span class="divider">\</span><a href="../namespaces/Ascmvc.Middleware.html">Middleware</a></li>
+    <li><span class="divider">\</span><a href="../namespaces/Ascmvc.Session.html">Session</a></li>
 
-                <li class="active"><span class="divider">\</span><a href="../classes/Ascmvc.Middleware.MiddlewareFactory.html">MiddlewareFactory</a></li>
+                <li class="active"><span class="divider">\</span><a href="../classes/Ascmvc.Session.Swoole.html">Swoole</a></li>
             </ul>
         </div>
     </div>

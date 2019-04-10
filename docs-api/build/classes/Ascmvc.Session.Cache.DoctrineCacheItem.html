@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta charset="utf-8"/>
-    <title>    ASCMVC &raquo; \Ascmvc\Mvc\Controller
+    <title>    ASCMVC &raquo; \Ascmvc\Session\Cache\DoctrineCacheItem
 </title>
     <meta name="author" content=""/>
     <meta name="description" content=""/>
@@ -119,43 +119,51 @@
         <li class="nav-header">
             <i class="icon-custom icon-method"></i> Methods
             <ul>
-                                                                                                    <li class="method public inherited">
-        <a href="#method___construct" title="__construct :: Initializes this class by assigning the objects and arrays
-contained in the referenced application object to the corresponding
-properties.">
-            <span class="description">Initializes this class by assigning the objects and arrays
-contained in the referenced application object to the corresponding
-properties.</span><pre>__construct</pre>
-        </a>
-    </li>
-
-                                                                                                        <li class="method public inherited">
-        <a href="#method_indexAction" title="indexAction :: Method corresponding to the controller&#039;s default action.">
-            <span class="description">Method corresponding to the controller&#039;s default action.</span><pre>indexAction</pre>
+                                                                                                    <li class="method public">
+        <a href="#method___construct" title="__construct :: DoctrineCacheItem constructor.">
+            <span class="description">DoctrineCacheItem constructor.</span><pre>__construct</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_onBootstrap" title="onBootstrap :: OnBootstrap listener method.">
-            <span class="description">OnBootstrap listener method.</span><pre>onBootstrap</pre>
+        <a href="#method_expiresAfter" title="expiresAfter :: Sets the expiration time for this cache item.">
+            <span class="description">Sets the expiration time for this cache item.</span><pre>expiresAfter</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_onDispatch" title="onDispatch :: OnDispatch listener method.">
-            <span class="description">OnDispatch listener method.</span><pre>onDispatch</pre>
+        <a href="#method_expiresAt" title="expiresAt :: Sets the expiration time for this cache item.">
+            <span class="description">Sets the expiration time for this cache item.</span><pre>expiresAt</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_onFinish" title="onFinish :: OnFinish listener method.">
-            <span class="description">OnFinish listener method.</span><pre>onFinish</pre>
+        <a href="#method_get" title="get :: Retrieves the value of the item from the cache associated with this object&#039;s key.">
+            <span class="description">Retrieves the value of the item from the cache associated with this object&#039;s key.</span><pre>get</pre>
         </a>
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_onRender" title="onRender :: OnRender listener method.">
-            <span class="description">OnRender listener method.</span><pre>onRender</pre>
+        <a href="#method_getExpiration" title="getExpiration :: Gets the expiration time for this cache item.">
+            <span class="description">Gets the expiration time for this cache item.</span><pre>getExpiration</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getKey" title="getKey :: Returns the key for the current cache item.">
+            <span class="description">Returns the key for the current cache item.</span><pre>getKey</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_isHit" title="isHit :: Confirms if the cache item lookup resulted in a cache hit.">
+            <span class="description">Confirms if the cache item lookup resulted in a cache hit.</span><pre>isHit</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_set" title="set :: Sets the value represented by this cache item.">
+            <span class="description">Sets the value represented by this cache item.</span><pre>set</pre>
         </a>
     </li>
 
@@ -163,11 +171,11 @@ properties.</span><pre>__construct</pre>
         </li>
         <li class="nav-header protected">» Protected
             <ul>
-                                                                                                                                                                                                                                                                    </ul>
+                                                                                                                                                                                                                                                                                                                                            </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                                                                                                                                                                                                    </ul>
+                                                                                                                                                                                                                                                                                                                                            </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -181,16 +189,14 @@ properties.</span><pre>__construct</pre>
 
         <div class="span8">
             <div class="element class">
-                <h1>Controller</h1>
+                <h1>DoctrineCacheItem</h1>
                 <small style="display: block; text-align: right">
-                                            Extends <a href="../classes/Ascmvc.AbstractController.html">\Ascmvc\AbstractController</a>
-                                                                Implements <a href="../classes/Ascmvc.AscmvcEventManagerListenerInterface.html">\Ascmvc\AscmvcEventManagerListenerInterface</a>
+                                                                Implements \Psr\Cache\CacheItemInterface
                                     </small>
-                <p class="short_description">Class Controller</p>
+                <p class="short_description">Class DoctrineCacheItem</p>
                 <div class="details">
                     <div class="long_description">
-                        <p>The Controller class extends the AbstractController and
-implements the AscmvcEventManagerListenerInterface.</p>
+                        
                     </div>
                     <table class="table table-bordered">
                                                                                     <tr>
@@ -199,20 +205,18 @@ implements the AscmvcEventManagerListenerInterface.</p>
                                                                             </th>
                                     <td>
                                                                                     
-                                                                                <p>LightMVC/ASCMVC</p>
+                                                                                <p>Ascmvc\Session\Cache</p>
                                     </td>
                                 </tr>
                                                                                                                                                                                 </table>
 
                     <h3><i class="icon-custom icon-method"></i> Methods</h3>
                                                                 <a id="method___construct"></a>
-                        <div class="element clickable method public  method___construct inherited" data-toggle="collapse" data-target=".method___construct .collapse">
-                            <h2>Initializes this class by assigning the objects and arrays
-contained in the referenced application object to the corresponding
-properties.</h2>
-                            <pre>__construct(array $baseConfig) : void</pre>
+                        <div class="element clickable method public  method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+                            <h2>DoctrineCacheItem constructor.</h2>
+                            <pre>__construct( $key,  $data) </pre>
                             <div class="labels">
-                                <span class="label">inherited</span>                                                                                                <span class="label">abstract</span>                                                            </div>
+                                                                                                                                                                                            </div>
 
                             
                             <div class="row collapse">
@@ -220,76 +224,33 @@ properties.</h2>
                                     <div class="long_description"></div>
 
                                     <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
                                                                                                                     </table>
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
-                                                <h4>$baseConfig</h4>
-                                                <code>array</code><p></p>
+                                                <h4>$key</h4>
+                                                <code></code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$data</h4>
+                                                <code></code><p></p>
                                             </div>
                                                                             
                                                                     </div>
                             </div>
 
                         </div>
-                                            <a id="method_indexAction"></a>
-                        <div class="element clickable method public  method_indexAction inherited" data-toggle="collapse" data-target=".method_indexAction .collapse">
-                            <h2>Method corresponding to the controller&#039;s default action.</h2>
-                            <pre>indexAction(null $vars = null) : mixed|void</pre>
-                            <div class="labels">
-                                <span class="label">inherited</span>                                                                                                <span class="label">abstract</span>                                                            </div>
-
-                            
-                            <div class="row collapse">
-                                <div class="detail-description">
-                                    <div class="long_description"></div>
-
-                                    <table class="table">
-                                                                                                                    </table>
-
-                                                                            <h3>Arguments</h3>
-                                                                                    <div class="subelement argument">
-                                                <h4>$vars</h4>
-                                                <code>null</code><p></p>
-                                            </div>
-                                                                            
-                                                                            <h3>Response</h3>
-                                        <code>mixed|void</code><p></p>
-                                                                    </div>
-                            </div>
-
-                        </div>
-                                            <a id="method_onBootstrap"></a>
-                        <div class="element clickable method public  method_onBootstrap" data-toggle="collapse" data-target=".method_onBootstrap .collapse">
-                            <h2>OnBootstrap listener method.</h2>
-                            <pre>onBootstrap(\Ascmvc\Mvc\AscmvcEvent $event) : mixed|void</pre>
-                            <div class="labels">
-                                                                <span class="label">static</span>                                                                                                                            </div>
-
-                            
-                            <div class="row collapse">
-                                <div class="detail-description">
-                                    <div class="long_description"></div>
-
-                                    <table class="table">
-                                                                                                                    </table>
-
-                                                                            <h3>Arguments</h3>
-                                                                                    <div class="subelement argument">
-                                                <h4>$event</h4>
-                                                <code><a href="../classes/Ascmvc.Mvc.AscmvcEvent.html">\Ascmvc\Mvc\AscmvcEvent</a></code><p></p>
-                                            </div>
-                                                                            
-                                                                            <h3>Response</h3>
-                                        <code>mixed|void</code><p></p>
-                                                                    </div>
-                            </div>
-
-                        </div>
-                                            <a id="method_onDispatch"></a>
-                        <div class="element clickable method public  method_onDispatch" data-toggle="collapse" data-target=".method_onDispatch .collapse">
-                            <h2>OnDispatch listener method.</h2>
-                            <pre>onDispatch(\Ascmvc\Mvc\AscmvcEvent $event) : mixed|void</pre>
+                                            <a id="method_expiresAfter"></a>
+                        <div class="element clickable method public  method_expiresAfter" data-toggle="collapse" data-target=".method_expiresAfter .collapse">
+                            <h2>Sets the expiration time for this cache item.</h2>
+                            <pre>expiresAfter(integer|\DateInterval|null $time) : static</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -303,20 +264,24 @@ properties.</h2>
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
-                                                <h4>$event</h4>
-                                                <code><a href="../classes/Ascmvc.Mvc.AscmvcEvent.html">\Ascmvc\Mvc\AscmvcEvent</a></code><p></p>
+                                                <h4>$time</h4>
+                                                <code>integer|\DateInterval|null</code><p><p>The period of time from the present after which the item MUST be considered
+expired. An integer parameter is understood to be the time in seconds until
+expiration. If null is passed explicitly, a default value MAY be used.
+If none is set, the value should be stored permanently or for as long as the
+implementation allows.</p></p>
                                             </div>
                                                                             
                                                                             <h3>Response</h3>
-                                        <code>mixed|void</code><p></p>
+                                        <code>static</code><p><p>The called object.</p></p>
                                                                     </div>
                             </div>
 
                         </div>
-                                            <a id="method_onFinish"></a>
-                        <div class="element clickable method public  method_onFinish" data-toggle="collapse" data-target=".method_onFinish .collapse">
-                            <h2>OnFinish listener method.</h2>
-                            <pre>onFinish(\Ascmvc\Mvc\AscmvcEvent $event) : mixed|void</pre>
+                                            <a id="method_expiresAt"></a>
+                        <div class="element clickable method public  method_expiresAt" data-toggle="collapse" data-target=".method_expiresAt .collapse">
+                            <h2>Sets the expiration time for this cache item.</h2>
+                            <pre>expiresAt(\DateTimeInterface|null $expiration) : static</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -330,20 +295,55 @@ properties.</h2>
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
-                                                <h4>$event</h4>
-                                                <code><a href="../classes/Ascmvc.Mvc.AscmvcEvent.html">\Ascmvc\Mvc\AscmvcEvent</a></code><p></p>
+                                                <h4>$expiration</h4>
+                                                <code>\DateTimeInterface|null</code><p><p>The point in time after which the item MUST be considered expired.
+If null is passed explicitly, a default value MAY be used. If none is set,
+the value should be stored permanently or for as long as the
+implementation allows.</p></p>
                                             </div>
                                                                             
                                                                             <h3>Response</h3>
-                                        <code>mixed|void</code><p></p>
+                                        <code>static</code><p><p>The called object.</p></p>
                                                                     </div>
                             </div>
 
                         </div>
-                                            <a id="method_onRender"></a>
-                        <div class="element clickable method public  method_onRender" data-toggle="collapse" data-target=".method_onRender .collapse">
-                            <h2>OnRender listener method.</h2>
-                            <pre>onRender(\Ascmvc\Mvc\AscmvcEvent $event) : mixed|void</pre>
+                                            <a id="method_get"></a>
+                        <div class="element clickable method public  method_get" data-toggle="collapse" data-target=".method_get .collapse">
+                            <h2>Retrieves the value of the item from the cache associated with this object&#039;s key.</h2>
+                            <pre>get() : mixed</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"><p>The value returned must be identical to the value originally stored by set().</p>
+<p>If isHit() returns false, this method MUST return null. Note that null
+is a legitimate cached value, so the isHit() method SHOULD be used to
+differentiate between &quot;null value was found&quot; and &quot;no value was found.&quot;</p></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>mixed</code><p><p>The value corresponding to this cache item's key, or null if not found.</p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getExpiration"></a>
+                        <div class="element clickable method public  method_getExpiration" data-toggle="collapse" data-target=".method_getExpiration .collapse">
+                            <h2>Gets the expiration time for this cache item.</h2>
+                            <pre>getExpiration() : integer</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -353,16 +353,107 @@ properties.</h2>
                                     <div class="long_description"></div>
 
                                     <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>integer</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getKey"></a>
+                        <div class="element clickable method public  method_getKey" data-toggle="collapse" data-target=".method_getKey .collapse">
+                            <h2>Returns the key for the current cache item.</h2>
+                            <pre>getKey() : string</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"><p>The key is loaded by the Implementing Library, but should be available to
+the higher level callers when needed.</p></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>string</code><p><p>The key string for this cache item.</p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_isHit"></a>
+                        <div class="element clickable method public  method_isHit" data-toggle="collapse" data-target=".method_isHit .collapse">
+                            <h2>Confirms if the cache item lookup resulted in a cache hit.</h2>
+                            <pre>isHit() : boolean</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"><p>Note: This method MUST NOT have a race condition between calling isHit()
+and calling get().</p></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>boolean</code><p><p>True if the request resulted in a cache hit. False otherwise.</p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_set"></a>
+                        <div class="element clickable method public  method_set" data-toggle="collapse" data-target=".method_set .collapse">
+                            <h2>Sets the value represented by this cache item.</h2>
+                            <pre>set(mixed $value) : static</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"><p>The $value argument may be any item that can be serialized by PHP,
+although the method of serialization is left up to the Implementing
+Library.</p></div>
+
+                                    <table class="table">
                                                                                                                     </table>
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
-                                                <h4>$event</h4>
-                                                <code><a href="../classes/Ascmvc.Mvc.AscmvcEvent.html">\Ascmvc\Mvc\AscmvcEvent</a></code><p></p>
+                                                <h4>$value</h4>
+                                                <code>mixed</code><p><p>The serializable value to be stored.</p></p>
                                             </div>
                                                                             
                                                                             <h3>Response</h3>
-                                        <code>mixed|void</code><p></p>
+                                        <code>static</code><p><p>The invoked object.</p></p>
                                                                     </div>
                             </div>
 
@@ -370,13 +461,12 @@ properties.</h2>
                     
                     
                                                                 <h3><i class="icon-custom icon-property"></i> Properties</h3>
-                                                    <a id="property_baseConfig"> </a>
-                            <div class="element clickable property  protected property_baseConfig inherited" data-toggle="collapse" data-target=".property_baseConfig .collapse">
-                                <h2>Contains a reference to the array containing some of the app&#039;s basic configurations
-useful to controllers.</h2>
-                                <pre>baseConfig : array|null</pre>
+                                                    <a id="property_hit"> </a>
+                            <div class="element clickable property  protected property_hit" data-toggle="collapse" data-target=".property_hit .collapse">
+                                <h2>Contains the result of the cache item lookup.</h2>
+                                <pre>hit : boolean</pre>
                                 <div class="labels">
-                                    <span class="label">inherited</span>                                                                    </div>
+                                                                                                        </div>
                                 <div class="row collapse">
                                     <div class="detail-description">
                                         <div class="long_description"></div>
@@ -393,16 +483,16 @@ useful to controllers.</h2>
                                                                                     </table>
 
                                                                                     <h3>Type(s)</h3>
-                                            <code>array|null</code>
+                                            <code>boolean</code>
                                                                             </div>
                                 </div>
                             </div>
-                                                    <a id="property_view"> </a>
-                            <div class="element clickable property  protected property_view inherited" data-toggle="collapse" data-target=".property_view .collapse">
-                                <h2>Array contains all of the values that will be assigned to the View manager&#039;s template.</h2>
-                                <pre>view : array|null</pre>
+                                                    <a id="property_key"> </a>
+                            <div class="element clickable property  protected property_key" data-toggle="collapse" data-target=".property_key .collapse">
+                                <h2>Contains the item&#039;s key.</h2>
+                                <pre>key : string</pre>
                                 <div class="labels">
-                                    <span class="label">inherited</span>                                                                    </div>
+                                                                                                        </div>
                                 <div class="row collapse">
                                     <div class="detail-description">
                                         <div class="long_description"></div>
@@ -419,16 +509,16 @@ useful to controllers.</h2>
                                                                                     </table>
 
                                                                                     <h3>Type(s)</h3>
-                                            <code>array|null</code>
+                                            <code>string</code>
                                                                             </div>
                                 </div>
                             </div>
-                                                    <a id="property_helpers"> </a>
-                            <div class="element clickable property  protected property_helpers inherited" data-toggle="collapse" data-target=".property_helpers .collapse">
-                                <h2>Array contains the controller&#039;s helper objects.</h2>
-                                <pre>helpers : array|null</pre>
+                                                    <a id="property_data"> </a>
+                            <div class="element clickable property  protected property_data" data-toggle="collapse" data-target=".property_data .collapse">
+                                <h2>Contains the value of the item from the cache associated with this object&#039;s key.</h2>
+                                <pre>data : array</pre>
                                 <div class="labels">
-                                    <span class="label">inherited</span>                                                                    </div>
+                                                                                                        </div>
                                 <div class="row collapse">
                                     <div class="detail-description">
                                         <div class="long_description"></div>
@@ -445,20 +535,46 @@ useful to controllers.</h2>
                                                                                     </table>
 
                                                                                     <h3>Type(s)</h3>
-                                            <code>array|null</code>
+                                            <code>array</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_expiration"> </a>
+                            <div class="element clickable property  protected property_expiration" data-toggle="collapse" data-target=".property_expiration .collapse">
+                                <h2>Contains the item expiration time in seconds.</h2>
+                                <pre>expiration : integer</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>integer</code>
                                                                             </div>
                                 </div>
                             </div>
                                                             </div>
             </div>
-            <a id="\Ascmvc\Mvc\Controller"></a>
+            <a id="\Ascmvc\Session\Cache\DoctrineCacheItem"></a>
             <ul class="breadcrumb">
                 <li><a href="../index.html"><i class="icon-custom icon-class"></i></a></li>
                     
     
-    <li><span class="divider">\</span><a href="../namespaces/Ascmvc.Mvc.html">Mvc</a></li>
+    <li><span class="divider">\</span><a href="../namespaces/Ascmvc.Session.Cache.html">Cache</a></li>
 
-                <li class="active"><span class="divider">\</span><a href="../classes/Ascmvc.Mvc.Controller.html">Controller</a></li>
+                <li class="active"><span class="divider">\</span><a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItem.html">DoctrineCacheItem</a></li>
             </ul>
         </div>
     </div>

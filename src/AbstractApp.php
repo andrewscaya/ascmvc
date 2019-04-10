@@ -22,10 +22,11 @@ use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
 
 /**
+ * Class AbstractApp
+ *
  * The abstract AbstractApp class is the blueprint for the MVC's main engine.
  *
- * The abstract AbstractApp class is the one that needs to be extended
- * in order to create a LightMVC AbstractApp.
+ * @package Ascmvc
  */
 abstract class AbstractApp
 {

@@ -23,6 +23,11 @@ use Doctrine\Common\Cache\XcacheCache;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
+/**
+ * Class DoctrineCacheItemPool
+ *
+ * @package Ascmvc\Session\Cache
+ */
 class DoctrineCacheItemPool implements CacheItemPoolInterface
 {
     /**

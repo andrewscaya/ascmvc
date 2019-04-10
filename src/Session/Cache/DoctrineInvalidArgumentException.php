@@ -14,6 +14,11 @@ namespace Ascmvc\Session\Cache;
 
 use Psr\Cache\InvalidArgumentException;
 
+/**
+ * Class DoctrineInvalidArgumentException
+ *
+ * @package Ascmvc\Session\Cache
+ */
 class DoctrineInvalidArgumentException extends \Exception implements InvalidArgumentException
 {
     /**

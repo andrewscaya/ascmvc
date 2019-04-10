@@ -14,6 +14,11 @@ namespace Ascmvc\Session\Cache;
 
 use Psr\Cache\CacheItemInterface;
 
+/**
+ * Class DoctrineCacheItem
+ *
+ * @package Ascmvc\Session\Cache
+ */
 class DoctrineCacheItem implements CacheItemInterface
 {
     /**
@@ -48,7 +53,7 @@ class DoctrineCacheItem implements CacheItemInterface
      * DoctrineCacheItem constructor.
      *
      * @param $key
-     * @param $result
+     * @param $data
      */
     public function __construct($key, $data)
     {
@@ -129,7 +134,9 @@ class DoctrineCacheItem implements CacheItemInterface
     }
 
     /**
-     * @return mixed
+     * Gets the expiration time for this cache item.
+     *
+     * @return int
      */
     public function getExpiration()
     {

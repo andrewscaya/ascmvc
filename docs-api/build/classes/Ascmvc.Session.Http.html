@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta charset="utf-8"/>
-    <title>    ASCMVC &raquo; \Ascmvc\AscmvcDispatchListenerInterface
+    <title>    ASCMVC &raquo; \Ascmvc\Session\Http
 </title>
     <meta name="author" content=""/>
     <meta name="description" content=""/>
@@ -120,14 +120,20 @@
             <i class="icon-custom icon-method"></i> Methods
             <ul>
                                                                                                     <li class="method public">
-        <a href="#method_onDispatch" title="onDispatch :: Allows an implementing object to interrupt the application&#039;s runtime after the
-registration of the controller object, but before the controller manager&#039;s call
-to the controller&#039;s action method.  This phase allows for controller specific
-configuration.">
-            <span class="description">Allows an implementing object to interrupt the application&#039;s runtime after the
-registration of the controller object, but before the controller manager&#039;s call
-to the controller&#039;s action method.  This phase allows for controller specific
-configuration.</span><pre>onDispatch</pre>
+        <a href="#method_getCookie" title="getCookie :: Gets a cookie by name.">
+            <span class="description">Gets a cookie by name.</span><pre>getCookie</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_getServerGlobalEnv" title="getServerGlobalEnv :: Returns the $_SERVER array.">
+            <span class="description">Returns the $_SERVER array.</span><pre>getServerGlobalEnv</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_setCookie" title="setCookie :: Sets a new cookie.">
+            <span class="description">Sets a new cookie.</span><pre>setCookie</pre>
         </a>
     </li>
 
@@ -135,11 +141,11 @@ configuration.</span><pre>onDispatch</pre>
         </li>
         <li class="nav-header protected">» Protected
             <ul>
-                                                                                </ul>
+                                                                                                                                                        </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                </ul>
+                                                                                                                                                        </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -153,18 +159,13 @@ configuration.</span><pre>onDispatch</pre>
 
         <div class="span8">
             <div class="element class">
-                <h1>AscmvcDispatchListenerInterface</h1>
+                <h1>Http</h1>
                 <small style="display: block; text-align: right">
-                                            Extends 
                                                         </small>
-                <p class="short_description">AscmvcRenderListenerInterface allows the implementing class
-to be consumed as a AscmvcEventManager class listener.</p>
+                <p class="short_description">Class Http</p>
                 <div class="details">
                     <div class="long_description">
-                        <p>The interface's methods correspond exactly to the
-application's events as they are used in its run() method
-so that, in turn, these methods may be dynamically called by the
-EventManager's event-driven &quot;trigger&quot; methods.</p>
+                        
                     </div>
                     <table class="table table-bordered">
                                                                                     <tr>
@@ -173,19 +174,43 @@ EventManager's event-driven &quot;trigger&quot; methods.</p>
                                                                             </th>
                                     <td>
                                                                                     
-                                                                                <p>LightMVC/ASCMVC</p>
+                                                                                <p>Ascmvc\Session</p>
                                     </td>
                                 </tr>
-                                                                                                                            </table>
+                                                                                                                                                                                </table>
 
                     <h3><i class="icon-custom icon-method"></i> Methods</h3>
-                                                                <a id="method_onDispatch"></a>
-                        <div class="element clickable method public  method_onDispatch" data-toggle="collapse" data-target=".method_onDispatch .collapse">
-                            <h2>Allows an implementing object to interrupt the application&#039;s runtime after the
-registration of the controller object, but before the controller manager&#039;s call
-to the controller&#039;s action method.  This phase allows for controller specific
-configuration.</h2>
-                            <pre>onDispatch(\Ascmvc\Mvc\AscmvcEvent $event) </pre>
+                                                                <a id="method_getCookie"></a>
+                        <div class="element clickable method public  method_getCookie" data-toggle="collapse" data-target=".method_getCookie .collapse">
+                            <h2>Gets a cookie by name.</h2>
+                            <pre>getCookie(string $name = &#039;&#039;) : null</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$name</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>null</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getServerGlobalEnv"></a>
+                        <div class="element clickable method public  method_getServerGlobalEnv" data-toggle="collapse" data-target=".method_getServerGlobalEnv .collapse">
+                            <h2>Returns the $_SERVER array.</h2>
+                            <pre>getServerGlobalEnv() : mixed</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -204,12 +229,60 @@ configuration.</h2>
                                             </tr>
                                                                                                                     </table>
 
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>mixed</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setCookie"></a>
+                        <div class="element clickable method public  method_setCookie" data-toggle="collapse" data-target=".method_setCookie .collapse">
+                            <h2>Sets a new cookie.</h2>
+                            <pre>setCookie(string $name, string $value = &quot;&quot;, integer $expire, string $path = &quot;&quot;, string $domain = &quot;&quot;, boolean $secure = false, boolean $httponly = false) : boolean</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
-                                                <h4>$event</h4>
-                                                <code><a href="../classes/Ascmvc.Mvc.AscmvcEvent.html">\Ascmvc\Mvc\AscmvcEvent</a></code><p></p>
+                                                <h4>$name</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$value</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$expire</h4>
+                                                <code>integer</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$path</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$domain</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$secure</h4>
+                                                <code>boolean</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$httponly</h4>
+                                                <code>boolean</code><p></p>
                                             </div>
                                                                             
+                                                                            <h3>Response</h3>
+                                        <code>boolean</code><p></p>
                                                                     </div>
                             </div>
 
@@ -218,14 +291,14 @@ configuration.</h2>
                     
                                                         </div>
             </div>
-            <a id="\Ascmvc\AscmvcDispatchListenerInterface"></a>
+            <a id="\Ascmvc\Session\Http"></a>
             <ul class="breadcrumb">
                 <li><a href="../index.html"><i class="icon-custom icon-class"></i></a></li>
                     
     
-    <li><span class="divider">\</span><a href="../namespaces/Ascmvc.html">Ascmvc</a></li>
+    <li><span class="divider">\</span><a href="../namespaces/Ascmvc.Session.html">Session</a></li>
 
-                <li class="active"><span class="divider">\</span><a href="../classes/Ascmvc.AscmvcDispatchListenerInterface.html">AscmvcDispatchListenerInterface</a></li>
+                <li class="active"><span class="divider">\</span><a href="../classes/Ascmvc.Session.Http.html">Http</a></li>
             </ul>
         </div>
     </div>
