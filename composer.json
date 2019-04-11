@@ -28,7 +28,7 @@
         "pimple/pimple": "3.2.3",
         "smarty/smarty": "3.1.33",
         "twig/twig": "2.6.0",
-        "zendframework/zend-diactoros": "2.1.0",
+        "zendframework/zend-diactoros": "2.1.1",
         "zendframework/zend-eventmanager": "3.2.1",
         "zendframework/zend-stdlib": "3.2.1",
         "zendframework/zend-stratigility": "3.0.2",
