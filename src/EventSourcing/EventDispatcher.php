@@ -13,6 +13,7 @@
 namespace Ascmvc\EventSourcing;
 
 use Ascmvc\AbstractApp;
+use Ascmvc\EventSourcing\Event\Event;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Zend\EventManager\EventManager as ZendEventManager;
 use Zend\EventManager\SharedEventManagerInterface;
@@ -41,16 +42,17 @@ class EventDispatcher extends ZendEventManager implements EventDispatcherInterfa
     /**
      * Dispatches the event.
      *
-     * @param Event $event
+     * @param object $event
      *
-     * @return object|void
+     * @return void
      */
     public function dispatch(object $event)
     {
         if ($event instanceof Event) {
             $event->setApplication($this->application);
 
-            return $this->triggerEvent($event);
+            // Not checking if event is stopped because this event implementation IS NOT stoppable.
+            $this->triggerEvent($event);
         }
     }
 }

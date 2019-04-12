@@ -16,6 +16,7 @@ use Ascmvc\AbstractApp;
 use Ascmvc\AbstractController;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\AbstractRouter;
+use Ascmvc\EventSourcing\EventLogger;
 use Ascmvc\Middleware\MiddlewareFactory;
 use Ascmvc\Session\SessionManager;
 use Pimple\Container;
@@ -200,6 +201,10 @@ class App extends AbstractApp
             }, 3);
         }
 
+        if (isset($baseConfig['eventlog']) && $baseConfig['eventlog']['enabled'] === true) {
+            $eventLogger = new EventLogger($this, $eventManager, $baseConfig['eventlog']);
+        }
+
         return $this;
     }
 
@@ -339,24 +344,6 @@ class App extends AbstractApp
         $this->eventManager->triggerEvent($this->event);
 
         return;
-    }
-
-    /**
-     * Updates the Controller's output after the dispatch event if needed (listener method).
-     *
-     * @param EventInterface $event
-     */
-    public function updatePostDispatchControllerOutput(EventInterface $event)
-    {
-        $params = $event->getParams();
-
-        if (!empty($params)) {
-            if (is_null($this->controllerOutput)) {
-                $this->controllerOutput = $params;
-            }
-        } else {
-            array_merge($this->controllerOutput, $params);
-        }
     }
 
     /**

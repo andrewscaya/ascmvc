@@ -50,10 +50,6 @@ class ControllerManager extends AbstractControllerManager
 
         $eventManager = $this->app->getEventManager();
 
-        $sharedEventManager = $eventManager->getSharedManager();
-
-        $eventDispatcher = new EventDispatcher($this->app, $sharedEventManager);
-
         $viewObject = $this->app->getViewObject();
 
         if (strpos($controllerName, '/') !== false) {
@@ -77,6 +73,12 @@ class ControllerManager extends AbstractControllerManager
             if (!$this->controllerReflection->hasMethod($this->controllerMethodName)) {
                 throw new \ReflectionException;
             }
+
+            $sharedEventManager = $eventManager->getSharedManager();
+
+            $eventDispatcherName = $baseConfig['events']['psr14_event_dispatcher'];
+
+            $eventDispatcher = new $eventDispatcherName($this->app, $sharedEventManager);
 
             if ($this->controllerReflection->implementsInterface(AscmvcControllerFactoryInterface::class)
                 && $this->controllerReflection->hasMethod('factory')

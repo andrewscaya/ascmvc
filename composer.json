@@ -56,7 +56,8 @@
     "autoload-dev": {
         "psr-4": {
             "AscmvcTest\\": "tests/",
-            "Application\\": "tests/unit/app/controllers/Application",
+            "Application\\Controllers\\": "tests/unit/app/controllers/Application/Controllers",
+            "Application\\Models\\": "tests/unit/app/models/Application/Models",
             "Specialmodule\\": "tests/unit/app/controllers/Specialmodule"
         }
     },

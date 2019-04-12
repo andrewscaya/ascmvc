@@ -34,7 +34,7 @@ class AppTest extends TestCase
     public function testGetAppInstance()
     {
         if (!defined('BASEDIR')) {
-            define('BASEDIR', dirname(__FILE__));
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
         }
 
         $app = App::getInstance();
@@ -53,28 +53,33 @@ class AppTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $baseConfig['BASEDIR'] = BASEDIR . DIRECTORY_SEPARATOR . 'app';
+        $baseConfig['BASEDIR'] = BASEDIR;
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $app = App::getInstance();
 
@@ -101,24 +106,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $_SERVER['HTTP_HOST'] = 'localhost';
 
@@ -155,24 +165,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         rename(
             BASEDIR
@@ -235,24 +250,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['doctrine']['DBAL']['dm2'] = [
             'driver'   => 'pdo_mysql',
@@ -288,24 +308,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['atlas']['ORM']['aem1'] = [
             'driver'   => 'pdo_mysql',
@@ -363,24 +388,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['middleware'] = [
             function ($req, $handler) {
@@ -466,24 +496,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['middleware'] = [
             function ($req, $handler) {
@@ -611,24 +646,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $app = App::getInstance();
 
@@ -692,24 +732,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $app = App::getInstance();
 
@@ -783,24 +828,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $app = App::getInstance();
 
@@ -873,24 +923,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Twig';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $app = App::getInstance();
 
@@ -964,24 +1019,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Smarty';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $app = App::getInstance();
 
@@ -1057,24 +1117,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $app = App::getInstance();
 
@@ -1154,24 +1219,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['routes'] = [
             0 => [
@@ -1285,24 +1355,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['routes'] = [
             0 => [
@@ -1355,6 +1430,113 @@ class AppTest extends TestCase
         );
     }
 
+    public function testRunMethodWithAllEventsWithMergedControllerEventOutput()
+    {
+        // Redirect output to command output
+        $this->setOutputCallback(function () {
+        });
+
+        ob_start();
+
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/fakeevent/index']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
+        $baseConfig['routes'] = [
+            0 => [
+                'GET',
+                '/fakeevent[/{action}]',
+                'fakeevent',
+            ],
+        ];
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $ascmvcEvent = $app->getEvent();
+        $ascmvcEvent->setName(AscmvcEvent::EVENT_ROUTE);
+        $ascmvcEvent->setApplication($app);
+        $app->setEvent($ascmvcEvent);
+
+        $app->run();
+
+        $actualOutput = ob_get_contents();
+
+        $this->assertSame(
+            "<html>\n"
+            . "<head>\n"
+            . "</head>\n"
+            . "<body>\n"
+            . "<!-- Plates template -->\n"
+            . "FakeeventControllerSTDOUTtestaddedvalue</body>\n"
+            . "</html>",
+            $actualOutput
+        );
+    }
+
     public function testSessionIsEnabled()
     {
         // Redirect output to command output
@@ -1400,24 +1582,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['session'] = [
             'enabled' => true,
@@ -1509,24 +1696,29 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['session'] = [
             'enabled' => false,

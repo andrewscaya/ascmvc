@@ -12,6 +12,8 @@
 
 namespace Ascmvc\EventSourcing;
 
+use Ascmvc\EventSourcing\Event\Event;
+
 /**
  * Interface EventListenerInterface
  *

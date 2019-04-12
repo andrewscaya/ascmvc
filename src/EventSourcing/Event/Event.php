@@ -10,12 +10,12 @@
  * @since      3.0.0
  */
 
-namespace Ascmvc\EventSourcing;
+namespace Ascmvc\EventSourcing\Event;
 
 use Ascmvc\AbstractApp;
 use Zend\EventManager\Event as ZendEvent;
 
-class Event extends ZendEvent
+abstract class Event extends ZendEvent
 {
     /**
      * The instance of the application.
@@ -44,13 +44,15 @@ class Event extends ZendEvent
     public function setApplication(AbstractApp &$application) : AbstractApp
     {
         $this->application = $application;
+
         return $this->application;
     }
 
     /**
-     * Event propagation is not stoppable
+     * Event propagation is not stoppable.
      *
-     * @param  bool $flag
+     * @param bool $flag
+     * @return bool
      */
     public function stopPropagation($flag = true)
     {
@@ -58,7 +60,7 @@ class Event extends ZendEvent
     }
 
     /**
-     * Propagation is never stopped
+     * Propagation is never stopped.
      *
      * @return bool
      */

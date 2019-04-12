@@ -13,7 +13,9 @@
 namespace AscmvcTest;
 
 use Application\Controllers\FakeController;
-use Ascmvc\EventSourcing\EventProcessor;
+use Ascmvc\EventSourcing\EventDispatcher;
+use Ascmvc\Mvc\App;
+use Ascmvc\Mvc\AscmvcEvent;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -26,15 +28,48 @@ class ControllerTest extends TestCase
     {
         $baseConfig['BASEDIR'] = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app';
 
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $baseConfig['view'] = [
             'title' => "Skeleton Application",
             'author' => 'Andrew Caya',
             'description' => 'Small CRUD application',
         ];
 
-        $eventProcessor = new EventProcessor();
+        $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_DISPATCH);
 
-        $controller = new FakeController($baseConfig, $eventProcessor);
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $eventDispatcher = new EventDispatcher($app);
+
+        $controller = new FakeController($baseConfig, $eventDispatcher);
 
         $controllerReflection = new \ReflectionClass($controller);
 

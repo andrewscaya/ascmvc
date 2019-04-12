@@ -14,7 +14,7 @@
 namespace AscmvcTest;
 
 use \Application\Controllers\FakeController;
-use Ascmvc\EventSourcing\EventProcessor;
+use Ascmvc\EventSourcing\EventDispatcher;
 use Ascmvc\Mvc\App;
 use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\AscmvcEventManagerFactory;
@@ -61,6 +61,14 @@ class AscmvcEventManagerTest extends TestCase
             . 'config';
 
         $baseConfig['env'] = 'development';
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $eventManager = AscmvcEventManagerFactory::create();
 
@@ -118,6 +126,14 @@ class AscmvcEventManagerTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $eventManager = AscmvcEventManagerFactory::create();
 
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_DISPATCH);
@@ -135,9 +151,9 @@ class AscmvcEventManagerTest extends TestCase
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 
-        $eventProcessor = new EventProcessor();
+        $eventDispatcher = new EventDispatcher($app);
 
-        $controller = new FakeController($baseConfig, $eventProcessor);
+        $controller = new FakeController($baseConfig, $eventDispatcher);
         $app->setController($controller);
         $ascmvcEvent->setApplication($app);
 
@@ -178,6 +194,14 @@ class AscmvcEventManagerTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $eventManager = AscmvcEventManagerFactory::create();
 
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_RENDER);
@@ -195,9 +219,9 @@ class AscmvcEventManagerTest extends TestCase
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 
-        $eventProcessor = new EventProcessor();
+        $eventDispatcher = new EventDispatcher($app);
 
-        $controller = new FakeController($baseConfig, $eventProcessor);
+        $controller = new FakeController($baseConfig, $eventDispatcher);
         $app->setController($controller);
         $ascmvcEvent->setApplication($app);
 
@@ -249,6 +273,14 @@ class AscmvcEventManagerTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $eventManager = AscmvcEventManagerFactory::create();
 
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_FINISH);
@@ -258,9 +290,9 @@ class AscmvcEventManagerTest extends TestCase
         // Deliberately not calling the app's boot() method
         $app->initialize($baseConfig);
 
-        $eventProcessor = new EventProcessor();
+        $eventDispatcher = new EventDispatcher($app);
 
-        $controller = new FakeController($baseConfig, $eventProcessor);
+        $controller = new FakeController($baseConfig, $eventDispatcher);
         $app->setController($controller);
         $app->setRequest($requestMock);
         $ascmvcEvent->setApplication($app);
@@ -326,6 +358,14 @@ class AscmvcEventManagerTest extends TestCase
             . 'config';
 
         $baseConfig['env'] = 'development';
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['routes'] = [
             0 => [
@@ -461,6 +501,14 @@ class AscmvcEventManagerTest extends TestCase
 
         $baseConfig['env'] = 'development';
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $baseConfig['routes'] = [
             0 => [
                 'GET',
@@ -576,6 +624,14 @@ class AscmvcEventManagerTest extends TestCase
             . 'config';
 
         $baseConfig['env'] = 'development';
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['routes'] = [
             0 => [
@@ -704,6 +760,14 @@ class AscmvcEventManagerTest extends TestCase
             . 'config';
 
         $baseConfig['env'] = 'development';
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['routes'] = [
             0 => [

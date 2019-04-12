@@ -29,6 +29,8 @@ class AscmvcEventManagerFactory
     public static function create() : AscmvcEventManager
     {
         $shared = new SharedEventManager();
-        return new AscmvcEventManager($shared);
+        $eventManager = new AscmvcEventManager($shared);
+        $eventManager->setIdentifiers(['AscmvcApplication']);
+        return $eventManager;
     }
 }

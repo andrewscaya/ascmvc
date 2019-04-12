@@ -36,7 +36,8 @@ abstract class Command
     /**
      * Command constructor.
      *
-     * @param array $args
+     * @param EventDispatcher $eventDispatcher
+     * @param array $argv
      */
     public function __construct(EventDispatcher $eventDispatcher, array $argv)
     {
