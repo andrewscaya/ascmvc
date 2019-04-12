@@ -23,6 +23,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
+use Zend\EventManager\EventInterface;
 use Zend\Stratigility\MiddlewarePipe;
 use Zend\Stratigility\Exception\EmptyPipelineException;
 use function Zend\Stratigility\path;
@@ -318,7 +319,11 @@ class App extends AbstractApp
                 return;
             }
         } else {
-            $this->controllerOutput = $response;
+            if (!empty($this->controllerOutput)) {
+                $this->controllerOutput = array_merge($response, $this->controllerOutput);
+            } else {
+                $this->controllerOutput = $response;
+            }
         }
 
         $this->event->setName(AscmvcEvent::EVENT_RENDER);
@@ -334,6 +339,24 @@ class App extends AbstractApp
         $this->eventManager->triggerEvent($this->event);
 
         return;
+    }
+
+    /**
+     * Updates the Controller's output after the dispatch event if needed (listener method).
+     *
+     * @param EventInterface $event
+     */
+    public function updatePostDispatchControllerOutput(EventInterface $event)
+    {
+        $params = $event->getParams();
+
+        if (!empty($params)) {
+            if (is_null($this->controllerOutput)) {
+                $this->controllerOutput = $params;
+            }
+        } else {
+            array_merge($this->controllerOutput, $params);
+        }
     }
 
     /**

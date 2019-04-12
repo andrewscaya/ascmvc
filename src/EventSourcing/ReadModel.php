@@ -12,7 +12,19 @@
 
 namespace Ascmvc\EventSourcing;
 
-abstract class ReadModel
+/**
+ * Class ReadModel
+ *
+ * @package Ascmvc\EventSourcing
+ */
+class ReadModel extends EventListener
 {
-    abstract public function read(array $params);
+    /**
+     * Reads from the domain model.
+     *
+     * @return mixed
+     */
+    public function read()
+    {
+    }
 }

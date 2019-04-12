@@ -12,9 +12,22 @@
 
 namespace Ascmvc\EventSourcing;
 
-use Zend\EventManager\EventInterface;
-
-abstract class Policy implements EventListenerInterface
+/**
+ * Class Policy
+ *
+ * @package Ascmvc\EventSourcing
+ */
+class Policy extends EventListener
 {
-    abstract public function onEvent(EventInterface $event);
+    /**
+     * Returns an instance of this class.
+     *
+     * @param EventDispatcher $eventDispatcher
+     *
+     * @return Policy
+     */
+    public static function getInstance(EventDispatcher $eventDispatcher)
+    {
+        return new self($eventDispatcher);
+    }
 }

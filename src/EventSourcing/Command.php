@@ -12,23 +12,37 @@
 
 namespace Ascmvc\EventSourcing;
 
+/**
+ * Class Command
+ *
+ * @package Ascmvc\EventSourcing
+ */
 abstract class Command
 {
     /**
-     * Contains the command's arguments
+     * Contains an instance of the \Ascmvc\EventSourcing\EventDispatcher
+     *
+     * @var EventDispatcher
+     */
+    protected $eventDispatcher;
+
+    /**
+     * Contains an array of the command's arguments
      *
      * @var array
      */
-    protected $args = [];
+    protected $argv = [];
 
     /**
      * Command constructor.
      *
      * @param array $args
      */
-    public function __construct(array $args)
+    public function __construct(EventDispatcher $eventDispatcher, array $argv)
     {
-        $this->args = $args;
+        $this->eventDispatcher = $eventDispatcher;
+
+        $this->argv = $argv;
     }
 
     abstract public function execute();

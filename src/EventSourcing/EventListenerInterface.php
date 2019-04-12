@@ -12,16 +12,12 @@
 
 namespace Ascmvc\EventSourcing;
 
-use Zend\EventManager\EventInterface;
-
 /**
  * Interface EventListenerInterface
  *
- * The EventListenerInterface interface is implemented by any Policy class that
- * wishes to be triggered by the EventProcessor.
- *
+ * @package Ascmvc\EventSourcing
  */
 interface EventListenerInterface
 {
-    public function onEvent(EventInterface $event);
+    public function onEvent(Event $event);
 }

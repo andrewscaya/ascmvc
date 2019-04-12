@@ -14,7 +14,7 @@ namespace Ascmvc\Mvc;
 
 use Ascmvc\AbstractController;
 use Ascmvc\AscmvcEventManagerListenerInterface;
-use Ascmvc\EventSourcing\EventProcessor;
+use Ascmvc\EventSourcing\EventDispatcher;
 
 /**
  * Class Controller
@@ -29,12 +29,15 @@ class Controller extends AbstractController implements AscmvcEventManagerListene
      * Controller constructor.
      *
      * @param array $baseConfig
+     * @param EventDispatcher $eventDispatcher
      */
-    public function __construct(array $baseConfig, EventProcessor $eventProcessor)
+    public function __construct(array $baseConfig, EventDispatcher $eventDispatcher)
     {
         $this->baseConfig = $baseConfig;
 
         $this->view = $this->baseConfig['view'];
+
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     // @codeCoverageIgnoreStart

@@ -12,13 +12,17 @@
 
 namespace Ascmvc;
 
-use Ascmvc\EventSourcing\EventProcessor;
+use Ascmvc\EventSourcing\EventDispatcher;
 use Pimple\Container;
 use Ascmvc\Mvc\AscmvcEventManager;
 
 /**
+ * Interface AscmvcControllerFactoryInterface
+ *
  * FactoryInterface allows the implementing class
  * to create itself using initialization logic.
+ *
+ * @package Ascmvc
  */
 interface AscmvcControllerFactoryInterface
 {
@@ -27,11 +31,11 @@ interface AscmvcControllerFactoryInterface
      * Allows an implementing object to initialize itself using
      * application resources and parameters.
      *
-     * @param array &$baseConfig
-     * @param &$viewObject
-     * @param Container &$serviceManager
-     * @param AscmvcEventManager &$eventManager
-     *
+     * @param array $baseConfig
+     * @param EventDispatcher $eventDispatcher
+     * @param Container $serviceManager
+     * @param $viewObject
+     * @return mixed
      */
-    public static function factory(array &$baseConfig, EventProcessor &$eventProcessor, Container &$serviceManager, &$viewObject);
+    public static function factory(array &$baseConfig, EventDispatcher &$eventDispatcher, Container &$serviceManager, &$viewObject);
 }
