@@ -28,6 +28,8 @@ class AggregateImmutableValueObjectTest extends TestCase
 
         $serializedString = 'a:1:{s:7:"testkey";s:9:"testvalue";}';
 
+        $this->assertInstanceOf(AggregateImmutableValueObject::class, $aggregateValueObject);
+
         $this->assertSame(
             $serializedString,
             $aggregateValueObject->serialize()
@@ -54,5 +56,11 @@ class AggregateImmutableValueObjectTest extends TestCase
         );
 
         $this->assertFalse($aggregateValueObject->unserialize('O:8:"stdClass":0:{}'));
+
+        $aggregateValueObject = new AggregateImmutableValueObject();
+
+        $this->assertInstanceOf(AggregateImmutableValueObject::class, $aggregateValueObject);
+
+        $this->assertTrue(is_array($aggregateValueObject->getProperties()));
     }
 }

@@ -20,11 +20,14 @@ namespace Ascmvc\EventSourcing;
 class ReadModel extends EventListener
 {
     /**
-     * Executes a command in order to read from the domain model.
+     * Returns an instance of this class.
      *
-     * @return mixed
+     * @param EventDispatcher $eventDispatcher
+     *
+     * @return ReadModel
      */
-    public function read()
+    public static function getInstance(EventDispatcher $eventDispatcher)
     {
+        return new self($eventDispatcher);
     }
 }
