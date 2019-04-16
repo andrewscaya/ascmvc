@@ -210,7 +210,7 @@ implements the AscmvcEventManagerListenerInterface.</p>
                             <h2>Initializes this class by assigning the objects and arrays
 contained in the referenced application object to the corresponding
 properties.</h2>
-                            <pre>__construct(array $baseConfig) </pre>
+                            <pre>__construct(array $baseConfig, \Ascmvc\EventSourcing\EventDispatcher $eventDispatcher) </pre>
                             <div class="labels">
                                 <span class="label">inherited</span>                                                                                                <span class="label">abstract</span>                                                            </div>
 
@@ -233,6 +233,10 @@ properties.</h2>
                                                                                     <div class="subelement argument">
                                                 <h4>$baseConfig</h4>
                                                 <code>array</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$eventDispatcher</h4>
+                                                <code><a href="../classes/Ascmvc.EventSourcing.EventDispatcher.html">\Ascmvc\EventSourcing\EventDispatcher</a></code><p></p>
                                             </div>
                                                                             
                                                                     </div>
@@ -430,6 +434,32 @@ useful to controllers.</h2>
                                                                             </div>
                                 </div>
                             </div>
+                                                    <a id="property_eventDispatcher"> </a>
+                            <div class="element clickable property  protected property_eventDispatcher inherited" data-toggle="collapse" data-target=".property_eventDispatcher .collapse">
+                                <h2>Contains an instance of the Ascmvc\EventSourcing\EventDispatcher class.</h2>
+                                <pre>eventDispatcher : \Ascmvc\EventSourcing\EventDispatcher</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code><a href="../classes/Ascmvc.EventSourcing.EventDispatcher.html">\Ascmvc\EventSourcing\EventDispatcher</a></code>
+                                                                            </div>
+                                </div>
+                            </div>
                                                     <a id="property_helpers"> </a>
                             <div class="element clickable property  protected property_helpers inherited" data-toggle="collapse" data-target=".property_helpers .collapse">
                                 <h2>Array contains the controller&#039;s helper objects.</h2>
@@ -476,7 +506,7 @@ useful to controllers.</h2>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Tue, 16 Apr 2019 22:29:08 +0000.<br/>
+            generated on Tue, 16 Apr 2019 03:38:30 +0000.<br/>
     </footer>
     </body>
 </html>

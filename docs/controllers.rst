@@ -8,7 +8,12 @@ Controllers
 ===========
 
 The framework's controllers are extensions of the ``Ascmvc\Mvc\Controller`` class which implements
-the ``Ascmvc\AscmvcEventManagerListenerInterface`` interface.
+the ``Ascmvc\AscmvcEventManagerListenerInterface`` interface. Within the LightMVC Framework, controllers
+are considered to be the Root Aggregate (main command) of the each and every Event Sourcing aggregate.
+
+.. note:: For more information on configuring an application's event sourcing aggregates and the application's event log, please see the :ref:`configuration eventsourcing` section.
+
+.. note:: For more information on the framework's event sourcing aggregates in general, please see the :ref:`eventsourcing` section.
 
 .. index:: Controller methods
 

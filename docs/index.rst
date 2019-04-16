@@ -22,6 +22,7 @@ LightMVC Framework's documentation
    services
    routing
    controllers
+   eventsourcing
    views
    models
    middleware

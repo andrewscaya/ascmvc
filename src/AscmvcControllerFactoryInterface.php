@@ -5,14 +5,14 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.1.1
+ * @version    3.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
 
 namespace Ascmvc;
 
-use Ascmvc\Mvc\AscmvcEventManager;
+use Ascmvc\EventSourcing\EventDispatcher;
 use Pimple\Container;
 
 /**
@@ -31,10 +31,10 @@ interface AscmvcControllerFactoryInterface
      * application resources and parameters.
      *
      * @param array $baseConfig
-     * @param $viewObject
+     * @param EventDispatcher $eventDispatcher
      * @param Container $serviceManager
-     * @param AscmvcEventManager $eventManager
+     * @param $viewObject
      * @return mixed
      */
-    public static function factory(array &$baseConfig, &$viewObject, Container &$serviceManager, AscmvcEventManager &$eventManager);
+    public static function factory(array &$baseConfig, EventDispatcher &$eventDispatcher, Container &$serviceManager, &$viewObject);
 }

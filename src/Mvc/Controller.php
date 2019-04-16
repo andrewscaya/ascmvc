@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.1.1
+ * @version    3.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -14,6 +14,7 @@ namespace Ascmvc\Mvc;
 
 use Ascmvc\AbstractController;
 use Ascmvc\AscmvcEventManagerListenerInterface;
+use Ascmvc\EventSourcing\EventDispatcher;
 
 /**
  * Class Controller
@@ -28,12 +29,15 @@ class Controller extends AbstractController implements AscmvcEventManagerListene
      * Controller constructor.
      *
      * @param array $baseConfig
+     * @param EventDispatcher $eventDispatcher
      */
-    public function __construct(array $baseConfig)
+    public function __construct(array $baseConfig, EventDispatcher $eventDispatcher)
     {
         $this->baseConfig = $baseConfig;
 
         $this->view = $this->baseConfig['view'];
+
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     // @codeCoverageIgnoreStart

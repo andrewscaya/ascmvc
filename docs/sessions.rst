@@ -7,12 +7,12 @@
 Sessions
 ========
 
-As mentioned in the :ref:`configuration` section, setting up asynchronous PHP sessions with LightMVC is
+As mentioned in the :ref:`configuration session` section, setting up asynchronous PHP sessions with LightMVC is
 a matter of adding the appropriate configuration in the ``config/session.config.php`` file. But, one might
 need to use an asynchronous session in a customized way. To do so, it is necessary to instantiate a session
 ``Config`` object, constructor injecting into it any custom configuration array that might be deemed
 necessary, and obtaining an instance of the ``SessionManager`` object by requesting it through
-the ``getSessionMananger()`` static method. Once this is done, it is a question of invoking
+the ``getSessionManager()`` static method. Once this is done, it is a question of invoking
 the ``SessionManager``'s ``start()`` method to get the session started. Here is a working example:
 
 .. code-block:: php
@@ -47,4 +47,3 @@ the ``SessionManager``'s ``start()`` method to get the session started. Here is 
     // This step is optional, as the session object will persist itself automatically
     // before the PHP script exits and falls out of scope of the PHP runtime.
     $sessionManager->persist();
-

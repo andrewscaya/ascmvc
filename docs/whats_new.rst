@@ -1,5 +1,14 @@
 .. _WhatsNewAnchor:
 
+What's new in version 3.0.0 (2019-04-16)
+========================================
+
+* Adds controller-based Event Sourcing aggregates to the framework with a PSR-14 compliant Event Dispatcher (event bus).
+
+* Adds the facilities to use CQRS.
+
+* Updates the documentation.
+
 What's new in version 2.1.1 (2019-04-16)
 ========================================
 

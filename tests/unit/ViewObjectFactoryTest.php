@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.1.1
+ * @version    3.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
@@ -44,6 +44,14 @@ class ViewObjectFactoryTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
         $this->assertInstanceOf(Engine::class, $viewObject);
@@ -71,6 +79,14 @@ class ViewObjectFactoryTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
         $this->assertInstanceOf(\Twig_Environment::class, $viewObject);
@@ -97,6 +113,14 @@ class ViewObjectFactoryTest extends TestCase
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
@@ -129,6 +153,14 @@ class ViewObjectFactoryTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
         $this->assertInstanceOf(Engine::class, $viewObject);
@@ -160,6 +192,14 @@ class ViewObjectFactoryTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
         $this->assertInstanceOf(\Twig_Environment::class, $viewObject);
@@ -190,6 +230,14 @@ class ViewObjectFactoryTest extends TestCase
         $baseConfig['env'] = 'production';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 

@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.1.1
+ * @version    3.0.0
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  * @since      2.0.0
@@ -87,6 +87,14 @@ class FastRouterTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $baseConfig['routes'] = [
             0 => [
                 'GET',
@@ -167,6 +175,14 @@ class FastRouterTest extends TestCase
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['routes'] = [
             0 => [
@@ -254,6 +270,14 @@ class FastRouterTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $baseConfig['routes'] = [
             0 => [
                 'GET',
@@ -340,6 +364,14 @@ class FastRouterTest extends TestCase
         $baseConfig['env'] = 'production';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['routes'] = [
             0 => [
@@ -437,6 +469,14 @@ class FastRouterTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $baseConfig['routes'] = [
             0 => [
                 'GET',
@@ -515,6 +555,14 @@ class FastRouterTest extends TestCase
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['routes'] = [
             0 => [
@@ -595,6 +643,14 @@ class FastRouterTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $baseConfig['routes'] = [
             0 => [
                 'GET',
@@ -674,6 +730,14 @@ class FastRouterTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $baseConfig['routes'] = [
             0 => [
                 'GET',
@@ -752,6 +816,14 @@ class FastRouterTest extends TestCase
         $baseConfig['env'] = 'development';
 
         $baseConfig['view'] = [];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
 
         $baseConfig['routes'] = [
             0 => [

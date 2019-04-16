@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.1.1
+ * @version    3.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
@@ -13,6 +13,9 @@
 namespace AscmvcTest;
 
 use Application\Controllers\FakeController;
+use Ascmvc\EventSourcing\EventDispatcher;
+use Ascmvc\Mvc\App;
+use Ascmvc\Mvc\AscmvcEvent;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -43,13 +46,30 @@ class ControllerTest extends TestCase
 
         $baseConfig['view'] = [];
 
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
         $baseConfig['view'] = [
             'title' => "Skeleton Application",
             'author' => 'Andrew Caya',
             'description' => 'Small CRUD application',
         ];
 
-        $controller = new FakeController($baseConfig);
+        $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_DISPATCH);
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $eventDispatcher = new EventDispatcher($app);
+
+        $controller = new FakeController($baseConfig, $eventDispatcher);
 
         $controllerReflection = new \ReflectionClass($controller);
 

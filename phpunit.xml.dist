@@ -36,6 +36,11 @@
                 <file>src/AscmvcRenderListenerInterface.php</file>
                 <file>src/AscmvcRouteListenerInterface.php</file>
                 <file>src/AscmvcControllerFactoryInterface.php</file>
+                <file>src/EventSourcing/Command.php</file>
+                <file>src/EventSourcing/EventListener.php</file>
+                <file>src/EventSourcing/EventListenerInterface.php</file>
+                <file>src/EventSourcing/Policy.php</file>
+                <file>src/EventSourcing/ReadModel.php</file>
                 <file>src/Mvc/Psr4Autoloader.php</file>
                 <file>src/Session/Swoole.php</file>
             </exclude>

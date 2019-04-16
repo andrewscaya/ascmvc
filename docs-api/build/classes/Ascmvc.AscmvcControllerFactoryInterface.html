@@ -176,7 +176,7 @@ to create itself using initialization logic.</p>
                         <div class="element clickable method public  method_factory" data-toggle="collapse" data-target=".method_factory .collapse">
                             <h2>Allows an implementing object to initialize itself using
 application resources and parameters.</h2>
-                            <pre>factory(array &$baseConfig,  &$viewObject, \Pimple\Container &$serviceManager, \Ascmvc\Mvc\AscmvcEventManager &$eventManager) : mixed</pre>
+                            <pre>factory(array &$baseConfig, \Ascmvc\EventSourcing\EventDispatcher &$eventDispatcher, \Pimple\Container &$serviceManager,  &$viewObject) : mixed</pre>
                             <div class="labels">
                                                                 <span class="label">static</span>                                                                                                                            </div>
 
@@ -194,16 +194,16 @@ application resources and parameters.</h2>
                                                 <code>array</code><p></p>
                                             </div>
                                                                                     <div class="subelement argument">
-                                                <h4>$viewObject</h4>
-                                                <code></code><p></p>
+                                                <h4>$eventDispatcher</h4>
+                                                <code><a href="../classes/Ascmvc.EventSourcing.EventDispatcher.html">\Ascmvc\EventSourcing\EventDispatcher</a></code><p></p>
                                             </div>
                                                                                     <div class="subelement argument">
                                                 <h4>$serviceManager</h4>
                                                 <code>\Pimple\Container</code><p></p>
                                             </div>
                                                                                     <div class="subelement argument">
-                                                <h4>$eventManager</h4>
-                                                <code><a href="../classes/Ascmvc.Mvc.AscmvcEventManager.html">\Ascmvc\Mvc\AscmvcEventManager</a></code><p></p>
+                                                <h4>$viewObject</h4>
+                                                <code></code><p></p>
                                             </div>
                                                                             
                                                                             <h3>Response</h3>
@@ -234,7 +234,7 @@ application resources and parameters.</h2>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Tue, 16 Apr 2019 22:29:08 +0000.<br/>
+            generated on Tue, 16 Apr 2019 03:38:30 +0000.<br/>
     </footer>
     </body>
 </html>

@@ -63,3 +63,5 @@ By default, the middleware pipeline is attached as a listener to the ``AscmvcEve
 
 For more information on **Zend Stratigility**, please see
 the `Zend Stratigility website <https://docs.zendframework.com/zend-stratigility/>`_.
+
+You can also see the :ref:`configuration middleware` section.

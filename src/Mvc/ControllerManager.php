@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.1.1
+ * @version    3.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -15,6 +15,7 @@ namespace Ascmvc\Mvc;
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\AscmvcControllerFactoryInterface;
+use Ascmvc\EventSourcing\EventDispatcher;
 use Zend\Diactoros\Response;
 
 /**
@@ -73,10 +74,16 @@ class ControllerManager extends AbstractControllerManager
                 throw new \ReflectionException;
             }
 
+            $sharedEventManager = $eventManager->getSharedManager();
+
+            $eventDispatcherName = $baseConfig['events']['psr14_event_dispatcher'];
+
+            $eventDispatcher = new $eventDispatcherName($this->app, $sharedEventManager);
+
             if ($this->controllerReflection->implementsInterface(AscmvcControllerFactoryInterface::class)
                 && $this->controllerReflection->hasMethod('factory')
             ) {
-                $controller = $controllerName::factory($baseConfig, $viewObject, $serviceManager, $eventManager);
+                $controller = $controllerName::factory($baseConfig, $eventDispatcher, $serviceManager, $viewObject);
                 $this->controller = $controller instanceof Controller ? $controller : null;
                 $this->controller = !isset($this->controller) && isset($serviceManager[$controllerName]) ? $serviceManager[$controllerName] : null;
             }
@@ -92,7 +99,7 @@ class ControllerManager extends AbstractControllerManager
             $this->controller = null;
         }
 
-        $this->controller = ($this->controller == null && $this->controllerName != null) ? new $controllerName($baseConfig) : $this->controller;
+        $this->controller = ($this->controller == null && $this->controllerName != null) ? new $controllerName($baseConfig, $eventDispatcher) : $this->controller;
 
         $this->method = ($this->controllerMethodName != null) ? $this->controllerMethodName : null;
 

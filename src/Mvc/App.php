@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.1.1
+ * @version    3.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -16,6 +16,7 @@ use Ascmvc\AbstractApp;
 use Ascmvc\AbstractController;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\AbstractRouter;
+use Ascmvc\EventSourcing\EventLogger;
 use Ascmvc\Middleware\MiddlewareFactory;
 use Ascmvc\Session\SessionManager;
 use Pimple\Container;
@@ -199,6 +200,10 @@ class App extends AbstractApp
             }, 3);
         }
 
+        if (isset($baseConfig['eventlog']) && $baseConfig['eventlog']['enabled'] === true) {
+            $eventLogger = new EventLogger($this, $eventManager, $baseConfig['eventlog']);
+        }
+
         return $this;
     }
 
@@ -318,7 +323,11 @@ class App extends AbstractApp
                 return;
             }
         } else {
-            $this->controllerOutput = $response;
+            if (!empty($this->controllerOutput)) {
+                $this->controllerOutput = array_merge($response, $this->controllerOutput);
+            } else {
+                $this->controllerOutput = $response;
+            }
         }
 
         $this->event->setName(AscmvcEvent::EVENT_RENDER);

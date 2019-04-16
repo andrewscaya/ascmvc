@@ -14,13 +14,6 @@ branches:
 matrix:
   fast_finish: true
   include:
-    - php: 7.1
-      env:
-        - COMPOSER_PROCESS_TIMEOUT=1200
-        - TEST_CHECK_COVER=false
-        - TEST_CHECK=true
-        - CS_CHECK=true
-        - CC_CHECK=false
     - php: 7.2
       env:
         - COMPOSER_PROCESS_TIMEOUT=1200
@@ -32,7 +25,7 @@ matrix:
       env:
         - COMPOSER_PROCESS_TIMEOUT=1200
         - TEST_CHECK_COVER=false
-        - TEST_CHECK=true
+        - TEST_CHECK=false
         - CS_CHECK=true
         - CC_CHECK=false
     - php: hhvm
