@@ -1,5 +1,10 @@
 .. _WhatsNewAnchor:
 
+What's new in version 2.0.4 (2019-04-16)
+========================================
+
+* Fixes a few unit tests and a few minor issues concerning code comments.
+
 What's new in version 2.0.3 (2019-04-10)
 ========================================
 
