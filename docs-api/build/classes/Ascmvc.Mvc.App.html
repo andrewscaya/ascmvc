@@ -119,7 +119,13 @@
         <li class="nav-header">
             <i class="icon-custom icon-method"></i> Methods
             <ul>
-                                                                                                                                                                                                                    <li class="method public inherited">
+                                                                                                                                                            <li class="method public inherited">
+        <a href="#method___construct" title="__construct :: This class should be a Singleton, but instantiation is needed for compatibility with Swoole.">
+            <span class="description">This class should be a Singleton, but instantiation is needed for compatibility with Swoole.</span><pre>__construct</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
         <a href="#method_appendBaseConfig" title="appendBaseConfig :: Adds an element to the application&#039;s base configuration.">
             <span class="description">Adds an element to the application&#039;s base configuration.</span><pre>appendBaseConfig</pre>
         </a>
@@ -210,6 +216,12 @@
     </li>
 
                                                                                                         <li class="method public inherited">
+        <a href="#method_getSessionManager" title="getSessionManager :: Gets the SessionManager.">
+            <span class="description">Gets the SessionManager.</span><pre>getSessionManager</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
         <a href="#method_getViewObject" title="getViewObject :: Gets the Template Manager object.">
             <span class="description">Gets the Template Manager object.</span><pre>getViewObject</pre>
         </a>
@@ -290,6 +302,12 @@ are given in the baseConfig array.</span><pre>initialize</pre>
     </li>
 
                                                                                                         <li class="method public inherited">
+        <a href="#method_setSessionManager" title="setSessionManager :: Sets the SessionManager.">
+            <span class="description">Sets the SessionManager.</span><pre>setSessionManager</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
         <a href="#method_setViewObject" title="setViewObject :: Sets the Template Manager object.">
             <span class="description">Sets the Template Manager object.</span><pre>setViewObject</pre>
         </a>
@@ -304,18 +322,11 @@ are given in the baseConfig array.</span><pre>initialize</pre>
                                 <span class="description">Protected method : this class cannot be copied because it is a Singleton.</span><pre>__clone</pre>
                             </a>
                         </li>
-                                                                                <li class="method protected inherited">
-                            <a href="#method___construct" title="__construct :: Protected method : this class cannot be instantiated by the new keyword
-because it is a Singleton.">
-                                <span class="description">Protected method : this class cannot be instantiated by the new keyword
-because it is a Singleton.</span><pre>__construct</pre>
-                            </a>
-                        </li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -336,7 +347,7 @@ because it is a Singleton.</span><pre>__construct</pre>
                 <p class="short_description">Class App</p>
                 <div class="details">
                     <div class="long_description">
-                        <p>The MVC application class.</p>
+                        <p>The abstract AbstractApp class is the blueprint for the MVC's main engine.</p>
                     </div>
                     <table class="table table-bordered">
                                                                                     <tr>
@@ -345,7 +356,7 @@ because it is a Singleton.</span><pre>__construct</pre>
                                                                             </th>
                                     <td>
                                                                                     
-                                                                                <p>LightMVC/ASCMVC</p>
+                                                                                <p>Ascmvc\Mvc</p>
                                     </td>
                                 </tr>
                                                                                                                                                                                 </table>
@@ -374,9 +385,8 @@ because it is a Singleton.</span><pre>__construct</pre>
 
                         </div>
                                             <a id="method___construct"></a>
-                        <div class="element clickable method protected  method___construct inherited" data-toggle="collapse" data-target=".method___construct .collapse">
-                            <h2>Protected method : this class cannot be instantiated by the new keyword
-because it is a Singleton.</h2>
+                        <div class="element clickable method public  method___construct inherited" data-toggle="collapse" data-target=".method___construct .collapse">
+                            <h2>This class should be a Singleton, but instantiation is needed for compatibility with Swoole.</h2>
                             <pre>__construct() : \Ascmvc\void.</pre>
                             <div class="labels">
                                 <span class="label">inherited</span>                                                                                                <span class="label">abstract</span>                                                            </div>
@@ -808,6 +818,35 @@ because it is a Singleton.</h2>
                             </div>
 
                         </div>
+                                            <a id="method_getSessionManager"></a>
+                        <div class="element clickable method public  method_getSessionManager inherited" data-toggle="collapse" data-target=".method_getSessionManager .collapse">
+                            <h2>Gets the SessionManager.</h2>
+                            <pre>getSessionManager() : \Ascmvc\Session\SessionManager|null</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.Session.SessionManager.html">\Ascmvc\Session\SessionManager</a>|null</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
                                             <a id="method_getViewObject"></a>
                         <div class="element clickable method public  method_getViewObject inherited" data-toggle="collapse" data-target=".method_getViewObject .collapse">
                             <h2>Gets the Template Manager object.</h2>
@@ -1155,6 +1194,33 @@ are given in the baseConfig array.</h2>
                             </div>
 
                         </div>
+                                            <a id="method_setSessionManager"></a>
+                        <div class="element clickable method public  method_setSessionManager inherited" data-toggle="collapse" data-target=".method_setSessionManager .collapse">
+                            <h2>Sets the SessionManager.</h2>
+                            <pre>setSessionManager(\Ascmvc\Session\SessionManager $sessionManager) : \Ascmvc\Session\SessionManager|null</pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                <span class="label">abstract</span>                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$sessionManager</h4>
+                                                <code><a href="../classes/Ascmvc.Session.SessionManager.html">\Ascmvc\Session\SessionManager</a></code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code><a href="../classes/Ascmvc.Session.SessionManager.html">\Ascmvc\Session\SessionManager</a>|null</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
                                             <a id="method_setViewObject"></a>
                         <div class="element clickable method public  method_setViewObject inherited" data-toggle="collapse" data-target=".method_setViewObject .collapse">
                             <h2>Sets the Template Manager object.</h2>
@@ -1266,7 +1332,7 @@ are given in the baseConfig array.</h2>
                                                     <a id="property_response"> </a>
                             <div class="element clickable property  protected property_response inherited" data-toggle="collapse" data-target=".property_response .collapse">
                                 <h2>Contains a reference to a Response instance.</h2>
-                                <pre>response : \Zend\Diactoros\Request|null</pre>
+                                <pre>response : \Zend\Diactoros\Response|null</pre>
                                 <div class="labels">
                                     <span class="label">inherited</span>                                                                    </div>
                                 <div class="row collapse">
@@ -1285,13 +1351,39 @@ are given in the baseConfig array.</h2>
                                                                                     </table>
 
                                                                                     <h3>Type(s)</h3>
-                                            <code>\Zend\Diactoros\Request|null</code>
+                                            <code>\Zend\Diactoros\Response|null</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_sessionManager"> </a>
+                            <div class="element clickable property  protected property_sessionManager inherited" data-toggle="collapse" data-target=".property_sessionManager .collapse">
+                                <h2>Contains a reference to the SessionManager instance.</h2>
+                                <pre>sessionManager : \Ascmvc\Session\SessionManager|null</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code><a href="../classes/Ascmvc.Session.SessionManager.html">\Ascmvc\Session\SessionManager</a>|null</code>
                                                                             </div>
                                 </div>
                             </div>
                                                     <a id="property_serviceManager"> </a>
                             <div class="element clickable property  protected property_serviceManager inherited" data-toggle="collapse" data-target=".property_serviceManager .collapse">
-                                <h2>Contains a reference to a Pimple\Container instance.</h2>
+                                <h2>Contains a reference to a \Pimple\Container instance.</h2>
                                 <pre>serviceManager : \Pimple\Container|null</pre>
                                 <div class="labels">
                                     <span class="label">inherited</span>                                                                    </div>
@@ -1317,7 +1409,7 @@ are given in the baseConfig array.</h2>
                             </div>
                                                     <a id="property_eventManager"> </a>
                             <div class="element clickable property  protected property_eventManager inherited" data-toggle="collapse" data-target=".property_eventManager .collapse">
-                                <h2>Contains a reference to the EventManager instance.</h2>
+                                <h2>Contains a reference to the AscmvcEventManager instance.</h2>
                                 <pre>eventManager : \Ascmvc\Mvc\AscmvcEventManager|null</pre>
                                 <div class="labels">
                                     <span class="label">inherited</span>                                                                    </div>
@@ -1517,7 +1609,7 @@ are given in the baseConfig array.</h2>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Tue, 22 Jan 2019 20:11:53 +0000.<br/>
+            generated on Tue, 16 Apr 2019 22:29:08 +0000.<br/>
     </footer>
     </body>
 </html>
