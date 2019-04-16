@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.1.0
+ * @version    2.1.1
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -67,7 +67,7 @@ abstract class AbstractApp
     protected $sessionManager;
 
     /**
-     * Contains a reference to a Pimple\Container instance.
+     * Contains a reference to a \Pimple\Container instance.
      *
      * @var \Pimple\Container|null
      */
@@ -257,15 +257,19 @@ abstract class AbstractApp
     public abstract function setResponse(ResponseInterface $response);
 
     /**
+     * Gets the SessionManager.
+     *
      * @return SessionManager|null
      */
-    public abstract function getSessionManager(): ?SessionManager;
+    public abstract function getSessionManager();
 
     /**
-     * @param SessionManager|null $session
-     * @return SessionManager
+     * Sets the SessionManager.
+     *
+     * @param SessionManager $sessionManager
+     * @return SessionManager|null
      */
-    public abstract function setSessionManager(?SessionManager $sessionManager): ?SessionManager;
+    public abstract function setSessionManager(SessionManager $sessionManager);
 
     /**
      * Gets the Pimple\Container object.

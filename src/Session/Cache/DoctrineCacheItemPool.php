@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.1.0
+ * @version    2.1.1
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.1.0
  */
@@ -13,7 +13,6 @@
 namespace Ascmvc\Session\Cache;
 
 use Ascmvc\Session\Config;
-use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Cache\ClearableCache;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\Common\Cache\MemcacheCache;
@@ -105,7 +104,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      * @param string $key
      *   The key for which to return the corresponding Cache Item.
      *
-     * @throws InvalidArgumentException
+     * @throws DoctrineInvalidArgumentException
      *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown.
      *
@@ -129,7 +128,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      * @param string[] $keys
      *   An indexed array of keys of items to retrieve.
      *
-     * @throws InvalidArgumentException
+     * @throws DoctrineInvalidArgumentException
      *   If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown.
      *
@@ -160,7 +159,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      * @param string $key
      *   The key for which to check existence.
      *
-     * @throws InvalidArgumentException
+     * @throws DoctrineInvalidArgumentException
      *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown.
      *
@@ -200,7 +199,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      * @param string $key
      *   The key to delete.
      *
-     * @throws InvalidArgumentException
+     * @throws DoctrineInvalidArgumentException
      *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown.
      *
@@ -222,7 +221,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
      * @param string[] $keys
      *   An array of keys that should be removed from the pool.
 
-     * @throws InvalidArgumentException
+     * @throws DoctrineInvalidArgumentException
      *   If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown.
      *
@@ -261,7 +260,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
     }
 
     /**
-     * Sets a cache item to be persisted later.
+     * Sets a cache item to be committed later.
      *
      * @param CacheItemInterface $item
      *   The cache item to save.
@@ -287,7 +286,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
     }
 
     /**
-     * Persists any deferred cache items.
+     * Commits any deferred cache items.
      *
      * @return bool
      *   True if all not-yet-saved items were successfully saved or there were none. False otherwise.
