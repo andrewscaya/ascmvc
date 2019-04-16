@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.0.2
+ * @version    2.0.4
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  * @since      2.0.0
@@ -33,7 +33,7 @@ class AppTest extends TestCase
     public function testGetAppInstance()
     {
         if (!defined('BASEDIR')) {
-            define('BASEDIR', dirname(__FILE__));
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
         }
 
         $app = App::getInstance();
@@ -52,23 +52,20 @@ class AppTest extends TestCase
             ->shouldReceive('fromGlobals')
             ->once();
 
-        $baseConfig['BASEDIR'] = BASEDIR . DIRECTORY_SEPARATOR . 'app';
+        $baseConfig['BASEDIR'] = BASEDIR;
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -100,19 +97,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -154,19 +148,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -234,19 +225,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -287,19 +275,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -362,19 +347,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -465,19 +447,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -610,19 +589,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -691,19 +667,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -782,19 +755,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -872,19 +842,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Twig';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -963,19 +930,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Smarty';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -1056,19 +1020,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -1153,19 +1114,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';
@@ -1284,19 +1242,16 @@ class AppTest extends TestCase
 
         $baseConfig['templateManager'] = 'Plates';
         $baseConfig['templates']['templateDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates';
         $baseConfig['templates']['compileDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'templates_c';
         $baseConfig['templates']['configDir'] =
-            dirname(__FILE__)
+            $baseConfig['BASEDIR']
             . DIRECTORY_SEPARATOR
-            . 'app' . DIRECTORY_SEPARATOR
             . 'config';
 
         $baseConfig['env'] = 'development';

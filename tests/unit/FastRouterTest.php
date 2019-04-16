@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.0.2
+ * @version    2.0.4
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  * @since      2.0.0
@@ -85,6 +85,8 @@ class FastRouterTest extends TestCase
 
         $baseConfig['env'] = 'development';
 
+        $baseConfig['view'] = [];
+
         $baseConfig['routes'] = [
             0 => [
                 'GET',
@@ -92,8 +94,6 @@ class FastRouterTest extends TestCase
                 'fake',
             ],
         ];
-
-        $baseConfig['view'] = [];
 
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
@@ -164,8 +164,9 @@ class FastRouterTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'config';
 
-
         $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
 
         $baseConfig['routes'] = [
             0 => [
@@ -179,8 +180,6 @@ class FastRouterTest extends TestCase
                 'specialmodule/fake',
             ],
         ];
-
-        $baseConfig['view'] = [];
 
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
@@ -251,8 +250,9 @@ class FastRouterTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'config';
 
-
         $baseConfig['env'] = 'production';
+
+        $baseConfig['view'] = [];
 
         $baseConfig['routes'] = [
             0 => [
@@ -261,8 +261,6 @@ class FastRouterTest extends TestCase
                 'fake',
             ],
         ];
-
-        $baseConfig['view'] = [];
 
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
@@ -339,8 +337,9 @@ class FastRouterTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'config';
 
-
         $baseConfig['env'] = 'production';
+
+        $baseConfig['view'] = [];
 
         $baseConfig['routes'] = [
             0 => [
@@ -355,7 +354,7 @@ class FastRouterTest extends TestCase
             ],
         ];
 
-        $baseConfig['view'] = [];
+
 
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
@@ -434,8 +433,9 @@ class FastRouterTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'config';
 
-
         $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
 
         $baseConfig['routes'] = [
             0 => [
@@ -444,8 +444,6 @@ class FastRouterTest extends TestCase
                 'fake',
             ],
         ];
-
-        $baseConfig['view'] = [];
 
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
@@ -514,8 +512,9 @@ class FastRouterTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'config';
 
-
         $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
 
         $baseConfig['routes'] = [
             0 => [
@@ -524,8 +523,6 @@ class FastRouterTest extends TestCase
                 'fake',
             ],
         ];
-
-        $baseConfig['view'] = [];
 
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
@@ -594,8 +591,9 @@ class FastRouterTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'config';
 
-
         $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
 
         $baseConfig['routes'] = [
             0 => [
@@ -604,8 +602,6 @@ class FastRouterTest extends TestCase
                 'fake',
             ],
         ];
-
-        $baseConfig['view'] = [];
 
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
@@ -674,8 +670,9 @@ class FastRouterTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'config';
 
-
         $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
 
         $baseConfig['routes'] = [
             0 => [
@@ -684,8 +681,6 @@ class FastRouterTest extends TestCase
                 'fake',
             ],
         ];
-
-        $baseConfig['view'] = [];
 
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 
@@ -754,8 +749,9 @@ class FastRouterTest extends TestCase
             . DIRECTORY_SEPARATOR
             . 'config';
 
-
         $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
 
         $baseConfig['routes'] = [
             0 => [
@@ -764,8 +760,6 @@ class FastRouterTest extends TestCase
                 'fake',
             ],
         ];
-
-        $baseConfig['view'] = [];
 
         $ascmvcEvent = new AscmvcEvent(AscmvcEvent::EVENT_ROUTE);
 

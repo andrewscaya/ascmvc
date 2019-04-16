@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.0.2
+ * @version    2.0.4
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
@@ -42,6 +42,8 @@ class ViewObjectFactoryTest extends TestCase
 
         $baseConfig['env'] = 'development';
 
+        $baseConfig['view'] = [];
+
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
         $this->assertInstanceOf(Engine::class, $viewObject);
@@ -67,6 +69,8 @@ class ViewObjectFactoryTest extends TestCase
 
         $baseConfig['env'] = 'development';
 
+        $baseConfig['view'] = [];
+
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
         $this->assertInstanceOf(\Twig_Environment::class, $viewObject);
@@ -91,6 +95,8 @@ class ViewObjectFactoryTest extends TestCase
             . 'config';
 
         $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
 
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
@@ -121,6 +127,8 @@ class ViewObjectFactoryTest extends TestCase
 
         $baseConfig['env'] = 'production';
 
+        $baseConfig['view'] = [];
+
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
         $this->assertInstanceOf(Engine::class, $viewObject);
@@ -150,6 +158,8 @@ class ViewObjectFactoryTest extends TestCase
 
         $baseConfig['env'] = 'production';
 
+        $baseConfig['view'] = [];
+
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
         $this->assertInstanceOf(\Twig_Environment::class, $viewObject);
@@ -178,6 +188,8 @@ class ViewObjectFactoryTest extends TestCase
             . 'cache';
 
         $baseConfig['env'] = 'production';
+
+        $baseConfig['view'] = [];
 
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
