@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.4 (2019-04-16)
+
+- Fixes a few unit tests and a few minor issues concerning code comments.
+
 ## 2.0.3 (2019-04-10)
 
 - Fixes an issue when requesting an unknown controller method.
