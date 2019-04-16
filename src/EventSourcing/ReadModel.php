@@ -20,7 +20,7 @@ namespace Ascmvc\EventSourcing;
 class ReadModel extends EventListener
 {
     /**
-     * Reads from the domain model.
+     * Executes a command in order to read from the domain model.
      *
      * @return mixed
      */

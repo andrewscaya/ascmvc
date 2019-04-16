@@ -12,6 +12,11 @@
 
 namespace Ascmvc\EventSourcing;
 
+/**
+ * Class AggregateImmutableValueObject
+ *
+ * @package Ascmvc\EventSourcing
+ */
 class AggregateImmutableValueObject implements \Serializable
 {
     /**
@@ -58,7 +63,7 @@ class AggregateImmutableValueObject implements \Serializable
      * Unserializes the properties of this object.
      *
      * @param string $serialized
-     * @return AggregateImmutableValue
+     * @return AggregateImmutableValueObject|bool
      */
     public function unserialize($serialized)
     {
@@ -82,7 +87,7 @@ class AggregateImmutableValueObject implements \Serializable
     }
 
     /**
-     * Allows for automatic object to string conversion.
+     * Allows for automatic array to string conversion of the object's properties.
      *
      * @return string
      */

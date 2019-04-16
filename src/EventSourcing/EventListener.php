@@ -51,11 +51,9 @@ class EventListener implements EventListenerInterface
     }
 
     /**
-     * Event listener.
+     * Event listener method.
      *
      * @param Event $event
-     *
-     * @return mixed
      */
     public function onEvent(Event $event)
     {

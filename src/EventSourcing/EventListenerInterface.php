@@ -21,5 +21,10 @@ use Ascmvc\EventSourcing\Event\Event;
  */
 interface EventListenerInterface
 {
+    /**
+     * Event listener method.
+     *
+     * @param Event $event
+     */
     public function onEvent(Event $event);
 }

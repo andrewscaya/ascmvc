@@ -132,8 +132,8 @@
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_commit" title="commit :: Persists any deferred cache items.">
-            <span class="description">Persists any deferred cache items.</span><pre>commit</pre>
+        <a href="#method_commit" title="commit :: Commits any deferred cache items.">
+            <span class="description">Commits any deferred cache items.</span><pre>commit</pre>
         </a>
     </li>
 
@@ -174,8 +174,8 @@
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_saveDeferred" title="saveDeferred :: Sets a cache item to be persisted later.">
-            <span class="description">Sets a cache item to be persisted later.</span><pre>saveDeferred</pre>
+        <a href="#method_saveDeferred" title="saveDeferred :: Sets a cache item to be committed later.">
+            <span class="description">Sets a cache item to be committed later.</span><pre>saveDeferred</pre>
         </a>
     </li>
 
@@ -286,7 +286,7 @@
                         </div>
                                             <a id="method_commit"></a>
                         <div class="element clickable method public  method_commit" data-toggle="collapse" data-target=".method_commit .collapse">
-                            <h2>Persists any deferred cache items.</h2>
+                            <h2>Commits any deferred cache items.</h2>
                             <pre>commit() : boolean</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
@@ -330,7 +330,7 @@
                                                 <th>Throws</th>
                                                 <td>
                                                     <dl>
-                                                                                                            <dt>\Ascmvc\Session\Cache\InvalidArgumentException</dt>
+                                                                                                            <dt>\Ascmvc\Session\Cache\DoctrineInvalidArgumentException</dt>
                                                         <dd><p>If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
 MUST be thrown.</p></dd>
                                                                                                                                                             </dl>
@@ -367,7 +367,7 @@ MUST be thrown.</p></dd>
                                                 <th>Throws</th>
                                                 <td>
                                                     <dl>
-                                                                                                            <dt>\Ascmvc\Session\Cache\InvalidArgumentException</dt>
+                                                                                                            <dt>\Ascmvc\Session\Cache\DoctrineInvalidArgumentException</dt>
                                                         <dd><p>If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException
 MUST be thrown.</p></dd>
                                                                                                                                                             </dl>
@@ -405,7 +405,7 @@ a cache miss. It MUST NOT return null.</p></div>
                                                 <th>Throws</th>
                                                 <td>
                                                     <dl>
-                                                                                                            <dt>\Ascmvc\Session\Cache\InvalidArgumentException</dt>
+                                                                                                            <dt>\Ascmvc\Session\Cache\DoctrineInvalidArgumentException</dt>
                                                         <dd><p>If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
 MUST be thrown.</p></dd>
                                                                                                                                                             </dl>
@@ -442,7 +442,7 @@ MUST be thrown.</p></dd>
                                                 <th>Throws</th>
                                                 <td>
                                                     <dl>
-                                                                                                            <dt>\Ascmvc\Session\Cache\InvalidArgumentException</dt>
+                                                                                                            <dt>\Ascmvc\Session\Cache\DoctrineInvalidArgumentException</dt>
                                                         <dd><p>If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException
 MUST be thrown.</p></dd>
                                                                                                                                                             </dl>
@@ -484,7 +484,7 @@ such situation use CacheItemInterface::isHit() instead.</p></div>
                                                 <th>Throws</th>
                                                 <td>
                                                     <dl>
-                                                                                                            <dt>\Ascmvc\Session\Cache\InvalidArgumentException</dt>
+                                                                                                            <dt>\Ascmvc\Session\Cache\DoctrineInvalidArgumentException</dt>
                                                         <dd><p>If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
 MUST be thrown.</p></dd>
                                                                                                                                                             </dl>
@@ -533,7 +533,7 @@ MUST be thrown.</p></dd>
                         </div>
                                             <a id="method_saveDeferred"></a>
                         <div class="element clickable method public  method_saveDeferred" data-toggle="collapse" data-target=".method_saveDeferred .collapse">
-                            <h2>Sets a cache item to be persisted later.</h2>
+                            <h2>Sets a cache item to be committed later.</h2>
                             <pre>saveDeferred(\Psr\Cache\CacheItemInterface $item) : boolean</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
@@ -633,7 +633,7 @@ MUST be thrown.</p></dd>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Wed, 10 Apr 2019 19:15:29 +0000.<br/>
+            generated on Tue, 16 Apr 2019 03:38:30 +0000.<br/>
     </footer>
     </body>
 </html>

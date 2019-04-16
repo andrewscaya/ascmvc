@@ -13,8 +13,6 @@
 namespace Ascmvc\EventSourcing;
 
 use Ascmvc\AbstractApp;
-use Ascmvc\EventSourcing\Event\AggregateEvent;
-use Ascmvc\EventSourcing\Event\ReadAggregateCompletedEvent;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityRepository;
@@ -135,6 +133,7 @@ class EventLogger
      * EventLogger listener method.
      *
      * @param EventInterface $event
+     * @throws \Exception
      */
     public function logEvent(EventInterface $event)
     {

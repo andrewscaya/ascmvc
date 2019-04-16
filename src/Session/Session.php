@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.1.0
+ * @version    3.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.1.0
  *
@@ -163,6 +163,7 @@ class Session
      * Sets the session id.
      *
      * @param $sessionId
+     * @return null|string
      */
     protected function setSessionId($sessionId)
     {
@@ -190,14 +191,13 @@ class Session
 
     /**
      * Creates a new session.
-     *
      */
     protected function createNewSession()
     {
         $config = $this->config;
         $http = $this->http;
 
-        $sessionId = $this->setSessionId($this->generateSessionId());
+        $this->setSessionId($this->generateSessionId());
         $this->readData();
 
         try {
@@ -261,6 +261,8 @@ class Session
 
     /**
      * Reads the data from the storage.
+     *
+     * @return bool
      */
     protected function readData()
     {

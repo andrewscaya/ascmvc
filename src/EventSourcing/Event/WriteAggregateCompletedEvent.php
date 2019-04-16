@@ -12,6 +12,11 @@
 
 namespace Ascmvc\EventSourcing\Event;
 
+/**
+ * Class WriteAggregateCompletedEvent
+ *
+ * @package Ascmvc\EventSourcing\Event
+ */
 class WriteAggregateCompletedEvent extends AggregateEvent
 {
     /**

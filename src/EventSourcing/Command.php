@@ -46,5 +46,10 @@ abstract class Command
         $this->argv = $argv;
     }
 
+    /**
+     * The command's main runtime execution method
+     *
+     * @return mixed
+     */
     abstract public function execute();
 }

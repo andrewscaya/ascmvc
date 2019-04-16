@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.0.2
+ * @version    3.0.0
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  * @since      2.0.0
@@ -34,8 +34,7 @@ class EventLoggerTest extends TestCase
         if (!defined('BASEDIR2')) {
             define('BASEDIR2', dirname(dirname(__FILE__))
                 . DIRECTORY_SEPARATOR
-                . 'app'
-            );
+                . 'app');
         }
 
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
@@ -117,8 +116,7 @@ class EventLoggerTest extends TestCase
         if (!defined('BASEDIR2')) {
             define('BASEDIR2', dirname(dirname(__FILE__))
                 . DIRECTORY_SEPARATOR
-                . 'app'
-            );
+                . 'app');
         }
 
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
@@ -214,8 +212,7 @@ class EventLoggerTest extends TestCase
         if (!defined('BASEDIR2')) {
             define('BASEDIR2', dirname(dirname(__FILE__))
                 . DIRECTORY_SEPARATOR
-                . 'app'
-            );
+                . 'app');
         }
 
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
@@ -309,8 +306,7 @@ class EventLoggerTest extends TestCase
         if (!defined('BASEDIR2')) {
             define('BASEDIR2', dirname(dirname(__FILE__))
                 . DIRECTORY_SEPARATOR
-                . 'app'
-            );
+                . 'app');
         }
 
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);

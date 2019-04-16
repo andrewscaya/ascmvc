@@ -14,6 +14,11 @@ namespace Ascmvc\EventSourcing\Event;
 
 use Ascmvc\EventSourcing\AggregateImmutableValueObject;
 
+/**
+ * Class AggregateEvent
+ *
+ * @package Ascmvc\EventSourcing\Event
+ */
 class AggregateEvent extends Event
 {
     /**
@@ -42,6 +47,7 @@ class AggregateEvent extends Event
     /**
      * AggregateEvent constructor.
      *
+     * @param AggregateImmutableValueObject $aggregateValueObject
      * @param null $rootAggregateName
      * @param null $name
      * @param null $target
@@ -81,8 +87,8 @@ class AggregateEvent extends Event
     /**
      * Sets the event's immutable value object.
      *
-     * @param AggregateImmutableValueObject $valueObject
-     * @return $this
+     * @param AggregateImmutableValueObject $aggregateValueObject
+     * @return AggregateEvent
      */
     public function setAggregateValueObject(AggregateImmutableValueObject $aggregateValueObject): AggregateEvent
     {

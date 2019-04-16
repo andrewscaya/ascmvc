@@ -32,6 +32,13 @@ class EventDispatcher extends ZendEventManager implements EventDispatcherInterfa
      */
     protected $application;
 
+    /**
+     * EventDispatcher constructor.
+     *
+     * @param AbstractApp $application
+     * @param SharedEventManagerInterface|null $sharedEventManager
+     * @param array $identifiers
+     */
     public function __construct(AbstractApp $application, SharedEventManagerInterface $sharedEventManager = null, array $identifiers = [])
     {
         parent::__construct($sharedEventManager, $identifiers);
@@ -43,8 +50,6 @@ class EventDispatcher extends ZendEventManager implements EventDispatcherInterfa
      * Dispatches the event.
      *
      * @param object $event
-     *
-     * @return void
      */
     public function dispatch(object $event)
     {

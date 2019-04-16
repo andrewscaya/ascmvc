@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 3.0.0 (2019-04-16)
+
+- Adds controller-based Event Sourcing aggregates to the framework with a PSR-14 compliant Event Dispatcher (event bus).
+
+- Adds the facilities to use CQRS.
+
+- Updates the documentation.
+
+## 2.1.1 (2019-04-16)
+
+- Fixes an issue with a broken link in the View.
+
 ## 2.1.0 (2019-04-10)
 
 - Adds asynchronous non-blocking PHP sessions (Swoole compatible).
@@ -7,6 +19,10 @@
 - Adds a PSR-6 compliant interface and a corresponding proxy class to Doctrine\Common\Cache classes for session caching.
 
 - Updates the documentation.
+
+## 2.0.4 (2019-04-16)
+
+- Fixes an issue with broken links in the View.
 
 ## 2.0.3 (2019-04-10)
 

@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.1.0
+ * @version    3.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.1.0
  *
@@ -43,10 +43,6 @@ class Random
      */
     public static function randNumStr($length)
     {
-        $chars = array(
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-        );
-
         $password = '';
 
         for ($i = 0; strlen($password) < $length; $i++) {

@@ -15,6 +15,11 @@ namespace Ascmvc\EventSourcing\Event;
 use Ascmvc\AbstractApp;
 use Zend\EventManager\Event as ZendEvent;
 
+/**
+ * Class Event
+ *
+ * @package Ascmvc\EventSourcing\Event
+ */
 abstract class Event extends ZendEvent
 {
     /**
