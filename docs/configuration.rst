@@ -23,15 +23,17 @@ The main preconfigured indexes of this array are:
 * ``env``, which contains an environment setting ('production' or 'development'),
 * ``routes``, which contains an array of FastRouter routes to be used,
 * ``templateManager``, which contains the name of the Template Manager that is to be used ('Plates', 'Twig' or 'Smarty'),
-* ``templateDir`` under the ``templates`` index, which contains the name of the folder where the templates are stored.
+* ``templateDir`` under the ``templates`` index, which contains the name of the folder where the templates are stored,
+* ``events``, which contains an array of parameters in order to configure the LightMVC Event Sourcing controller-based aggregates,
+* ``session``, which contains an array of parameters in order to configure the LightMVC asynchronous PHP session.
 
 .. note:: The Twig and Smarty template managers require additional indexes under the ``templates`` index. These are: ``compileDir``, ``configDir`` and ``cacheDir``.
 
-Also, there are four optional preconfigured indexes in the ``$baseConfig`` array:
+Also, there are three optional preconfigured indexes in the ``$baseConfig`` array:
 
 * ``middleware``, which contains an array of PSR-15 compliant middleware to be used,
+* ``eventlog``, which contains an array of parameters in order to configure the LightMVC Event Sourcing Logger,
 * ``doctrine``, which contains an array of parameters in order to configure one or more Doctrine connections.
-* ``session``, which contains an array of parameters in order to configure the LightMVC asynchronous PHP session.
 * ``atlas``, which contains an array of parameters in order to configure one or more Atlas connections.
 
 Here is an example of a ``config/config.php`` file:
@@ -44,16 +46,63 @@ Here is an example of a ``config/config.php`` file:
 
     $baseConfig['appName'] = 'The LightMVC Framework Skeleton Application';
 
+    // Required configuration
+    require 'events.config.php';
+
     require 'routes.config.php';
 
-    require 'middleware.config.php';
+    require 'view.config.php';
 
-    require 'session.config.php';
+    // Optional configuration
+    include 'middleware.config.php';
+
+    include 'session.config.php';
+
+.. _configuration eventsourcing:
+
+Event Sourcing Configuration
+----------------------------
+
+For example, the ``config/events.config.php`` file might look like the following:
+
+.. code-block:: php
+
+    <?php
+
+    $baseConfig['events'] = [
+        // PSR-14 compliant Event Bus.
+        'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+        // Different read and write connections allow for simplified (!) CQRS. :)
+        'read_conn_name' => 'dem1',
+        'write_conn_name' => 'dem1',
+    ];
+
+    $baseConfig['eventlog'] = [
+        'enabled' => true,
+        'doctrine' => [
+            'log_conn_name' => 'dem1',
+            'entity_name' => \Application\Log\Entity\EventLog::class,
+        ],
+        // Leave empty to log everything, including the kitchen sink. :)
+        // If you you start whitelisting events, it will blacklist everything else by default.
+        'log_event_type' => [
+            'whitelist' => [
+                \Ascmvc\EventSourcing\Event\WriteAggregateCompletedEvent::class,
+            ],
+            'blacklist' => [
+                //\Ascmvc\EventSourcing\Event\AggregateEvent::class,
+            ],
+        ],
+    ];
+
+.. note:: For more information on configuring the application's event sourcing aggregates and the application's event log, please see the :ref:`eventsourcing` section.
+
+.. _configuration routing:
 
 Routing Configuration
 ---------------------
 
-Where the ``config/routes.config.php`` file might look like the following:
+The ``config/routes.config.php`` file might look like the following:
 
 .. code-block:: php
 
@@ -67,42 +116,12 @@ Where the ``config/routes.config.php`` file might look like the following:
 
 .. note:: For more information on configuring the application's routes, please see the :ref:`routing` section.
 
-Middleware Configuration
-------------------------
-
-And, the ``config/middleware.config.php`` file might look like the following:
-
-.. code-block:: php
-
-    $baseConfig['middleware'] = [
-        '/foo' => function ($req, $handler) {
-            $response = new \Zend\Diactoros\Response();
-            $response->getBody()->write('FOO!');
-
-            return $response;
-        },
-        function ($req, $handler) {
-            if (! in_array($req->getUri()->getPath(), ['/bar'], true)) {
-                return $handler->handle($req);
-            }
-
-            $response = new \Zend\Diactoros\Response();
-            $response->getBody()->write('Hello world!');
-
-            return $response;
-        },
-        '/baz' => [
-            \Application\Middleware\SessionMiddleware::class,
-            \Application\Middleware\ExampleMiddleware::class,
-        ],
-    ];
-
-.. note:: The :ref:`middleware` section contains all the needed information in order to set up PSR-15 compliant middleware.
+.. _configuration session:
 
 Session Configuration
 ---------------------
 
-And, finally, the ``config/session.config.php`` file might look like this:
+And, the ``config/session.config.php`` file might look like this:
 
 .. code-block:: php
 
@@ -133,10 +152,6 @@ any of the given Doctrine\\Common\\Cache classes can be used in order to store t
 the ``\Ascmvc\Session\Cache\DoctrineCacheItemPool`` class.
 
 For more information on sessions, please see the :ref:`sessions` section.
-
-.. index:: View configuration
-
-.. index:: Configuration View
 
 .. _configuration view:
 
@@ -178,7 +193,7 @@ Here is an example of setting up common view elements within a ``config/view.con
             ],
         'js' =>
             [
-                $baseConfig['URLBASEADDR'] . 'js/jquery.min.js',
+                $baseConfig['URLBASEADDR'] . 'js/jquery-3.3.1.min.js',
                 $baseConfig['URLBASEADDR'] . 'js/bootstrap.min.js',
 
             ],
@@ -201,6 +216,44 @@ For more information on configuring the application's view, please see the :ref:
 .. index:: Model configuration
 
 .. index:: Configuration Model
+
+.. _configuration middleware:
+
+Middleware Configuration
+------------------------
+
+The ``config/middleware.config.php`` file might look like the following:
+
+.. code-block:: php
+
+    $baseConfig['middleware'] = [
+        '/foo' => function ($req, $handler) {
+            $response = new \Zend\Diactoros\Response();
+            $response->getBody()->write('FOO!');
+
+            return $response;
+        },
+        function ($req, $handler) {
+            if (! in_array($req->getUri()->getPath(), ['/bar'], true)) {
+                return $handler->handle($req);
+            }
+
+            $response = new \Zend\Diactoros\Response();
+            $response->getBody()->write('Hello world!');
+
+            return $response;
+        },
+        '/baz' => [
+            \Application\Middleware\SessionMiddleware::class,
+            \Application\Middleware\ExampleMiddleware::class,
+        ],
+    ];
+
+.. note:: The :ref:`middleware` section contains all the needed information in order to set up PSR-15 compliant middleware.
+
+.. index:: View configuration
+
+.. index:: Configuration View
 
 .. _configuration model:
 

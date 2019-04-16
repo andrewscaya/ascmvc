@@ -20,13 +20,29 @@ Event Manager
 -------------
 
 The ``\Ascmvc\Mvc\AscmvcEventManager`` event manager is an extension of the ``\Zend\EventManager\EventManager``.
-It is available through the application object's ``getEventManager()`` method. It is configured **WITHOUT** a
-``\Zend\EventManager\SharedEventManager``.
+It is available through the application object's ``getEventManager()`` method. It is configured **WITH** a
+``\Zend\EventManager\SharedEventManager``. It is possible to get the shared manager by calling the main
+event manager's ``getSharedManager()`` method. This same shared manager will also be readily available
+within each controller aggregate by getting it from the controller's PSR-14 event dispatcher (event bus)
+like so:
 
-.. note:: Segregated event managers and the availability of a shared event manager are to be added to the framework in a future release.
+.. code-block:: php
 
-The ``AscmvcEventManager`` is designed to be able to trigger ``\Ascmvc\Mvc\AscmvcEvent`` events. The ``\Ascmvc\Mvc\AscmvcEvent``
-class is an extension of the ``Zend\EventManager\Event`` class. Here is a list of the framework's main MVC events:
+    // From within a controller's action method for example.
+    $sharedEventManager = $this->eventDispatcher->getSharedManager();
+
+By doing so, it becomes possible to dispatch custom events not only to other parts of the current aggregate,
+but to also dispatch custom events to other aggregates outside of the current controller aggregate. Thus,
+Aspect-Oriented Programming becomes a clear possibility and allows for separation of concerns and
+code modularity.
+
+.. note:: Each controller has access to a segregated event dispatcher (event bus), as the controller is considered to be the Root Aggregate of its Event Sourcing aggregate.
+
+For more information on configuring the controller's event dispatcher, please see the :ref:`configuration eventsourcing` section.
+
+The main ``AscmvcEventManager`` is designed to be able to trigger ``\Ascmvc\Mvc\AscmvcEvent`` events for the
+entire application. The ``\Ascmvc\Mvc\AscmvcEvent`` class is an extension of the ``Zend\EventManager\Event``
+class. Here is a list of the framework's main MVC events:
 
 .. code-block:: php
 
@@ -44,7 +60,7 @@ These events correspond to listener interfaces that are implemented by default i
 from within any controller, it is possible to tap into a specific MVC event, or to downright interrupt
 the application's flow by returning a ``\Zend\Diactoros\Response``, from within these listener methods.
 
-Here is a sort description of each main event:
+Here is a short description of each main event:
 
     * EVENT_BOOTSTRAP (onBootstrap): this event is triggered right after the booting and initialization phases of the application. Using the onBootstrap method within a controller class makes it possible to run code immediately after the middleware pipeline. And, if you attach a listener to this event with a high priority, you can run code before the execution of any middleware, any controller or any service.
     * EVENT_ROUTE (onRoute): this event is triggered after bootstrapping is done and the router class has been instantiated, but before the router actually tries to resolve the request URI to a handler.

@@ -31,7 +31,7 @@ Once cloned, enter the directory and install the dependencies using **Composer**
 In order to use all the included features, one must create and populate the database. A sample database
 is included in the ``data`` folder.
 
-Furthermore, a sample virtual host configuration file for the **Apache** Web server is included in this same folder.
+Furthermore, sample virtual host configuration files for the **Apache** and **nginx** Web servers are included in this same folder.
 
 .. index:: Skeleton Application Structure
 

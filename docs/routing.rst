@@ -17,7 +17,7 @@ The framework uses the nikic/fast-route library - ``FastRoute`` - as its main ro
 
 All configuration must be given in the ``$baseConfig`` array, under the ``routes`` index.
 
-.. note:: For more information on configuring the application's routes, please see the :ref:`configuration` section.
+.. note:: For more information on configuring the application's routes, please see the :ref:`configuration routing` section.
 
 .. index:: Routes
 
