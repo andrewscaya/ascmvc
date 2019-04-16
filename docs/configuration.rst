@@ -29,7 +29,7 @@ The main preconfigured indexes of this array are:
 
 .. note:: The Twig and Smarty template managers require additional indexes under the ``templates`` index. These are: ``compileDir``, ``configDir`` and ``cacheDir``.
 
-Also, there are three optional preconfigured indexes in the ``$baseConfig`` array:
+Also, there are four optional preconfigured indexes in the ``$baseConfig`` array:
 
 * ``middleware``, which contains an array of PSR-15 compliant middleware to be used,
 * ``eventlog``, which contains an array of parameters in order to configure the LightMVC Event Sourcing Logger,
