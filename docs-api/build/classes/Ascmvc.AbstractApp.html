@@ -119,7 +119,13 @@
         <li class="nav-header">
             <i class="icon-custom icon-method"></i> Methods
             <ul>
-                                                                                                                                                                                                                    <li class="method public">
+                                                                                                                                                            <li class="method public">
+        <a href="#method___construct" title="__construct :: This class should be a Singleton, but instantiation is needed for compatibility with Swoole.">
+            <span class="description">This class should be a Singleton, but instantiation is needed for compatibility with Swoole.</span><pre>__construct</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
         <a href="#method_appendBaseConfig" title="appendBaseConfig :: Adds an element to the application&#039;s base configuration.">
             <span class="description">Adds an element to the application&#039;s base configuration.</span><pre>appendBaseConfig</pre>
         </a>
@@ -304,14 +310,7 @@ are given in the baseConfig array.</span><pre>initialize</pre>
                                 <span class="description">Protected method : this class cannot be copied because it is a Singleton.</span><pre>__clone</pre>
                             </a>
                         </li>
-                                                                                <li class="method protected">
-                            <a href="#method___construct" title="__construct :: Protected method : this class cannot be instantiated by the new keyword
-because it is a Singleton.">
-                                <span class="description">Protected method : this class cannot be instantiated by the new keyword
-because it is a Singleton.</span><pre>__construct</pre>
-                            </a>
-                        </li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
@@ -332,11 +331,10 @@ because it is a Singleton.</span><pre>__construct</pre>
                 <h1>AbstractApp</h1>
                 <small style="display: block; text-align: right">
                                                         </small>
-                <p class="short_description">The abstract AbstractApp class is the blueprint for the MVC&#039;s main engine.</p>
+                <p class="short_description">Class AbstractApp</p>
                 <div class="details">
                     <div class="long_description">
-                        <p>The abstract AbstractApp class is the one that needs to be extended
-in order to create a LightMVC AbstractApp.</p>
+                        <p>The abstract AbstractApp class is the blueprint for the MVC's main engine.</p>
                     </div>
                     <table class="table table-bordered">
                                                                                     <tr>
@@ -345,7 +343,7 @@ in order to create a LightMVC AbstractApp.</p>
                                                                             </th>
                                     <td>
                                                                                     
-                                                                                <p>LightMVC/ASCMVC</p>
+                                                                                <p>Ascmvc</p>
                                     </td>
                                 </tr>
                                                                                                                                                                                 </table>
@@ -374,9 +372,8 @@ in order to create a LightMVC AbstractApp.</p>
 
                         </div>
                                             <a id="method___construct"></a>
-                        <div class="element clickable method protected  method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
-                            <h2>Protected method : this class cannot be instantiated by the new keyword
-because it is a Singleton.</h2>
+                        <div class="element clickable method public  method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+                            <h2>This class should be a Singleton, but instantiation is needed for compatibility with Swoole.</h2>
                             <pre>__construct() : \Ascmvc\void.</pre>
                             <div class="labels">
                                                                                                                                 <span class="label">abstract</span>                                                            </div>
@@ -1266,7 +1263,7 @@ are given in the baseConfig array.</h2>
                                                     <a id="property_response"> </a>
                             <div class="element clickable property  protected property_response" data-toggle="collapse" data-target=".property_response .collapse">
                                 <h2>Contains a reference to a Response instance.</h2>
-                                <pre>response : \Zend\Diactoros\Request|null</pre>
+                                <pre>response : \Zend\Diactoros\Response|null</pre>
                                 <div class="labels">
                                                                                                         </div>
                                 <div class="row collapse">
@@ -1285,13 +1282,13 @@ are given in the baseConfig array.</h2>
                                                                                     </table>
 
                                                                                     <h3>Type(s)</h3>
-                                            <code>\Zend\Diactoros\Request|null</code>
+                                            <code>\Zend\Diactoros\Response|null</code>
                                                                             </div>
                                 </div>
                             </div>
                                                     <a id="property_serviceManager"> </a>
                             <div class="element clickable property  protected property_serviceManager" data-toggle="collapse" data-target=".property_serviceManager .collapse">
-                                <h2>Contains a reference to a Pimple\Container instance.</h2>
+                                <h2>Contains a reference to a \Pimple\Container instance.</h2>
                                 <pre>serviceManager : \Pimple\Container|null</pre>
                                 <div class="labels">
                                                                                                         </div>
@@ -1317,7 +1314,7 @@ are given in the baseConfig array.</h2>
                             </div>
                                                     <a id="property_eventManager"> </a>
                             <div class="element clickable property  protected property_eventManager" data-toggle="collapse" data-target=".property_eventManager .collapse">
-                                <h2>Contains a reference to the EventManager instance.</h2>
+                                <h2>Contains a reference to the AscmvcEventManager instance.</h2>
                                 <pre>eventManager : \Ascmvc\Mvc\AscmvcEventManager|null</pre>
                                 <div class="labels">
                                                                                                         </div>
@@ -1517,7 +1514,7 @@ are given in the baseConfig array.</h2>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Tue, 22 Jan 2019 20:11:53 +0000.<br/>
+            generated on Tue, 16 Apr 2019 19:25:48 +0000.<br/>
     </footer>
     </body>
 </html>
