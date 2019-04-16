@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.1.0
+ * @version    2.1.1
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -429,18 +429,22 @@ class App extends AbstractApp
     }
 
     /**
+     * Gets the SessionManager.
+     *
      * @return SessionManager|null
      */
-    public function getSessionManager(): ?SessionManager
+    public function getSessionManager()
     {
         return $this->sessionManager;
     }
 
     /**
-     * @param SessionManager|null $session
+     * Sets the SessionManager.
+     *
+     * @param SessionManager $sessionManager
      * @return SessionManager|null
      */
-    public function setSessionManager(?SessionManager $sessionManager): ?SessionManager
+    public function setSessionManager(SessionManager $sessionManager)
     {
         $this->sessionManager = $sessionManager;
 
