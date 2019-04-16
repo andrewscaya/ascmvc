@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.0.3
+ * @version    2.0.4
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -21,10 +21,11 @@ use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
 
 /**
+ * Class AbstractApp
+ *
  * The abstract AbstractApp class is the blueprint for the MVC's main engine.
  *
- * The abstract AbstractApp class is the one that needs to be extended
- * in order to create a LightMVC AbstractApp.
+ * @package Ascmvc
  */
 abstract class AbstractApp
 {
@@ -53,19 +54,19 @@ abstract class AbstractApp
     /**
      * Contains a reference to a Response instance.
      *
-     * @var Request|null
+     * @var Response|null
      */
     protected $response;
 
     /**
-     * Contains a reference to a Pimple\Container instance.
+     * Contains a reference to a \Pimple\Container instance.
      *
      * @var \Pimple\Container|null
      */
     protected $serviceManager;
 
     /**
-     * Contains a reference to the EventManager instance.
+     * Contains a reference to the AscmvcEventManager instance.
      *
      * @var AscmvcEventManager|null
      */
@@ -115,14 +116,13 @@ abstract class AbstractApp
 
 
     /**
-     * Protected method : this class cannot be instantiated by the new keyword
-     * because it is a Singleton.
+     * This class should be a Singleton, but instantiation is needed for compatibility with Swoole.
      *
      * @param void.
      *
      * @return void.
      */
-    protected abstract function __construct();
+    public abstract function __construct();
 
     /**
      * Protected method : this class cannot be copied because it is a Singleton.

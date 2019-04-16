@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.0.3
+ * @version    2.0.4
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
@@ -20,7 +20,6 @@ use Zend\EventManager\Event;
  *
  * The clas AscmvcEvent extends the Zend\EventManager\Event class and
  * adds logic that is specific to this MVC.
- *
  */
 class AscmvcEvent extends Event
 {
@@ -62,6 +61,7 @@ class AscmvcEvent extends Event
     public function setApplication(AbstractApp &$application) : AbstractApp
     {
         $this->application = $application;
+
         return $this->application;
     }
 }

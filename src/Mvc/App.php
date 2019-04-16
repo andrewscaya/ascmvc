@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    2.0.3
+ * @version    2.0.4
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -29,8 +29,7 @@ use function Zend\Stratigility\path;
 /**
  * Class App
  *
- * The MVC application class.
- *
+ * @package Ascmvc\Mvc
  */
 class App extends AbstractApp
 {
