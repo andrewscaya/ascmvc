@@ -37,6 +37,7 @@
                 <file>src/AscmvcRouteListenerInterface.php</file>
                 <file>src/AscmvcControllerFactoryInterface.php</file>
                 <file>src/Mvc/Psr4Autoloader.php</file>
+                <file>src/Session/Swoole.php</file>
             </exclude>
         </whitelist>
     </filter>

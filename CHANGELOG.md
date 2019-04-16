@@ -1,8 +1,12 @@
 # CHANGELOG
 
-## 2.0.4 (2019-04-16)
+## 2.1.0 (2019-04-10)
 
-- Fixes a few unit tests and a few minor issues concerning code comments.
+- Adds asynchronous non-blocking PHP sessions (Swoole compatible).
+
+- Adds a PSR-6 compliant interface and a corresponding proxy class to Doctrine\Common\Cache classes for session caching.
+
+- Updates the documentation.
 
 ## 2.0.3 (2019-04-10)
 
