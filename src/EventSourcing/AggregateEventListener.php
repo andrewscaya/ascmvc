@@ -12,14 +12,15 @@
 
 namespace Ascmvc\EventSourcing;
 
+use Ascmvc\EventSourcing\Event\AggregateEvent;
 use Ascmvc\EventSourcing\Event\Event;
 
 /**
- * Class EventListener
+ * Class AggregateEventListener
  *
  * @package Ascmvc\EventSourcing
  */
-class EventListener implements EventListenerInterface
+class AggregateEventListener implements AggregateEventListenerInterface
 {
     /**
      * Contains an instance of the \Ascmvc\EventSourcing\EventDispatcher
@@ -27,6 +28,13 @@ class EventListener implements EventListenerInterface
      * @var EventDispatcher
      */
     protected $eventDispatcher;
+
+    /**
+     * Contains the name of the aggregate root that created the event.
+     *
+     * @var string
+     */
+    protected $aggregateRootName;
 
     /**
      * EventListener constructor.
@@ -41,12 +49,12 @@ class EventListener implements EventListenerInterface
     /**
      * Runs the EventListener class as a function.
      *
-     * @param Event $event
+     * @param AggregateEvent $event
      * @return \Generator
      */
-    public function __invoke(Event $event)
+    public function __invoke(AggregateEvent $event)
     {
-        yield $this->onEvent($event);
+        yield $this->onAggregateEvent($event);
     }
 
     /**
@@ -54,11 +62,26 @@ class EventListener implements EventListenerInterface
      *
      * @param EventDispatcher $eventDispatcher
      *
-     * @return EventListener
+     * @return AggregateEventListener
      */
     public static function getInstance(EventDispatcher $eventDispatcher)
     {
         return new self($eventDispatcher);
+    }
+
+    /**
+     * Aggregate Event listener method.
+     *
+     * @param AggregateEvent $event
+     * @return \Generator
+     */
+    public function onAggregateEvent(AggregateEvent $event)
+    {
+        if (!isset($this->aggregateRootName)) {
+            $this->aggregateRootName = $event->getAggregateRootName();
+        }
+
+        yield $this->onEvent($event);
     }
 
     /**

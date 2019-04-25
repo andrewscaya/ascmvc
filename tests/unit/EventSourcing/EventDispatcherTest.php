@@ -13,6 +13,7 @@
 
 namespace AscmvcTest;
 
+use Application\ReadModels\TestReadModel;
 use Ascmvc\EventSourcing\AggregateImmutableValueObject;
 use Ascmvc\EventSourcing\Event\AggregateEvent;
 use Ascmvc\EventSourcing\EventDispatcher;
@@ -38,5 +39,25 @@ class EventDispatcherTest extends TestCase
         $eventDispatcher->dispatch($aggregateEvent);
 
         $this->assertInstanceOf(App::class, $aggregateEvent->getApplication());
+    }
+
+    public function testAsyncEventBusWillProcessGeneratorsCorrectly()
+    {
+        $app = App::getInstance();
+
+        $eventDispatcher = new EventDispatcher($app);
+
+        $eventDispatcher->attach(
+            'testName',
+            TestReadModel::getInstance($eventDispatcher)
+        );
+
+        $aggregateValueObject = new AggregateImmutableValueObject(['testkey' => 'testvalue']);
+
+        $aggregateEvent = new AggregateEvent($aggregateValueObject, 'testRootAggregate', 'testName');
+
+        $responses = $eventDispatcher->triggerEvent($aggregateEvent);
+
+        $this->assertTrue($responses->last());
     }
 }

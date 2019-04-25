@@ -13,18 +13,18 @@
 namespace Ascmvc\EventSourcing;
 
 /**
- * Class ReadModel
+ * Class AggregateReadModel
  *
  * @package Ascmvc\EventSourcing
  */
-class ReadModel extends EventListener
+class AggregateReadModel extends AggregateEventListener
 {
     /**
      * Returns an instance of this class.
      *
      * @param EventDispatcher $eventDispatcher
      *
-     * @return ReadModel
+     * @return AggregateReadModel
      */
     public static function getInstance(EventDispatcher $eventDispatcher)
     {

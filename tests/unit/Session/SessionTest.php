@@ -320,12 +320,14 @@ class SessionTest extends TestCase
 
         $this->assertEquals(3, $session->get('middleware')['example']);
 
+        $lastActivity = $session->get('last_activity');
+
         $this->assertSame(
             [
                 'initiated' => true,
                 'created' => $time,
                 'http_user_agent' => 'd33bdc0532cfe79bd15ad8554774fe2a77af2977642d261e2ec2462f191adae1',
-                'last_activity' => $time,
+                'last_activity' => $lastActivity,
                 'middleware' => [
                     'session' => 'Application\Middleware\SessionMiddleware',
                     'example' => 3

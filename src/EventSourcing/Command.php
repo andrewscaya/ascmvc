@@ -20,6 +20,11 @@ namespace Ascmvc\EventSourcing;
 abstract class Command
 {
     /**
+     * Name of the event to be dispatched once the command is completed.
+     */
+    const COMMAND_COMPLETED = '';
+
+    /**
      * Contains an instance of the \Ascmvc\EventSourcing\EventDispatcher
      *
      * @var EventDispatcher

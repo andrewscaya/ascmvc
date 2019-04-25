@@ -37,6 +37,11 @@
                 <file>src/AscmvcRouteListenerInterface.php</file>
                 <file>src/AscmvcControllerFactoryInterface.php</file>
                 <file>src/EventSourcing/Command.php</file>
+                <file>src/EventSourcing/AggregateEventListenerInterface.php</file>
+                <file>src/EventSourcing/AggregateEventListener.php</file>
+                <file>src/EventSourcing/AggregatePolicy.php</file>
+                <file>src/EventSourcing/AggregateReadModel.php</file>
+                <file>src/EventSourcing/AsyncCommand.php</file>
                 <file>src/EventSourcing/EventListener.php</file>
                 <file>src/EventSourcing/EventListenerInterface.php</file>
                 <file>src/EventSourcing/Policy.php</file>

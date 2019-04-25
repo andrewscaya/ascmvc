@@ -44,7 +44,7 @@ class AggregateEventTest extends TestCase
 
         $this->assertEquals(1, $aggregateEvent->getEventType());
 
-        $this->assertSame('testRootAggregate', $aggregateEvent->getRootAggregateName());
+        $this->assertSame('testRootAggregate', $aggregateEvent->getAggregateRootName());
 
         $aggregateValueObject2 = new AggregateImmutableValueObject(['testkey2' => 'testvalue2']);
 

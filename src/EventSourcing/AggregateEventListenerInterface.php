@@ -12,22 +12,20 @@
 
 namespace Ascmvc\EventSourcing;
 
+use Ascmvc\EventSourcing\Event\AggregateEvent;
+
 /**
- * Class ReadModel
+ * Interface EventListenerInterface
  *
  * @package Ascmvc\EventSourcing
  */
-class ReadModel extends EventListener
+interface AggregateEventListenerInterface extends EventListenerInterface
 {
     /**
-     * Returns an instance of this class.
+     * Aggregate Event listener method.
      *
-     * @param EventDispatcher $eventDispatcher
-     *
-     * @return ReadModel
+     * @param AggregateEvent $event
+     * @return mixed
      */
-    public static function getInstance(EventDispatcher $eventDispatcher)
-    {
-        return new self($eventDispatcher);
-    }
+    public function onAggregateEvent(AggregateEvent $event);
 }
