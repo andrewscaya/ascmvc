@@ -92,6 +92,8 @@ class AppTest extends TestCase
         $app->appendBaseConfig('test', ['test1']);
 
         $this->assertArrayHasKey('test', $app->getBaseConfig());
+
+        $this->assertFalse($app->isSwoole());
     }
 
     public function testBootMethodLoadsConfigurationFiles()

@@ -35,13 +35,20 @@ use function Zend\Stratigility\path;
  */
 class App extends AbstractApp
 {
-
     // @codeCoverageIgnoreStart
+    /**
+     * Indicates if the application is running inside a Swoole coroutine or not.
+     *
+     * @var bool
+     */
+    protected $swoole = false;
+
     /**
      * App constructor.
      */
-    public function __construct()
+    public function __construct(bool $swoole = false)
     {
+        $this->swoole = $swoole;
     }
 
     /**
@@ -57,10 +64,10 @@ class App extends AbstractApp
      *
      * @return AbstractApp
      */
-    public static function getInstance() : AbstractApp
+    public static function getInstance(bool $swoole = false) : AbstractApp
     {
         if (!self::$appInstance) {
-            self::$appInstance = new App();
+            self::$appInstance = new App($swoole);
         }
 
         return self::$appInstance;
@@ -91,7 +98,11 @@ class App extends AbstractApp
             $requestUri = implode('/', $requestUriArray);
         }
 
-        $requestUrl = $protocol . $_SERVER['HTTP_HOST'] . $requestUri . '/';
+        if (!isset($_SERVER['HTTP_HOST'])) {
+            $requestUrl = $protocol . 'localhost' . $requestUri . '/';
+        } else {
+            $requestUrl = $protocol . $_SERVER['HTTP_HOST'] . $requestUri . '/';
+        }
 
         if (!defined('URLBASEADDR')) {
             define('URLBASEADDR', $requestUrl);
@@ -650,5 +661,15 @@ class App extends AbstractApp
         $this->viewObject = $viewObject;
 
         return $this;
+    }
+
+    /**
+     * Checks if the application is running inside a Swoole coroutine or not.
+     *
+     * @return bool
+     */
+    public function isSwoole(): bool
+    {
+        return $this->swoole;
     }
 }
