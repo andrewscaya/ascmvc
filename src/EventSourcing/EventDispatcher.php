@@ -65,8 +65,12 @@ class EventDispatcher extends ZendEventManager implements EventDispatcherInterfa
     }
 
     // @codeCoverageIgnoreStart
+
     /**
-     * @inheritDoc
+     * Triggers the given event.
+     *
+     * @param EventInterface $event
+     * @return ResponseCollection
      */
     public function triggerEvent(EventInterface $event)
     {

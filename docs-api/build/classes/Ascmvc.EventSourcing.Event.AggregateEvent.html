@@ -126,6 +126,12 @@
     </li>
 
                                                                                                         <li class="method public">
+        <a href="#method_getAggregateRootName" title="getAggregateRootName :: Gets the name of the aggregate root that created the event.">
+            <span class="description">Gets the name of the aggregate root that created the event.</span><pre>getAggregateRootName</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
         <a href="#method_getAggregateValueObject" title="getAggregateValueObject :: Gets the event&#039;s immutable value object.">
             <span class="description">Gets the event&#039;s immutable value object.</span><pre>getAggregateValueObject</pre>
         </a>
@@ -144,8 +150,8 @@
     </li>
 
                                                                                                         <li class="method public">
-        <a href="#method_getRootAggregateName" title="getRootAggregateName :: Gets the name of the root aggregate that created the event.">
-            <span class="description">Gets the name of the root aggregate that created the event.</span><pre>getRootAggregateName</pre>
+        <a href="#method_getRootAggregateName" title="getRootAggregateName :: DEPRECATED - Use getAggregateRootName() instead - Will be removed in 4.0.0.">
+            <span class="description">DEPRECATED - Use getAggregateRootName() instead - Will be removed in 4.0.0.</span><pre>getRootAggregateName</pre>
         </a>
     </li>
 
@@ -177,11 +183,11 @@
         </li>
         <li class="nav-header protected">» Protected
             <ul>
-                                                                                                                                                                                                                                                                                                                                                                                </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                                                                                                                                                                                                                                                                                                                </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -225,7 +231,7 @@
                                                                 <a id="method___construct"></a>
                         <div class="element clickable method public  method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
                             <h2>AggregateEvent constructor.</h2>
-                            <pre>__construct(\Ascmvc\EventSourcing\AggregateImmutableValueObject $aggregateValueObject, null $rootAggregateName = null, null $name = null, null $target = null, null $params = null) </pre>
+                            <pre>__construct(\Ascmvc\EventSourcing\AggregateImmutableValueObject $aggregateValueObject, null $aggregateRootName = null, null $name = null, null $target = null, null $params = null) </pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -250,7 +256,7 @@
                                                 <code><a href="../classes/Ascmvc.EventSourcing.AggregateImmutableValueObject.html">\Ascmvc\EventSourcing\AggregateImmutableValueObject</a></code><p></p>
                                             </div>
                                                                                     <div class="subelement argument">
-                                                <h4>$rootAggregateName</h4>
+                                                <h4>$aggregateRootName</h4>
                                                 <code>null</code><p></p>
                                             </div>
                                                                                     <div class="subelement argument">
@@ -266,6 +272,35 @@
                                                 <code>null</code><p></p>
                                             </div>
                                                                             
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getAggregateRootName"></a>
+                        <div class="element clickable method public  method_getAggregateRootName" data-toggle="collapse" data-target=".method_getAggregateRootName .collapse">
+                            <h2>Gets the name of the aggregate root that created the event.</h2>
+                            <pre>getAggregateRootName() : null|string</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>null|string</code><p></p>
                                                                     </div>
                             </div>
 
@@ -359,7 +394,7 @@
                         </div>
                                             <a id="method_getRootAggregateName"></a>
                         <div class="element clickable method public  method_getRootAggregateName" data-toggle="collapse" data-target=".method_getRootAggregateName .collapse">
-                            <h2>Gets the name of the root aggregate that created the event.</h2>
+                            <h2>DEPRECATED - Use getAggregateRootName() instead - Will be removed in 4.0.0.</h2>
                             <pre>getRootAggregateName() : null|string</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
@@ -367,7 +402,7 @@
                             
                             <div class="row collapse">
                                 <div class="detail-description">
-                                    <div class="long_description"></div>
+                                    <div class="long_description"><p>Gets the name of the aggregate root that created the event.</p></div>
 
                                     <table class="table">
                                                                                     <tr>
@@ -549,10 +584,10 @@
                                                                             </div>
                                 </div>
                             </div>
-                                                    <a id="property_rootAggregateName"> </a>
-                            <div class="element clickable property  protected property_rootAggregateName" data-toggle="collapse" data-target=".property_rootAggregateName .collapse">
+                                                    <a id="property_aggregateRootName"> </a>
+                            <div class="element clickable property  protected property_aggregateRootName" data-toggle="collapse" data-target=".property_aggregateRootName .collapse">
                                 <h2>Contains the name of the bounded context (event sourcing aggregate).</h2>
-                                <pre>rootAggregateName : null|string</pre>
+                                <pre>aggregateRootName : null|string</pre>
                                 <div class="labels">
                                                                                                         </div>
                                 <div class="row collapse">
@@ -621,7 +656,7 @@
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Tue, 16 Apr 2019 03:38:30 +0000.<br/>
+            generated on Tue, 30 Apr 2019 15:54:21 +0000.<br/>
     </footer>
     </body>
 </html>

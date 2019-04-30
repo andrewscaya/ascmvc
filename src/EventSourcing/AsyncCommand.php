@@ -18,6 +18,11 @@ use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class AsyncCommand
+ *
+ * @package Ascmvc\EventSourcing
+ */
 class AsyncCommand extends Command
 {
     /**
@@ -27,8 +32,18 @@ class AsyncCommand extends Command
      */
     protected $webapp;
 
+    /**
+     * Name of the command.
+     *
+     * @var string
+     */
     protected static $defaultName;
 
+    /**
+     * AsyncCommand constructor.
+     *
+     * @param AbstractApp $webapp
+     */
     public function __construct(AbstractApp $webapp)
     {
         // you *must* call the parent constructor
@@ -37,10 +52,29 @@ class AsyncCommand extends Command
         $this->webapp = $webapp;
     }
 
+    /**
+     * Configures the current command.
+     */
     protected function configure()
     {
     }
 
+    /**
+     * Executes the current command.
+     *
+     * This method is not abstract because you can use this class
+     * as a concrete class. In this case, instead of defining the
+     * execute() method, you set the code to execute by passing
+     * a Closure to the setCode() method.
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|null null or 0 if everything went fine, or an error code
+     *
+     * @throws LogicException When this abstract method is not implemented
+     *
+     * @see setCode()
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         throw new LogicException('You must override the execute() method in the concrete command class.');

@@ -235,6 +235,12 @@ are given in the baseConfig array.</span><pre>initialize</pre>
         </a>
     </li>
 
+                                                                                                        <li class="method public">
+        <a href="#method_isSwoole" title="isSwoole :: Checks if the application is running inside a Swoole coroutine or not.">
+            <span class="description">Checks if the application is running inside a Swoole coroutine or not.</span><pre>isSwoole</pre>
+        </a>
+    </li>
+
                                                                                                         <li class="method public inherited">
         <a href="#method_render" title="render :: Renders the response.">
             <span class="description">Renders the response.</span><pre>render</pre>
@@ -322,11 +328,11 @@ are given in the baseConfig array.</span><pre>initialize</pre>
                                 <span class="description">Protected method : this class cannot be copied because it is a Singleton.</span><pre>__clone</pre>
                             </a>
                         </li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -904,6 +910,35 @@ are given in the baseConfig array.</h2>
                             </div>
 
                         </div>
+                                            <a id="method_isSwoole"></a>
+                        <div class="element clickable method public  method_isSwoole" data-toggle="collapse" data-target=".method_isSwoole .collapse">
+                            <h2>Checks if the application is running inside a Swoole coroutine or not.</h2>
+                            <pre>isSwoole() : boolean</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                    </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>boolean</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
                                             <a id="method_render"></a>
                         <div class="element clickable method public  method_render inherited" data-toggle="collapse" data-target=".method_render .collapse">
                             <h2>Renders the response.</h2>
@@ -1251,6 +1286,32 @@ are given in the baseConfig array.</h2>
                     
                     
                                                                 <h3><i class="icon-custom icon-property"></i> Properties</h3>
+                                                    <a id="property_swoole"> </a>
+                            <div class="element clickable property  protected property_swoole" data-toggle="collapse" data-target=".property_swoole .collapse">
+                                <h2>Indicates if the application is running inside a Swoole coroutine or not.</h2>
+                                <pre>swoole : boolean</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>boolean</code>
+                                                                            </div>
+                                </div>
+                            </div>
                                                     <a id="property_appInstance"> </a>
                             <div class="element clickable property  protected property_appInstance inherited" data-toggle="collapse" data-target=".property_appInstance .collapse">
                                 <h2>Contains the Singleton instance of this class.</h2>
@@ -1609,7 +1670,7 @@ are given in the baseConfig array.</h2>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Tue, 16 Apr 2019 03:38:30 +0000.<br/>
+            generated on Tue, 30 Apr 2019 15:54:21 +0000.<br/>
     </footer>
     </body>
 </html>

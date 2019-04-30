@@ -159,6 +159,15 @@
         </ul>
     </li>
         <li>
+        <a href="../namespaces/Ascmvc.Proxy.html" title="Proxy">
+            <i class="icon-th"></i> Proxy
+        </a>
+        <ul class="nav nav-list nav-namespaces">
+                
+    
+        </ul>
+    </li>
+        <li>
         <a href="../namespaces/Ascmvc.Session.html" title="Session">
             <i class="icon-th"></i> Session
         </a>
@@ -416,7 +425,7 @@ in order to create a LightMVC router.</p>
 
     
     <li>
-        <span class="divider">\</span><a href="../namespaces/Ascmvc.Middleware.html">Middleware</a>
+        <span class="divider">\</span><a href="../namespaces/Ascmvc.Session.html">Session</a>
     </li>
 
         </ul>
@@ -427,46 +436,113 @@ in order to create a LightMVC router.</p>
                 <h3><i class="icon-custom icon-class"></i> Classes, interfaces and traits</h3>
                 
                 
-                                        <div id="class_LazyLoadingMiddleware" class="element ajax clickable class" data-toggle="collapse" data-target="#class_LazyLoadingMiddleware .collapse">
-        <h1>LazyLoadingMiddleware<a href="../classes/Ascmvc.Middleware.LazyLoadingMiddleware.html">¶</a></h1>
-        <p class="short_description">Class LazyLoadingMiddleware</p>
+                                        <div id="class_Config" class="element ajax clickable class" data-toggle="collapse" data-target="#class_Config .collapse">
+        <h1>Config<a href="../classes/Ascmvc.Session.Config.html">¶</a></h1>
+        <p class="short_description">Class Config</p>
         <div class="details collapse">
-                            <p>This class stores given middleware inside a Container factory in order to load them only when needed.</p>
+                            
                     </div>
-        <a href="../classes/Ascmvc.Middleware.LazyLoadingMiddleware.html" class="more">« More »</a>    </div>
+        <a href="../classes/Ascmvc.Session.Config.html" class="more">« More »</a>    </div>
 
-                                        <div id="class_MiddlewareFactory" class="element ajax clickable class" data-toggle="collapse" data-target="#class_MiddlewareFactory .collapse">
-        <h1>MiddlewareFactory<a href="../classes/Ascmvc.Middleware.MiddlewareFactory.html">¶</a></h1>
-        <p class="short_description">Class MiddlewareFactory</p>
+                                        <div id="class_Http" class="element ajax clickable class" data-toggle="collapse" data-target="#class_Http .collapse">
+        <h1>Http<a href="../classes/Ascmvc.Session.Http.html">¶</a></h1>
+        <p class="short_description">Class Http</p>
         <div class="details collapse">
-                            <p>Marshal middleware for use in the application.</p>
-<p>This class provides a number of methods for preparing and returning
-middleware for use within an application.</p>
-<p>If any middleware provided is already a MiddlewareInterface, it can be used
-verbatim or decorated as-is. Other middleware types acceptable are:</p>
-<ul>
-<li>PSR-15 RequestHandlerInterface instances; these will be decorated as
-RequestHandlerMiddleware instances.</li>
-<li>string service names resolving to middleware</li>
-<li>arrays of service names and/or MiddlewareInterface instances</li>
-<li>PHP callables that follow the PSR-15 signature</li>
-</ul>
-<p>Additionally, the class provides the following decorator/utility methods:</p>
-<ul>
-<li>callableMiddleware() will decorate the callable middleware passed to it using
-CallableMiddlewareDecorator.</li>
-<li>handlerMiddleware() will decorate the request handler passed to it using
-RequestHandlerMiddleware.</li>
-<li>lazyMiddleware() will decorate the string service name passed to it, along with the
-factory instance, as a LazyLoadingMiddleware instance.</li>
-<li>pipeline() will create a MiddlewarePipe instance from the array of
-middleware passed to it, after passing each first to prepare().</li>
-</ul>
+                            
                     </div>
-        <a href="../classes/Ascmvc.Middleware.MiddlewareFactory.html" class="more">« More »</a>    </div>
+        <a href="../classes/Ascmvc.Session.Http.html" class="more">« More »</a>    </div>
+
+                                        <div id="class_Random" class="element ajax clickable class" data-toggle="collapse" data-target="#class_Random .collapse">
+        <h1>Random<a href="../classes/Ascmvc.Session.Random.html">¶</a></h1>
+        <p class="short_description">Class Random</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.Session.Random.html" class="more">« More »</a>    </div>
+
+                                        <div id="class_Session" class="element ajax clickable class" data-toggle="collapse" data-target="#class_Session .collapse">
+        <h1>Session<a href="../classes/Ascmvc.Session.Session.html">¶</a></h1>
+        <p class="short_description">Class Session</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.Session.Session.html" class="more">« More »</a>    </div>
+
+                                        <div id="class_SessionManager" class="element ajax clickable class" data-toggle="collapse" data-target="#class_SessionManager .collapse">
+        <h1>SessionManager<a href="../classes/Ascmvc.Session.SessionManager.html">¶</a></h1>
+        <p class="short_description">Class SessionManager</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.Session.SessionManager.html" class="more">« More »</a>    </div>
+
+                                        <div id="class_Swoole" class="element ajax clickable class" data-toggle="collapse" data-target="#class_Swoole .collapse">
+        <h1>Swoole<a href="../classes/Ascmvc.Session.Swoole.html">¶</a></h1>
+        <p class="short_description">Class Swoole</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.Session.Swoole.html" class="more">« More »</a>    </div>
 
                             </div>
             
+                
+    
+        <ul class="breadcrumb">
+            <li><a href="../index.html"><i class="icon-th"></i></a></li>
+                
+                
+                
+    
+    <li>
+        <span class="divider">\</span><a href="../namespaces/Ascmvc.html">Ascmvc</a>
+    </li>
+
+    
+    <li>
+        <span class="divider">\</span><a href="../namespaces/Ascmvc.Session.html">Session</a>
+    </li>
+
+    
+    <li>
+        <span class="divider">\</span><a href="../namespaces/Ascmvc.Session.Cache.html">Cache</a>
+    </li>
+
+        </ul>
+
+        
+        
+                    <div class="namespace-indent">
+                <h3><i class="icon-custom icon-class"></i> Classes, interfaces and traits</h3>
+                
+                
+                                        <div id="class_DoctrineCacheItem" class="element ajax clickable class" data-toggle="collapse" data-target="#class_DoctrineCacheItem .collapse">
+        <h1>DoctrineCacheItem<a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItem.html">¶</a></h1>
+        <p class="short_description">Class DoctrineCacheItem</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItem.html" class="more">« More »</a>    </div>
+
+                                        <div id="class_DoctrineCacheItemPool" class="element ajax clickable class" data-toggle="collapse" data-target="#class_DoctrineCacheItemPool .collapse">
+        <h1>DoctrineCacheItemPool<a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItemPool.html">¶</a></h1>
+        <p class="short_description">Class DoctrineCacheItemPool</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItemPool.html" class="more">« More »</a>    </div>
+
+                                        <div id="class_DoctrineInvalidArgumentException" class="element ajax clickable class" data-toggle="collapse" data-target="#class_DoctrineInvalidArgumentException .collapse">
+        <h1>DoctrineInvalidArgumentException<a href="../classes/Ascmvc.Session.Cache.DoctrineInvalidArgumentException.html">¶</a></h1>
+        <p class="short_description">Class DoctrineInvalidArgumentException</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.Session.Cache.DoctrineInvalidArgumentException.html" class="more">« More »</a>    </div>
+
+                            </div>
+            
+    
     
                 
     
@@ -478,27 +554,6 @@ middleware passed to it, after passing each first to prepare().</li>
     <li>
         <span class="divider">\</span><a href="../namespaces/Ascmvc.html">Ascmvc</a>
     </li>
-
-    
-    <li>
-        <span class="divider">\</span><a href="../namespaces/Ascmvc.Mvc.html">Mvc</a>
-    </li>
-
-        </ul>
-
-        
-        
-                    <div class="namespace-indent">
-                <h3><i class="icon-custom icon-class"></i> Classes, interfaces and traits</h3>
-                
-                
-                                        <div id="class_App" class="element ajax clickable class" data-toggle="collapse" data-target="#class_App .collapse">
-        <h1>App<a href="../classes/Ascmvc.Mvc.App.html">¶</a></h1>
-        <p class="short_description">Class App</p>
-        <div class="details collapse">
-                            <p>The abstract AbstractApp class is the blueprint for the MVC's main engine.</p>
-                    </div>
-        <a href="../classes/Ascmvc.Mvc.App.html" class="more">« More »</a>    </div>
 
     
     <li>
@@ -664,6 +719,14 @@ according to specified configuration.</p>
                     <div class="namespace-indent">
                 <h3><i class="icon-custom icon-class"></i> Classes, interfaces and traits</h3>
                 
+                                        <div id="interface_AggregateEventListenerInterface" class="element ajax clickable interface" data-toggle="collapse" data-target="#interface_AggregateEventListenerInterface .collapse">
+        <h1>AggregateEventListenerInterface<a href="../classes/Ascmvc.EventSourcing.AggregateEventListenerInterface.html">¶</a></h1>
+        <p class="short_description">Interface EventListenerInterface</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.EventSourcing.AggregateEventListenerInterface.html" class="more">« More »</a>    </div>
+
                                         <div id="interface_EventListenerInterface" class="element ajax clickable interface" data-toggle="collapse" data-target="#interface_EventListenerInterface .collapse">
         <h1>EventListenerInterface<a href="../classes/Ascmvc.EventSourcing.EventListenerInterface.html">¶</a></h1>
         <p class="short_description">Interface EventListenerInterface</p>
@@ -673,6 +736,14 @@ according to specified configuration.</p>
         <a href="../classes/Ascmvc.EventSourcing.EventListenerInterface.html" class="more">« More »</a>    </div>
 
                 
+                                        <div id="class_AggregateEventListener" class="element ajax clickable class" data-toggle="collapse" data-target="#class_AggregateEventListener .collapse">
+        <h1>AggregateEventListener<a href="../classes/Ascmvc.EventSourcing.AggregateEventListener.html">¶</a></h1>
+        <p class="short_description">Class AggregateEventListener</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.EventSourcing.AggregateEventListener.html" class="more">« More »</a>    </div>
+
                                         <div id="class_AggregateImmutableValueObject" class="element ajax clickable class" data-toggle="collapse" data-target="#class_AggregateImmutableValueObject .collapse">
         <h1>AggregateImmutableValueObject<a href="../classes/Ascmvc.EventSourcing.AggregateImmutableValueObject.html">¶</a></h1>
         <p class="short_description">Class AggregateImmutableValueObject</p>
@@ -681,6 +752,39 @@ according to specified configuration.</p>
                     </div>
         <a href="../classes/Ascmvc.EventSourcing.AggregateImmutableValueObject.html" class="more">« More »</a>    </div>
 
+                                        <div id="class_AggregatePolicy" class="element ajax clickable class" data-toggle="collapse" data-target="#class_AggregatePolicy .collapse">
+        <h1>AggregatePolicy<a href="../classes/Ascmvc.EventSourcing.AggregatePolicy.html">¶</a></h1>
+        <p class="short_description">Class AggregatePolicy</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.EventSourcing.AggregatePolicy.html" class="more">« More »</a>    </div>
+
+                                        <div id="class_AggregateReadModel" class="element ajax clickable class" data-toggle="collapse" data-target="#class_AggregateReadModel .collapse">
+        <h1>AggregateReadModel<a href="../classes/Ascmvc.EventSourcing.AggregateReadModel.html">¶</a></h1>
+        <p class="short_description">Class AggregateReadModel</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.EventSourcing.AggregateReadModel.html" class="more">« More »</a>    </div>
+
+                                        <div id="class_AggregateRootController" class="element ajax clickable class" data-toggle="collapse" data-target="#class_AggregateRootController .collapse">
+        <h1>AggregateRootController<a href="../classes/Ascmvc.EventSourcing.AggregateRootController.html">¶</a></h1>
+        <p class="short_description">Class AggregateRootController</p>
+        <div class="details collapse">
+                            <p>The Controller class extends the AbstractController and
+implements the AscmvcEventManagerListenerInterface.</p>
+                    </div>
+        <a href="../classes/Ascmvc.EventSourcing.AggregateRootController.html" class="more">« More »</a>    </div>
+
+                                        <div id="class_AsyncCommand" class="element ajax clickable class" data-toggle="collapse" data-target="#class_AsyncCommand .collapse">
+        <h1>AsyncCommand<a href="../classes/Ascmvc.EventSourcing.AsyncCommand.html">¶</a></h1>
+        <p class="short_description">Class AsyncCommand</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.EventSourcing.AsyncCommand.html" class="more">« More »</a>    </div>
+
                                         <div id="class_Command" class="element ajax clickable class" data-toggle="collapse" data-target="#class_Command .collapse">
         <h1>Command<a href="../classes/Ascmvc.EventSourcing.Command.html">¶</a></h1>
         <p class="short_description">Class Command</p>
@@ -688,6 +792,14 @@ according to specified configuration.</p>
                             
                     </div>
         <a href="../classes/Ascmvc.EventSourcing.Command.html" class="more">« More »</a>    </div>
+
+                                        <div id="class_CommandRunner" class="element ajax clickable class" data-toggle="collapse" data-target="#class_CommandRunner .collapse">
+        <h1>CommandRunner<a href="../classes/Ascmvc.EventSourcing.CommandRunner.html">¶</a></h1>
+        <p class="short_description">Class CommandRunner</p>
+        <div class="details collapse">
+                            
+                    </div>
+        <a href="../classes/Ascmvc.EventSourcing.CommandRunner.html" class="more">« More »</a>    </div>
 
                                         <div id="class_EventDispatcher" class="element ajax clickable class" data-toggle="collapse" data-target="#class_EventDispatcher .collapse">
         <h1>EventDispatcher<a href="../classes/Ascmvc.EventSourcing.EventDispatcher.html">¶</a></h1>
@@ -810,6 +922,41 @@ according to specified configuration.</p>
 
     
     <li>
+        <span class="divider">\</span><a href="../namespaces/Ascmvc.Proxy.html">Proxy</a>
+    </li>
+
+        </ul>
+
+        
+        
+                    <div class="namespace-indent">
+                <h3><i class="icon-custom icon-class"></i> Classes, interfaces and traits</h3>
+                
+                
+                                        <div id="class_AtlasORM" class="element ajax clickable class" data-toggle="collapse" data-target="#class_AtlasORM .collapse">
+        <h1>AtlasORM<a href="../classes/Ascmvc.Proxy.AtlasORM.html">¶</a></h1>
+        <p class="short_description">Class AtlasORM</p>
+        <div class="details collapse">
+                            <p>Proxy to class \Atlas\Orm\Atlas</p>
+                    </div>
+        <a href="../classes/Ascmvc.Proxy.AtlasORM.html" class="more">« More »</a>    </div>
+
+                            </div>
+            
+    
+                
+    
+        <ul class="breadcrumb">
+            <li><a href="../index.html"><i class="icon-th"></i></a></li>
+                
+                
+    
+    <li>
+        <span class="divider">\</span><a href="../namespaces/Ascmvc.html">Ascmvc</a>
+    </li>
+
+    
+    <li>
         <span class="divider">\</span><a href="../namespaces/Ascmvc.Middleware.html">Middleware</a>
     </li>
 
@@ -821,113 +968,46 @@ according to specified configuration.</p>
                 <h3><i class="icon-custom icon-class"></i> Classes, interfaces and traits</h3>
                 
                 
-                                        <div id="class_Config" class="element ajax clickable class" data-toggle="collapse" data-target="#class_Config .collapse">
-        <h1>Config<a href="../classes/Ascmvc.Session.Config.html">¶</a></h1>
-        <p class="short_description">Class Config</p>
+                                        <div id="class_LazyLoadingMiddleware" class="element ajax clickable class" data-toggle="collapse" data-target="#class_LazyLoadingMiddleware .collapse">
+        <h1>LazyLoadingMiddleware<a href="../classes/Ascmvc.Middleware.LazyLoadingMiddleware.html">¶</a></h1>
+        <p class="short_description">Class LazyLoadingMiddleware</p>
         <div class="details collapse">
-                            
+                            <p>This class stores given middleware inside a Container factory in order to load them only when needed.</p>
                     </div>
-        <a href="../classes/Ascmvc.Session.Config.html" class="more">« More »</a>    </div>
+        <a href="../classes/Ascmvc.Middleware.LazyLoadingMiddleware.html" class="more">« More »</a>    </div>
 
-                                        <div id="class_Http" class="element ajax clickable class" data-toggle="collapse" data-target="#class_Http .collapse">
-        <h1>Http<a href="../classes/Ascmvc.Session.Http.html">¶</a></h1>
-        <p class="short_description">Class Http</p>
+                                        <div id="class_MiddlewareFactory" class="element ajax clickable class" data-toggle="collapse" data-target="#class_MiddlewareFactory .collapse">
+        <h1>MiddlewareFactory<a href="../classes/Ascmvc.Middleware.MiddlewareFactory.html">¶</a></h1>
+        <p class="short_description">Class MiddlewareFactory</p>
         <div class="details collapse">
-                            
+                            <p>Marshal middleware for use in the application.</p>
+<p>This class provides a number of methods for preparing and returning
+middleware for use within an application.</p>
+<p>If any middleware provided is already a MiddlewareInterface, it can be used
+verbatim or decorated as-is. Other middleware types acceptable are:</p>
+<ul>
+<li>PSR-15 RequestHandlerInterface instances; these will be decorated as
+RequestHandlerMiddleware instances.</li>
+<li>string service names resolving to middleware</li>
+<li>arrays of service names and/or MiddlewareInterface instances</li>
+<li>PHP callables that follow the PSR-15 signature</li>
+</ul>
+<p>Additionally, the class provides the following decorator/utility methods:</p>
+<ul>
+<li>callableMiddleware() will decorate the callable middleware passed to it using
+CallableMiddlewareDecorator.</li>
+<li>handlerMiddleware() will decorate the request handler passed to it using
+RequestHandlerMiddleware.</li>
+<li>lazyMiddleware() will decorate the string service name passed to it, along with the
+factory instance, as a LazyLoadingMiddleware instance.</li>
+<li>pipeline() will create a MiddlewarePipe instance from the array of
+middleware passed to it, after passing each first to prepare().</li>
+</ul>
                     </div>
-        <a href="../classes/Ascmvc.Session.Http.html" class="more">« More »</a>    </div>
-
-                                        <div id="class_Random" class="element ajax clickable class" data-toggle="collapse" data-target="#class_Random .collapse">
-        <h1>Random<a href="../classes/Ascmvc.Session.Random.html">¶</a></h1>
-        <p class="short_description">Class Random</p>
-        <div class="details collapse">
-                            
-                    </div>
-        <a href="../classes/Ascmvc.Session.Random.html" class="more">« More »</a>    </div>
-
-                                        <div id="class_Session" class="element ajax clickable class" data-toggle="collapse" data-target="#class_Session .collapse">
-        <h1>Session<a href="../classes/Ascmvc.Session.Session.html">¶</a></h1>
-        <p class="short_description">Class Session</p>
-        <div class="details collapse">
-                            
-                    </div>
-        <a href="../classes/Ascmvc.Session.Session.html" class="more">« More »</a>    </div>
-
-                                        <div id="class_SessionManager" class="element ajax clickable class" data-toggle="collapse" data-target="#class_SessionManager .collapse">
-        <h1>SessionManager<a href="../classes/Ascmvc.Session.SessionManager.html">¶</a></h1>
-        <p class="short_description">Class SessionManager</p>
-        <div class="details collapse">
-                            
-                    </div>
-        <a href="../classes/Ascmvc.Session.SessionManager.html" class="more">« More »</a>    </div>
-
-                                        <div id="class_Swoole" class="element ajax clickable class" data-toggle="collapse" data-target="#class_Swoole .collapse">
-        <h1>Swoole<a href="../classes/Ascmvc.Session.Swoole.html">¶</a></h1>
-        <p class="short_description">Class Swoole</p>
-        <div class="details collapse">
-                            
-                    </div>
-        <a href="../classes/Ascmvc.Session.Swoole.html" class="more">« More »</a>    </div>
+        <a href="../classes/Ascmvc.Middleware.MiddlewareFactory.html" class="more">« More »</a>    </div>
 
                             </div>
             
-                
-    
-        <ul class="breadcrumb">
-            <li><a href="../index.html"><i class="icon-th"></i></a></li>
-                
-                
-                
-    
-    <li>
-        <span class="divider">\</span><a href="../namespaces/Ascmvc.html">Ascmvc</a>
-    </li>
-
-    
-    <li>
-        <span class="divider">\</span><a href="../namespaces/Ascmvc.Session.html">Session</a>
-    </li>
-
-    
-    <li>
-        <span class="divider">\</span><a href="../namespaces/Ascmvc.Session.Cache.html">Cache</a>
-    </li>
-
-        </ul>
-
-        
-        
-                    <div class="namespace-indent">
-                <h3><i class="icon-custom icon-class"></i> Classes, interfaces and traits</h3>
-                
-                
-                                        <div id="class_DoctrineCacheItem" class="element ajax clickable class" data-toggle="collapse" data-target="#class_DoctrineCacheItem .collapse">
-        <h1>DoctrineCacheItem<a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItem.html">¶</a></h1>
-        <p class="short_description">Class DoctrineCacheItem</p>
-        <div class="details collapse">
-                            
-                    </div>
-        <a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItem.html" class="more">« More »</a>    </div>
-
-                                        <div id="class_DoctrineCacheItemPool" class="element ajax clickable class" data-toggle="collapse" data-target="#class_DoctrineCacheItemPool .collapse">
-        <h1>DoctrineCacheItemPool<a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItemPool.html">¶</a></h1>
-        <p class="short_description">Class DoctrineCacheItemPool</p>
-        <div class="details collapse">
-                            
-                    </div>
-        <a href="../classes/Ascmvc.Session.Cache.DoctrineCacheItemPool.html" class="more">« More »</a>    </div>
-
-                                        <div id="class_DoctrineInvalidArgumentException" class="element ajax clickable class" data-toggle="collapse" data-target="#class_DoctrineInvalidArgumentException .collapse">
-        <h1>DoctrineInvalidArgumentException<a href="../classes/Ascmvc.Session.Cache.DoctrineInvalidArgumentException.html">¶</a></h1>
-        <p class="short_description">Class DoctrineInvalidArgumentException</p>
-        <div class="details collapse">
-                            
-                    </div>
-        <a href="../classes/Ascmvc.Session.Cache.DoctrineInvalidArgumentException.html" class="more">« More »</a>    </div>
-
-                            </div>
-            
-    
     
     
     
@@ -939,7 +1019,7 @@ according to specified configuration.</p>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Tue, 16 Apr 2019 03:38:30 +0000.<br/>
+            generated on Tue, 30 Apr 2019 15:54:21 +0000.<br/>
     </footer>
     </body>
 </html>

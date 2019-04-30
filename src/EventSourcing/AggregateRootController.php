@@ -27,7 +27,13 @@ class AggregateRootController extends Controller
      * @var string 
      */
     protected $aggregateRootName;
-    
+
+    /**
+     * Contains a list of listeners for this aggregate, where the key is the name of the event
+     * and the value is the FQCN of the class that is to become a listener of the specified event.
+     *
+     * @var array
+     */
     protected $aggregateListenerNames = [];
     
     /**

@@ -45,6 +45,8 @@ class App extends AbstractApp
 
     /**
      * App constructor.
+     *
+     * @param bool $swoole
      */
     public function __construct(bool $swoole = false)
     {
@@ -62,6 +64,7 @@ class App extends AbstractApp
     /**
      * Gets a Singleton instance of the App class.
      *
+     * @param bool $swoole
      * @return AbstractApp
      */
     public static function getInstance(bool $swoole = false) : AbstractApp

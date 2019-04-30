@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta charset="utf-8"/>
-    <title>    ASCMVC &raquo; \Ascmvc\Session\Swoole
+    <title>    ASCMVC &raquo; \Ascmvc\EventSourcing\AsyncCommand
 </title>
     <meta name="author" content=""/>
     <meta name="description" content=""/>
@@ -120,50 +120,35 @@
             <i class="icon-custom icon-method"></i> Methods
             <ul>
                                                                                                     <li class="method public">
-        <a href="#method___construct" title="__construct :: Swoole constructor.">
-            <span class="description">Swoole constructor.</span><pre>__construct</pre>
+        <a href="#method___construct" title="__construct :: AsyncCommand constructor.">
+            <span class="description">AsyncCommand constructor.</span><pre>__construct</pre>
         </a>
     </li>
 
-                                                                                                        <li class="method public">
-        <a href="#method_getCookie" title="getCookie :: Gets the cookie from the Swoole Request object.">
-            <span class="description">Gets the cookie from the Swoole Request object.</span><pre>getCookie</pre>
-        </a>
-    </li>
-
-                                                                                                        <li class="method public">
-        <a href="#method_getServerGlobalEnv" title="getServerGlobalEnv :: Returns the equivalent of the $_SERVER array from the Swoole environment.">
-            <span class="description">Returns the equivalent of the $_SERVER array from the Swoole environment.</span><pre>getServerGlobalEnv</pre>
-        </a>
-    </li>
-
-                                                                                                        <li class="method public">
-        <a href="#method_setCookie" title="setCookie :: Sets the cookie in the Swoole Response object.">
-            <span class="description">Sets the cookie in the Swoole Response object.</span><pre>setCookie</pre>
-        </a>
-    </li>
-
-                                                                                                        <li class="method public">
-        <a href="#method_setRequest" title="setRequest :: Sets the \swoole_http_request object.">
-            <span class="description">Sets the \swoole_http_request object.</span><pre>setRequest</pre>
-        </a>
-    </li>
-
-                                                                                                        <li class="method public">
-        <a href="#method_setResponse" title="setResponse :: Sets the \swoole_http_response object.">
-            <span class="description">Sets the \swoole_http_response object.</span><pre>setResponse</pre>
-        </a>
-    </li>
-
-                                                </ul>
+                                                                                                                                                                                                                        </ul>
         </li>
         <li class="nav-header protected">» Protected
             <ul>
-                                                                                                                                                                                                                                                                    </ul>
+                                                                                                                <li class="method protected">
+                            <a href="#method_configure" title="configure :: Configures the current command.">
+                                <span class="description">Configures the current command.</span><pre>configure</pre>
+                            </a>
+                        </li>
+                                                                                <li class="method protected">
+                            <a href="#method_execute" title="execute :: Executes the current command.">
+                                <span class="description">Executes the current command.</span><pre>execute</pre>
+                            </a>
+                        </li>
+                                                                                <li class="method protected">
+                            <a href="#method_getWebapp" title="getWebapp :: Gets the instance of the AbstractApp class.">
+                                <span class="description">Gets the instance of the AbstractApp class.</span><pre>getWebapp</pre>
+                            </a>
+                        </li>
+                                                </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                                                                                                                                                                                                    </ul>
+                                                                                                                                                                                            </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -177,10 +162,11 @@
 
         <div class="span8">
             <div class="element class">
-                <h1>Swoole</h1>
+                <h1>AsyncCommand</h1>
                 <small style="display: block; text-align: right">
+                                            Extends \Symfony\Component\Console\Command\Command
                                                         </small>
-                <p class="short_description">Class Swoole</p>
+                <p class="short_description">Class AsyncCommand</p>
                 <div class="details">
                     <div class="long_description">
                         
@@ -192,7 +178,7 @@
                                                                             </th>
                                     <td>
                                                                                     
-                                                                                <p>Ascmvc\Session</p>
+                                                                                <p>Ascmvc\EventSourcing</p>
                                     </td>
                                 </tr>
                                                                                                                                                                                 </table>
@@ -200,8 +186,8 @@
                     <h3><i class="icon-custom icon-method"></i> Methods</h3>
                                                                 <a id="method___construct"></a>
                         <div class="element clickable method public  method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
-                            <h2>Swoole constructor.</h2>
-                            <pre>__construct(\swoole_http_request $request, \swoole_http_response $response) </pre>
+                            <h2>AsyncCommand constructor.</h2>
+                            <pre>__construct(\Ascmvc\AbstractApp $webapp) </pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -222,22 +208,18 @@
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
-                                                <h4>$request</h4>
-                                                <code>\swoole_http_request</code><p></p>
-                                            </div>
-                                                                                    <div class="subelement argument">
-                                                <h4>$response</h4>
-                                                <code>\swoole_http_response</code><p></p>
+                                                <h4>$webapp</h4>
+                                                <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
                                             </div>
                                                                             
                                                                     </div>
                             </div>
 
                         </div>
-                                            <a id="method_getCookie"></a>
-                        <div class="element clickable method public  method_getCookie" data-toggle="collapse" data-target=".method_getCookie .collapse">
-                            <h2>Gets the cookie from the Swoole Request object.</h2>
-                            <pre>getCookie(string $name = &#039;&#039;) : null</pre>
+                                            <a id="method_configure"></a>
+                        <div class="element clickable method protected  method_configure" data-toggle="collapse" data-target=".method_configure .collapse">
+                            <h2>Configures the current command.</h2>
+                            <pre>configure() </pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -247,24 +229,84 @@
                                     <div class="long_description"></div>
 
                                     <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
                                                                                                                     </table>
 
-                                                                            <h3>Arguments</h3>
-                                                                                    <div class="subelement argument">
-                                                <h4>$name</h4>
-                                                <code>string</code><p></p>
-                                            </div>
-                                                                            
-                                                                            <h3>Response</h3>
-                                        <code>null</code><p></p>
+                                    
                                                                     </div>
                             </div>
 
                         </div>
-                                            <a id="method_getServerGlobalEnv"></a>
-                        <div class="element clickable method public  method_getServerGlobalEnv" data-toggle="collapse" data-target=".method_getServerGlobalEnv .collapse">
-                            <h2>Returns the equivalent of the $_SERVER array from the Swoole environment.</h2>
-                            <pre>getServerGlobalEnv() : mixed</pre>
+                                            <a id="method_execute"></a>
+                        <div class="element clickable method protected  method_execute" data-toggle="collapse" data-target=".method_execute .collapse">
+                            <h2>Executes the current command.</h2>
+                            <pre>execute(\Symfony\Component\Console\Input\InputInterface $input, \Symfony\Component\Console\Output\OutputInterface $output) : integer|null</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"><p>This method is not abstract because you can use this class
+as a concrete class. In this case, instead of defining the
+execute() method, you set the code to execute by passing
+a Closure to the setCode() method.</p></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    see
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                            \Ascmvc\EventSourcing\setCode()
+                                                                                                                
+                                                                                                    </td>
+                                            </tr>
+                                                                                                                            <tr>
+                                                <th>Throws</th>
+                                                <td>
+                                                    <dl>
+                                                                                                            <dt>\Symfony\Component\Console\Exception\LogicException</dt>
+                                                        <dd><p>When this abstract method is not implemented</p></dd>
+                                                                                                                                                            </dl>
+                                                </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$input</h4>
+                                                <code>\Symfony\Component\Console\Input\InputInterface</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$output</h4>
+                                                <code>\Symfony\Component\Console\Output\OutputInterface</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>integer|null</code><p><p>null or 0 if everything went fine, or an error code</p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_getWebapp"></a>
+                        <div class="element clickable method protected  method_getWebapp" data-toggle="collapse" data-target=".method_getWebapp .collapse">
+                            <h2>Gets the instance of the AbstractApp class.</h2>
+                            <pre>getWebapp() : \Ascmvc\AbstractApp</pre>
                             <div class="labels">
                                                                                                                                                                                             </div>
 
@@ -285,112 +327,7 @@
 
                                     
                                                                             <h3>Response</h3>
-                                        <code>mixed</code><p></p>
-                                                                    </div>
-                            </div>
-
-                        </div>
-                                            <a id="method_setCookie"></a>
-                        <div class="element clickable method public  method_setCookie" data-toggle="collapse" data-target=".method_setCookie .collapse">
-                            <h2>Sets the cookie in the Swoole Response object.</h2>
-                            <pre>setCookie(string $name, string $value = &quot;&quot;, integer $expire, string $path = &quot;&quot;, string $domain = &quot;&quot;, boolean $secure = false, boolean $httponly = false) : mixed</pre>
-                            <div class="labels">
-                                                                                                                                                                                            </div>
-
-                            
-                            <div class="row collapse">
-                                <div class="detail-description">
-                                    <div class="long_description"></div>
-
-                                    <table class="table">
-                                                                                                                    </table>
-
-                                                                            <h3>Arguments</h3>
-                                                                                    <div class="subelement argument">
-                                                <h4>$name</h4>
-                                                <code>string</code><p></p>
-                                            </div>
-                                                                                    <div class="subelement argument">
-                                                <h4>$value</h4>
-                                                <code>string</code><p></p>
-                                            </div>
-                                                                                    <div class="subelement argument">
-                                                <h4>$expire</h4>
-                                                <code>integer</code><p></p>
-                                            </div>
-                                                                                    <div class="subelement argument">
-                                                <h4>$path</h4>
-                                                <code>string</code><p></p>
-                                            </div>
-                                                                                    <div class="subelement argument">
-                                                <h4>$domain</h4>
-                                                <code>string</code><p></p>
-                                            </div>
-                                                                                    <div class="subelement argument">
-                                                <h4>$secure</h4>
-                                                <code>boolean</code><p></p>
-                                            </div>
-                                                                                    <div class="subelement argument">
-                                                <h4>$httponly</h4>
-                                                <code>boolean</code><p></p>
-                                            </div>
-                                                                            
-                                                                            <h3>Response</h3>
-                                        <code>mixed</code><p></p>
-                                                                    </div>
-                            </div>
-
-                        </div>
-                                            <a id="method_setRequest"></a>
-                        <div class="element clickable method public  method_setRequest" data-toggle="collapse" data-target=".method_setRequest .collapse">
-                            <h2>Sets the \swoole_http_request object.</h2>
-                            <pre>setRequest(\swoole_http_request|null $request = null) : $this|\swoole_http_request</pre>
-                            <div class="labels">
-                                                                                                                                                                                            </div>
-
-                            
-                            <div class="row collapse">
-                                <div class="detail-description">
-                                    <div class="long_description"></div>
-
-                                    <table class="table">
-                                                                                                                    </table>
-
-                                                                            <h3>Arguments</h3>
-                                                                                    <div class="subelement argument">
-                                                <h4>$request</h4>
-                                                <code>\swoole_http_request|null</code><p></p>
-                                            </div>
-                                                                            
-                                                                            <h3>Response</h3>
-                                        <code>$this|\swoole_http_request</code><p></p>
-                                                                    </div>
-                            </div>
-
-                        </div>
-                                            <a id="method_setResponse"></a>
-                        <div class="element clickable method public  method_setResponse" data-toggle="collapse" data-target=".method_setResponse .collapse">
-                            <h2>Sets the \swoole_http_response object.</h2>
-                            <pre>setResponse(\swoole_http_response|null $response = null) : $this|\swoole_http_response</pre>
-                            <div class="labels">
-                                                                                                                                                                                            </div>
-
-                            
-                            <div class="row collapse">
-                                <div class="detail-description">
-                                    <div class="long_description"></div>
-
-                                    <table class="table">
-                                                                                                                    </table>
-
-                                                                            <h3>Arguments</h3>
-                                                                                    <div class="subelement argument">
-                                                <h4>$response</h4>
-                                                <code>\swoole_http_response|null</code><p></p>
-                                            </div>
-                                                                            
-                                                                            <h3>Response</h3>
-                                        <code>$this|\swoole_http_response</code><p></p>
+                                        <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code><p></p>
                                                                     </div>
                             </div>
 
@@ -398,10 +335,10 @@
                     
                     
                                                                 <h3><i class="icon-custom icon-property"></i> Properties</h3>
-                                                    <a id="property_request"> </a>
-                            <div class="element clickable property  protected property_request" data-toggle="collapse" data-target=".property_request .collapse">
-                                <h2>Contains a swoole_http_request instance.</h2>
-                                <pre>request : \swoole_http_request</pre>
+                                                    <a id="property_webapp"> </a>
+                            <div class="element clickable property  protected property_webapp" data-toggle="collapse" data-target=".property_webapp .collapse">
+                                <h2>Contains an instance of the AbstractApp class.</h2>
+                                <pre>webapp : \Ascmvc\AbstractApp</pre>
                                 <div class="labels">
                                                                                                         </div>
                                 <div class="row collapse">
@@ -420,16 +357,16 @@
                                                                                     </table>
 
                                                                                     <h3>Type(s)</h3>
-                                            <code>\swoole_http_request</code>
+                                            <code><a href="../classes/Ascmvc.AbstractApp.html">\Ascmvc\AbstractApp</a></code>
                                                                             </div>
                                 </div>
                             </div>
-                                                    <a id="property_response"> </a>
-                            <div class="element clickable property  protected property_response" data-toggle="collapse" data-target=".property_response .collapse">
-                                <h2>Contains a swoole_http_response instance.</h2>
-                                <pre>response : \swoole_http_response</pre>
+                                                    <a id="property_defaultName"> </a>
+                            <div class="element clickable property  protected property_defaultName" data-toggle="collapse" data-target=".property_defaultName .collapse">
+                                <h2>Name of the command.</h2>
+                                <pre>defaultName : string</pre>
                                 <div class="labels">
-                                                                                                        </div>
+                                                                        <span class="label">static</span>                                </div>
                                 <div class="row collapse">
                                     <div class="detail-description">
                                         <div class="long_description"></div>
@@ -446,20 +383,20 @@
                                                                                     </table>
 
                                                                                     <h3>Type(s)</h3>
-                                            <code>\swoole_http_response</code>
+                                            <code>string</code>
                                                                             </div>
                                 </div>
                             </div>
                                                             </div>
             </div>
-            <a id="\Ascmvc\Session\Swoole"></a>
+            <a id="\Ascmvc\EventSourcing\AsyncCommand"></a>
             <ul class="breadcrumb">
                 <li><a href="../index.html"><i class="icon-custom icon-class"></i></a></li>
                     
     
-    <li><span class="divider">\</span><a href="../namespaces/Ascmvc.Session.html">Session</a></li>
+    <li><span class="divider">\</span><a href="../namespaces/Ascmvc.EventSourcing.html">EventSourcing</a></li>
 
-                <li class="active"><span class="divider">\</span><a href="../classes/Ascmvc.Session.Swoole.html">Swoole</a></li>
+                <li class="active"><span class="divider">\</span><a href="../classes/Ascmvc.EventSourcing.AsyncCommand.html">AsyncCommand</a></li>
             </ul>
         </div>
     </div>

@@ -131,15 +131,26 @@
         </a>
     </li>
 
-                                                </ul>
+                                                                                                        <li class="method public">
+        <a href="#method_triggerEvent" title="triggerEvent :: Triggers the given event.">
+            <span class="description">Triggers the given event.</span><pre>triggerEvent</pre>
+        </a>
+    </li>
+
+                                                                                                        </ul>
         </li>
         <li class="nav-header protected">» Protected
             <ul>
-                                                                                                                    </ul>
+                                                                                                                                                                                        <li class="method protected">
+                            <a href="#method_triggerListeners" title="triggerListeners :: Trigger listeners">
+                                <span class="description">Trigger listeners</span><pre>triggerListeners</pre>
+                            </a>
+                        </li>
+                                                </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                                                    </ul>
+                                                                                                                                                                                            </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -248,6 +259,64 @@
                             </div>
 
                         </div>
+                                            <a id="method_triggerEvent"></a>
+                        <div class="element clickable method public  method_triggerEvent" data-toggle="collapse" data-target=".method_triggerEvent .collapse">
+                            <h2>Triggers the given event.</h2>
+                            <pre>triggerEvent(\Zend\EventManager\EventInterface $event) : \Zend\EventManager\ResponseCollection</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$event</h4>
+                                                <code>\Zend\EventManager\EventInterface</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>\Zend\EventManager\ResponseCollection</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_triggerListeners"></a>
+                        <div class="element clickable method protected  method_triggerListeners" data-toggle="collapse" data-target=".method_triggerListeners .collapse">
+                            <h2>Trigger listeners</h2>
+                            <pre>triggerListeners(\Zend\EventManager\EventInterface $event, null|callable $callback = null) : \Zend\EventManager\ResponseCollection</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"><p>Actual functionality for triggering listeners, to which trigger() delegate.</p></div>
+
+                                    <table class="table">
+                                                                                                                    </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$event</h4>
+                                                <code>\Zend\EventManager\EventInterface</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$callback</h4>
+                                                <code>null|callable</code><p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>\Zend\EventManager\ResponseCollection</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
                     
                     
                                                                 <h3><i class="icon-custom icon-property"></i> Properties</h3>
@@ -297,7 +366,7 @@
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Tue, 16 Apr 2019 03:38:30 +0000.<br/>
+            generated on Tue, 30 Apr 2019 15:54:21 +0000.<br/>
     </footer>
     </body>
 </html>

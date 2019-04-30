@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta charset="utf-8"/>
-    <title>    ASCMVC &raquo; \Ascmvc\Session\Random
+    <title>    ASCMVC &raquo; \Ascmvc\Proxy\AtlasORM
 </title>
     <meta name="author" content=""/>
     <meta name="description" content=""/>
@@ -120,14 +120,8 @@
             <i class="icon-custom icon-method"></i> Methods
             <ul>
                                                                                                     <li class="method public">
-        <a href="#method_randNumStr" title="randNumStr :: Generates a random string of numerical values of the specified length.">
-            <span class="description">Generates a random string of numerical values of the specified length.</span><pre>randNumStr</pre>
-        </a>
-    </li>
-
-                                                                                                        <li class="method public">
-        <a href="#method_randStr" title="randStr :: Generates a random string of the specified length.">
-            <span class="description">Generates a random string of the specified length.</span><pre>randStr</pre>
+        <a href="#method_create" title="create :: Wrapper function to the Atlas&#039; &#039;new&#039; method.">
+            <span class="description">Wrapper function to the Atlas&#039; &#039;new&#039; method.</span><pre>create</pre>
         </a>
     </li>
 
@@ -135,11 +129,11 @@
         </li>
         <li class="nav-header protected">» Protected
             <ul>
-                                                                                                                    </ul>
+                                                                                </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                                                    </ul>
+                                                                                </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -153,13 +147,14 @@
 
         <div class="span8">
             <div class="element class">
-                <h1>Random</h1>
+                <h1>AtlasORM</h1>
                 <small style="display: block; text-align: right">
+                                            Extends \Atlas\Orm\Atlas
                                                         </small>
-                <p class="short_description">Class Random</p>
+                <p class="short_description">Class AtlasORM</p>
                 <div class="details">
                     <div class="long_description">
-                        
+                        <p>Proxy to class \Atlas\Orm\Atlas</p>
                     </div>
                     <table class="table table-bordered">
                                                                                     <tr>
@@ -168,16 +163,16 @@
                                                                             </th>
                                     <td>
                                                                                     
-                                                                                <p>Ascmvc\Session</p>
+                                                                                <p>LightMVC/ASCMVC</p>
                                     </td>
                                 </tr>
                                                                                                                                                                                 </table>
 
                     <h3><i class="icon-custom icon-method"></i> Methods</h3>
-                                                                <a id="method_randNumStr"></a>
-                        <div class="element clickable method public  method_randNumStr" data-toggle="collapse" data-target=".method_randNumStr .collapse">
-                            <h2>Generates a random string of numerical values of the specified length.</h2>
-                            <pre>randNumStr( $length) : string</pre>
+                                                                <a id="method_create"></a>
+                        <div class="element clickable method public  method_create" data-toggle="collapse" data-target=".method_create .collapse">
+                            <h2>Wrapper function to the Atlas&#039; &#039;new&#039; method.</h2>
+                            <pre>create(array $args) : \Atlas\Orm\Atlas</pre>
                             <div class="labels">
                                                                 <span class="label">static</span>                                                                                                                            </div>
 
@@ -191,39 +186,12 @@
 
                                                                             <h3>Arguments</h3>
                                                                                     <div class="subelement argument">
-                                                <h4>$length</h4>
-                                                <code></code><p></p>
+                                                <h4>$args</h4>
+                                                <code>array</code><p></p>
                                             </div>
                                                                             
                                                                             <h3>Response</h3>
-                                        <code>string</code><p></p>
-                                                                    </div>
-                            </div>
-
-                        </div>
-                                            <a id="method_randStr"></a>
-                        <div class="element clickable method public  method_randStr" data-toggle="collapse" data-target=".method_randStr .collapse">
-                            <h2>Generates a random string of the specified length.</h2>
-                            <pre>randStr( $length) : boolean|string</pre>
-                            <div class="labels">
-                                                                <span class="label">static</span>                                                                                                                            </div>
-
-                            
-                            <div class="row collapse">
-                                <div class="detail-description">
-                                    <div class="long_description"></div>
-
-                                    <table class="table">
-                                                                                                                    </table>
-
-                                                                            <h3>Arguments</h3>
-                                                                                    <div class="subelement argument">
-                                                <h4>$length</h4>
-                                                <code></code><p></p>
-                                            </div>
-                                                                            
-                                                                            <h3>Response</h3>
-                                        <code>boolean|string</code><p></p>
+                                        <code>\Atlas\Orm\Atlas</code><p></p>
                                                                     </div>
                             </div>
 
@@ -232,14 +200,14 @@
                     
                                                         </div>
             </div>
-            <a id="\Ascmvc\Session\Random"></a>
+            <a id="\Ascmvc\Proxy\AtlasORM"></a>
             <ul class="breadcrumb">
                 <li><a href="../index.html"><i class="icon-custom icon-class"></i></a></li>
                     
     
-    <li><span class="divider">\</span><a href="../namespaces/Ascmvc.Session.html">Session</a></li>
+    <li><span class="divider">\</span><a href="../namespaces/Ascmvc.Proxy.html">Proxy</a></li>
 
-                <li class="active"><span class="divider">\</span><a href="../classes/Ascmvc.Session.Random.html">Random</a></li>
+                <li class="active"><span class="divider">\</span><a href="../classes/Ascmvc.Proxy.AtlasORM.html">AtlasORM</a></li>
             </ul>
         </div>
     </div>

@@ -22,7 +22,7 @@ use Atlas\Orm\Atlas;
 class AtlasORM extends Atlas
 {
     /**
-     * Wrapper function to the Atlas::new(...$args) method.
+     * Wrapper function to the Atlas' 'new' method.
      *
      * @param array ...$args
      *

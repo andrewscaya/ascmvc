@@ -18,6 +18,11 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Process\Process;
 
+/**
+ * Class CommandRunner
+ *
+ * @package Ascmvc\EventSourcing
+ */
 class CommandRunner
 {
     /**
