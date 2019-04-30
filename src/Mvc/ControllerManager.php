@@ -128,7 +128,7 @@ class ControllerManager extends AbstractControllerManager
         ) {
             $controllerPreActionOutput = $this->controller->{$preActionName}($this->vars);
         }
-            
+
         $controllerActionOutput = $this->controller->{$this->method}($this->vars);
 
         if (isset($controllerPreActionOutput)

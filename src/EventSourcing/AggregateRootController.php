@@ -23,8 +23,8 @@ class AggregateRootController extends Controller
 {
     /**
      * Contains the name of the Aggregate Root.
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $aggregateRootName;
 
@@ -35,7 +35,7 @@ class AggregateRootController extends Controller
      * @var array
      */
     protected $aggregateListenerNames = [];
-    
+
     /**
      * Controller constructor.
      *
@@ -45,7 +45,7 @@ class AggregateRootController extends Controller
     public function __construct(array $baseConfig, EventDispatcher $eventDispatcher)
     {
         parent::__construct($baseConfig, $eventDispatcher);
-        
+
         $this->aggregateRootName = static::class;
 
         $aggregateIdentifiers[] = $this->aggregateRootName;
@@ -55,7 +55,7 @@ class AggregateRootController extends Controller
         }
 
         $eventDispatcher->setIdentifiers($aggregateIdentifiers);
-        
+
         if (!empty($this->aggregateListenerNames)) {
             foreach ($this->aggregateListenerNames as $key => $listenerName) {
                 if (is_string($key) && is_string($listenerName)) {
@@ -66,7 +66,7 @@ class AggregateRootController extends Controller
                 }
             }
         }
-        
+
         $sharedEventManager = $eventDispatcher->getSharedManager();
 
         if (!is_null($sharedEventManager)) {

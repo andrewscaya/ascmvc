@@ -184,7 +184,7 @@ class CommandRunner
                 return true;
             }
             // @codeCoverageIgnoreEnd
-            
+
             $this->output = $this->commandProcess->getOutput();
         }
 
