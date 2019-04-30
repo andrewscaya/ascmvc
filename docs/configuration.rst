@@ -24,7 +24,9 @@ The main preconfigured indexes of this array are:
 * ``routes``, which contains an array of FastRouter routes to be used,
 * ``templateManager``, which contains the name of the Template Manager that is to be used ('Plates', 'Twig' or 'Smarty'),
 * ``templateDir`` under the ``templates`` index, which contains the name of the folder where the templates are stored,
-* ``events``, which contains an array of parameters in order to configure the LightMVC Event Sourcing controller-based aggregates,
+* ``async_process_bin``, which contains the path to the PHP script that will be used to fork processes in order to run event sourcing commands,
+* ``async_commands``, which contains an array of fully-qualified class names to run asynchronously,
+* ``events``, which contains an array of parameters in order to configure the LightMVC event sourcing controller-based aggregates,
 * ``session``, which contains an array of parameters in order to configure the LightMVC asynchronous PHP session.
 
 .. note:: The Twig and Smarty template managers require additional indexes under the ``templates`` index. These are: ``compileDir``, ``configDir`` and ``cacheDir``.
@@ -32,7 +34,7 @@ The main preconfigured indexes of this array are:
 Also, there are four optional preconfigured indexes in the ``$baseConfig`` array:
 
 * ``middleware``, which contains an array of PSR-15 compliant middleware to be used,
-* ``eventlog``, which contains an array of parameters in order to configure the LightMVC Event Sourcing Logger,
+* ``eventlog``, which contains an array of parameters in order to configure the LightMVC event sourcing Logger,
 * ``doctrine``, which contains an array of parameters in order to configure one or more Doctrine connections.
 * ``atlas``, which contains an array of parameters in order to configure one or more Atlas connections.
 
@@ -49,6 +51,8 @@ Here is an example of a ``config/config.php`` file:
     // Required configuration
     require 'events.config.php';
 
+    require 'commands.config.php';
+
     require 'routes.config.php';
 
     require 'view.config.php';
@@ -62,6 +66,9 @@ Here is an example of a ``config/config.php`` file:
 
 Event Sourcing Configuration
 ----------------------------
+
+When configuring event sourcing aggregates, one must configure both the event bus and, optionally,
+the command bus if one is to use asynchronous commands.
 
 For example, the ``config/events.config.php`` file might look like the following:
 
@@ -96,6 +103,27 @@ For example, the ``config/events.config.php`` file might look like the following
     ];
 
 .. note:: For more information on configuring the application's event sourcing aggregates and the application's event log, please see the :ref:`eventsourcing` section.
+
+And, if using asynchronous commands, the ``config/commands.config.php`` file might look like the following:
+
+.. code-block:: php
+
+    <?php
+
+    // The PHP script to use when forking processes.
+    $baseConfig['async_process_bin'] = $baseConfig['BASEDIR']
+    . DIRECTORY_SEPARATOR
+    . 'bin'
+    . DIRECTORY_SEPARATOR
+    . 'process.php';
+
+    // List of commands to run asynchronously.
+    $baseConfig['async_commands'] = [
+        \Application\Commands\ReadProductsCommand::class,
+        \Application\Commands\WriteProductsCommand::class,
+    ];
+
+.. note:: When running the application as a Swoole coroutine, listed commands will not be forked, since new processes cannot be created from within a Swoole coroutine.
 
 .. _configuration routing:
 

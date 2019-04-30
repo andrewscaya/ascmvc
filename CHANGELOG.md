@@ -2,7 +2,7 @@
 
 ## 3.1.0 (2019-04-30)
 
-- Adds aggregate root controllers for easier usage of most aggregate-based functionality.
+- Adds aggregate root controllers for easier usage of aggregate-based functionality.
 
 - Adds asynchronous functionality to the Event Dispatcher.
 
