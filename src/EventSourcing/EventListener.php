@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.0.0
+ * @version    3.1.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      3.0.0
  */
@@ -29,13 +29,24 @@ class EventListener implements EventListenerInterface
     protected $eventDispatcher;
 
     /**
-     * Policy constructor.
+     * EventListener constructor.
      *
      * @param EventDispatcher $eventDispatcher
      */
     protected function __construct(EventDispatcher $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
+    }
+
+    /**
+     * Runs the EventListener class as a function.
+     *
+     * @param Event $event
+     * @return \Generator
+     */
+    public function __invoke(Event $event)
+    {
+        yield $this->onEvent($event);
     }
 
     /**
@@ -54,8 +65,10 @@ class EventListener implements EventListenerInterface
      * Event listener method.
      *
      * @param Event $event
+     * @return \Generator
      */
     public function onEvent(Event $event)
     {
+        yield;
     }
 }

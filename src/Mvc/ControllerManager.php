@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.0.0
+ * @version    3.1.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -15,7 +15,7 @@ namespace Ascmvc\Mvc;
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\AscmvcControllerFactoryInterface;
-use Ascmvc\EventSourcing\EventDispatcher;
+use Ascmvc\EventSourcing\AggregateRootController;
 use Zend\Diactoros\Response;
 
 /**
@@ -65,6 +65,12 @@ class ControllerManager extends AbstractControllerManager
 
         $controllerName = $this->controllerName;
 
+        $sharedEventManager = $eventManager->getSharedManager();
+
+        $eventDispatcherName = $baseConfig['events']['psr14_event_dispatcher'];
+
+        $eventDispatcher = new $eventDispatcherName($this->app, $sharedEventManager);
+
         try {
             $this->controllerReflection = new \ReflectionClass($controllerName);
 
@@ -73,12 +79,6 @@ class ControllerManager extends AbstractControllerManager
             if (!$this->controllerReflection->hasMethod($this->controllerMethodName)) {
                 throw new \ReflectionException;
             }
-
-            $sharedEventManager = $eventManager->getSharedManager();
-
-            $eventDispatcherName = $baseConfig['events']['psr14_event_dispatcher'];
-
-            $eventDispatcher = new $eventDispatcherName($this->app, $sharedEventManager);
 
             if ($this->controllerReflection->implementsInterface(AscmvcControllerFactoryInterface::class)
                 && $this->controllerReflection->hasMethod('factory')
@@ -121,7 +121,24 @@ class ControllerManager extends AbstractControllerManager
      */
     public function execute()
     {
-        $controllerOutput = $this->controller->{$this->method}($this->vars);
+        $preActionName = 'pre' . ucfirst($this->method);
+
+        if ($this->controllerReflection->getParentClass()->getName() === AggregateRootController::class
+            && $this->controllerReflection->hasMethod($preActionName)
+        ) {
+            $controllerPreActionOutput = $this->controller->{$preActionName}($this->vars);
+        }
+
+        $controllerActionOutput = $this->controller->{$this->method}($this->vars);
+
+        if (isset($controllerPreActionOutput)
+            && is_array($controllerPreActionOutput)
+            && !empty($controllerPreActionOutput)
+        ) {
+            $controllerOutput = array_merge($controllerPreActionOutput, $controllerActionOutput);
+        } else {
+            $controllerOutput = $controllerActionOutput;
+        }
 
         return $controllerOutput;
     }

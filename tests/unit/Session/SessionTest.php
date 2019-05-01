@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.0.0
+ * @version    3.1.0
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  * @since      2.1.0
@@ -320,12 +320,14 @@ class SessionTest extends TestCase
 
         $this->assertEquals(3, $session->get('middleware')['example']);
 
+        $lastActivity = $session->get('last_activity');
+
         $this->assertSame(
             [
                 'initiated' => true,
                 'created' => $time,
                 'http_user_agent' => 'd33bdc0532cfe79bd15ad8554774fe2a77af2977642d261e2ec2462f191adae1',
-                'last_activity' => $time,
+                'last_activity' => $lastActivity,
                 'middleware' => [
                     'session' => 'Application\Middleware\SessionMiddleware',
                     'example' => 3

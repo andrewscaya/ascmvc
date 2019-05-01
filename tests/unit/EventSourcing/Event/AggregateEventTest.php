@@ -5,10 +5,10 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.0.0
+ * @version    3.1.0
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
- * @since      2.0.0
+ * @since      3.0.0
  */
 
 namespace AscmvcTest\EventSourcing\Event;
@@ -44,7 +44,7 @@ class AggregateEventTest extends TestCase
 
         $this->assertEquals(1, $aggregateEvent->getEventType());
 
-        $this->assertSame('testRootAggregate', $aggregateEvent->getRootAggregateName());
+        $this->assertSame('testRootAggregate', $aggregateEvent->getAggregateRootName());
 
         $aggregateValueObject2 = new AggregateImmutableValueObject(['testkey2' => 'testvalue2']);
 

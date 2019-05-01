@@ -42,6 +42,7 @@ File Structure
 
 The application's file structure is quite straightforward:
 
+* ``bin``: contains scripts that will be used to fork and run commands.
 * ``cache``: contains files created by the application while running in ``production`` mode.
 * ``config``: contains all of the application's configuration files.
 * ``controllers``: contains all of the application's controllers, grouped by module (namespace).

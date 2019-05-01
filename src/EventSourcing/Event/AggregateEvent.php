@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.0.0
+ * @version    3.1.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      3.0.0
  */
@@ -42,25 +42,25 @@ class AggregateEvent extends Event
      *
      * @var null|string
      */
-    protected $rootAggregateName;
+    protected $aggregateRootName;
 
     /**
      * AggregateEvent constructor.
      *
      * @param AggregateImmutableValueObject $aggregateValueObject
-     * @param null $rootAggregateName
+     * @param null $aggregateRootName
      * @param null $name
      * @param null $target
      * @param null $params
      */
-    public function __construct(AggregateImmutableValueObject $aggregateValueObject, $rootAggregateName = null, $name = null, $target = null, $params = null)
+    public function __construct(AggregateImmutableValueObject $aggregateValueObject, $aggregateRootName = null, $name = null, $target = null, $params = null)
     {
         parent::__construct($name, $target, $params);
 
         $this->aggregateValueObject = $aggregateValueObject;
 
-        if (!is_null($rootAggregateName)) {
-            $this->rootAggregateName = $rootAggregateName;
+        if (!is_null($aggregateRootName)) {
+            $this->aggregateRootName = $aggregateRootName;
         }
     }
 
@@ -97,13 +97,27 @@ class AggregateEvent extends Event
         return $this;
     }
 
+    // @codeCoverageIgnoreStart
     /**
-     * Gets the name of the root aggregate that created the event.
+     * DEPRECATED - Use getAggregateRootName() instead - Will be removed in 4.0.0.
+     *
+     * Gets the name of the aggregate root that created the event.
      *
      * @return null|string
      */
     public function getRootAggregateName()
     {
-        return $this->rootAggregateName;
+        return $this->aggregateRootName;
+    }
+    // @codeCoverageIgnoreEnd
+
+    /**
+     * Gets the name of the aggregate root that created the event.
+     *
+     * @return null|string
+     */
+    public function getAggregateRootName()
+    {
+        return $this->aggregateRootName;
     }
 }

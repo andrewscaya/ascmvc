@@ -8,7 +8,7 @@ Installation
 Prerequisites
 -------------
 
-* PHP 7.1
+* PHP 7.2
 
 Installation using Composer
 ---------------------------

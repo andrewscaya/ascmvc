@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.0.0
+ * @version    3.1.0
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  * @since      2.0.0
@@ -13,6 +13,9 @@
 
 namespace AscmvcTest;
 
+use Application\Controllers\FakeaggregateController;
+use Application\Log\Repository\EventLogRepository;
+use Ascmvc\EventSourcing\EventDispatcher;
 use Ascmvc\Mvc\App;
 use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Session\SessionManager;
@@ -89,6 +92,8 @@ class AppTest extends TestCase
         $app->appendBaseConfig('test', ['test1']);
 
         $this->assertArrayHasKey('test', $app->getBaseConfig());
+
+        $this->assertFalse($app->isSwoole());
     }
 
     public function testBootMethodLoadsConfigurationFiles()
@@ -1532,6 +1537,144 @@ class AppTest extends TestCase
             . "<body>\n"
             . "<!-- Plates template -->\n"
             . "FakeeventControllerSTDOUTtestaddedvalue</body>\n"
+            . "</html>",
+            $actualOutput
+        );
+    }
+
+    public function testRunMethodWithAllEventsWithMergedControllerEventOutputFromAggregateRootController()
+    {
+        // Redirect output to command output
+        $this->setOutputCallback(function () {
+        });
+
+        ob_start();
+
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'app');
+        }
+
+        $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
+        $serverRequestFactoryMock
+            ->shouldReceive('fromGlobals')
+            ->once();
+
+        $requestMock = \Mockery::mock(
+            'overload:' . ServerRequest::class,
+            'overload:' . ServerRequestInterface::class
+        );
+        $requestMock
+            ->shouldReceive('getServerParams')
+            ->once()
+            ->andReturn(['REQUEST_URI' => '/fakeaggregate/index']);
+        $requestMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('GET');
+        $requestMock
+            ->shouldReceive('getParsedBody')
+            ->once();
+        $requestMock
+            ->shouldReceive('getUploadedFiles')
+            ->once();
+        $requestMock
+            ->shouldReceive('getCookieParams')
+            ->once();
+        $requestMock
+            ->shouldReceive('getProtocolVersion')
+            ->once()
+            ->andReturn('1.1');
+
+        $eventLogRepositoryMock = \Mockery::mock('overload:' . EventLogRepository::class);
+        $eventLogRepositoryMock
+            ->shouldReceive('commit')
+            ->once();
+
+        $baseConfig['BASEDIR'] = BASEDIR;
+
+        $baseConfig['templateManager'] = 'Plates';
+        $baseConfig['templates']['templateDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates';
+        $baseConfig['templates']['compileDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'templates_c';
+        $baseConfig['templates']['configDir'] =
+            $baseConfig['BASEDIR']
+            . DIRECTORY_SEPARATOR
+            . 'config';
+
+        $baseConfig['env'] = 'development';
+
+        $baseConfig['view'] = [];
+
+        $baseConfig['doctrine']['ORM']['dem1'] = [
+            'driver'   => 'pdo_mysql',
+            'host'     => 'localhost',
+            'user'     => 'fwuser',
+            'password' => 'testpass',
+            'dbname'   => 'fw',
+        ];
+
+        $baseConfig['events'] = [
+            // PSR-14 compliant Event Bus.
+            'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
+            // Different read and write connections allow for simplified (!) CQRS. :)
+            'read_conn_name' => 'dem1',
+            'write_conn_name' => 'dem1',
+        ];
+
+        $baseConfig['eventlog'] = [
+            'enabled' => true,
+            'doctrine' => [
+                'log_conn_name' => 'dem1',
+                'entity_name' => \Application\Log\Entity\EventLog::class,
+            ],
+            // Leave empty to log everything, including the kitchen sink. :)
+            // If you you start whitelisting events, it will blacklist everything else by default.
+            'log_event_type' => [
+                'whitelist' => [
+                    \Ascmvc\EventSourcing\Event\WriteAggregateCompletedEvent::class,
+                ],
+                'blacklist' => [
+                    //\Ascmvc\EventSourcing\Event\AggregateEvent::class,
+                ],
+            ],
+        ];
+
+        $baseConfig['routes'] = [
+            0 => [
+                'GET',
+                '/fakeaggregate[/{action}]',
+                'fakeaggregate',
+            ],
+        ];
+
+        $app = App::getInstance();
+
+        // Deliberately not calling the app's boot() method
+        $app->initialize($baseConfig);
+
+        $app->setRequest($requestMock);
+
+        $ascmvcEvent = $app->getEvent();
+        $ascmvcEvent->setName(AscmvcEvent::EVENT_ROUTE);
+        $ascmvcEvent->setApplication($app);
+        $app->setEvent($ascmvcEvent);
+
+        $app->run();
+
+        $actualOutput = ob_get_contents();
+
+        $this->assertSame(
+            "<html>\n"
+            . "<head>\n"
+            . "</head>\n"
+            . "<body>\n"
+            . "<!-- Plates template -->\n"
+            . "FakeaggregateControllerSTDOUTtestaddedvaluefromreadmodelPreIndexData</body>\n"
             . "</html>",
             $actualOutput
         );

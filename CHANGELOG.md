@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 3.1.0 (2019-04-30)
+
+- Adds aggregate root controllers for easier usage of aggregate-based functionality.
+
+- Adds asynchronous functionality to the Event Dispatcher.
+
+- Adds asynchronous commands in non-Swoole environments using ReactPHP/Symfony Process.
+
+- Adds a Command Runner to make running commands independent of the PHP environment (Swoole or non-Swoole).
+
+- Updates the documentation.
+
 ## 3.0.0 (2019-04-16)
 
 - Adds controller-based Event Sourcing aggregates to the framework with a PSR-14 compliant Event Dispatcher (event bus).

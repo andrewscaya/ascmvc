@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.0.0
+ * @version    3.1.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -35,13 +35,22 @@ use function Zend\Stratigility\path;
  */
 class App extends AbstractApp
 {
-
     // @codeCoverageIgnoreStart
     /**
-     * App constructor.
+     * Indicates if the application is running inside a Swoole coroutine or not.
+     *
+     * @var bool
      */
-    public function __construct()
+    protected $swoole = false;
+
+    /**
+     * App constructor.
+     *
+     * @param bool $swoole
+     */
+    public function __construct(bool $swoole = false)
     {
+        $this->swoole = $swoole;
     }
 
     /**
@@ -55,12 +64,13 @@ class App extends AbstractApp
     /**
      * Gets a Singleton instance of the App class.
      *
+     * @param bool $swoole
      * @return AbstractApp
      */
-    public static function getInstance() : AbstractApp
+    public static function getInstance(bool $swoole = false) : AbstractApp
     {
         if (!self::$appInstance) {
-            self::$appInstance = new App();
+            self::$appInstance = new App($swoole);
         }
 
         return self::$appInstance;
@@ -91,7 +101,11 @@ class App extends AbstractApp
             $requestUri = implode('/', $requestUriArray);
         }
 
-        $requestUrl = $protocol . $_SERVER['HTTP_HOST'] . $requestUri . '/';
+        if (!isset($_SERVER['HTTP_HOST'])) {
+            $requestUrl = $protocol . 'localhost' . $requestUri . '/';
+        } else {
+            $requestUrl = $protocol . $_SERVER['HTTP_HOST'] . $requestUri . '/';
+        }
 
         if (!defined('URLBASEADDR')) {
             define('URLBASEADDR', $requestUrl);
@@ -650,5 +664,15 @@ class App extends AbstractApp
         $this->viewObject = $viewObject;
 
         return $this;
+    }
+
+    /**
+     * Checks if the application is running inside a Swoole coroutine or not.
+     *
+     * @return bool
+     */
+    public function isSwoole(): bool
+    {
+        return $this->swoole;
     }
 }

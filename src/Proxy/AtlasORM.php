@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.0.0
+ * @version    3.1.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
@@ -22,7 +22,7 @@ use Atlas\Orm\Atlas;
 class AtlasORM extends Atlas
 {
     /**
-     * Wrapper function to the Atlas::new(...$args) method.
+     * Wrapper function to the Atlas' 'new' method.
      *
      * @param array ...$args
      *

@@ -5,14 +5,15 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.0.0
+ * @version    3.1.0
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
- * @since      2.0.0
+ * @since      3.0.0
  */
 
 namespace AscmvcTest;
 
+use Application\ReadModels\TestReadModel;
 use Ascmvc\EventSourcing\AggregateImmutableValueObject;
 use Ascmvc\EventSourcing\Event\AggregateEvent;
 use Ascmvc\EventSourcing\EventDispatcher;
@@ -38,5 +39,25 @@ class EventDispatcherTest extends TestCase
         $eventDispatcher->dispatch($aggregateEvent);
 
         $this->assertInstanceOf(App::class, $aggregateEvent->getApplication());
+    }
+
+    public function testAsyncEventBusWillProcessGeneratorsCorrectly()
+    {
+        $app = App::getInstance();
+
+        $eventDispatcher = new EventDispatcher($app);
+
+        $eventDispatcher->attach(
+            'testName',
+            TestReadModel::getInstance($eventDispatcher)
+        );
+
+        $aggregateValueObject = new AggregateImmutableValueObject(['testkey' => 'testvalue']);
+
+        $aggregateEvent = new AggregateEvent($aggregateValueObject, 'testRootAggregate', 'testName');
+
+        $responses = $eventDispatcher->triggerEvent($aggregateEvent);
+
+        $this->assertTrue($responses->last());
     }
 }

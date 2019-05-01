@@ -36,7 +36,7 @@ but to also dispatch custom events to other aggregates outside of the current co
 Aspect-Oriented Programming becomes a clear possibility and allows for separation of concerns and
 code modularity.
 
-.. note:: Each controller has access to a segregated event dispatcher (event bus), as the controller is considered to be the Root Aggregate of its Event Sourcing aggregate.
+.. note:: Each controller has access to a segregated event dispatcher (event bus), as the controller is considered to be the Aggregate Root of its event sourcing aggregate.
 
 For more information on configuring the controller's event dispatcher, please see the :ref:`configuration eventsourcing` section.
 
@@ -56,8 +56,8 @@ class. Here is a list of the framework's main MVC events:
     const EVENT_FINISH         = 'finish';
     /**#@-*/
 
-These events correspond to listener interfaces that are implemented by default in every controller. Thus,
-from within any controller, it is possible to tap into a specific MVC event, or to downright interrupt
+These events correspond to listener interfaces that are implemented by default in each and every controller.
+Thus, from within any controller, it is possible to tap into a specific MVC event, or to downright interrupt
 the application's flow by returning a ``\Zend\Diactoros\Response``, from within these listener methods.
 
 Here is a short description of each main event:
@@ -100,7 +100,7 @@ In order to attach a new listener to one of the main MVC events, you can simply 
 
 .. code-block:: php
 
-    $this->eventManager->attach(AscmvcEvent::EVENT_BOOTSTRAP, function ($event) use ($serviceManager) {
+    $this->event->getApplication()->getEventManager()->attach(AscmvcEvent::EVENT_RENDER, function ($event) use ($serviceManager) {
         // do something here
     }, 3);
 
@@ -124,7 +124,7 @@ The LightMVC Service Manager is an instance of the ``\Pimple\Container`` class. 
 of a Registry and allows for easy storage and retrieval of objects and data. The Pimple container object
 implements the ``\ArrayAccess`` interface and thus, can be accessed as if it was an array.
 
-Storing a service is as easy as this:
+Storing a service is as simple as:
 
 .. code-block:: php
 
@@ -133,7 +133,7 @@ Storing a service is as easy as this:
         return new SomeService();
     };
 
-And, retrieving the same service is just as easy as this:
+And, retrieving the same service would be done as follows:
 
 .. code-block:: php
 
