@@ -1,5 +1,12 @@
 .. _WhatsNewAnchor:
 
+What's new in version 3.1.1 (2019-05-08)
+========================================
+
+* Updates all the templates (Skeleton Application).
+
+* Updates the documentation.
+
 What's new in version 3.1.0 (2019-04-30)
 ========================================
 

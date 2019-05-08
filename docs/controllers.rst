@@ -144,11 +144,16 @@ When extending the ``Ascmvc\EventSourcing\AggregateRootController`` class instea
 Essentially, these additional facilities allow for automatic configuration of the Aggregate Root,
 by setting the name of the Aggregate Root, by setting the Event Dispatcher's identifiers accordingly,
 by attaching all listeners found in the ``$aggregateListenerNames`` property to the specified events,
-and by attaching the Aggregate Root controller as a listener to all events dispatched within the
+and by attaching the Aggregate Root controller as a listener to all events dispatched within its own
 event sourcing aggregate. If event logging is enabled, it will also add the Event Logger's Aggregate Root
 name as an aggregate identifier in order to dispatch all of the current aggregate's events to this other
 aggregate. Adding more identifiers might also prove useful in case one needs to also dispatch all events
 from one aggregate to another.
+
+Additionally, the 'pre' action methods allow for the dispatching of events before the actual call to the
+main action method. The naming convention for 'pre' methods is to capitalize the first letter of the name
+of the action method and to add the prefix 'pre' in front of the name. Thus, the ``indexAction()`` method
+would have a 'pre' action method with the name ``preIndexAction()``.
 
 .. note:: For further reading on the framework's event sourcing aggregates in general, please see the :ref:`eventsourcing` section.
 
