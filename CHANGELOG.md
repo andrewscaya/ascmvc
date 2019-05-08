@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 3.1.1 (2019-05-08)
+
+* Updates all the templates (Skeleton Application).
+
+* Updates the documentation.
+
 ## 3.1.0 (2019-04-30)
 
 - Adds aggregate root controllers for easier usage of aggregate-based functionality.
