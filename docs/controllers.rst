@@ -153,7 +153,9 @@ from one aggregate to another.
 Additionally, the 'pre' action methods allow for the dispatching of events before the actual call to the
 main action method. The naming convention for 'pre' methods is to capitalize the first letter of the name
 of the action method and to add the prefix 'pre' in front of the name. Thus, the ``indexAction()`` method
-would have a 'pre' action method with the name ``preIndexAction()``.
+would have a 'pre' action method with the name ``preIndexAction()``. The 'pre' method has access to the same
+environment variables as the controller's main request handler method, through the injection of the
+``$vars`` variable.
 
 .. note:: For further reading on the framework's event sourcing aggregates in general, please see the :ref:`eventsourcing` section.
 
