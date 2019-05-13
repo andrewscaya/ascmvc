@@ -1,5 +1,14 @@
 .. _WhatsNewAnchor:
 
+What's new in version 3.1.2 (2019-05-13)
+========================================
+
+* Removes some dead code (Skeleton Application).
+
+* Updates the project's dependencies.
+
+* Updates the user documentation.
+
 What's new in version 3.1.1 (2019-05-08)
 ========================================
 
