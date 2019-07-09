@@ -168,7 +168,7 @@ class CommandRunner
                     $this->commandProcess->mustRun();
                 } catch (ProcessFailedException $e) {
                     $this->error = $e->getMessage();
-                    throw new \Exception($productsCommand . ' failed');
+                    throw new \Exception($commandline . ' failed');
                 }
                 // @codeCoverageIgnoreEnd
 
