@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.1.2
+ * @version    3.2.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      3.1.0
  */
@@ -58,6 +58,19 @@ class AggregateRootController extends Controller
 
         if (!empty($this->aggregateListenerNames)) {
             foreach ($this->aggregateListenerNames as $key => $listenerName) {
+                if (is_array($listenerName)) {
+                    $keys = array_keys($listenerName);
+
+                    $event = $keys[0];
+
+                    $listener = $listenerName[$event];
+
+                    $eventDispatcher->attach(
+                        $event,
+                        $listener::getInstance($eventDispatcher)
+                    );
+                }
+
                 if (is_string($key) && is_string($listenerName)) {
                     $eventDispatcher->attach(
                         $key,

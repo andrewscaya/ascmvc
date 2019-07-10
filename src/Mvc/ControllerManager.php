@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.1.2
+ * @version    3.2.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -15,7 +15,9 @@ namespace Ascmvc\Mvc;
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\AscmvcControllerFactoryInterface;
+use Ascmvc\EventSourcing\AggregateImmutableValueObject;
 use Ascmvc\EventSourcing\AggregateRootController;
+use Ascmvc\EventSourcing\Event\AggregateEvent;
 use Zend\Diactoros\Response;
 
 /**
@@ -110,6 +112,10 @@ class ControllerManager extends AbstractControllerManager
         }
 
         $this->app->setController($this->controller);
+
+        $event = new AggregateEvent(new AggregateImmutableValueObject(), get_class($this->controller), $this->method);
+
+        $eventDispatcher->dispatch($event);
 
         return;
     }

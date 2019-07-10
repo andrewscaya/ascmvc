@@ -26,10 +26,14 @@ the ``SessionManager``'s ``start()`` method to get the session started. Here is 
         'doctrine_filesystem_cache_directory' => __DIR__ . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
         'session_name' => 'MYSESSION',
         'session_path' => '/',
+        'session_domain' => 'localdomain.local',
+        'session_secure' => false,
+        'session_httponly' => false,
         'session_id_length' => 32,
-        'session_id_type' => 1,
-        'session_storage_prefix' => 'myprefix',
-        'session_expire' => 60 * 60, // 60 minutes
+        'session_id_type' => 1, // 1 = alphanumeric, 2 = digits only
+        'session_storage_prefix' => 'ascmvc',
+        'session_token_regeneration' => 60 * 30, // 30 minutes - session token will change after 30 minutes
+        'session_expire' => 60 * 60, // 60 minutes - session will expire after 60 minutes of inactivity
     ];
 
     $config = new \Ascmvc\Session\Config($config['session']);

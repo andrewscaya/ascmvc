@@ -2,6 +2,7 @@
 
 namespace Application\Controllers;
 
+use Application\ReadModels\TestarraylistenersReadModel;
 use Application\ReadModels\TestReadModel;
 use Ascmvc\EventSourcing\AggregateEventListenerInterface;
 use Ascmvc\EventSourcing\AggregateImmutableValueObject;
@@ -9,11 +10,12 @@ use Ascmvc\EventSourcing\AggregateRootController;
 use Ascmvc\EventSourcing\Event\AggregateEvent;
 use Ascmvc\EventSourcing\Event\Event;
 
-class FakeaggregateController extends AggregateRootController implements AggregateEventListenerInterface
+class FakeaggregatearraylistenersController extends AggregateRootController implements AggregateEventListenerInterface
 {
     // Define the Aggregate's invokable listeners.
     protected $aggregateListenerNames = [
-        'testevent' => TestReadModel::class,
+        ['testevent' => TestReadModel::class],
+        ['testevent' => TestarraylistenersReadModel::class],
     ];
 
     public function onAggregateEvent(AggregateEvent $event)
@@ -34,7 +36,7 @@ class FakeaggregateController extends AggregateRootController implements Aggrega
     {
         $aggregateValue = new AggregateImmutableValueObject(['testkey' => 'testaddedvalue']);
 
-        $event = new AggregateEvent($aggregateValue, FakeaggregateController::class, 'testevent');
+        $event = new AggregateEvent($aggregateValue, FakeaggregatearraylistenersController::class, 'testevent');
 
         $this->eventDispatcher->dispatch($event);
 
@@ -45,11 +47,11 @@ class FakeaggregateController extends AggregateRootController implements Aggrega
 
     public function indexAction($vars = null)
     {
-        $this->view['results'] = 'FakeaggregateControllerSTDOUT';
+        $this->view['results'] = 'FakeaggregatearraylistenersControllerSTDOUT';
 
         $this->view['values'] = $this->values;
 
-        $this->view['templatefile'] = 'fakeaggregate_index';
+        $this->view['templatefile'] = 'fakeaggregatearraylisteners_index';
 
         return $this->view;
     }

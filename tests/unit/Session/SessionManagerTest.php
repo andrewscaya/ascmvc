@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.1.2
+ * @version    3.2.0
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  * @since      2.1.0
@@ -41,10 +41,14 @@ class SessionManagerTest extends TestCase
             [
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
                 'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
-                'session_expire' => 60 * 30, // 30 minutes
+                'session_token_regeneration' => 60 * 30, // 30 minutes
+                'session_expire' => 60 * 60, // 60 minutes
             ],
             $sessionManager1->getConfig()->get()
         );
@@ -68,10 +72,14 @@ class SessionManagerTest extends TestCase
             [
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
                 'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
-                'session_expire' => 60 * 30, // 30 minutes
+                'session_token_regeneration' => 60 * 30, // 30 minutes
+                'session_expire' => 60 * 60, // 60 minutes
             ],
             $sessionManager1->getConfig()->get()
         );
@@ -106,10 +114,14 @@ class SessionManagerTest extends TestCase
                 ],
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
                 'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
-                'session_expire' => 60 * 30, // 30 minutes
+                'session_token_regeneration' => 60 * 30, // 30 minutes
+                'session_expire' => 60 * 60, // 60 minutes
             ]
         );
 
@@ -121,10 +133,14 @@ class SessionManagerTest extends TestCase
             array_merge([
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
                 'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
-                'session_expire' => 60 * 30, // 30 minutes
+                'session_token_regeneration' => 60 * 30, // 30 minutes
+                'session_expire' => 60 * 60, // 60 minutes
             ], [
                 'enabled' => true,
                 'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
@@ -141,10 +157,14 @@ class SessionManagerTest extends TestCase
                 ],
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
                 'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
-                'session_expire' => 60 * 30, // 30 minutes
+                'session_token_regeneration' => 60 * 30, // 30 minutes
+                'session_expire' => 60 * 60, // 60 minutes
             ]),
             $sessionManager->getConfig()->get()
         );
@@ -166,9 +186,13 @@ class SessionManagerTest extends TestCase
                 ],
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
-                'session_id_length' => 64,
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
+                'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
+                'session_token_regeneration' => 60 * 30, // 30 minutes
                 'session_expire' => 60 * 60, // 60 minutes
             ]
         );
@@ -179,10 +203,14 @@ class SessionManagerTest extends TestCase
             array_merge([
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
                 'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
-                'session_expire' => 60 * 30, // 30 minutes
+                'session_token_regeneration' => 60 * 30, // 30 minutes
+                'session_expire' => 60 * 60, // 60 minutes
             ], [
                 'enabled' => false,
                 'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
@@ -199,9 +227,13 @@ class SessionManagerTest extends TestCase
                 ],
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
-                'session_id_length' => 64,
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
+                'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
+                'session_token_regeneration' => 60 * 30, // 30 minutes
                 'session_expire' => 60 * 60, // 60 minutes
             ]),
             $sessionManager->getConfig()->get()
@@ -222,10 +254,14 @@ class SessionManagerTest extends TestCase
             [
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
                 'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
-                'session_expire' => 60 * 30, // 30 minutes
+                'session_token_regeneration' => 60 * 30, // 30 minutes
+                'session_expire' => 60 * 60, // 60 minutes
             ],
             $sessionManager->getConfig()->get()
         );
@@ -270,10 +306,14 @@ class SessionManagerTest extends TestCase
                 ],
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
                 'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
-                'session_expire' => 60 * 30, // 30 minutes
+                'session_token_regeneration' => 60 * 30, // 30 minutes
+                'session_expire' => 60 * 60, // 60 minutes
             ]
         );
 
@@ -328,10 +368,14 @@ class SessionManagerTest extends TestCase
                 ],
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
                 'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
-                'session_expire' => 60 * 30, // 30 minutes
+                'session_token_regeneration' => 60 * 30, // 30 minutes
+                'session_expire' => 60 * 60, // 60 minutes
             ]
         );
 
@@ -379,10 +423,14 @@ class SessionManagerTest extends TestCase
                 ],
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
                 'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
-                'session_expire' => 60 * 30, // 30 minutes
+                'session_token_regeneration' => 60 * 30, // 30 minutes
+                'session_expire' => 60 * 60, // 60 minutes
             ]
         );
 

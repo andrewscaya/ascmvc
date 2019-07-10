@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.1.2
+ * @version    3.2.0
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  * @since      2.1.0
@@ -37,10 +37,14 @@ class ConfigTest extends TestCase
             [
                 'session_name' => 'PHPSESSION',
                 'session_path' => '/',
+                'session_domain' => 'localdomain.local',
+                'session_secure' => false,
+                'session_httponly' => false,
                 'session_id_length' => 32,
                 'session_id_type' => 1,
                 'session_storage_prefix' => 'ascmvc',
-                'session_expire' => 60 * 30, // 30 minutes
+                'session_token_regeneration' => 60 * 30, // 30 minutes
+                'session_expire' => 60 * 60, // 60 minutes
             ],
             $config->get('')
         );

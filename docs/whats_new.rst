@@ -1,5 +1,18 @@
 .. _WhatsNewAnchor:
 
+What's new in version 3.2.0 (2019-07-10)
+========================================
+
+* Adds built-in token regeneration to LightMVC Sessions.
+
+* Adds new session configuration options to allow for domain configuration of session cookies.
+
+* Adds a new controller-based pre-dispatch event for all controllers.
+
+* Adds the possibility to configure multiple listeners on a same event when using an AggregateRootController.
+
+* Updates the user documentation.
+
 What's new in version 3.1.2 (2019-05-13)
 ========================================
 
