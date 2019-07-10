@@ -43,7 +43,7 @@ is sending a response back for a specific request from the client.
 
 Thus, the first step in order to start using aggregates is to define a new controller by extending the
 ``Ascmvc\EventSourcing\AggregateRootController`` class. This allows for automatic configuration of the
-aggregate root. Essentially, it will set the name of the Aggregate Root, set  the Event Dispatcher's
+aggregate root. Essentially, it will set the name of the Aggregate Root, set the Event Dispatcher's
 identifiers accordingly, attach all listeners found in the class' ``$aggregateListenerNames`` property,
 and attach the Aggregate Root controller as a listener to all events dispatched within the event sourcing
 aggregate. If event logging is enabled, it will also add the Event Logger's Aggregate Root name as an
@@ -51,7 +51,7 @@ aggregate identifier in order to dispatch all of the current aggregate's events 
 
 .. note:: For more information on this automatic configuration of the aggregate root, please see the section on :ref:`controller methods`.
 
-It is also posible to define an aggregate manually, by extending the ``Ascmvc\Mvc\Controller`` class
+It is also possible to define an aggregate manually, by extending the ``Ascmvc\Mvc\Controller`` class
 and by establishing the aggregate root from within a controller's ``factory()`` method when implementing the
 ``\Ascmvc\AscmvcControllerFactoryInterface`` interface, like so:
 
@@ -89,13 +89,15 @@ and by attaching the controller's listener method ``onAggregateEvent`` with the 
 name as the aggregate root's name (first parameter of the event dispatcher's ``attach()`` method) and with a
 wildcard symbol as the event' name (second parameter of the same ``attach()`` method), we are, in fact,
 making this controller a listener to all of the aggregates events. This will allow the controller to determine
-what is left to be done, before a response can be considered to be completely finished. In
-an asynchronous environment like Swoole, this allows for simultaneous execution of multiple parts of the
-aggregate, without having to wait for one part to finish before another one can be executed.
+what is left to be done, before a response can be considered to be completely finished. This allows for
+simultaneous execution of multiple parts of the aggregate, without having to wait for one part to finish
+before another one can be executed.
 
 Each part of the aggregate is then responsible of accomplishing its own subordinated task in order
 to fulfill the common goal. The way each part of the aggregate can interact with the other parts is by
 dispatching events through the event dispatcher.
+
+.. note:: An event with the name of the controller method (handler) and with the aggregate root name of the controller will be dispatched upon successful routing to the designated handler (at the end of the main AscmvcEvent::EVENT_ROUTE event).
 
 .. index:: Event Sourcing Dispatcher
 
@@ -591,7 +593,21 @@ and store the data to a 'products' table in the database:
 
 If the listener is named inside the ``Ascmvc\EventSourcing\AggregateRootController`` class'
 ``$aggregateListenerNames`` array property, it will automatically be called upon when the specified event
-occurs.
+occurs. If many listeners must listen to a same event, an array of arrays will have to be given within
+this property.
+
+.. code-block:: php
+
+    // Define the Aggregate's invokable listeners.
+    protected $aggregateListenerNames = [
+        ['testevent' => TestReadModel::class],
+        ['testevent' => TestarraylistenersReadModel::class],
+    ];
+
+If not, the property can be an array of key/value pairs, where the key is the name of the event, and the
+value is the FQCN of the invokable listener.
+
+.. note:: All automatically configured listeners must be invokables, and the Event Bus will check if these are generators in order to determine if they are to be executed asynchronously or not.
 
 If configuring the aggregate manually, one must, from within the controller's ``factory()`` method
 (or any other main ``AscmvcEvent`` method), attach the Read Model to the aggregate's

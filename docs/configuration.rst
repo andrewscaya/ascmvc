@@ -169,10 +169,14 @@ And, the ``config/session.config.php`` file might look like this:
         ],
         'session_name' => 'PHPSESSION',
         'session_path' => '/',
+        'session_domain' => 'localdomain.local',
+        'session_secure' => false,
+        'session_httponly' => false,
         'session_id_length' => 32,
-        'session_id_type' => 1,
+        'session_id_type' => 1, // 1 = alphanumeric, 2 = digits only
         'session_storage_prefix' => 'ascmvc',
-        'session_expire' => 60 * 30, // 30 minutes
+        'session_token_regeneration' => 60 * 30, // 30 minutes - session token will change after 30 minutes
+        'session_expire' => 60 * 60, // 60 minutes - session will expire after 60 minutes of inactivity
     ];
 
 It is possible to replace the value of the ``psr6_cache_pool`` index with any PSR-6 compliant class. Also,
