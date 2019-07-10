@@ -15,7 +15,9 @@ namespace Ascmvc\Mvc;
 use Ascmvc\AbstractApp;
 use Ascmvc\AbstractControllerManager;
 use Ascmvc\AscmvcControllerFactoryInterface;
+use Ascmvc\EventSourcing\AggregateImmutableValueObject;
 use Ascmvc\EventSourcing\AggregateRootController;
+use Ascmvc\EventSourcing\Event\AggregateEvent;
 use Zend\Diactoros\Response;
 
 /**
@@ -110,6 +112,10 @@ class ControllerManager extends AbstractControllerManager
         }
 
         $this->app->setController($this->controller);
+
+        $event = new AggregateEvent(new AggregateImmutableValueObject(), get_class($this->controller), $this->method);
+
+        $eventDispatcher->dispatch($event);
 
         return;
     }

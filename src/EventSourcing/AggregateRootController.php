@@ -58,6 +58,19 @@ class AggregateRootController extends Controller
 
         if (!empty($this->aggregateListenerNames)) {
             foreach ($this->aggregateListenerNames as $key => $listenerName) {
+                if (is_array($listenerName)) {
+                    $keys = array_keys($listenerName);
+
+                    $event = $keys[0];
+
+                    $listener = $listenerName[$event];
+
+                    $eventDispatcher->attach(
+                        $event,
+                        $listener::getInstance($eventDispatcher)
+                    );
+                }
+
                 if (is_string($key) && is_string($listenerName)) {
                     $eventDispatcher->attach(
                         $key,
