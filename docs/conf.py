@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# Simple Email Form documentation build configuration file, created by
-# sphinx-quickstart on Sun Jul 17 00:20:22 2016.
+# ASCMVC/LightMVC documentation build configuration file, created by
+# sphinx-quickstart on Sun Jul 17 00:20:22 2019.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
