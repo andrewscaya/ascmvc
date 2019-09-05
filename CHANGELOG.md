@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 3.2.1 (2019-09-05)
+
+- Updates the project's dependencies.
+
+- Updates the user documentation.
+
 ## 3.2.0 (2019-07-10)
 
 - Adds built-in token regeneration to LightMVC Sessions.
