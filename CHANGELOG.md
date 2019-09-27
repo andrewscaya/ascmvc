@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.2.2 (2019-09-27)
+
+- Fixes an issue whereby the protocol is not detected correctly if running behind a proxy server.
+
 ## 3.2.1 (2019-09-05)
 
 - Updates the project's dependencies.

@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.2.1
+ * @version    3.2.2
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -88,6 +88,7 @@ class App extends AbstractApp
             (isset($_SERVER['SERVER_SIGNATURE']) && strpos($_SERVER['SERVER_SIGNATURE'], '443') !== false)
             || (isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']))
             || (isset($_SERVER['HTTP_HTTPS']) && !empty($_SERVER['HTTP_HTTPS']))
+            || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
             ? 'https://'
             : 'http://';
 
