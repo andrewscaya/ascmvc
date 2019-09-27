@@ -88,6 +88,7 @@ class App extends AbstractApp
             (isset($_SERVER['SERVER_SIGNATURE']) && strpos($_SERVER['SERVER_SIGNATURE'], '443') !== false)
             || (isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']))
             || (isset($_SERVER['HTTP_HTTPS']) && !empty($_SERVER['HTTP_HTTPS']))
+            || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
             ? 'https://'
             : 'http://';
 
