@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.2.3
+ * @version    3.3.0
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  * @since      2.0.0
@@ -964,15 +964,10 @@ class AppTest extends TestCase
 
         $response = $app->render($controllerOutput);
 
-        $this->assertSame(
-            "<html>\n"
-            . "<head>\n"
-            . "</head>\n"
-            . "<body>\n"
-            . "<!-- Twig template -->\n"
-            . "AppTest_Render_Array_Twig\n"
-            . "</body>\n"
-            . "</html>",
+        $this->assertRegExp(
+            "/Twig template"
+            . ".+"
+            . "\<p\>AppTest_Render_Array_Twig\<\/p\>/is",
             $response->getBody()->__toString()
         );
 

@@ -25,7 +25,14 @@ matrix:
       env:
         - COMPOSER_PROCESS_TIMEOUT=1200
         - TEST_CHECK_COVER=false
-        - TEST_CHECK=false
+        - TEST_CHECK=true
+        - CS_CHECK=true
+        - CC_CHECK=false
+    - php: 7.4
+      env:
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK_COVER=false
+        - TEST_CHECK=true
         - CS_CHECK=true
         - CC_CHECK=false
     - php: hhvm
@@ -36,7 +43,7 @@ matrix:
         - CS_CHECK=true
         - CC_CHECK=false
   allow_failures:
-    - php: 7.3
+    - php: 7.4
     - php: hhvm
 
 before_install:
