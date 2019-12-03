@@ -19,6 +19,7 @@ use Ascmvc\EventSourcing\EventDispatcher;
 use Ascmvc\EventSourcing\EventLogger;
 use Ascmvc\Mvc\App;
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\SharedEventManager;
@@ -31,6 +32,12 @@ class EventLoggerTest extends TestCase
 {
     public function testCreateEventLoggerInstance()
     {
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(dirname(__FILE__))
+                . DIRECTORY_SEPARATOR
+                . 'app');
+        }
+
         if (!defined('BASEDIR2')) {
             define('BASEDIR2', dirname(dirname(__FILE__))
                 . DIRECTORY_SEPARATOR
@@ -40,11 +47,6 @@ class EventLoggerTest extends TestCase
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
         $serverRequestFactoryMock
             ->shouldReceive('fromGlobals')
-            ->once();
-
-        $dbalConnectionMock = \Mockery::mock('alias:' . Connection::class);
-        $dbalConnectionMock
-            ->shouldReceive('flush')
             ->once();
 
         $baseConfig['BASEDIR'] = BASEDIR2;
@@ -71,14 +73,14 @@ class EventLoggerTest extends TestCase
             // PSR-14 compliant Event Bus.
             'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
             // Different read and write connections allow for simplified (!) CQRS. :)
-            'read_conn_name' => 'dem1',
-            'write_conn_name' => 'dem1',
+            'read_conn_name' => 'em1',
+            'write_conn_name' => 'em1',
         ];
 
         $baseConfig['eventlog'] = [
             'enabled' => true,
             'doctrine' => [
-                'log_conn_name' => 'dem1',
+                'log_conn_name' => 'em1',
                 'entity_name' => \Application\Models\Entity\EventLog::class,
             ],
             // Leave empty to log everything, including the kitchen sink. :)
@@ -93,7 +95,7 @@ class EventLoggerTest extends TestCase
             ],
         ];
 
-        $baseConfig['doctrine']['DBAL']['dem1'] = [
+        $baseConfig['doctrine']['ORM']['em1'] = [
             'driver'   => 'pdo_mysql',
             'host'     => 'localhost',
             'user'     => 'USERNAME',
@@ -113,6 +115,12 @@ class EventLoggerTest extends TestCase
 
     public function testLogWhitelistEvents()
     {
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(dirname(__FILE__))
+                . DIRECTORY_SEPARATOR
+                . 'app');
+        }
+
         if (!defined('BASEDIR2')) {
             define('BASEDIR2', dirname(dirname(__FILE__))
                 . DIRECTORY_SEPARATOR
@@ -122,11 +130,6 @@ class EventLoggerTest extends TestCase
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
         $serverRequestFactoryMock
             ->shouldReceive('fromGlobals')
-            ->once();
-
-        $dbalConnectionMock = \Mockery::mock('alias:' . Connection::class);
-        $dbalConnectionMock
-            ->shouldReceive('flush')
             ->once();
 
         $baseConfig['BASEDIR'] = BASEDIR2;
@@ -153,14 +156,14 @@ class EventLoggerTest extends TestCase
             // PSR-14 compliant Event Bus.
             'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
             // Different read and write connections allow for simplified (!) CQRS. :)
-            'read_conn_name' => 'dem1',
-            'write_conn_name' => 'dem1',
+            'read_conn_name' => 'em1',
+            'write_conn_name' => 'em1',
         ];
 
         $baseConfig['eventlog'] = [
             'enabled' => true,
             'doctrine' => [
-                'log_conn_name' => 'dem1',
+                'log_conn_name' => 'em1',
                 'entity_name' => \Application\Models\Entity\EventLog::class,
             ],
             // Leave empty to log everything, including the kitchen sink. :)
@@ -175,7 +178,7 @@ class EventLoggerTest extends TestCase
             ],
         ];
 
-        $baseConfig['doctrine']['DBAL']['dem1'] = [
+        $baseConfig['doctrine']['ORM']['em1'] = [
             'driver'   => 'pdo_mysql',
             'host'     => 'localhost',
             'user'     => 'USERNAME',
@@ -209,6 +212,12 @@ class EventLoggerTest extends TestCase
 
     public function testLogBlacklistEvents()
     {
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(dirname(__FILE__))
+                . DIRECTORY_SEPARATOR
+                . 'app');
+        }
+
         if (!defined('BASEDIR2')) {
             define('BASEDIR2', dirname(dirname(__FILE__))
                 . DIRECTORY_SEPARATOR
@@ -218,11 +227,6 @@ class EventLoggerTest extends TestCase
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
         $serverRequestFactoryMock
             ->shouldReceive('fromGlobals')
-            ->once();
-
-        $dbalConnectionMock = \Mockery::mock('alias:' . Connection::class);
-        $dbalConnectionMock
-            ->shouldReceive('flush')
             ->once();
 
         $baseConfig['BASEDIR'] = BASEDIR2;
@@ -249,14 +253,14 @@ class EventLoggerTest extends TestCase
             // PSR-14 compliant Event Bus.
             'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
             // Different read and write connections allow for simplified (!) CQRS. :)
-            'read_conn_name' => 'dem1',
-            'write_conn_name' => 'dem1',
+            'read_conn_name' => 'em1',
+            'write_conn_name' => 'em1',
         ];
 
         $baseConfig['eventlog'] = [
             'enabled' => true,
             'doctrine' => [
-                'log_conn_name' => 'dem1',
+                'log_conn_name' => 'em1',
                 'entity_name' => \Application\Models\Entity\EventLog::class,
             ],
             // Leave empty to log everything, including the kitchen sink. :)
@@ -271,7 +275,7 @@ class EventLoggerTest extends TestCase
             ],
         ];
 
-        $baseConfig['doctrine']['DBAL']['dem1'] = [
+        $baseConfig['doctrine']['ORM']['em1'] = [
             'driver'   => 'pdo_mysql',
             'host'     => 'localhost',
             'user'     => 'USERNAME',
@@ -303,6 +307,12 @@ class EventLoggerTest extends TestCase
 
     public function testLogAllEventsByDefault()
     {
+        if (!defined('BASEDIR')) {
+            define('BASEDIR', dirname(dirname(__FILE__))
+                . DIRECTORY_SEPARATOR
+                . 'app');
+        }
+
         if (!defined('BASEDIR2')) {
             define('BASEDIR2', dirname(dirname(__FILE__))
                 . DIRECTORY_SEPARATOR
@@ -312,11 +322,6 @@ class EventLoggerTest extends TestCase
         $serverRequestFactoryMock = \Mockery::mock('alias:' . ServerRequestFactory::class);
         $serverRequestFactoryMock
             ->shouldReceive('fromGlobals')
-            ->once();
-
-        $dbalConnectionMock = \Mockery::mock('alias:' . Connection::class);
-        $dbalConnectionMock
-            ->shouldReceive('flush')
             ->once();
 
         $baseConfig['BASEDIR'] = BASEDIR2;
@@ -343,14 +348,14 @@ class EventLoggerTest extends TestCase
             // PSR-14 compliant Event Bus.
             'psr14_event_dispatcher' => \Ascmvc\EventSourcing\EventDispatcher::class,
             // Different read and write connections allow for simplified (!) CQRS. :)
-            'read_conn_name' => 'dem1',
-            'write_conn_name' => 'dem1',
+            'read_conn_name' => 'em1',
+            'write_conn_name' => 'em1',
         ];
 
         $baseConfig['eventlog'] = [
             'enabled' => true,
             'doctrine' => [
-                'log_conn_name' => 'dem1',
+                'log_conn_name' => 'em1',
                 'entity_name' => \Application\Models\Entity\EventLog::class,
             ],
             // Leave empty to log everything, including the kitchen sink. :)
@@ -365,7 +370,7 @@ class EventLoggerTest extends TestCase
             ],
         ];
 
-        $baseConfig['doctrine']['DBAL']['dem1'] = [
+        $baseConfig['doctrine']['ORM']['em1'] = [
             'driver'   => 'pdo_mysql',
             'host'     => 'localhost',
             'user'     => 'USERNAME',

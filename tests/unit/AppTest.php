@@ -964,15 +964,10 @@ class AppTest extends TestCase
 
         $response = $app->render($controllerOutput);
 
-        $this->assertSame(
-            "<html>\n"
-            . "<head>\n"
-            . "</head>\n"
-            . "<body>\n"
-            . "<!-- Twig template -->\n"
-            . "AppTest_Render_Array_Twig\n"
-            . "</body>\n"
-            . "</html>",
+        $this->assertRegExp(
+            "/Twig template"
+            . ".+"
+            . "\<p\>AppTest_Render_Array_Twig\<\/p\>/is",
             $response->getBody()->__toString()
         );
 
