@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 3.3.0 (2019-12-03)
+
+- Updates the Doctrine DBAL and ORM libraries (with possible BC breaks).
+
+- Updates the CI test matrix to include PHP 7.3 and PHP 7.4.
+
+- Updates the project's dependencies.
+
 ## 3.2.3 (2019-12-02)
 
 - Updates the project's dependencies.
