@@ -7,7 +7,7 @@
 Autoloading
 ===========
 
-The framework's autoload is managed by **Composer**. By default, the LightMVC Framework uses PSR-4 compliant
+The framework's autoloading is managed by **Composer**. By default, the LightMVC Framework uses PSR-4 compliant
 autoloading. To add new namespaces within a LightMVC application, it is necessary to declare these namespace
 mappings within the application's ``composer.json`` file. For example, here are the namespaces of the
 **LightMVC Skeleton Application**::

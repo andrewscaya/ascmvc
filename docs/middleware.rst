@@ -7,7 +7,7 @@
 Middleware
 ==========
 
-The LightMVC Framework uses **Zend Stratigility** for its middleware implementation. This implementation is therefore PSR-15 compliant.
+The LightMVC Framework uses **Laminas Stratigility** for its middleware implementation. This implementation is therefore PSR-15 compliant.
 
 Configuring middleware is very straightforward in the LightMVC Framework. In a ``config/middleware.config.php`` file, one might
 configure some middleware as per the following:
@@ -16,7 +16,7 @@ configure some middleware as per the following:
 
     $baseConfig['middleware'] = [
         '/foo' => function ($req, $handler) {
-            $response = new \Zend\Diactoros\Response();
+            $response = new \Laminas\Diactoros\Response();
             $response->getBody()->write('FOO!');
 
             return $response;
@@ -26,7 +26,7 @@ configure some middleware as per the following:
                 return $handler->handle($req);
             }
 
-            $response = new \Zend\Diactoros\Response();
+            $response = new \Laminas\Diactoros\Response();
             $response->getBody()->write('Hello world!');
 
             return $response;
@@ -61,7 +61,7 @@ and will run it in the given order.
 
 By default, the middleware pipeline is attached as a listener to the ``AscmvcEvent::EVENT_BOOTSTRAP`` event and can be overridden by a high priority listener on this event.
 
-For more information on **Zend Stratigility**, please see
-the `Zend Stratigility website <https://docs.zendframework.com/zend-stratigility/>`_.
+For more information on **Laminas Stratigility**, please see
+the `Laminas Stratigility website <https://docs.laminas.dev/laminas-stratigility/>`_.
 
 You can also see the :ref:`configuration middleware` section.

@@ -58,7 +58,7 @@ Here is an example of a more advanced route configuration:
 .. code-block:: php
 
     $baseConfig['routes'] = [
-        2 => [
+        [
             ['GET', 'POST'],
             '/products[/{action}[/{id:[0-9]+}]]',
             'product',

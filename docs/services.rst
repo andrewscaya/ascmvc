@@ -19,9 +19,9 @@ This framework's main services are:
 Event Manager
 -------------
 
-The ``\Ascmvc\Mvc\AscmvcEventManager`` event manager is an extension of the ``\Zend\EventManager\EventManager``.
+The ``\Ascmvc\Mvc\AscmvcEventManager`` event manager is an extension of the ``\Laminas\EventManager\EventManager``.
 It is available through the application object's ``getEventManager()`` method. It is configured **WITH** a
-``\Zend\EventManager\SharedEventManager``. It is possible to get the shared manager by calling the main
+``\Laminas\EventManager\SharedEventManager``. It is possible to get the shared manager by calling the main
 event manager's ``getSharedManager()`` method. This same shared manager will also be readily available
 within each controller aggregate by getting it from the controller's PSR-14 event dispatcher (event bus)
 like so:
@@ -41,7 +41,7 @@ code modularity.
 For more information on configuring the controller's event dispatcher, please see the :ref:`configuration eventsourcing` section.
 
 The main ``AscmvcEventManager`` is designed to be able to trigger ``\Ascmvc\Mvc\AscmvcEvent`` events for the
-entire application. The ``\Ascmvc\Mvc\AscmvcEvent`` class is an extension of the ``Zend\EventManager\Event``
+entire application. The ``\Ascmvc\Mvc\AscmvcEvent`` class is an extension of the ``Laminas\EventManager\Event``
 class. Here is a list of the framework's main MVC events:
 
 .. code-block:: php
@@ -58,7 +58,7 @@ class. Here is a list of the framework's main MVC events:
 
 These events correspond to listener interfaces that are implemented by default in each and every controller.
 Thus, from within any controller, it is possible to tap into a specific MVC event, or to downright interrupt
-the application's flow by returning a ``\Zend\Diactoros\Response``, from within these listener methods.
+the application's flow by returning a ``\Laminas\Diactoros\Response``, from within these listener methods.
 
 Here is a short description of each main event:
 
@@ -83,7 +83,7 @@ application's execution and return an early response:
 
     use Ascmvc\Mvc\AscmvcEvent;
     use Ascmvc\Mvc\Controller;
-    use Zend\Diactoros\Response;
+    use Laminas\Diactoros\Response;
 
     class FakeController extends Controller
     {
@@ -109,9 +109,9 @@ In order to attach a new listener to one of the main MVC events, you can simply 
 To learn more about the LightMVC events and and corresponding listeners, please see the **LightMVC Framework**'s
 `API documentation <http://apidocs.lightmvcframework.net/namespaces/Ascmvc.html>`_.
 
-For more information on available methods of the ``\Zend\EventManager\EventManager``, please see
-the `ZF documentation <https://framework.zend.com/manual/2.4/en/modules/zend.event-manager.event-manager.html>`_,
-and the `ZF API documentation <https://framework.zend.com/apidoc/2.4/index.html>`_.
+For more information on available methods of the ``\Laminas\EventManager\EventManager``, please see
+the `Laminas documentation <https://docs.laminas.dev/laminas-eventmanager/>`_,
+and the `Laminas API documentation <https://docs.laminas.dev/laminas-eventmanager/api/>`_.
 
 .. index:: Service Manager
 
@@ -148,7 +148,7 @@ container's ``factory()`` method:
     // Store SomeService instance
     $serviceManager['someService'] = $serviceManager->factory(function ($serviceManager) {
         // Retrieve the database connection and inject it within the SomeService constructor
-        return new SomeService($serviceManager['em1]);
+        return new SomeService($serviceManager['dem1]);
     });
 
 To learn more about **Pimple**, please visit the `Pimple Website <https://pimple.symfony.com/>`_.

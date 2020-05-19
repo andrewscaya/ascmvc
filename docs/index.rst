@@ -13,8 +13,6 @@ LightMVC Framework's documentation
 .. toctree::
    :maxdepth: 3
 
-   whats_new
-   license
    installation
    configuration
    autoloading
@@ -28,6 +26,8 @@ LightMVC Framework's documentation
    middleware
    sessions
    skeleton
+   whats_new
+   license
 
 Indices and tables
 ==================
