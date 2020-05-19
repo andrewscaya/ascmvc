@@ -31,7 +31,7 @@ use Laminas\Diactoros\ServerRequestFactory;
  */
 class FastRouterTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         \Mockery::close();
 

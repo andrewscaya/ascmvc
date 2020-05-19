@@ -30,7 +30,7 @@ use Laminas\Diactoros\ServerRequestFactory;
  */
 class AscmvcEventManagerTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         \Mockery::close();
 

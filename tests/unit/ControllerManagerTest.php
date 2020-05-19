@@ -27,7 +27,7 @@ use Laminas\Diactoros\ServerRequestFactory;
  */
 class ControllerManagerTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         \Mockery::close();
 
