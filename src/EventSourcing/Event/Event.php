@@ -13,14 +13,14 @@
 namespace Ascmvc\EventSourcing\Event;
 
 use Ascmvc\AbstractApp;
-use Zend\EventManager\Event as ZendEvent;
+use Laminas\EventManager\Event as LaminasEvent;
 
 /**
  * Class Event
  *
  * @package Ascmvc\EventSourcing\Event
  */
-abstract class Event extends ZendEvent
+abstract class Event extends LaminasEvent
 {
     /**
      * The instance of the application.

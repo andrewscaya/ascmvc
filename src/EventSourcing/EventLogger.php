@@ -16,8 +16,8 @@ use Ascmvc\AbstractApp;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityRepository;
-use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManagerInterface;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManagerInterface;
 
 /**
  * Class EventLogger

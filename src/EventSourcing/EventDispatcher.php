@@ -15,18 +15,18 @@ namespace Ascmvc\EventSourcing;
 use Ascmvc\AbstractApp;
 use Ascmvc\EventSourcing\Event\Event;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManager as ZendEventManager;
-use Zend\EventManager\Exception;
-use Zend\EventManager\ResponseCollection;
-use Zend\EventManager\SharedEventManagerInterface;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManager as LaminasEventManager;
+use Laminas\EventManager\Exception;
+use Laminas\EventManager\ResponseCollection;
+use Laminas\EventManager\SharedEventManagerInterface;
 
 /**
  * Class EventDispatcher
  *
  * @package Ascmvc\EventSourcing
  */
-class EventDispatcher extends ZendEventManager implements EventDispatcherInterface
+class EventDispatcher extends LaminasEventManager implements EventDispatcherInterface
 {
     /**
      * The instance of the application.

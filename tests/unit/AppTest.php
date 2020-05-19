@@ -21,10 +21,10 @@ use Atlas\Orm\Atlas;
 use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequest;
-use Zend\Diactoros\ServerRequestFactory;
-use Zend\Stratigility\MiddlewarePipe;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\ServerRequest;
+use Laminas\Diactoros\ServerRequestFactory;
+use Laminas\Stratigility\MiddlewarePipe;
 
 /**
  * @runTestsInSeparateProcesses

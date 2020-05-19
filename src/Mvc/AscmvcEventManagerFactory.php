@@ -12,7 +12,7 @@
 
 namespace Ascmvc\Mvc;
 
-use Zend\EventManager\SharedEventManager;
+use Laminas\EventManager\SharedEventManager;
 
 /**
  * Class AscmvcEventManagerFactory

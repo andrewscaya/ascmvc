@@ -22,8 +22,8 @@ use Ascmvc\Mvc\ControllerManager;
 use Ascmvc\Mvc\FastRouter;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\ServerRequest;
-use Zend\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\ServerRequest;
+use Laminas\Diactoros\ServerRequestFactory;
 
 /**
  * @runTestsInSeparateProcesses

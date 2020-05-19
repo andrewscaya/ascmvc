@@ -13,12 +13,12 @@
 namespace Ascmvc\Mvc;
 
 use Ascmvc\AbstractApp;
-use Zend\EventManager\Event;
+use Laminas\EventManager\Event;
 
 /**
  * Class AscmvcEvent
  *
- * The clas AscmvcEvent extends the Zend\EventManager\Event class and
+ * The class AscmvcEvent extends the Laminas\EventManager\Event class and
  * adds logic that is specific to this MVC.
  */
 class AscmvcEvent extends Event

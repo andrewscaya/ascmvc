@@ -21,8 +21,8 @@ use Ascmvc\Mvc\App;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\SharedEventManager;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\SharedEventManager;
 
 /**
  * @runTestsInSeparateProcesses

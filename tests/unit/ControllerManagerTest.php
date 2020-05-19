@@ -19,7 +19,7 @@ use Ascmvc\Mvc\App;
 use Ascmvc\Mvc\ControllerManager;
 use PHPUnit\Framework\TestCase;
 use \Specialmodule\Controllers\FakeController as FakeController2;
-use Zend\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\ServerRequestFactory;
 
 /**
  * @runTestsInSeparateProcesses

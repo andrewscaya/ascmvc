@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 groupadd vagrant
-useradd -g vagrant vagrant
+useradd -p 'vagrant' -g vagrant vagrant
 cp -rf /etc/skel /home/vagrant
 chown -R vagrant:vagrant /home/vagrant
-passwd vagrant
+echo 'vagrant:vagrant' | chpasswd
+#passwd vagrant

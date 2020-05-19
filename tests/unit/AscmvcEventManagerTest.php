@@ -20,9 +20,9 @@ use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\AscmvcEventManagerFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\ServerRequest;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\ServerRequest;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\ServerRequestFactory;
 
 /**
  * @runTestsInSeparateProcesses

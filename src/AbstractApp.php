@@ -18,8 +18,8 @@ use Ascmvc\Session\SessionManager;
 use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Request;
-use Zend\Diactoros\Response;
+use Laminas\Diactoros\Request;
+use Laminas\Diactoros\Response;
 
 /**
  * Class AbstractApp

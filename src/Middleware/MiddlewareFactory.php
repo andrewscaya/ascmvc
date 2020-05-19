@@ -9,9 +9,9 @@
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  *
- * @see       https://github.com/zendframework/zend-expressive for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-stratigility for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-stratigility/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-stratigility/blob/master/LICENSE.md New BSD License
  */
 
 namespace Ascmvc\Middleware;
@@ -19,9 +19,9 @@ namespace Ascmvc\Middleware;
 use Pimple\Container;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Stratigility\Middleware\CallableMiddlewareDecorator;
-use Zend\Stratigility\Middleware\RequestHandlerMiddleware;
-use Zend\Stratigility\MiddlewarePipe;
+use Laminas\Stratigility\Middleware\CallableMiddlewareDecorator;
+use Laminas\Stratigility\Middleware\RequestHandlerMiddleware;
+use Laminas\Stratigility\MiddlewarePipe;
 
 use function array_shift;
 use function count;

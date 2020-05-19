@@ -22,11 +22,11 @@ use Ascmvc\Session\SessionManager;
 use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequestFactory;
-use Zend\Stratigility\MiddlewarePipe;
-use Zend\Stratigility\Exception\EmptyPipelineException;
-use function Zend\Stratigility\path;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\ServerRequestFactory;
+use Laminas\Stratigility\MiddlewarePipe;
+use Laminas\Stratigility\Exception\EmptyPipelineException;
+use function Laminas\Stratigility\path;
 
 /**
  * Class App

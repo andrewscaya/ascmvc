@@ -18,7 +18,7 @@ use Ascmvc\AscmvcControllerFactoryInterface;
 use Ascmvc\EventSourcing\AggregateImmutableValueObject;
 use Ascmvc\EventSourcing\AggregateRootController;
 use Ascmvc\EventSourcing\Event\AggregateEvent;
-use Zend\Diactoros\Response;
+use Laminas\Diactoros\Response;
 
 /**
  * Class ControllerManager

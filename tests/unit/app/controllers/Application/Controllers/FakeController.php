@@ -4,7 +4,7 @@ namespace Application\Controllers;
 
 use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\Controller;
-use Zend\Diactoros\Response;
+use Laminas\Diactoros\Response;
 
 class FakeController extends Controller
 {

@@ -28,10 +28,10 @@
         "pimple/pimple": "3.2.3",
         "smarty/smarty": "3.1.33",
         "twig/twig": "2.6.0",
-        "zendframework/zend-diactoros": "2.1.1",
-        "zendframework/zend-eventmanager": "3.2.1",
-        "zendframework/zend-stdlib": "3.2.1",
-        "zendframework/zend-stratigility": "3.0.2",
+        "laminas/laminas-diactoros": "2.1.1",
+        "laminas/laminas-eventmanager": "3.2.1",
+        "laminas/laminas-stdlib": "3.2.1",
+        "laminas/laminas-stratigility": "3.0.2",
         "container-interop/container-interop": "1.2.0",
         "atlas/orm": "3.1.0",
         "psr/cache": "^1.0",
@@ -44,7 +44,7 @@
         "mockery/mockery": "1.2.0",
         "pds/skeleton": "~1.0",
         "atlas/cli": "2.2.0",
-        "linuxforphp/linuxforcomposer": "^1.0"
+        "linuxforphp/linuxforcomposer": "^2.0"
     },
     "autoload": {
         "files": [
