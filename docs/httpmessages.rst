@@ -5,8 +5,8 @@
 HTTP Messages
 =============
 
-The LightMVC Framework's HTTP message objects are the ``\Zend\Diactoros\ServerRequest`` and the
-``\Zend\Diactoros\Response`` objects. These are PSR-7 compliant classes and are compatible with
+The LightMVC Framework's HTTP message objects are the ``\Laminas\Diactoros\ServerRequest`` and the
+``\Laminas\Diactoros\Response`` objects. These are PSR-7 compliant classes and are compatible with
 PSR-15 compliant middleware.
 
 .. index:: Request
@@ -17,7 +17,7 @@ ServerRequest Object
 --------------------
 
 In order to get a better understanding of the ``ServerRequest`` object, please see the
-`ZF documentation on server-side applications <https://zendframework.github.io/zend-diactoros/v2/usage/#server-side-applications>`_.
+`Laminas documentation on server-side applications <https://docs.laminas.dev/laminas-diactoros/v2/usage/#server-side-applications>`_.
 
 .. index:: Response
 
@@ -31,7 +31,7 @@ to the client. Here is a simple example in order to do so:
 
 .. code-block:: php
 
-    $response = new Zend\Diactoros\Response();
+    $response = new Laminas\Diactoros\Response();
 
     // Write to the response body:
     $response->getBody()->write("Hello");
@@ -46,4 +46,4 @@ to the client. Here is a simple example in order to do so:
         ->withAddedHeader('X-Custom-Header', 'example');
 
 For further reading on the ``Response`` object, please see the
-`ZF documentation <https://zendframework.github.io/zend-diactoros/v2/usage/#manipulating-the-response>`_.
+`Laminas documentation <https://docs.laminas.dev/laminas-diactoros/v2/usage/#manipulating-the-response>`_.

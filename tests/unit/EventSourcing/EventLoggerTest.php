@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  * @since      3.0.0
@@ -21,8 +21,8 @@ use Ascmvc\Mvc\App;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\SharedEventManager;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\SharedEventManager;
 
 /**
  * @runTestsInSeparateProcesses

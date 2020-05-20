@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -13,9 +13,14 @@
 namespace Ascmvc\Mvc;
 
 use Ascmvc\AbstractModelObject;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\Annotations\AnnotationException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
 /**
@@ -48,10 +53,11 @@ class Doctrine extends AbstractModelObject
      * @param string $connName
      * @param array $params
      *
-     * @return \Doctrine\DBAL\Connection|\Doctrine\ORM\EntityManager|bool
+     * @return Connection|EntityManager|bool
      *
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\ORM\ORMException
+     * @throws DBALException
+     * @throws ORMException
+     * @throws AnnotationException
      */
     public static function getInstance($connType, $connName, Array $params)
     {

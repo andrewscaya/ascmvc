@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.1.0
  *
@@ -27,6 +27,7 @@ class Http
      * Gets a cookie by name.
      *
      * @param string $name
+     *
      * @return null
      */
     public function getCookie($name = '')
@@ -56,6 +57,7 @@ class Http
      * @param string $domain
      * @param bool $secure
      * @param bool $httponly
+     *
      * @return bool
      */
     public function setCookie(string $name, string $value = "", int $expire = 0, string $path = "", string $domain = "", bool $secure = false, bool $httponly = false)

@@ -26,3 +26,4 @@ extras/documentation
 # IDE files
 .idea/
 .project
+.phpunit.result.cache

@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  * @since      2.0.0
@@ -19,7 +19,7 @@ use Ascmvc\Mvc\App;
 use Ascmvc\Mvc\ControllerManager;
 use PHPUnit\Framework\TestCase;
 use \Specialmodule\Controllers\FakeController as FakeController2;
-use Zend\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\ServerRequestFactory;
 
 /**
  * @runTestsInSeparateProcesses
@@ -27,7 +27,7 @@ use Zend\Diactoros\ServerRequestFactory;
  */
 class ControllerManagerTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         \Mockery::close();
 

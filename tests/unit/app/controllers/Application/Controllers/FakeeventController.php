@@ -10,7 +10,7 @@ use Ascmvc\EventSourcing\EventDispatcher;
 use Ascmvc\Mvc\AscmvcEvent;
 use Ascmvc\Mvc\Controller;
 use Pimple\Container;
-use Zend\Diactoros\Response;
+use Laminas\Diactoros\Response;
 
 class FakeeventController extends Controller implements AscmvcControllerFactoryInterface
 {

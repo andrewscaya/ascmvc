@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
@@ -13,12 +13,12 @@
 namespace Ascmvc\Mvc;
 
 use Ascmvc\AbstractApp;
-use Zend\EventManager\Event;
+use Laminas\EventManager\Event;
 
 /**
  * Class AscmvcEvent
  *
- * The clas AscmvcEvent extends the Zend\EventManager\Event class and
+ * The class AscmvcEvent extends the Laminas\EventManager\Event class and
  * adds logic that is specific to this MVC.
  */
 class AscmvcEvent extends Event

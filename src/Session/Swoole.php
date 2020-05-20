@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.1.0
  *
@@ -52,6 +52,7 @@ class Swoole
      * Sets the \swoole_http_request object.
      *
      * @param \swoole_http_request|null $request
+     *
      * @return $this|\swoole_http_request
      */
     public function setRequest(\swoole_http_request $request = null)
@@ -67,6 +68,7 @@ class Swoole
      * Sets the \swoole_http_response object.
      *
      * @param \swoole_http_response|null $response
+     *
      * @return $this|\swoole_http_response
      */
     public function setResponse(\swoole_http_response $response = null)
@@ -82,6 +84,7 @@ class Swoole
      * Gets the cookie from the Swoole Request object.
      *
      * @param string $name
+     *
      * @return null
      */
     public function getCookie($name = '')
@@ -111,6 +114,7 @@ class Swoole
      * @param string $domain
      * @param bool $secure
      * @param bool $httponly
+     *
      * @return mixed
      */
     public function setCookie(string $name, string $value = "", int $expire = 0, string $path = "", string $domain = "", bool $secure = false, bool $httponly = false)

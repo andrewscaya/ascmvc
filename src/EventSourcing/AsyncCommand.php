@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      3.1.0
  */
@@ -69,6 +69,7 @@ class AsyncCommand extends Command
      *
      * @param InputInterface $input
      * @param OutputInterface $output
+     *
      * @return int|null null or 0 if everything went fine, or an error code
      *
      * @throws LogicException When this abstract method is not implemented

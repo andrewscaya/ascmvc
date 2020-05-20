@@ -1,5 +1,10 @@
 .. _WhatsNewAnchor:
 
+What's new in version 4.0.0 (2020-05-19)
+========================================
+
+* Migrates to Laminas and updates the project's dependencies.
+
 What's new in version 3.3.0 (2019-12-03)
 ========================================
 

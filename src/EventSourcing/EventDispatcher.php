@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      3.0.0
  */
@@ -15,18 +15,18 @@ namespace Ascmvc\EventSourcing;
 use Ascmvc\AbstractApp;
 use Ascmvc\EventSourcing\Event\Event;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManager as ZendEventManager;
-use Zend\EventManager\Exception;
-use Zend\EventManager\ResponseCollection;
-use Zend\EventManager\SharedEventManagerInterface;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManager as LaminasEventManager;
+use Laminas\EventManager\Exception;
+use Laminas\EventManager\ResponseCollection;
+use Laminas\EventManager\SharedEventManagerInterface;
 
 /**
  * Class EventDispatcher
  *
  * @package Ascmvc\EventSourcing
  */
-class EventDispatcher extends ZendEventManager implements EventDispatcherInterface
+class EventDispatcher extends LaminasEventManager implements EventDispatcherInterface
 {
     /**
      * The instance of the application.
@@ -70,6 +70,7 @@ class EventDispatcher extends ZendEventManager implements EventDispatcherInterfa
      * Triggers the given event.
      *
      * @param EventInterface $event
+     *
      * @return ResponseCollection
      */
     public function triggerEvent(EventInterface $event)
@@ -85,6 +86,7 @@ class EventDispatcher extends ZendEventManager implements EventDispatcherInterfa
      *
      * @param  EventInterface $event
      * @param  null|callable $callback
+     *
      * @return ResponseCollection
      */
     protected function triggerListeners(EventInterface $event, callable $callback = null)

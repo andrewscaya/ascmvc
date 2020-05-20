@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.1.0
  *
@@ -15,6 +15,8 @@
  */
 
 namespace Ascmvc\Session;
+
+use Psr\Cache\InvalidArgumentException;
 
 /**
  * Class SessionManager
@@ -101,6 +103,7 @@ class SessionManager
      * @param \swoole_http_response|null $response
      * @param Config|null $config
      * @param bool $reset
+     *
      * @return SessionManager|null|static
      */
     public static function getSessionManager(
@@ -120,7 +123,9 @@ class SessionManager
      * Starts the session.
      *
      * @return $this
+     *
      * @throws \Exception
+     * @throws InvalidArgumentException
      */
     public function start()
     {
@@ -171,6 +176,7 @@ class SessionManager
      * Sets the Config instance.
      *
      * @param Config $config
+     *
      * @return $this
      */
     public function setConfig(Config $config)

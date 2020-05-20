@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      3.0.0
  */
@@ -13,14 +13,14 @@
 namespace Ascmvc\EventSourcing\Event;
 
 use Ascmvc\AbstractApp;
-use Zend\EventManager\Event as ZendEvent;
+use Laminas\EventManager\Event as LaminasEvent;
 
 /**
  * Class Event
  *
  * @package Ascmvc\EventSourcing\Event
  */
-abstract class Event extends ZendEvent
+abstract class Event extends LaminasEvent
 {
     /**
      * The instance of the application.
@@ -57,6 +57,7 @@ abstract class Event extends ZendEvent
      * Event propagation is not stoppable.
      *
      * @param bool $flag
+     *
      * @return bool
      */
     public function stopPropagation($flag = true)

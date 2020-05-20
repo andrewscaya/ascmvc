@@ -5,23 +5,23 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
 
 namespace Ascmvc\Mvc;
 
-use Zend\Diactoros\Response;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\SharedEventManagerInterface;
+use Laminas\Diactoros\Response;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\SharedEventManagerInterface;
 
 use function Ascmvc\getNamespaceFromPath;
 
 /**
  * Class AscmvcEventManager
  *
- * The AscmvcEventManager class extends the Zend\EventManager\EventManager class and
+ * The AscmvcEventManager class extends the Laminas\EventManager\EventManager class and
  * adds events and logic that are specific to this MVC.
  *
  */

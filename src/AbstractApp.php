@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -18,8 +18,8 @@ use Ascmvc\Session\SessionManager;
 use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Request;
-use Zend\Diactoros\Response;
+use Laminas\Diactoros\Request;
+use Laminas\Diactoros\Response;
 
 /**
  * Class AbstractApp
@@ -267,6 +267,7 @@ abstract class AbstractApp
      * Sets the SessionManager.
      *
      * @param SessionManager $sessionManager
+     *
      * @return SessionManager|null
      */
     public abstract function setSessionManager(SessionManager $sessionManager);

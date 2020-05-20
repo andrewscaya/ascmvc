@@ -3,7 +3,7 @@
 namespace Specialmodule\Controllers;
 
 use Ascmvc\Mvc\Controller;
-use Zend\Diactoros\Response;
+use Laminas\Diactoros\Response;
 
 class FakeController extends Controller
 {

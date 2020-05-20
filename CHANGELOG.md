@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.0.0 (2020-05-19)
+
+- Migrates to Laminas and updates the project's dependencies.
+
 ## 3.3.0 (2019-12-03)
 
 - Updates the Doctrine DBAL and ORM libraries (with possible BC breaks).

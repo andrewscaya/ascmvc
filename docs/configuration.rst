@@ -135,7 +135,7 @@ The ``config/routes.config.php`` file might look like the following:
 .. code-block:: php
 
     $baseConfig['routes'] = [
-        0 => [
+        [
             'GET',
             '/',
             'index',
@@ -260,7 +260,7 @@ The ``config/middleware.config.php`` file might look like the following:
 
     $baseConfig['middleware'] = [
         '/foo' => function ($req, $handler) {
-            $response = new \Zend\Diactoros\Response();
+            $response = new \Laminas\Diactoros\Response();
             $response->getBody()->write('FOO!');
 
             return $response;
@@ -270,7 +270,7 @@ The ``config/middleware.config.php`` file might look like the following:
                 return $handler->handle($req);
             }
 
-            $response = new \Zend\Diactoros\Response();
+            $response = new \Laminas\Diactoros\Response();
             $response->getBody()->write('Hello world!');
 
             return $response;

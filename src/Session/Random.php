@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.1.0
  *
@@ -27,7 +27,10 @@ class Random
      * Generates a random string of the specified length.
      *
      * @param $length
+     *
      * @return bool|string
+     *
+     * @throws \Exception
      */
     public static function randStr($length)
     {
@@ -40,6 +43,8 @@ class Random
      * @param $length
      *
      * @return string
+     *
+     * @throws \Exception
      */
     public static function randNumStr($length)
     {

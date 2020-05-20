@@ -111,7 +111,7 @@ Event Dispatcher
 The default LightMVC event dispatcher is an instance of the ``\Ascmvc\EventSourcing\EventDispatcher`` class.
 It is a PSR-14 compliant event dispatcher. Therefore, you can replace this event dispatcher with any other
 PSR-14 compliant event dispatcher. Since the LightMVC event dispatcher is an extension of the
-``\Zend\EventManager\EventManager``, it is possible to use any of the known Zend event manager facilities.
+``\Laminas\EventManager\EventManager``, it is possible to use any of the known Laminas event manager facilities.
 
 .. note:: For more information on configuring an application's event sourcing aggregates, please see the :ref:`configuration eventsourcing` section.
 
@@ -138,7 +138,7 @@ attached listeners.
 
 .. note:: Default aggregate listeners that are configured automatically by the aggregate root controller, using the ``$aggregateListenerNames`` property, MUST be invokable objects.
 
-The event dispatcher contains an instance of the ``\Zend\EventManager\SharedEventManager`` by default. This
+The event dispatcher contains an instance of the ``\Laminas\EventManager\SharedEventManager`` by default. This
 allows for the dispatching of events to other parts of the application, or for listening to events dispatched
 by other parts of the application.
 
@@ -152,7 +152,7 @@ Aggregate Events
 ----------------
 
 The LightMVC ``\Ascmvc\EventSourcing\Event\AggregateEvent`` class is, ultimately, an extension of the
-``\Zend\EventManager\Event`` class. The added facilities allow the dispatching code to define the name
+``\Laminas\EventManager\Event`` class. The added facilities allow the dispatching code to define the name
 of the aggregate root, and to inject an aggregate value object to be shared with listeners. The framework
 defines two child event classes: ``\Ascmvc\EventSourcing\Event\ReadAggregateCompletedEvent`` and
 ``\Ascmvc\EventSourcing\Event\WriteAggregateCompletedEvent``. These two classes are designed to make logging
@@ -620,24 +620,24 @@ event bus (event dispatcher) in this way:
     $productsPolicy = ProductsPolicy::getInstance($eventDispatcher);
 
     // If there are many listeners to attach, one may use a
-    // Listener Aggregate that implements the \Zend\EventManager\ListenerAggregateInterface
+    // Listener Aggregate that implements the \Laminas\EventManager\ListenerAggregateInterface
     // instead of attaching them one by one.
     $eventDispatcher->attach(
         ProductsController::CREATE_REQUESTED,
-        $somePolicy
+        $productsPolicy
     );
 
     $eventDispatcher->attach(
         ProductsController::UPDATE_REQUESTED,
-        $somePolicy
+        $productsPolicy
     );
 
     $eventDispatcher->attach(
         ProductsController::DELETE_REQUESTED,
-        $somePolicy
+        $productsPolicy
     );
 
-.. note:: To learn more about the ``\Zend\EventManager\ListenerAggregateInterface`` interface, please see the `ZF documentation on Aggregate Listeners <https://zendframework.github.io/zend-eventmanager/aggregates/>`_.
+.. note:: To learn more about the ``\Laminas\EventManager\ListenerAggregateInterface`` interface, please see the `Laminas documentation on Aggregate Listeners <https://docs.laminas.dev/laminas-eventmanager/aggregates/>`_.
 
 Thus, the Policy will listen for any of the above mentioned events from within this aggregate.
 
@@ -842,7 +842,7 @@ corresponding event will be dispatched by another object, whether it is the main
 Event Logger
 ------------
 
-LightMVC Framework's event sourcing implementation comes with ``\Ascmvc\EventSourcing\EventLogger`` that
+LightMVC Framework's event sourcing implementation comes with the ``\Ascmvc\EventSourcing\EventLogger`` that
 will log any event based on two criteria: 1- any aggregate that has added the ``EventLogger`` class
 name to its event bus identifiers, and 2- any whitelisted (or not blacklisted) event class type. Concerning
 this second criterium, the logger will log all events if no classes were whitelisted or blacklisted. If one

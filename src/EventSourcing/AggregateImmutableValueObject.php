@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    3.3.0
+ * @version    4.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      3.0.0
  */
@@ -21,6 +21,7 @@ class AggregateImmutableValueObject implements \Serializable
 {
     /**
      * Contains the AggregateValue object's properties.
+     *
      * @var array
      */
     protected $properties = [];
@@ -63,6 +64,7 @@ class AggregateImmutableValueObject implements \Serializable
      * Unserializes the properties of this object.
      *
      * @param string $serialized
+     *
      * @return AggregateImmutableValueObject|bool
      */
     public function unserialize($serialized)
