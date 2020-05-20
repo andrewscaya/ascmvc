@@ -86,6 +86,7 @@ class Psr4Autoloader
      * @param bool $prepend If true, prepend the base directory to the stack
      * instead of appending it; this causes it to be searched first rather
      * than last.
+     *
      * @return void
      */
     public function addNamespace($prefix, $base_dir, $prepend = false)
@@ -113,6 +114,7 @@ class Psr4Autoloader
      * Loads the class file for a given class name.
      *
      * @param string $class The fully-qualified class name.
+     *
      * @return mixed The mapped file name on success, or boolean false on
      * failure.
      */
@@ -150,6 +152,7 @@ class Psr4Autoloader
      *
      * @param string $prefix The namespace prefix.
      * @param string $relative_class The relative class name.
+     *
      * @return mixed Boolean false if no mapped file can be loaded, or the
      * name of the mapped file that was loaded.
      */
@@ -184,6 +187,7 @@ class Psr4Autoloader
      * If a file exists, require it from the file system.
      *
      * @param string $file The file to require.
+     *
      * @return bool True if the file exists, false if not.
      */
     protected function requireFile($file)

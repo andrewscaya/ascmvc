@@ -21,6 +21,7 @@ class AggregateImmutableValueObject implements \Serializable
 {
     /**
      * Contains the AggregateValue object's properties.
+     *
      * @var array
      */
     protected $properties = [];
@@ -63,6 +64,7 @@ class AggregateImmutableValueObject implements \Serializable
      * Unserializes the properties of this object.
      *
      * @param string $serialized
+     *
      * @return AggregateImmutableValueObject|bool
      */
     public function unserialize($serialized)

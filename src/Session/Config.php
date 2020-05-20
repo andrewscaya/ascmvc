@@ -59,6 +59,7 @@ class Config
      * Gets a session element of data.
      *
      * @param string $name
+     *
      * @return array|mixed|null
      */
     public function get($name = '')

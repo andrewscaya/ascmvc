@@ -267,6 +267,7 @@ abstract class AbstractApp
      * Sets the SessionManager.
      *
      * @param SessionManager $sessionManager
+     *
      * @return SessionManager|null
      */
     public abstract function setSessionManager(SessionManager $sessionManager);

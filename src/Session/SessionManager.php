@@ -16,6 +16,8 @@
 
 namespace Ascmvc\Session;
 
+use Psr\Cache\InvalidArgumentException;
+
 /**
  * Class SessionManager
  *
@@ -101,6 +103,7 @@ class SessionManager
      * @param \swoole_http_response|null $response
      * @param Config|null $config
      * @param bool $reset
+     *
      * @return SessionManager|null|static
      */
     public static function getSessionManager(
@@ -120,7 +123,9 @@ class SessionManager
      * Starts the session.
      *
      * @return $this
+     *
      * @throws \Exception
+     * @throws InvalidArgumentException
      */
     public function start()
     {
@@ -171,6 +176,7 @@ class SessionManager
      * Sets the Config instance.
      *
      * @param Config $config
+     *
      * @return $this
      */
     public function setConfig(Config $config)

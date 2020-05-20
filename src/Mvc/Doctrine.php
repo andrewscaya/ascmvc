@@ -13,10 +13,16 @@
 namespace Ascmvc\Mvc;
 
 use Ascmvc\AbstractModelObject;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\Annotations\AnnotationException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+
 
 /**
  * Class Doctrine
@@ -48,10 +54,11 @@ class Doctrine extends AbstractModelObject
      * @param string $connName
      * @param array $params
      *
-     * @return \Doctrine\DBAL\Connection|\Doctrine\ORM\EntityManager|bool
+     * @return Connection|EntityManager|bool
      *
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\ORM\ORMException
+     * @throws DBALException
+     * @throws ORMException
+     * @throws AnnotationException
      */
     public static function getInstance($connType, $connName, Array $params)
     {

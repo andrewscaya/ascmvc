@@ -27,7 +27,10 @@ class Random
      * Generates a random string of the specified length.
      *
      * @param $length
+     *
      * @return bool|string
+     *
+     * @throws \Exception
      */
     public static function randStr($length)
     {
@@ -40,6 +43,8 @@ class Random
      * @param $length
      *
      * @return string
+     *
+     * @throws \Exception
      */
     public static function randNumStr($length)
     {

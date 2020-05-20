@@ -24,6 +24,7 @@ class FastRouter extends AbstractRouter
 {
     /**
      * FastRouter constructor.
+     *
      * @param AscmvcEvent $event
      */
     public function __construct(AscmvcEvent $event)

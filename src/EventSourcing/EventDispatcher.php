@@ -70,6 +70,7 @@ class EventDispatcher extends LaminasEventManager implements EventDispatcherInte
      * Triggers the given event.
      *
      * @param EventInterface $event
+     *
      * @return ResponseCollection
      */
     public function triggerEvent(EventInterface $event)
@@ -85,6 +86,7 @@ class EventDispatcher extends LaminasEventManager implements EventDispatcherInte
      *
      * @param  EventInterface $event
      * @param  null|callable $callback
+     *
      * @return ResponseCollection
      */
     protected function triggerListeners(EventInterface $event, callable $callback = null)

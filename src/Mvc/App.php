@@ -65,6 +65,7 @@ class App extends AbstractApp
      * Gets a Singleton instance of the App class.
      *
      * @param bool $swoole
+     *
      * @return AbstractApp
      */
     public static function getInstance(bool $swoole = false) : AbstractApp
@@ -466,6 +467,7 @@ class App extends AbstractApp
      * Sets the SessionManager.
      *
      * @param SessionManager $sessionManager
+     *
      * @return SessionManager|null
      */
     public function setSessionManager(SessionManager $sessionManager)

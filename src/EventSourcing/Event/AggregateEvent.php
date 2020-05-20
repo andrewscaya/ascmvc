@@ -88,6 +88,7 @@ class AggregateEvent extends Event
      * Sets the event's immutable value object.
      *
      * @param AggregateImmutableValueObject $aggregateValueObject
+     *
      * @return AggregateEvent
      */
     public function setAggregateValueObject(AggregateImmutableValueObject $aggregateValueObject): AggregateEvent

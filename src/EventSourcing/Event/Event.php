@@ -57,6 +57,7 @@ abstract class Event extends LaminasEvent
      * Event propagation is not stoppable.
      *
      * @param bool $flag
+     *
      * @return bool
      */
     public function stopPropagation($flag = true)

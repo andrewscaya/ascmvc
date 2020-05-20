@@ -50,6 +50,7 @@ class AggregateEventListener implements AggregateEventListenerInterface
      * Runs the EventListener class as a function.
      *
      * @param AggregateEvent $event
+     *
      * @return \Generator
      */
     public function __invoke(AggregateEvent $event)
@@ -73,6 +74,7 @@ class AggregateEventListener implements AggregateEventListenerInterface
      * Aggregate Event listener method.
      *
      * @param AggregateEvent $event
+     *
      * @return \Generator
      */
     public function onAggregateEvent(AggregateEvent $event)
@@ -88,6 +90,7 @@ class AggregateEventListener implements AggregateEventListenerInterface
      * Event listener method.
      *
      * @param Event $event
+     *
      * @return \Generator
      */
     public function onEvent(Event $event)

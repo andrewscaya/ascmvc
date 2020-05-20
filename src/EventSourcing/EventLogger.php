@@ -133,6 +133,7 @@ class EventLogger
      * EventLogger listener method.
      *
      * @param EventInterface $event
+     *
      * @throws \Exception
      */
     public function logEvent(EventInterface $event)

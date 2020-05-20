@@ -18,6 +18,7 @@ namespace Ascmvc\Session;
 
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Cache\InvalidArgumentException;
 
 /**
  * Class Session
@@ -80,6 +81,8 @@ class Session
      *
      * @param SessionManager $sessionManager
      * @param CacheItemPoolInterface $sessionCachePool
+     *
+     * @throws InvalidArgumentException
      */
     public function __construct(SessionManager $sessionManager, CacheItemPoolInterface $sessionCachePool)
     {
@@ -106,6 +109,8 @@ class Session
      * Gets the session id.
      *
      * @return string|null
+     *
+     * @throws InvalidArgumentException
      */
     protected function getSessionId()
     {
@@ -167,6 +172,7 @@ class Session
      * Sets the session id.
      *
      * @param $sessionId
+     *
      * @return null|string
      */
     protected function setSessionId($sessionId)
@@ -180,6 +186,8 @@ class Session
      * Generates a new session ID.
      *
      * @return bool|string
+     *
+     * @throws \Exception
      */
     protected function generateSessionId()
     {
@@ -314,6 +322,7 @@ class Session
      * Gets the session element of data by name.
      *
      * @param string|null $name
+     *
      * @return array|mixed|null
      */
     public function get(string $name = null)
@@ -337,6 +346,7 @@ class Session
      *
      * @param string $name
      * @param $value
+     *
      * @return $this
      */
     public function set(string $name, $value)
@@ -350,6 +360,8 @@ class Session
      * Reads the data from the storage.
      *
      * @return bool
+     *
+     * @throws InvalidArgumentException
      */
     protected function readData()
     {

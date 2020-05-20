@@ -34,6 +34,7 @@ interface AscmvcControllerFactoryInterface
      * @param EventDispatcher $eventDispatcher
      * @param Container $serviceManager
      * @param $viewObject
+     *
      * @return mixed
      */
     public static function factory(array &$baseConfig, EventDispatcher &$eventDispatcher, Container &$serviceManager, &$viewObject);

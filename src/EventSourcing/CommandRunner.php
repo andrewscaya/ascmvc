@@ -97,6 +97,7 @@ class CommandRunner
      * Runs the command.
      *
      * @return bool
+     *
      * @throws \Exception
      */
     public function start()

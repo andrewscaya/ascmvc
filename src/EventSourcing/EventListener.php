@@ -42,6 +42,7 @@ class EventListener implements EventListenerInterface
      * Runs the EventListener class as a function.
      *
      * @param Event $event
+     *
      * @return \Generator
      */
     public function __invoke(Event $event)
@@ -65,6 +66,7 @@ class EventListener implements EventListenerInterface
      * Event listener method.
      *
      * @param Event $event
+     *
      * @return \Generator
      */
     public function onEvent(Event $event)

@@ -27,6 +27,7 @@ class Http
      * Gets a cookie by name.
      *
      * @param string $name
+     *
      * @return null
      */
     public function getCookie($name = '')
@@ -56,6 +57,7 @@ class Http
      * @param string $domain
      * @param bool $secure
      * @param bool $httponly
+     *
      * @return bool
      */
     public function setCookie(string $name, string $value = "", int $expire = 0, string $path = "", string $domain = "", bool $secure = false, bool $httponly = false)

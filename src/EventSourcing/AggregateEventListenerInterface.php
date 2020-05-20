@@ -25,6 +25,7 @@ interface AggregateEventListenerInterface extends EventListenerInterface
      * Aggregate Event listener method.
      *
      * @param AggregateEvent $event
+     *
      * @return mixed
      */
     public function onAggregateEvent(AggregateEvent $event);
