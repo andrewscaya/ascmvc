@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    4.0.0
+ * @version    5.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -21,7 +21,6 @@ use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationException;
-use Doctrine\Common\Annotations\AnnotationRegistry;
 
 /**
  * Class Doctrine
@@ -100,8 +99,6 @@ class Doctrine extends AbstractModelObject
                 );
 
                 $driver = new AnnotationDriver(new AnnotationReader(), $paths);
-
-                AnnotationRegistry::registerLoader('class_exists');
 
                 // NOTE: use "createXMLMetadataConfiguration()" for XML source
                 //       use "createYAMLMetadataConfiguration()" for YAML source

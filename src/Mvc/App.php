@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    4.0.0
+ * @version    5.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      1.0.0
  */
@@ -269,7 +269,7 @@ class App extends AbstractApp
 
             if ($viewObject instanceof \League\Plates\Engine) {
                 echo $viewObject->render($controllerOutput['templatefile'], ['view' => $controllerOutput]);
-            } elseif ($viewObject instanceof \Twig_Environment) {
+            } elseif ($viewObject instanceof \Twig\Environment) {
                 $twig = $viewObject->load($controllerOutput['templatefile'] . '.html.twig');
                 echo $twig->render(['view' => $controllerOutput]);
             } elseif ($viewObject instanceof \Smarty) {
@@ -648,7 +648,7 @@ class App extends AbstractApp
     /**
      * Gets the Template Manager object.
      *
-     * @return \League\Plates\Engine|\Smarty|\Twig_Environment
+     * @return \League\Plates\Engine|\Smarty|\Twig\Environment
      */
     public function getViewObject()
     {
@@ -658,7 +658,7 @@ class App extends AbstractApp
     /**
      * Sets the Template Manager object.
      *
-     * @param \League\Plates\Engine|\Smarty|\Twig_Environment
+     * @param \League\Plates\Engine|\Smarty|\Twig\Environment
      *
      * @return AbstractApp
      */

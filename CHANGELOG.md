@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 5.0.0 (2023-01-10)
+
+- Makes the \Doctrine\Common library a core ASCMVC library (\Ascmvc\Session\Common).
+- Updates the project's dependencies.
+
 ## 4.0.0 (2020-05-19)
 
 - Migrates to Laminas and updates the project's dependencies.

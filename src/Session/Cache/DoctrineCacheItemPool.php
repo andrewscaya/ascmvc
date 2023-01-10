@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    4.0.0
+ * @version    5.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.1.0
  */
@@ -13,12 +13,12 @@
 namespace Ascmvc\Session\Cache;
 
 use Ascmvc\Session\Config;
-use Doctrine\Common\Cache\ClearableCache;
-use Doctrine\Common\Cache\FilesystemCache;
-use Doctrine\Common\Cache\MemcacheCache;
-use Doctrine\Common\Cache\MemcachedCache;
-use Doctrine\Common\Cache\RedisCache;
-use Doctrine\Common\Cache\XcacheCache;
+use Ascmvc\Session\Common\Cache\ClearableCache;
+use Ascmvc\Session\Common\Cache\FilesystemCache;
+use Ascmvc\Session\Common\Cache\MemcacheCache;
+use Ascmvc\Session\Common\Cache\MemcachedCache;
+use Ascmvc\Session\Common\Cache\RedisCache;
+use Ascmvc\Session\Common\Cache\XcacheCache;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -32,7 +32,7 @@ class DoctrineCacheItemPool implements CacheItemPoolInterface
     /**
      * Contains an instance of the storage driver.
      *
-     * @var \Doctrine\Common\Cache\Cache
+     * @var \Ascmvc\Session\Common\Cache\Cache
      */
     protected $driver;
 

@@ -24,6 +24,8 @@
             <exclude>
                 <directory suffix=".php">src/Middleware</directory>
                 <directory suffix=".php">src/Proxy</directory>
+                <directory suffix=".php">src/Session/Common/Cache</directory>
+                <directory suffix=".php">src/Session/Common/Cache/Psr6</directory>
                 <file>src/AbstractApp.php</file>
                 <file>src/AbstractController.php</file>
                 <file>src/AbstractControllerManager.php</file>

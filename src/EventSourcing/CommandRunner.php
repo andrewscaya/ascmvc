@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    4.0.0
+ * @version    5.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      3.1.0
  */
@@ -130,32 +130,23 @@ class CommandRunner
 
                 $arguments = '';
 
+                $commandline[] = 'php';
+                $commandline[] = $asyncBus;
+                $commandline[] = $this->name;
+
                 if (isset($this->arguments['execute'])) {
                     $execute = $this->arguments['execute'];
 
                     unset($this->arguments['execute']);
 
-                    $arguments .= $execute . ' ';
+                    $commandline[] = $execute;
                 }
 
                 if (isset($this->arguments['--values'])) {
                     $values = $this->arguments['--values'];
 
-                    $arguments .= '--values ' . escapeshellarg($values) . ' ';
-                }
-
-                if (!empty($arguments)) {
-                    $commandline = 'php '
-                        . $asyncBus
-                        . ' '
-                        . $this->name
-                        . ' '
-                        . $arguments;
-                } else {
-                    $commandline = 'php '
-                        . $asyncBus
-                        . ' '
-                        . $this->name;
+                    $commandline[] = '--values';
+                    $commandline[] = $values;
                 }
 
                 $this->commandProcess = new Process($commandline);
@@ -169,7 +160,7 @@ class CommandRunner
                     $this->commandProcess->mustRun();
                 } catch (ProcessFailedException $e) {
                     $this->error = $e->getMessage();
-                    throw new \Exception($commandline . ' failed');
+                    throw new \Exception(implode(' ', $commandline) . ' failed');
                 }
                 // @codeCoverageIgnoreEnd
 

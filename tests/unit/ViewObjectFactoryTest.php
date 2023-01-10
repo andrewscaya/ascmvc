@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    4.0.0
+ * @version    5.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      2.0.0
  */
@@ -89,7 +89,7 @@ class ViewObjectFactoryTest extends TestCase
 
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
-        $this->assertInstanceOf(\Twig_Environment::class, $viewObject);
+        $this->assertInstanceOf(\Twig\Environment::class, $viewObject);
     }
 
     public function testGetSmartyInstanceWithDevelopmentEnvironment()
@@ -202,7 +202,7 @@ class ViewObjectFactoryTest extends TestCase
 
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
-        $this->assertInstanceOf(\Twig_Environment::class, $viewObject);
+        $this->assertInstanceOf(\Twig\Environment::class, $viewObject);
     }
 
     public function testGetSmartyInstanceWithProductionEnvironment()

@@ -156,11 +156,11 @@ And, the ``config/session.config.php`` file might look like this:
     $baseConfig['session'] = [
         'enabled' => true,
         'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
-        'doctrine_cache_driver' => \Doctrine\Common\Cache\FilesystemCache::class,
-        //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
-        //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
-        //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
-        //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+        'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\FilesystemCache::class,
+        //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\XcacheCache::class,
+        //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\RedisCache::class,
+        //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcachedCache::class,
+        //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcacheCache::class,
         'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
         'doctrine_cache_server_params' => [
             'host' => '127.0.0.1',
@@ -180,7 +180,7 @@ And, the ``config/session.config.php`` file might look like this:
     ];
 
 It is possible to replace the value of the ``psr6_cache_pool`` index with any PSR-6 compliant class. Also,
-any of the given Doctrine\\Common\\Cache classes can be used in order to store the session data when using
+any of the given Ascmvc\Session\\Common\\Cache classes can be used in order to store the session data when using
 the ``\Ascmvc\Session\Cache\DoctrineCacheItemPool`` class.
 
 For more information on sessions, please see the :ref:`sessions` section.

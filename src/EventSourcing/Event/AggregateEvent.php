@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    4.0.0
+ * @version    5.0.0
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0.
  * @since      3.0.0
  */
@@ -100,15 +100,13 @@ class AggregateEvent extends Event
 
     // @codeCoverageIgnoreStart
     /**
-     * DEPRECATED - Use getAggregateRootName() instead - Will be removed in 4.0.0.
-     *
      * Gets the name of the aggregate root that created the event.
      *
      * @return null|string
      */
     public function getRootAggregateName()
     {
-        return $this->aggregateRootName;
+        return $this->getAggregateRootName();
     }
     // @codeCoverageIgnoreEnd
 

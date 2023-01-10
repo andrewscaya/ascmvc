@@ -151,4 +151,4 @@ container's ``factory()`` method:
         return new SomeService($serviceManager['dem1]);
     });
 
-To learn more about **Pimple**, please visit the `Pimple Website <https://pimple.symfony.com/>`_.
+To learn more about **Pimple**, please visit the `Pimple Repository <https://github.com/silexphp/Pimple>`_.

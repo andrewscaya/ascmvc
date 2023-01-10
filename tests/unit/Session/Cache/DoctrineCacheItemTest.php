@@ -5,7 +5,7 @@
  * @package    LightMVC/ASCMVC
  * @author     Andrew Caya
  * @link       https://github.com/lightmvc/ascmvc
- * @version    4.0.0
+ * @version    5.0.0
  * @license    Apache License, Version 2.0, see above
  * @license    http://www.apache.org/licenses/LICENSE-2.0
  * @since      2.1.0
@@ -88,9 +88,9 @@ class DoctrineCacheItemTest extends TestCase
     {
         $doctrineCacheItem = new DoctrineCacheItem('testkey', ['testdata' => 'mydata']);
 
-        $doctrineCacheItem->expiresAt(10);
+        $doctrineCacheItem->expiresAt(new \DateTime('+10 minutes'));
 
-        $this->assertEquals(0, $doctrineCacheItem->getExpiration());
+        $this->assertGreaterThan(0, $doctrineCacheItem->getExpiration());
     }
 
     public function testDoctrineCacheItemWithExpirationAfter()

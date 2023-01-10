@@ -15,6 +15,8 @@ necessary, and obtaining an instance of the ``SessionManager`` object by request
 the ``getSessionManager()`` static method. Once this is done, it is a question of invoking
 the ``SessionManager``'s ``start()`` method to get the session started. Here is a working example:
 
+.. note:: As of LightMVC 5.0.0, the \Doctrine\Common\Cache namespace is replaced with the \Ascmvc\Session\Common\Cache namespace. Please update your session.config.php configuration file accordingly.
+
 .. code-block:: php
 
     <?php
@@ -22,7 +24,7 @@ the ``SessionManager``'s ``start()`` method to get the session started. Here is 
     $config['session'] = [
         'enabled' => true,
         'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
-        'doctrine_cache_driver' => \Doctrine\Common\Cache\FilesystemCache::class,
+        'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\FilesystemCache::class,
         'doctrine_filesystem_cache_directory' => __DIR__ . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
         'session_name' => 'MYSESSION',
         'session_path' => '/',
