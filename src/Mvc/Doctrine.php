@@ -21,7 +21,6 @@ use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationException;
-use Doctrine\Common\Annotations\AnnotationRegistry;
 
 /**
  * Class Doctrine
@@ -100,8 +99,6 @@ class Doctrine extends AbstractModelObject
                 );
 
                 $driver = new AnnotationDriver(new AnnotationReader(), $paths);
-
-                AnnotationRegistry::registerLoader('class_exists');
 
                 // NOTE: use "createXMLMetadataConfiguration()" for XML source
                 //       use "createYAMLMetadataConfiguration()" for YAML source

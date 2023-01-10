@@ -89,7 +89,7 @@ class ViewObjectFactoryTest extends TestCase
 
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
-        $this->assertInstanceOf(\Twig_Environment::class, $viewObject);
+        $this->assertInstanceOf(\Twig\Environment::class, $viewObject);
     }
 
     public function testGetSmartyInstanceWithDevelopmentEnvironment()
@@ -202,7 +202,7 @@ class ViewObjectFactoryTest extends TestCase
 
         $viewObject = ViewObjectFactory::getInstance($baseConfig);
 
-        $this->assertInstanceOf(\Twig_Environment::class, $viewObject);
+        $this->assertInstanceOf(\Twig\Environment::class, $viewObject);
     }
 
     public function testGetSmartyInstanceWithProductionEnvironment()

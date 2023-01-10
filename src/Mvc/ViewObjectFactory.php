@@ -24,7 +24,7 @@ class ViewObjectFactory
     /**
      * Contains an instance of a template manager.
      *
-     * @var \League\Plates\Engine|\Smarty|\Twig_Environment
+     * @var \League\Plates\Engine|\Smarty|\Twig\Environment
      */
     protected static $templateInstance;
 
@@ -50,7 +50,7 @@ class ViewObjectFactory
      *
      * @param array $baseConfig
      *
-     * @return \League\Plates\Engine|\Smarty|\Twig_Environment
+     * @return \League\Plates\Engine|\Smarty|\Twig\Environment
      */
     public static function getInstance(array $baseConfig)
     {
@@ -58,13 +58,13 @@ class ViewObjectFactory
             if ($baseConfig['templateManager'] === 'Plates') {
                 self::$templateInstance = new \League\Plates\Engine($baseConfig['templates']['templateDir']);
             } elseif ($baseConfig['templateManager'] === 'Twig') {
-                $loader = new \Twig_Loader_Filesystem($baseConfig['templates']['templateDir']);
+                $loader = new \Twig\Loader\FilesystemLoader($baseConfig['templates']['templateDir']);
                 if ($baseConfig['env'] === 'production') {
-                    self::$templateInstance = new \Twig_Environment($loader, array(
+                    self::$templateInstance = new \Twig\Environment($loader, array(
                         'cache' => $baseConfig['templates']['compileDir'],
                     ));
                 } else {
-                    self::$templateInstance = new \Twig_Environment($loader, array(
+                    self::$templateInstance = new \Twig\Environment($loader, array(
                         'cache' => false,
                     ));
                 }

@@ -387,14 +387,14 @@ abstract class AbstractApp
     /**
      * Gets the Template Manager object.
      *
-     * @return \League\Plates\Engine|\Smarty|\Twig_Environment
+     * @return \League\Plates\Engine|\Smarty|\Twig\Environment
      */
     public abstract function getViewObject();
 
     /**
      * Sets the Template Manager object.
      *
-     * @param \League\Plates\Engine|\Smarty|\Twig_Environment
+     * @param \League\Plates\Engine|\Smarty|\Twig\Environment
      *
      * @return AbstractApp
      */

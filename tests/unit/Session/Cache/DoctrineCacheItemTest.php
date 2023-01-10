@@ -88,9 +88,9 @@ class DoctrineCacheItemTest extends TestCase
     {
         $doctrineCacheItem = new DoctrineCacheItem('testkey', ['testdata' => 'mydata']);
 
-        $doctrineCacheItem->expiresAt(10);
+        $doctrineCacheItem->expiresAt(new \DateTime('+10 minutes'));
 
-        $this->assertEquals(0, $doctrineCacheItem->getExpiration());
+        $this->assertGreaterThan(0, $doctrineCacheItem->getExpiration());
     }
 
     public function testDoctrineCacheItemWithExpirationAfter()

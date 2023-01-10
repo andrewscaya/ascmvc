@@ -18,7 +18,7 @@ use Ascmvc\Session\Http;
 use Ascmvc\Session\Session;
 use Ascmvc\Session\SessionManager;
 use Ascmvc\Session\Swoole;
-use Doctrine\Common\Cache\FilesystemCache;
+use Ascmvc\Session\Common\Cache\FilesystemCache;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -102,10 +102,10 @@ class SessionManagerTest extends TestCase
                 'enabled' => true,
                 'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
                 'doctrine_cache_driver' => FilesystemCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcacheCache::class,
                 'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
                 'doctrine_cache_server_params' => [
                     'host' => '127.0.0.1',
@@ -145,10 +145,10 @@ class SessionManagerTest extends TestCase
                 'enabled' => true,
                 'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
                 'doctrine_cache_driver' => FilesystemCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcacheCache::class,
                 'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
                 'doctrine_cache_server_params' => [
                     'host' => '127.0.0.1',
@@ -174,10 +174,10 @@ class SessionManagerTest extends TestCase
                 'enabled' => false,
                 'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
                 'doctrine_cache_driver' => FilesystemCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcacheCache::class,
                 'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
                 'doctrine_cache_server_params' => [
                     'host' => '127.0.0.1',
@@ -215,10 +215,10 @@ class SessionManagerTest extends TestCase
                 'enabled' => false,
                 'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
                 'doctrine_cache_driver' => FilesystemCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcacheCache::class,
                 'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
                 'doctrine_cache_server_params' => [
                     'host' => '127.0.0.1',
@@ -294,10 +294,10 @@ class SessionManagerTest extends TestCase
                 'enabled' => true,
                 'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
                 'doctrine_cache_driver' => FilesystemCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcacheCache::class,
                 'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
                 'doctrine_cache_server_params' => [
                     'host' => '127.0.0.1',
@@ -356,10 +356,10 @@ class SessionManagerTest extends TestCase
                 'enabled' => true,
                 'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
                 'doctrine_cache_driver' => FilesystemCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcacheCache::class,
                 'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
                 'doctrine_cache_server_params' => [
                     'host' => '127.0.0.1',
@@ -411,10 +411,10 @@ class SessionManagerTest extends TestCase
                 'enabled' => true,
                 'psr6_cache_pool' => \Ascmvc\Session\Cache\DoctrineCacheItemPool::class,
                 'doctrine_cache_driver' => FilesystemCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\XcacheCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\RedisCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcachedCache::class,
-                //'doctrine_cache_driver' => \Doctrine\Common\Cache\MemcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\XcacheCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\RedisCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcachedCache::class,
+                //'doctrine_cache_driver' => \Ascmvc\Session\Common\Cache\MemcacheCache::class,
                 'doctrine_filesystem_cache_directory' => BASEDIR . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR,
                 'doctrine_cache_server_params' => [
                     'host' => '127.0.0.1',

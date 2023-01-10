@@ -269,7 +269,7 @@ class App extends AbstractApp
 
             if ($viewObject instanceof \League\Plates\Engine) {
                 echo $viewObject->render($controllerOutput['templatefile'], ['view' => $controllerOutput]);
-            } elseif ($viewObject instanceof \Twig_Environment) {
+            } elseif ($viewObject instanceof \Twig\Environment) {
                 $twig = $viewObject->load($controllerOutput['templatefile'] . '.html.twig');
                 echo $twig->render(['view' => $controllerOutput]);
             } elseif ($viewObject instanceof \Smarty) {
@@ -648,7 +648,7 @@ class App extends AbstractApp
     /**
      * Gets the Template Manager object.
      *
-     * @return \League\Plates\Engine|\Smarty|\Twig_Environment
+     * @return \League\Plates\Engine|\Smarty|\Twig\Environment
      */
     public function getViewObject()
     {
@@ -658,7 +658,7 @@ class App extends AbstractApp
     /**
      * Sets the Template Manager object.
      *
-     * @param \League\Plates\Engine|\Smarty|\Twig_Environment
+     * @param \League\Plates\Engine|\Smarty|\Twig\Environment
      *
      * @return AbstractApp
      */

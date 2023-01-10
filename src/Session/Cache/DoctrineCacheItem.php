@@ -12,6 +12,7 @@
 
 namespace Ascmvc\Session\Cache;
 
+use DateTimeInterface;
 use Psr\Cache\CacheItemInterface;
 
 /**
@@ -75,7 +76,7 @@ class DoctrineCacheItem implements CacheItemInterface
      * @return string
      *   The key string for this cache item.
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -92,7 +93,7 @@ class DoctrineCacheItem implements CacheItemInterface
      * @return mixed
      *   The value corresponding to this cache item's key, or null if not found.
      */
-    public function get()
+    public function get(): mixed
     {
         return $this->data;
     }
@@ -106,7 +107,7 @@ class DoctrineCacheItem implements CacheItemInterface
      * @return bool
      *   True if the request resulted in a cache hit. False otherwise.
      */
-    public function isHit()
+    public function isHit(): bool
     {
         return $this->hit;
     }
@@ -124,7 +125,7 @@ class DoctrineCacheItem implements CacheItemInterface
      * @return static
      *   The invoked object.
      */
-    public function set($value)
+    public function set(mixed $value): static
     {
         $this->data = null;
 
@@ -146,7 +147,7 @@ class DoctrineCacheItem implements CacheItemInterface
     /**
      * Sets the expiration time for this cache item.
      *
-     * @param \DateTimeInterface|null $expiration
+     * @param \DateTimeInterface $expiration
      *   The point in time after which the item MUST be considered expired.
      *   If null is passed explicitly, a default value MAY be used. If none is set,
      *   the value should be stored permanently or for as long as the
@@ -155,7 +156,7 @@ class DoctrineCacheItem implements CacheItemInterface
      * @return static
      *   The called object.
      */
-    public function expiresAt($expiration)
+    public function expiresAt(?DateTimeInterface $expiration): static
     {
         if ($expiration instanceof \DateTimeInterface) {
             $time = $expiration->diff(new \DateTime('NOW'));
@@ -180,7 +181,7 @@ class DoctrineCacheItem implements CacheItemInterface
      * @return static
      *   The called object.
      */
-    public function expiresAfter($time)
+    public function expiresAfter(int|\DateInterval|null $time): static
     {
         if (is_int($time)) {
             $this->expiration = $time;
