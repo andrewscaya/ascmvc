@@ -1,5 +1,11 @@
 .. _WhatsNewAnchor:
 
+What's new in version 5.0.0 (2023-01-10)
+========================================
+
+* Makes the \\Doctrine\\Common library a core ASCMVC library (\\Ascmvc\\Session\\Common).
+* Updates the project's dependencies.
+
 What's new in version 4.0.0 (2020-05-19)
 ========================================
 
