@@ -39,4 +39,8 @@ Then, from within the root directory of the project, you can run the following c
 
 > By default, Swoole will listen on the ``localhost`` loopback, on port 9501. If you wish to change this, please modify the ``run-swoole`` command inside the ``composer.json`` file accordingly.
 
+## Upgrading from 4.0.0 to 5.0.0
+
+When upgrading from version 4.0.0 to 5.0.0, please make sure to replace the \Doctrine\Common namespace with the \Ascmvc\Session\Common in your config/session.config.php file.
+
 ### Have a lot of fun! :)
