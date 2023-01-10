@@ -15,8 +15,6 @@ use const PHP_VERSION_ID;
 /**
  * APC cache provider.
  *
- * @deprecated since version 1.6, use ApcuCache instead
- *
  * @link       www.doctrine-project.org
  */
 class ApcCache extends CacheProvider

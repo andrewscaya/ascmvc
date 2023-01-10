@@ -19,8 +19,6 @@ use const XC_TYPE_VAR;
 /**
  * Xcache cache driver.
  *
- * @deprecated
- *
  * @link   www.doctrine-project.org
  */
 class XcacheCache extends CacheProvider

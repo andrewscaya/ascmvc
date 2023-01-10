@@ -5,8 +5,6 @@ namespace Ascmvc\Session\Common\Cache;
 /**
  * Interface for cache drivers that allows to get many items at once.
  *
- * @deprecated
- *
  * @link   www.doctrine-project.org
  */
 interface MultiGetCache
