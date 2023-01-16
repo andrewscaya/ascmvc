@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "914d1aaee99d8ff9dd679848c7ac293b",
+    "content-hash": "89c68932324699e10d9f33c70d0a3505",
     "packages": [
         {
             "name": "atlas/mapper",
@@ -5495,7 +5495,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.0 <=8.3"
+        "php": ">=8.0 <8.3"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

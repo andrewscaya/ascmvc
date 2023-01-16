@@ -1,5 +1,10 @@
 .. _WhatsNewAnchor:
 
+What's new in version 5.0.1 (2023-01-16)
+========================================
+
+* Updates the project's dependencies.
+
 What's new in version 5.0.0 (2023-01-10)
 ========================================
 

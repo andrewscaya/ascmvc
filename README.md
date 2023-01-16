@@ -41,6 +41,6 @@ Then, from within the root directory of the project, you can run the following c
 
 ## Upgrading from 4.0.0 to 5.0.0
 
-When upgrading from version 4.0.0 to 5.0.0, please make sure to replace the \Doctrine\Common namespace with the \Ascmvc\Session\Common in your config/session.config.php file.
+When upgrading from version 4.0.0 to 5.0.0, please make sure to replace the namespace \Doctrine\Common with \Ascmvc\Session\Common in your config/session.config.php file.
 
 ### Have a lot of fun! :)
