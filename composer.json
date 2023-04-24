@@ -28,7 +28,7 @@
         "pimple/pimple": "3.5.0",
         "smarty/smarty": "4.3.0",
         "twig/twig": "3.5.0",
-        "laminas/laminas-diactoros": "2.24.0",
+        "laminas/laminas-diactoros": "2.24.2",
         "laminas/laminas-eventmanager": "3.9.2",
         "laminas/laminas-stdlib": "3.16.1",
         "laminas/laminas-stratigility": "3.9.0",
